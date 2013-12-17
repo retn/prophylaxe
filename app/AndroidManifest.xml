@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="de.hawlandshut.rueckfallprophylaxe.DiaryActivity"
+            android:label="@string/title_activity_diary"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hawlandshut.rueckfallprophylaxe.Startseite" />
+        </activity>
+        <activity
+            android:name="de.hawlandshut.rueckfallprophylaxe.NewEntryActivity"
+            android:label="@string/title_activity_new_entry"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.DiaryActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hawlandshut.rueckfallprophylaxe.DiaryActivity" />
+        </activity>
     </application>
 
 </manifest>

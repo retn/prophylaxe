@@ -1,0 +1,30 @@
+/* 
+    Document   : login
+    Created on : 17.12.2013, 16:06:58
+    Author     : dominic
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html, body {
+    background-color: #E5E5E5;
+    height: 100%;
+}
+
+
+
+
+/*
+Login Start
+*/
+.login_form_wrapper{
+    margin-top:100px;
+}
+
+.login_form_password{
+    margin-top:10px;
+}
+
+/*
+Login Ende
+*/

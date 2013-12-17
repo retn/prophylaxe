@@ -1,0 +1,11 @@
+
+<div class="login_form_wrapper col-md-4 col-md-offset-4">
+    <h2 class="form-signin-heading">Bitte einloggen</h2>
+    <?php
+    $this->loginForm->setAction($this->url());
+    echo $this->loginForm;
+    ?>
+</div>
+<?php
+    echo $this->errorMessage;
+?>

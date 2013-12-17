@@ -1,0 +1,8 @@
+ 
+
+<dl>
+    <?php foreach ($this->entries as $entry): ?>
+    <dt><?php echo $this->escape($entry->getFirstName()) ?></dt>
+    <dd><?php echo $this->escape($entry->getLastName()) ?></dd>
+    <?php endforeach ?>
+</dl>

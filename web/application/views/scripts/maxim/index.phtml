@@ -1,0 +1,45 @@
+
+<div class="col-md-12 ">
+    <div>
+        <button id="maxim_create" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Neuer Spruch</button><br><br>
+    </div>
+
+    <table id="maxim_table" border="">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Text</th>
+                <th>Bearbeiten</th>
+                <th>Löschen</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+
+    <div id="maxim_dialog_edit">
+        <h3>Spruch anlegen</h3>
+
+        <div id="maxim_form_errors">
+
+        </div>
+
+        <?php
+        echo $this->form;
+        ?>
+
+    </div>
+
+    <div id="maxim_dialog_confirm">
+        <h3>Spruch löschen</h3>
+        <p>
+            Wollen Sie diesen Spruch wirklich löschen?
+        </p>
+        <input type="hidden" id="id_delete"/>
+    </div>
+</div>
+
+
+

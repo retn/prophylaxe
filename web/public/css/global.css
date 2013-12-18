@@ -1,0 +1,249 @@
+/* 
+Document   : global.css
+Created on : 06.12.2013, 13:07:09
+Author     : dominic
+Description:
+    Purpose of the stylesheet follows.
+*/
+
+
+html, body {
+    /*background-color: #eee;*/
+    background-color: #E5E5E5;
+    /*background-image: -moz-linear-gradient(center top , #F5F5F5 0%, #BDBDBD 100%);*/
+    /*background-repeat: repeat-x;*/
+    height: 100%;
+}
+#header {
+    /*background-color: lightblue;*/
+}
+.container{
+    /*background-color: lightblue;*/
+    
+    -moz-box-shadow:    0px 0px 6px 6px #ccc;
+    -webkit-box-shadow: 0px 0px 6px 6px #ccc;
+    box-shadow:         0px 0px 6px 6px #ccc;
+}
+
+.content {
+    margin-top:20px;
+    /*min-height: 100%;*/
+
+}
+
+.main_content{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    display:block;
+
+}
+
+.head_title{
+    color: #999999;
+}
+
+.fill{
+    height:100%;
+    background-color:white;
+    min-height: 100%;
+}
+
+
+
+
+/*
+ Navigation Start
+*/
+/*.navigation{
+    background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;    
+    display: table;
+    max-height: 52px;
+    width:100%;
+}
+
+.navigation > li {
+    width:190px;
+    display:table-cell;
+    border-right: #D5D5D5 solid 1px;
+    max-width: 190px;
+    width:1%;
+}
+
+.dropdown-menu {
+    left: auto;
+    margin-top:0px;
+    padding:0px;
+    margin-left:-2px;
+    border-top:none;
+    position: relative;
+}
+
+.dropdown-menu > li{
+    width: 188px;
+    border-bottom: #D5D5D5 solid 1px;
+    position: absolute;
+    width: 100%;
+}
+
+.navigation > li a{
+    background-color: #E5E5E5;
+    background-image: -moz-linear-gradient(center top , #F5F5F5 0%, #E5E5E5 100%);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #D5D5D5;
+    color: #777777;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+    
+    font-weight: bold;
+    display: block;
+}
+
+.navigation > .active > a{
+    background-color: #DDDDDD;
+    background-image: none;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15) inset;    
+}
+
+.nav-tabs > li{
+    margin-bottom: -1px;
+    float:none;
+}*/
+.hover_ul{
+    display: block;       
+    width: 100%;
+    position: relative;  
+    height:0px; 
+}
+
+.hover_li{
+    display: block; 
+    width: 100%;
+}
+
+.navigation {
+    background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;  
+
+    width:100%;
+    table-layout: fixed;
+    display:table;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.navigation ul {
+
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 100;
+}
+
+.navigation > li {
+    display:table-cell;
+    text-align:center;
+    /*height:52px;*/ 
+
+}
+
+.navigation li {
+    border-right: #D5D5D5 solid 1px;
+}
+
+.dropdown li{
+    border-right: none;
+}
+
+.dropdown {
+    display: none; 
+} 
+
+.navigation li > a{
+    padding: 10px 15px;
+    display:block;
+    color: #777777;
+    background-color: #E5E5E5;
+    background-image: -moz-linear-gradient(center top , #F5F5F5 0%, #E5E5E5 100%);
+    background-repeat: repeat-x;
+
+}
+
+.dropdown.active.submenu > a, li.active > a{
+    background-color: #DDDDDD;
+    background-image: none;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15) inset;    
+}
+
+/*
+         Hiding the submenus by default */
+
+/*.navigation li:hover ul {
+    display: block;         Show submenus on mouseover... 
+    width: 100%;
+    position: relative;     ...and make them appear below, not inside 
+    height:0px;  Kind of a hack, but it's for a good reason (remove it to see why) 
+}
+
+.navigation  li:hover ul li {
+    display: block;  Make submenu items stack vertically 
+    width: 100%;   100% of parent container 
+}*/
+/*
+ Navigation Ende
+*/
+
+
+/*
+    Maxim Start
+*/
+#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column{
+    text-align:center;
+}
+
+#maxim_table tbody tr{
+    height:70px;
+}
+
+/*
+    Maxim Ende
+*/
+
+
+/*
+edit-maxim Start
+*/
+
+#patient_has_maxims{
+    width:100%;
+}
+
+/*
+edit-maxim Ende
+*/
+
+
+/*
+Patient Anlegen Formular Start
+*/
+
+#patient_form dt {
+  float:left;
+  clear:left;
+  width:120px;
+}
+ 
+#patient_form dd {
+  float:left;
+  width:200px;
+}
+
+/*
+Patient Anlegen Formular Ende
+*/

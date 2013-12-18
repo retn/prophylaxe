@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <nav>
+        <Start>
+            <label>Start</label>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>index</resource>
+            <privilege>index</privilege>
+            <route>default</route>  
+        </Start>
+        
+        <Patient>
+            <label>Patient</label>
+            <route>default</route>  
+            <controller>patient</controller>
+            <action>index</action>
+            <resource>patient</resource>
+            <privilege>index</privilege>
+            <pages>
+                <create>
+                    <label>Hinzufügen</label>
+                    <controller>patient</controller>
+                    <action>create</action>  
+                    <route>default</route>     
+                </create>
+                <edit>
+                    <label>Bearbeiten</label>
+                    <controller>patient</controller>
+                    <action>list</action>
+                    <route>default</route>  
+                </edit>
+            </pages>
+        </Patient>
+        
+        <Maxim>
+            <label>Sprüche</label>
+            <controller>maxim</controller>
+            <action>index</action>
+            <resource>maxim</resource>
+            <privilege>index</privilege>
+            <route>default</route>  
+        </Maxim>
+        
+        <Distraciton>
+            <label>Ablenkung</label>
+            <controller>distraction</controller>
+            <action>index</action>
+            <resource>distraction</resource>
+            <privilege>index</privilege>
+            <route>default</route>  
+        </Distraciton>
+        
+        <Placetogo>
+            <label>Anlaufstellen</label>
+            <controller>placetogo</controller>
+            <action>index</action>
+            <resource>placetogo</resource>
+            <privilege></privilege>
+            <route>default</route>  
+            <pages>
+                <create>
+                    <label>Hinzufügen</label>
+                    <controller>placetogo</controller>
+                    <action>create</action>
+                    <resource>placetogo</resource>
+                    <privilege>create</privilege>  
+                    <route>default</route>                   
+                </create>
+                <edit>
+                    <label>Bearbeiten</label>
+                    <controller>placetogo</controller>
+                    <action>edit</action>
+                    <resource>placetogo</resource>
+                    <privilege>edit</privilege>
+                    <route>default</route>                      
+                </edit>
+            </pages>
+        </Placetogo>
+              
+        <Logout>
+            <label>Logout</label>
+            <controller>auth</controller>
+            <action>logout</action>
+            <resource>auth</resource>
+            <privilege>logout</privilege>
+            <route>default</route>  
+        </Logout>
+    </nav>
+</config>

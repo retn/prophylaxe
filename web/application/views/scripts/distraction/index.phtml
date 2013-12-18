@@ -1,0 +1,45 @@
+
+<div class="col-md-12 ">
+    <div>
+        <button id="distraction_create" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Neue Ablenkungs-Möglichkeit</button><br><br>
+    </div>
+
+    <table id="distraction_table" border="">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Text</th>
+                <th>Bearbeiten</th>
+                <th>Löschen</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+
+    <div id="distraction_dialog_edit">
+        <h3>Möglichkeit anlegen</h3>
+
+        <div id="distraction_form_errors">
+
+        </div>
+
+        <?php
+        echo $this->form;
+        ?>
+
+    </div>
+
+    <div id="distraction_dialog_confirm">
+        <h3>Möglichkeit löschen</h3>
+        <p>
+            Wollen Sie diese Ablenkungs-Möglichkeit wirklich löschen?
+        </p>
+        <input type="hidden" id="id_delete"/>
+    </div>
+</div>
+
+
+

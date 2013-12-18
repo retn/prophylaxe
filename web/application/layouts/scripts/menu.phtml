@@ -1,0 +1,58 @@
+<?php
+
+/*
+ * Folgender Algorithmus rendert das Menue und setzt dabei die Bootstrap Klassen
+ */
+$html = array();
+$ulClass = "dropdown";
+
+$html[] = '<ul class="navigation">';
+
+$iterator = new RecursiveIteratorIterator($this->container, RecursiveIteratorIterator::SELF_FIRST);
+$prevDepth = 0;
+// Durchlaueft jeden Container des Menues
+foreach ($iterator as $page) {
+    
+    //ACL Berechtigung pruefen
+    if ($this->navigation()->accept($page)) {
+        // Depth = Listenebene 0,1,2....
+        $depth = $iterator->getDepth();
+        $isActive = $page->isActive(true);
+        // Akteulle Ebene groesser als Vorherige => Untermenue
+        if ($depth > $prevDepth) {
+            $html [] = '<ul class="' . $ulClass . '">' . "\n";
+        } else if ($prevDepth > $depth) {
+            // Wenn aktuelle Ebene kleiner ist als voherige, offene Listen schließen
+            for ($i = $prevDepth; $i > $depth; $i--) {
+                $html [] = '</li>' . "\n";
+                $html [] = '</ul>' . "\n";
+            }
+            $html [] = '    </li>' . "\n";
+        } else {
+            // Geleiche Ebene => letzten erzeugten Listenpunkt wieder schließen
+            $html [] = '    </li>' . "\n";
+        }
+
+        if ($page->haspages()) {
+            $liClass = $isActive ? 'active submenu' : 'submenu';
+        } else {
+            $liClass = $isActive ? 'active' : '';
+        }
+        
+        if ($page->haspages()) {
+            $html [] = '<li class="dropdown ' . $liClass . '">' . "\n";
+            $html [] = '<a  href="#">' . $page->getLabel() . '<span class="caret"></a>' . "\n";
+//class="dropdown-toggle" data-toggle="dropdown" 
+        } else {
+            $html [] = '<li class="'. $liClass . '">' . "\n";
+            $html [] = '<a href="' . $page->getHref() . '">' . $page->getLabel() . '</a>' . "\n";
+        }
+
+
+        $prevDepth = $depth;
+    }
+}
+echo join(PHP_EOL, $html);
+?>
+
+

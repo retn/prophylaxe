@@ -17,5 +17,7 @@
     <string name="btn_anlaufstellen">Anlaufstellen</string>
     <string name="title_activity_contactpoint_map">Anlaufstellen Karte</string>
     <string name="title_activity_contactpoint_list">Anlaufstellen Liste</string>
+    <string name="btn_notfallkoffer">Notfallkoffer</string>
+    <string name="btn_ablenkungen">Ablenkungen</string>
 
 </resources>

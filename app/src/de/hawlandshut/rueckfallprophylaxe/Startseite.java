@@ -31,4 +31,15 @@ public class Startseite extends Activity {
     	Intent intent = new Intent(this, ContactpointListActivity.class);
     	startActivity(intent);
     }
+    /* Fehlt noch die Notfallkoffer klasse
+    public void callNotfallkoffer(View view) {
+    	Intent intent = new Intent(this, Notfallkoffer.class);
+    	startActivity(intent);
+    }*/
+    /* Fehlt noch die Ablenkungen klasse
+    public void callAblenkungen(View view) {
+    	Intent intent = new Intent(this, Ablenkungen.class);
+    	startActivity(intent);
+    }*/
+    
 }

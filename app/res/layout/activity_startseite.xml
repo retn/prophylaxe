@@ -9,23 +9,42 @@
     tools:context=".Startseite" >
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:id="@+id/btnTagebuch"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="@string/btn_tagebuch" 
-        android:onClick="callTagebuch"/>
+        android:onClick="callTagebuch"
+        android:text="@string/btn_tagebuch" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="32dp"
-        android:text="@string/btn_anlaufstellen"
-        android:onClick="callAnlaufstellen" />
+        android:id="@+id/btnAnlaufstellen"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnTagebuch"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:onClick="callAnlaufstellen"
+        android:text="@string/btn_anlaufstellen" />
+
+    <Button
+        android:id="@+id/btnNotfallkoffer"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnAnlaufstellen"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/btn_notfallkoffer" />
+
+    <Button
+        android:id="@+id/btnAblenkungen"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_alignRight="@+id/btnAnlaufstellen"
+        android:layout_below="@+id/btnNotfallkoffer"
+        android:layout_marginTop="40dp"
+        android:onClick="callAblenkungen"
+        android:text="@string/btn_ablenkungen" />
+
 </RelativeLayout>

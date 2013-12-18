@@ -47,9 +47,9 @@
                 android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" />
         </activity>
          <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.ContactpointMActapivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity"
             android:label="@string/title_activity_contactpoint_map"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity" />

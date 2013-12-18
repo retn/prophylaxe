@@ -19,4 +19,13 @@
         android:text="@string/btn_tagebuch" 
         android:onClick="callTagebuch"/>
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="32dp"
+        android:text="@string/btn_anlaufstellen"
+        android:onClick="callAnlaufstellen" />
 </RelativeLayout>

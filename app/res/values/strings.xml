@@ -10,5 +10,12 @@
     <string name="title_activity_new_entry">Eintrag hinzufügen</string>
     <string name="action_addAttachment">Bild hinzufügen</string>
     <string name="action_createEntry">Eintrag speichern</string>
+    <string name="label_adress">Adresse:</string>
+    <string name="label_phone">Telefonnummer:</string>
+    <string name="label_mail">E-Mail:</string>
+    <string name="btn_show_on_map">Auf Karte anzeigen</string>
+    <string name="btn_anlaufstellen">Anlaufstellen</string>
+    <string name="title_activity_contactpoint_map">Anlaufstellen Karte</string>
+    <string name="title_activity_contactpoint_list">Anlaufstellen Liste</string>
 
 </resources>

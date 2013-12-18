@@ -27,4 +27,8 @@ public class Startseite extends Activity {
     	startActivity(intent);
     }
     
+    public void callAnlaufstellen(View view) {
+    	Intent intent = new Intent(this, ContactpointListActivity.class);
+    	startActivity(intent);
+    }
 }

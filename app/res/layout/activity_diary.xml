@@ -81,7 +81,7 @@
                     android:maxLines="3"
                     android:lines="3"
                     android:minHeight="40dp"
-                    android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipsci"
+                    android:text="Lorem ipsum dolor sit at, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipsci"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="12sp"
                      />

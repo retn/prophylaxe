@@ -58,7 +58,9 @@
             </TableRow>
         </TableLayout>
 
-        <TableLayout android:layout_width="260dp" >
+        <TableLayout
+            android:layout_width="260dp"
+            android:paddingLeft="2dp" >
 
             <!-- Titel -->
 
@@ -67,7 +69,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="Test"
+                    android:text="Ein schöner Tag ohne Bild"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -80,6 +82,8 @@
                     android:layout_height="fill_parent"
                     android:maxLines="3"
                     android:lines="3"
+                    android:ellipsize="end" 
+				    android:singleLine="false"
                     android:minHeight="40dp"
                     android:text="Lorem ipsum dolor sit at, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipsci"
                     android:textAppearance="?android:attr/textAppearanceSmall"

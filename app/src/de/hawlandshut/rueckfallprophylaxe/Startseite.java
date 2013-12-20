@@ -36,10 +36,10 @@ public class Startseite extends Activity {
     	Intent intent = new Intent(this, Notfallkoffer.class);
     	startActivity(intent);
     }*/
-    /* Fehlt noch die Ablenkungen klasse
-    public void callAblenkungen(View view) {
-    	Intent intent = new Intent(this, Ablenkungen.class);
+ 
+    public void callEmotion(View view) {
+    	Intent intent = new Intent(this, EmotionActivity.class);
     	startActivity(intent);
-    }*/
+    }
     
 }

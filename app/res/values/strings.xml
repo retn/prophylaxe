@@ -19,5 +19,18 @@
     <string name="title_activity_contactpoint_list">Anlaufstellen Liste</string>
     <string name="btn_notfallkoffer">Notfallkoffer</string>
     <string name="btn_ablenkungen">Ablenkungen</string>
+    <string name="title_activity_emotion">EmotionActivity</string>
+    <string name="title_activity_distraction">DistractionActivity</string>
+     <string name="ermutigungs_text">Hier könnte der Text, der zur Ermutigung
+         beitragen soll stehen oder so.</string>
+    <string name="wuetend_button">Wütend</string>
+    <string name="Ablenkung_button">Ablenkung</string>
+    <string name="MP3_button">Musik Playlist</string>
+    <string name="Spiele_button">Spiele oder Apps</string>
+    <string name="title_activity_ablenkung_wuetend">Ablenkung_wuetend</string>
+    <string name="Ablekung1">Mandala malen</string>
+    <string name="Ablekung2">Laufen gehen</string>
+    <string name="Ablekung3">Fitnessstudio</string>
+    <string name="Ablekung4">Computer spielen</string>
 
 </resources>

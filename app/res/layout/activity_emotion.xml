@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".EmotionActivity" >
+
+   <TextView
+        android:id="@+id/ermutigungs_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/ermutigungs_text" />
+    
+    <Button 
+        android:id="@+id/Ablenkung_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ermutigungs_text"
+        android:text="@string/Ablenkung_button"
+        android:onClick="switch_to_Distraction"/>
+    
+    <Button        
+        android:id="@+id/MP3_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/Ablenkung_button"
+        android:text="@string/MP3_button" 
+        />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/MP3_button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/Spiele_button" />
+
+</RelativeLayout>
+
+

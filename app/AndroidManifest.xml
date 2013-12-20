@@ -46,13 +46,29 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" />
         </activity>
-         <activity
+        <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity"
             android:label="@string/title_activity_contactpoint_map"
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity" />
+        </activity>
+        <activity
+            android:name="de.hawlandshut.rueckfallprophylaxe.EmotionActivity"
+            android:label="@string/title_activity_emotion"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hawlandshut.rueckfallprophylaxe.Startseite" /> 
+        </activity>
+        <activity
+            android:name="de.hawlandshut.rueckfallprophylaxe.DistractionActivity"
+            android:label="@string/title_activity_distraction"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.EmotionActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hawlandshut.rueckfallprophylaxe.EmotionActivity" />
         </activity>
     </application>
 

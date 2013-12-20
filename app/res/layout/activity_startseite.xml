@@ -44,7 +44,7 @@
         android:layout_alignRight="@+id/btnAnlaufstellen"
         android:layout_below="@+id/btnNotfallkoffer"
         android:layout_marginTop="40dp"
-        android:onClick="callAblenkungen"
+        android:onClick="callEmotion"
         android:text="@string/btn_ablenkungen" />
 
 </RelativeLayout>

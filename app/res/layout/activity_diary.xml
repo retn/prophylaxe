@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="4dp"
     android:padding="16dp"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -10,11 +11,121 @@
     tools:context=".DiaryActivity" >
 
     <TableRow
-        android:id="@+id/tableRow1"
+        android:id="@+id/diaryEntryWithoutPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableLayout android:layout_width="35dp" >
+
+            <!-- Wochentag -->
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="MO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#505050"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <!-- Datum -->
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="18"
+                    android:textSize="24sp" />
+            </TableRow>
+
+            <!-- Uhrzeit -->
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="17:30"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#505050"
+                    android:textSize="12sp" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- Diary entry preview -->
+
+        <TableLayout
+            android:layout_width="260dp"
+            android:paddingLeft="2dp" >
+
+            <!-- Titel -->
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="fill_parent"
+                    android:text="Ein schöner Tag ohne Bild und ein viel viel viel zu langer Titel"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:singleLine="true"/>
+            </TableRow>
+
+            <!-- Text preview -->
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:ellipsize="end"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:minHeight="40dp"
+                    android:singleLine="false"
+                    android:text="Lorem ipsum dolor sit at, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipsci"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="12sp" />
+            </TableRow>
+        </TableLayout>
+    </TableRow>
+
+    <!-- Amazing fake table border - FUCK android -->
+
+    <TableRow
+        android:id="@+id/diaryEntryDivider"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#dcdcdc" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:text="" />
+    </TableRow>
+    
+    
+    <!--  Diary entry with picture(s) -->
+    <TableRow
+        android:id="@+id/diaryEntryWithPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <TableLayout android:layout_width="35dp" >
+        <!-- First column -->
+
+        <TableLayout
+            android:id="@+id/datumSpalte"
+            android:layout_width="35dp" >
 
             <!-- Wochentag -->
 
@@ -53,45 +164,71 @@
                     android:text="17:30"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#505050"
-                    android:textSize="12sp"
-                     />
+                    android:textSize="12sp" />
             </TableRow>
+
         </TableLayout>
 
+        <!-- Second column -->
+
         <TableLayout
+            android:id="@+id/eintragsSpalte"
             android:layout_width="260dp"
             android:paddingLeft="2dp" >
 
-            <!-- Titel -->
+            <TableLayout
+                android:id="@+id/textSpalte"
+                android:layout_width="80dp"
+                android:paddingLeft="2dp" >
 
-            <TableRow>
+                <TableRow>
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Ein schöner Tag ohne Bild"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </TableRow>
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="Ein schöner Tag ohne Bild und ein viel viel viel zu langer Titel"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
 
-            <TableRow>
+                <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:maxLines="3"
-                    android:lines="3"
-                    android:ellipsize="end" 
-				    android:singleLine="false"
-                    android:minHeight="40dp"
-                    android:text="Lorem ipsum dolor sit at, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipsci"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textSize="12sp"
-                     />
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="fill_parent"
+                        android:ellipsize="end"
+                        android:lines="3"
+                        android:maxLines="3"
+                        android:minHeight="40dp"
+                        android:singleLine="false"
+                        android:text="Lorem ipsum dolor sit at, consetetur sadipscing elitr, Lorem ipsum dolor sit amet, consetetur sadipscing elitr,Lorem ipsum dolor sit amet, consetetur sadipsci"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="12sp"
+                        android:width="120dp" />
+                </TableRow>
 
-            </TableRow>
-        </TableLayout>
-    </TableRow>
+                <TableLayout
+                    android:id="@+id/bildSpalte"
+                    android:layout_width="25dp" >
+
+                    <TableRow>
+
+                        <ImageView
+                            android:id="@+id/imageView1"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/beach" />
+                    </TableRow>
+                </TableLayout>
+
+            </TableLayout> <!-- Title & Text preview end -->
+	        </TableLayout>
+
+	     </TableRow>
 
 </TableLayout>

@@ -8,35 +8,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NewEntryActivity" >
 
-        
-	  <EditText
-	       android:id="@+id/editText1"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:ems="10"
-	       android:inputType="date" >
-	
-	       <requestFocus />
-	   </EditText>
+    <Spinner
+        android:id="@+id/spinnerMood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/textMood" />
 
-	   <EditText
-	       android:id="@+id/editText2"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
-	       android:layout_alignBottom="@+id/editText3"
-	       android:layout_alignLeft="@+id/editText3"
-	       android:layout_marginBottom="38dp"
-	       android:ems="10"
-	       android:inputType="text" />
-	   
-	    <EditText
-           android:id="@+id/editText3"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignLeft="@+id/editText1"
-           android:layout_below="@+id/editText1"
-           android:layout_marginTop="62dp"
-           android:ems="10"
-           android:inputType="textMultiLine" />
+    <TextView
+        android:id="@+id/textMood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/textMood"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+        <EditText
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerMood"
+        android:layout_marginBottom="5dp"
+        android:ems="10"
+        android:hint="@string/title_hint"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:layout_below="@+id/title"
+        android:ems="10"
+        android:hint="@string/entry_hint"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

@@ -32,5 +32,7 @@
     <string name="Ablekung2">Laufen gehen</string>
     <string name="Ablekung3">Fitnessstudio</string>
     <string name="Ablekung4">Computer spielen</string>
+    <string name="title_activity_koffer">Notfall Koffer</string>
+    <string name="title_activity_koffer2">Notfall Koffer 2</string>
 
 </resources>

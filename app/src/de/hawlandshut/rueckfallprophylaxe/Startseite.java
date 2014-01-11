@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class Startseite extends Activity {
 
@@ -31,11 +32,11 @@ public class Startseite extends Activity {
     	Intent intent = new Intent(this, ContactpointListActivity.class);
     	startActivity(intent);
     }
-    /* Fehlt noch die Notfallkoffer klasse
+    
     public void callNotfallkoffer(View view) {
-    	Intent intent = new Intent(this, Notfallkoffer.class);
+    	Intent intent = new Intent(this, NotfallKofferActivity.class);
     	startActivity(intent);
-    }*/
+    }
  
     public void callEmotion(View view) {
     	Intent intent = new Intent(this, EmotionActivity.class);

@@ -21,39 +21,56 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_action_accept=0x7f020000;
-        public static final int ic_action_attachment=0x7f020001;
-        public static final int ic_action_new=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
+        public static final int beach=0x7f020000;
+        public static final int bubble_white=0x7f020001;
+        public static final int face_not_final=0x7f020002;
+        public static final int ic_action_accept=0x7f020003;
+        public static final int ic_action_attachment=0x7f020004;
+        public static final int ic_action_new=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
     }
     public static final class id {
-        public static final int Ablenkung_button=0x7f080014;
-        public static final int Computer=0x7f080012;
-        public static final int Fitness=0x7f080011;
+        public static final int Ablenkung_button=0x7f08001a;
+        public static final int Computer=0x7f080018;
+        public static final int Fitness=0x7f080017;
         public static final int FrameLayout1=0x7f080000;
-        public static final int Laufen=0x7f080010;
+        public static final int Laufen=0x7f080016;
         public static final int LinearLayout1=0x7f080002;
-        public static final int MP3_button=0x7f080015;
-        public static final int Mandala=0x7f08000f;
+        public static final int MP3_button=0x7f08001b;
+        public static final int Mandala=0x7f080015;
         public static final int TableRow1=0x7f080008;
-        public static final int action_addAttachment=0x7f08001f;
-        public static final int action_createEntry=0x7f080020;
-        public static final int action_newEntry=0x7f08001d;
-        public static final int action_settings=0x7f08001e;
-        public static final int btnAblenkungen=0x7f08001c;
-        public static final int btnAnlaufstellen=0x7f08001a;
-        public static final int btnNotfallkoffer=0x7f08001b;
-        public static final int btnTagebuch=0x7f080019;
+        public static final int action_addAttachment=0x7f08002d;
+        public static final int action_createEntry=0x7f08002e;
+        public static final int action_newEntry=0x7f08002b;
+        public static final int action_settings=0x7f08002c;
+        public static final int bildSpalte=0x7f080013;
+        public static final int btnAblenkungen=0x7f080022;
+        public static final int btnAnlaufstellen=0x7f080020;
+        public static final int btnNotfallkoffer=0x7f080021;
+        public static final int btnTagebuch=0x7f08001f;
+        public static final int button=0x7f080026;
         public static final int button1=0x7f08000d;
+        public static final int button2=0x7f080027;
         public static final int city=0x7f080006;
         public static final int country=0x7f080007;
-        public static final int editText1=0x7f080016;
-        public static final int editText2=0x7f080017;
-        public static final int editText3=0x7f080018;
-        public static final int ermutigungs_text=0x7f080013;
+        public static final int datumSpalte=0x7f080011;
+        public static final int diaryEntryDivider=0x7f08000f;
+        public static final int diaryEntryWithPicture=0x7f080010;
+        public static final int diaryEntryWithoutPicture=0x7f08000e;
+        public static final int editText1=0x7f08001c;
+        public static final int editText2=0x7f08001d;
+        public static final int editText3=0x7f08001e;
+        public static final int ermutigungs_text=0x7f080019;
+        public static final int imageView1=0x7f080014;
+        public static final int image_koffer=0x7f080024;
+        public static final int koffer_item=0x7f080029;
+        public static final int list_view_koffer=0x7f080023;
+        public static final int man=0x7f08002a;
+        public static final int message_text=0x7f080028;
         public static final int scrollView1=0x7f080001;
         public static final int street=0x7f080005;
-        public static final int tableRow1=0x7f08000e;
+        public static final int textSpalte=0x7f080012;
+        public static final int textView=0x7f080025;
         public static final int textView1=0x7f080004;
         public static final int textView2=0x7f080003;
         public static final int textView3=0x7f080009;
@@ -69,6 +86,10 @@ public final class R {
         public static final int activity_emotion=0x7f030004;
         public static final int activity_new_entry=0x7f030005;
         public static final int activity_startseite=0x7f030006;
+        public static final int koffer_1=0x7f030007;
+        public static final int koffer_2=0x7f030008;
+        public static final int koffer_bubble=0x7f030009;
+        public static final int koffer_list_item=0x7f03000a;
     }
     public static final class menu {
         public static final int diary=0x7f070000;
@@ -106,6 +127,8 @@ public final class R {
         public static final int title_activity_diary=0x7f050003;
         public static final int title_activity_distraction=0x7f050013;
         public static final int title_activity_emotion=0x7f050012;
+        public static final int title_activity_koffer=0x7f05001e;
+        public static final int title_activity_koffer2=0x7f05001f;
         public static final int title_activity_new_entry=0x7f050006;
         public static final int wuetend_button=0x7f050015;
     }

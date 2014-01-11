@@ -70,6 +70,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.hawlandshut.rueckfallprophylaxe.EmotionActivity" />
         </activity>
+        <activity android:name="NotfallKofferActivity"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite"
+            android:label="@string/title_activity_koffer">
+        </activity>
+        <activity android:name="NotfallKofferZweiActivity"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.NotfallKofferActivity"
+            android:label="@string/title_activity_koffer2">
+        </activity>
     </application>
 
 </manifest>

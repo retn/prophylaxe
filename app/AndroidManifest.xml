@@ -41,10 +41,10 @@
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity"
             android:label="@string/title_activity_contactpoint_list"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.Startseite" />
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity"
@@ -52,7 +52,7 @@
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" />
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.EmotionActivity"

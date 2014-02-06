@@ -1,9 +1,11 @@
 <?php
 
-class Application_Model_Emotion {
+class Application_Model_EcRiskSituation {
 
-    protected $_emotionID;
-    protected $_emotion;
+    protected $_elrID;
+    protected $_text;
+    protected $_ecID_fk;
+    
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -14,7 +16,7 @@ class Application_Model_Emotion {
     public function __set($name, $value) {
         $method = 'set' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Emotion Eigenschaft');
+            throw new Exception('Ungültige EcRiskSituation Eigenschaft');
         }
         $this->$method($value);
     }
@@ -22,7 +24,7 @@ class Application_Model_Emotion {
     public function __get($name) {
         $method = 'get' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Emotion Eigenschaft');
+            throw new Exception('Ungültige EcRiskSituation Eigenschaft');
         }
         return $this->$method();
     }
@@ -38,31 +40,38 @@ class Application_Model_Emotion {
         return $this;
     }
 
-    public function setEmotion($emotion) {
-        $this->_emotion = (string) $emotion;
+    
+    public function getElrID() {
+        return $this->_elrid;
+    }
+
+    public function setElrID($_elrid) {
+        $this->_elrid = $_elrid;
         return $this;
     }
 
-    public function getEmotion() {
-        return $this->_emotion;
+    public function getText() {
+        return $this->_text;
     }
 
-    public function setId($id) {
-        if ($id > 0) {
-            $this->_emotionID = (int) $id;
-        } else {
-            $this->_emotionID = null;
-        }
+    public function setText($_text) {
+        $this->_text = $_text;
         return $this;
     }
 
-    public function getId() {
-        return $this->_emotionID;
+    public function getEcID_fk() {
+        return $this->_ecID_fk;
     }
 
+    public function setEcID_fk($_ecID_fk) {
+        $this->_ecID_fk = $_ecID_fk;
+        return $this;
+    }
+    
     public function getArray() {
-        return array($this->getId(), $this->getEmotion());
+        return array($this->getElrID(), $this->getText(), $this->getEcID_fk());
     }
+
 
 }
 

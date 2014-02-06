@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_MaximHasPatientMapper {
+class Application_Model_DistractionHasPatientMapper {
 
     protected $_dbTable = null;
 
@@ -17,11 +17,12 @@ class Application_Model_MaximHasPatientMapper {
 
     public function getDbTable() {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_MaximHasPatient');
+            $this->setDbTable('Application_Model_DbTable_DistractionHasPatient');
         }
         return $this->_dbTable;
     }
 
+   
     public function saveAll($patientID, $maximids) {
 
         // Alle Spreuche des Patienten zuerst loeschen
@@ -34,7 +35,7 @@ class Application_Model_MaximHasPatientMapper {
 
         // Alle gewaehlten Sprueche eintragen
         foreach ($maximids as $value) {
-            $this->getDbTable()->insert(array('patient_patientID' => $patientID, 'maxim_maximID' => $value));
+            $this->getDbTable()->insert(array('patient_patientID' => $patientID, 'distraction_distractionID' => $value));
         }
     }
 

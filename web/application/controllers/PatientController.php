@@ -8,11 +8,15 @@ class PatientController extends Zend_Controller_Action {
                 ->initContext();
         $contextSwitch->addActionContext('save-maxim', 'json')
                 ->initContext();
+        $contextSwitch->addActionContext('save-distraction', 'json')
+                ->initContext();
     }
 
     public function indexAction() {
-        $patient = new Application_Model_PatientMapper();
-        $this->view->entries = $patient->fetchAll();
+//        $patient = new Application_Model_PatientMapper();
+//        $this->view->entries = $patient->fetchAll();
+
+      
     }
 
     public function createAction() {
@@ -39,7 +43,7 @@ class PatientController extends Zend_Controller_Action {
 
         $form = new Application_Form_Patient();
         $form->getElement('submit')->setLabel("Daten ändern");
-        
+
         $request = $this->getRequest();
 
         // Wenn das Formular abgesedet wurde, neue Daten Speichern
@@ -125,4 +129,40 @@ class PatientController extends Zend_Controller_Action {
         $this->view->redirect = "/patient/list";
     }
 
+    public function editDistractionAction() {
+        $this->view->jQuery()->addJavascriptFile('/js/datatable/jquery.dataTables.min.js')
+                ->addJavascriptFile('/js/patient/PatientDistractionTable.js')
+                ->addStylesheet('/css/jquery.dataTables.css');
+        // Bisher zugeordnete Sprueche holen
+        $patientID = $this->getParam('id');
+        $patientMapper = new Application_Model_PatientMapper();
+        $distractionsFromPatient = $patientMapper->getDistractionsFromPatient($patientID);
+
+        // Alle Spruche fuer Anzeige holen
+        $mapper = new Application_Model_DistractionMapper();
+        $distractions = $mapper->fetchAll();
+
+        // Patient ID speichern
+//        Zend_Registry::set('patientID',$patientID);
+        $ns = new Zend_Session_Namespace('edit-distraction');
+        $ns->patient_id = $patientID;
+
+        $this->view->distractionsFromPatient = $distractionsFromPatient;
+        $this->view->distractions = $distractions;
+    }
+
+    public function saveDistractionAction() {
+        $request = $this->getRequest()->getPost('distraction_ids');
+        // Gespeicherte Patient ID holen
+        $ns = new Zend_Session_Namespace('edit-distraction');
+        $patientID = $ns->patient_id;
+
+        $distractionHasPatientMapper = new Application_Model_DistractionHasPatientMapper();
+        $distractionHasPatientMapper->saveAll($patientID, $request);
+
+
+        $this->view->redirect = "/patient/list";
+    }
+
 }
+

@@ -26,6 +26,7 @@ class Application_Model_DistractionMapper {
         $data = array(
             'distractionID' => $distraction->getId(),
             'text' => $distraction->getText(),
+            'emotionID_fk' => $distraction->getEmotion(),
         );
 
         if (null === ($id = $distraction->getId())) {
@@ -42,17 +43,32 @@ class Application_Model_DistractionMapper {
             return;
         }
         $row = $result->current();
+        $emotion = $row->findDependentRowset('Application_Model_DbTable_Emotion');
         $distraction->setId($row->distractionID)
-                ->setFirstname($row->text);
+                ->setText($row->text)
+                ->setEmotion($row->emotionID_fk)
+                ->setEmotionText($emotion->emotion);
     }
 
     public function fetchAll() {
-        $resultSet = $this->getDbTable()->fetchAll();
+//        $resultSet = $this->getDbTable()->fetchAll();
         $entries = array();
-        foreach ($resultSet as $row) {
+        
+        $select = $this->getDbTable()->select(Zend_Db_Table::SELECT_WITH_FROM_PART)
+                ->setIntegrityCheck(false);        
+        $select->join('spl_emotion', 'spl_emotion.emotionID = spl_distraction.emotionID_fk','emotion');
+        $rows = $this->getDbTable()->fetchAll($select);        
+
+        foreach ($rows as $row) {
+//            $emotionMapper = new Application_Model_EmotionMapper();
+//            $emotion = new Application_Model_Emotion();
+//            $emotionMapper->find($row->emotionID_fk, $emotion);
+
             $entry = new Application_Model_Distraction();
             $entry->setId($row->distractionID)
-                    ->setText($row->text);
+                    ->setText($row->text)
+                    ->setEmotion($row->emotionID_fk)
+                    ->setEmotionText($row->emotion);
             $entries[] = $entry;
         }
         return $entries;
@@ -63,8 +79,8 @@ class Application_Model_DistractionMapper {
         $distraction = $distractionRowset->current();
 
         $anzDeletedRows = $distraction->delete();
-        
-        return $anzDeletedRows;      
+
+        return $anzDeletedRows;
     }
 
 }

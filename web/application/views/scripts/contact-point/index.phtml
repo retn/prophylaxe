@@ -1,0 +1,65 @@
+<div class="col-md-12">
+    <table id="contactpoint_table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Strasse</th>
+                <th>Plz</th>
+                <th>Stadt</th>
+                <th>Tel. Nr.</th>
+                <th>E-Mail</th>
+                <th>Löschen</th>
+                <th>Bearbeiten</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->contactPoints as $key => $val): ?>
+             <tr>
+                    <td>
+                        <?php
+                        echo $val->getCpID();
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $val->getName();
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $val->getStreet();
+                        ?>
+                    </td>
+                     <td>
+                        <?php
+                        echo $val->getPlz();
+                        ?>
+                    </td>
+                     <td>
+                        <?php
+                        echo $val->getTown();
+                        ?>
+                    </td>
+                     <td>
+                        <?php
+                        echo $val->getPhone_number();
+                        ?>
+                    </td>
+                     <td>
+                        <?php
+                        echo $val->getEmail();
+                        ?>
+                    </td>
+                    <td>
+                    </td> 
+                    <td>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tbody>
+          
+        </tbody>
+    </table>
+</div>

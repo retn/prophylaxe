@@ -51,32 +51,32 @@
             <route>default</route>  
         </Distraciton>
         
-        <Placetogo>
+        <ContactPoint>
             <label>Anlaufstellen</label>
-            <controller>placetogo</controller>
+            <controller>contact-point</controller>
             <action>index</action>
-            <resource>placetogo</resource>
+            <resource>contact-point</resource>
             <privilege></privilege>
             <route>default</route>  
             <pages>
                 <create>
                     <label>Hinzufügen</label>
-                    <controller>placetogo</controller>
+                    <controller>contact-point</controller>
                     <action>create</action>
-                    <resource>placetogo</resource>
+                    <resource>contact-point</resource>
                     <privilege>create</privilege>  
                     <route>default</route>                   
                 </create>
                 <edit>
                     <label>Bearbeiten</label>
-                    <controller>placetogo</controller>
-                    <action>edit</action>
-                    <resource>placetogo</resource>
+                    <controller>contact-point</controller>
+                    <action>index</action>
+                    <resource>contact-point</resource>
                     <privilege>edit</privilege>
                     <route>default</route>                      
                 </edit>
             </pages>
-        </Placetogo>
+        </ContactPoint>
               
         <Logout>
             <label>Logout</label>

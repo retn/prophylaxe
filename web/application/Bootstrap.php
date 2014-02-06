@@ -80,6 +80,43 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // add this route to the front controller 
         $frontController->getRouter()->addRoute('editPatientMaxim', $editPatientMaxim);
+
+        $editPatientDistraction = new Zend_Controller_Router_Route(
+                'patient/edit-distraction/:id', array(
+            'controller' => 'patient',
+            'action' => 'edit-distraction',
+            'id' => 'id'));
+
+        // add this route to the front controller 
+        $frontController->getRouter()->addRoute('editPatientDistraction', $editPatientDistraction);
+
+        $editContactPoint = new Zend_Controller_Router_Route(
+                'contact-point/edit/:id', array(
+            'controller' => 'contact-point',
+            'action' => 'edit',
+            'id' => 'id'));
+
+        // add this route to the front controller 
+        $frontController->getRouter()->addRoute('editContactpint', $editContactPoint);
+
+        $createEmegencyCase = new Zend_Controller_Router_Route(
+                'emergency-case/create/:id', array(
+            'controller' => 'emergency-case',
+            'action' => 'create',
+            'id' => 'id'));
+
+        // add this route to the front controller 
+        $frontController->getRouter()->addRoute('createEmegencyCase', $createEmegencyCase);
+
+        $editEmergencyCase = new Zend_Controller_Router_Route(
+                'emergency-case/edit/:id', array(
+            'controller' => 'emergency-case',
+            'action' => 'edit',
+            'id' => 'id'));
+
+        // add this route to the front controller 
+        $frontController->getRouter()->addRoute('editEmergencyCase', $editEmergencyCase);
     }
 
 }
+

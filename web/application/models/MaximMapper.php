@@ -50,7 +50,7 @@ class Application_Model_MaximMapper {
         }
         $row = $result->current();
         $maxim->setId($row->maximID)
-                ->setFirstname($row->text);
+                ->setText($row->text);
     }
 
     public function fetchAll() {

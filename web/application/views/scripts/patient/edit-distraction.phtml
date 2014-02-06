@@ -1,18 +1,19 @@
 <div class="col-md-12 ">
-    <p>Dem Patienten sind zurzeit folgende Sprüche zugeordnet:</p>
+    <p>Dem Patienten sind zurzeit folgende Ablenkungsmöglikeiten zugeordnet:</p>
 
     <div>
-        <table border="1" id="patient_has_maxims">
+        <table border="1" id="patient_has_distractions">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Text</th>
+                    <th>Emotion</th>
                     <th>Entfernen</th>
                 </tr>
             </thead>
-            
-            <?php foreach ($this->maximsFromPatient as $key => $val): ?>
-                <tr maximid="<?php echo $val->getId(); ?>">
+
+            <?php foreach ($this->distractionsFromPatient as $key => $val): ?>
+                <tr distractionid="<?php echo $val->getId(); ?>">
                     <td>
                         <?php
                         echo $val->getId();
@@ -24,34 +25,43 @@
                         ?>
                     </td>
                     <td>
-                       <button name="btnRemove" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                        <?php
+                        echo $val->getEmotionText();
+                        ?>
+                    </td>
+                    <td>
+                        <button name="btnRemove" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
     </div>
-    
+
     <p>
         <br/>
         <button id="btnSubmit" type="button" class="btn btn-primary">Daten Übernehmen</button>
     </p>
 
-    <table id="patient_maxim_table" >
+    <table id="patient_distraction_table" border="">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Text</th>
+                <th>Emotion</th>
                 <th>Hinzufuegen</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($this->maxims as $key => $val): ?>
+            <?php foreach ($this->distractions as $key => $val): ?>
                 <tr>
                     <td>
                         <?php echo $val->getId(); ?>
                     </td>
                     <td>
                         <?php echo $val->getText(); ?>
+                    </td>
+                     <td>
+                        <?php echo $val->getEmotionText(); ?>
                     </td>
                     <td>
                     </td>

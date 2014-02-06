@@ -4,6 +4,8 @@ class Application_Model_Distraction {
 
     protected $_distractionID;
     protected $_text;
+    protected $_emotionID_fk;
+    protected $_emotion_text;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -60,8 +62,26 @@ class Application_Model_Distraction {
         return $this->_distractionID;
     }
 
+    public function setEmotionText($text) {
+        $this->_emotion_text = (string) $text;
+        return $this;
+    }
+
+    public function getEmotionText() {
+        return $this->_emotion_text;
+    }
+
+     public function setEmotion($id) {
+        $this->_emotionID_fk = (int) $id;
+        return $this;
+    }
+
+    public function getEmotion() {
+        return $this->_emotionID_fk;
+    }
+    
     public function getArray() {
-        return array($this->getId(), $this->getText());
+        return array($this->getId(), $this->getText(), $this->getEmotionText(), $this->getEmotion());
     }
 
 }

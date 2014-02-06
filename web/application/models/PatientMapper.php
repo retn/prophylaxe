@@ -113,4 +113,27 @@ class Application_Model_PatientMapper {
         return $entries;
     }
 
+    public function getDistractionsFromPatient($patientID) {
+        $patientRow = $this->find($patientID);
+//        $result = $patientRow->findDependentRowset('Application_Model_DbTable_MaximHasPatient');
+        $result = $patientRow->findManyToManyRowset('Application_Model_DbTable_Distraction', 'Application_Model_DbTable_DistractionHasPatient');
+
+        $entries = array();
+        foreach ($result as $row) {
+            // Emotion-String ermitteln
+            $emotionMapper = new Application_Model_EmotionMapper();
+            $emotion = new Application_Model_Emotion();
+            $emotionMapper->find($row->emotionID_fk, $emotion);
+
+            $entry = new Application_Model_Distraction();
+            $entry->setId($row->distractionID)
+                    ->setText($row->text)
+                    ->setEmotion($row->emotionID_fk)
+                    ->setEmotionText($emotion->getEmotion());
+            $entries[] = $entry;
+        }
+
+        return $entries;
+    }
+
 }

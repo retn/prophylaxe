@@ -32,7 +32,11 @@ function DistractionTable() {
                 },
                 {
                     "mData": 1,
-                    "sWidth": "60%"},
+                    "sWidth": "60%"
+                },
+                {
+                    "mData": 2  
+                },
                 {
                     "mData": null, // Spalte Bearbeiten
                     'bSortable': false,
@@ -45,6 +49,7 @@ function DistractionTable() {
                         button.bind('click', function() {
                             _dialog_edit.find('#id').val(oData[0]);
                             _dialog_edit.find('#text').text(oData[1]);
+                            _dialog_edit.find('#emotion').val(oData[3]);
                             _dialog_edit.dialog("open");
 //                            alert('show');
                         });

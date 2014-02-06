@@ -7,7 +7,7 @@ class Custom_Auth_AclList extends Zend_Acl {
 
         // Controller script names. You have to add all of them if credential check
         // is global to your application.
-        $controllers = array('auth', 'error', 'index', 'patient', 'placetogo','maxim','distraction');
+        $controllers = array('auth', 'error', 'index', 'patient', 'contact-point','maxim','distraction','emergency-case');
 
         foreach ($controllers as $controller) {
             $this->add(new Zend_Acl_Resource($controller));
@@ -29,11 +29,11 @@ class Custom_Auth_AclList extends Zend_Acl {
         // Therapist soll zugriff auf Logout haben
         $this->allow('therapist', 'auth', 'logout');
         // Zugriff auf index und patient controller
-        $this->allow('therapist', array('index','patient','maxim','distraction'));
+        $this->allow('therapist', array('index','patient','maxim','distraction','emergency-case'));
 
         // admin hat zusaetzlich zugriff auf anlaufstellen
-        $this->allow('admin', 'placetogo');
-//        $this->deny('admin', 'placetogo',array('edit','create'));
+        $this->allow('admin', 'contact-point');
+//        $this->deny('admin', 'contactpoint',array('edit','create'));
             
     }
 

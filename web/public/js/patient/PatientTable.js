@@ -64,7 +64,7 @@ function PatientTable() {
                     },
                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                         var a = $(nTd).find("a");
-                        a.attr("href", "/patient/editDistraction/" + oData[0]);
+                        a.attr("href", "/patient/edit-distraction/" + oData[0]);
                     }
                 }
             ]

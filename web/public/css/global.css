@@ -203,7 +203,7 @@ html, body {
 /*
     Maxim Start
 */
-#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column{
+#maxim_table .maxim_table_edit_column, .maxim_table_delete_column, .patient_edit_table_column, .contactpoint_edit_table_column{
     text-align:center;
 }
 

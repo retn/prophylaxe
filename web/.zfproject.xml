@@ -19,16 +19,13 @@
           <actionMethod actionName="list"/>
           <actionMethod actionName="editMaxim"/>
           <actionMethod actionName="saveMaxim"/>
+          <actionMethod actionName="editDistraction"/>
+          <actionMethod actionName="saveDistraction"/>
         </controllerFile>
         <controllerFile controllerName="Auth">
           <actionMethod actionName="index"/>
           <actionMethod actionName="login"/>
           <actionMethod actionName="logout"/>
-        </controllerFile>
-        <controllerFile controllerName="Placetogo">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="create"/>
-          <actionMethod actionName="edit"/>
         </controllerFile>
         <controllerFile controllerName="Maxim">
           <actionMethod actionName="index"/>
@@ -42,12 +39,26 @@
           <actionMethod actionName="save"/>
           <actionMethod actionName="delete"/>
         </controllerFile>
+        <controllerFile controllerName="ContactPoint">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="create"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="getcontactpoints"/>
+        </controllerFile>
+        <controllerFile controllerName="EmergencyCase">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="create"/>
+          <actionMethod actionName="edit"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory>
         <formFile formName="Patient"/>
         <formFile formName="Login"/>
         <formFile formName="Maxim"/>
         <formFile formName="Distraction"/>
+        <formFile formName="ContactPoint"/>
+        <formFile formName="EmergencyCase"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>
@@ -63,6 +74,10 @@
           <dbTableFile dbTableName="Emotion"/>
           <dbTableFile dbTableName="Distraction"/>
           <dbTableFile dbTableName="DistractionHasPatient"/>
+          <dbTableFile dbTableName="ContactPoint"/>
+          <dbTableFile dbTableName="EmergencyCase"/>
+          <dbTableFile dbTableName="EcLimitRelapse"/>
+          <dbTableFile dbTableName="EcRiskSituation"/>
         </dbTableDirectory>
         <modelFile modelName="PatientMapper"/>
         <modelFile modelName="Patient"/>
@@ -72,6 +87,11 @@
         <modelFile modelName="Emotion"/>
         <modelFile modelName="Distraction"/>
         <modelFile modelName="DistractionHasPatient"/>
+        <modelFile modelName="ContactPoint"/>
+        <modelFile modelName="ContactPointMapper"/>
+        <modelFile modelName="EmergencyCase"/>
+        <modelFile modelName="EcLimitRelapse"/>
+        <modelFile modelName="EcRiskSituation"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -98,16 +118,7 @@
           <viewControllerScriptsDirectory forControllerName="Auth">
             <viewScriptFile forActionName="logout"/>
           </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Placetogo">
-            <viewScriptFile forActionName="index"/>
-          </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Patient">
-            <viewScriptFile forActionName="edit"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Placetogo">
-            <viewScriptFile forActionName="create"/>
-          </viewControllerScriptsDirectory>
-          <viewControllerScriptsDirectory forControllerName="Placetogo">
             <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Maxim">
@@ -155,6 +166,36 @@
           <viewControllerScriptsDirectory forControllerName="Distraction">
             <viewScriptFile forActionName="delete"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="editDistraction"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Patient">
+            <viewScriptFile forActionName="saveDistraction"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ContactPoint">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ContactPoint">
+            <viewScriptFile forActionName="create"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ContactPoint">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ContactPoint">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="ContactPoint">
+            <viewScriptFile forActionName="getcontactpoints"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="EmergencyCase">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="EmergencyCase">
+            <viewScriptFile forActionName="create"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="EmergencyCase">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -199,16 +240,13 @@
             <testApplicationActionMethod forActionName="getpatients"/>
             <testApplicationActionMethod forActionName="list"/>
             <testApplicationActionMethod forActionName="editMaxim"/>
+            <testApplicationActionMethod forActionName="editDistraction"/>
+            <testApplicationActionMethod forActionName="saveDistraction"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Auth">
             <testApplicationActionMethod forActionName="index"/>
             <testApplicationActionMethod forActionName="login"/>
             <testApplicationActionMethod forActionName="logout"/>
-          </testApplicationControllerFile>
-          <testApplicationControllerFile forControllerName="Placetogo">
-            <testApplicationActionMethod forActionName="index"/>
-            <testApplicationActionMethod forActionName="create"/>
-            <testApplicationActionMethod forActionName="edit"/>
           </testApplicationControllerFile>
           <testApplicationControllerFile forControllerName="Maxim">
             <testApplicationActionMethod forActionName="index"/>
@@ -221,6 +259,18 @@
             <testApplicationActionMethod forActionName="getDistractions"/>
             <testApplicationActionMethod forActionName="save"/>
             <testApplicationActionMethod forActionName="delete"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="ContactPoint">
+            <testApplicationActionMethod forActionName="index"/>
+            <testApplicationActionMethod forActionName="create"/>
+            <testApplicationActionMethod forActionName="edit"/>
+            <testApplicationActionMethod forActionName="delete"/>
+            <testApplicationActionMethod forActionName="getcontactpoints"/>
+          </testApplicationControllerFile>
+          <testApplicationControllerFile forControllerName="EmergencyCase">
+            <testApplicationActionMethod forActionName="index"/>
+            <testApplicationActionMethod forActionName="create"/>
+            <testApplicationActionMethod forActionName="edit"/>
           </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>

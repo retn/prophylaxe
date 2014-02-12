@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.Startseite"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.Startseite"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,59 +23,59 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.DiaryActivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.DiaryActivity"
             android:label="@string/title_activity_diary"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.Startseite" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" />
         </activity>
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.NewEntryActivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.NewEntryActivity"
             android:label="@string/title_activity_new_entry"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.DiaryActivity" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.DiaryActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.DiaryActivity" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.DiaryActivity" />
         </activity>
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity"
             android:label="@string/title_activity_contactpoint_list"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.Startseite" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" />
         </activity>
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.ContactpointMapActivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointMapActivity"
             android:label="@string/title_activity_contactpoint_map"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ContactpointListActivity" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity" />
         </activity>
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.EmotionActivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.EmotionActivity"
             android:label="@string/title_activity_emotion"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.Startseite" /> 
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" /> 
         </activity>
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.DistractionActivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.DistractionActivity"
             android:label="@string/title_activity_distraction"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.EmotionActivity" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.EmotionActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.EmotionActivity" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.EmotionActivity" />
         </activity>
         <activity android:name="NotfallKofferActivity"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.Startseite"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.Startseite"
             android:label="@string/title_activity_koffer">
         </activity>
         <activity android:name="NotfallKofferZweiActivity"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.NotfallKofferActivity"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.NotfallKofferActivity"
             android:label="@string/title_activity_koffer2">
         </activity>
     </application>

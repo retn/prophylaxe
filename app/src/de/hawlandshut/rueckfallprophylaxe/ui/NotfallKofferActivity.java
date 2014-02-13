@@ -1,11 +1,10 @@
-package de.hawlandshut.rueckfallprophylaxe;
+package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -51,7 +50,7 @@ public class NotfallKofferActivity extends Activity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast=Toast.makeText(NotfallKofferActivity.this, "Wähle Foto oder mache selbst eines", Toast.LENGTH_LONG);
+                Toast toast=Toast.makeText(NotfallKofferActivity.this, "Wï¿½hle Foto oder mache selbst eines", Toast.LENGTH_LONG);
                 toast.show();		
             }
         });

@@ -1,4 +1,4 @@
-package de.hawlandshut.rueckfallprophylaxe;
+package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import android.app.Activity;
 import android.content.Context;

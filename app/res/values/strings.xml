@@ -46,5 +46,6 @@
     <string name="Ablekung4">Computer spielen</string>
     <string name="title_activity_koffer">Notfall Koffer</string>
     <string name="title_activity_koffer2">Notfall Koffer 2</string>
+    <string name="btn_saveDiaryEntry">Speichern</string>
 
 </resources>

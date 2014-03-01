@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//Das hier ist die Klasse wo der Benutzer bei jedem nutzen der App die PIN eingeben muss. 
 public class Password_verify extends Activity implements OnClickListener {
 	
 	TextView PIN_verify;

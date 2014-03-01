@@ -20,10 +20,10 @@
             android:id="@+id/button" android:layout_weight="3" android:layout_marginLeft="50dp"
             android:layout_marginBottom="20dp"/>
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ich denke an etwas was mir hilft"
-              android:id="@+id/textView1" android:layout_weight="1"
+              android:id="@+id/Aufforderung1" android:layout_weight="1"
               android:textColor="@android:color/black"/>
     <Button android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Bewältigungsgedanken"
-            android:id="@+id/button1" android:layout_weight="3" android:layout_marginLeft="50dp"
+            android:id="@+id/best_button" android:layout_weight="3" android:layout_marginLeft="50dp"
             android:layout_marginBottom="20dp"/>
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ich brauche Hilfe"
               android:id="@+id/textView2" android:layout_weight="1"

@@ -8,63 +8,52 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NewEntryActivity" >
 
-    <Spinner
-        android:id="@+id/spinnerMood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@+id/textMood" />
-
     <TextView
-        android:id="@+id/textMood"
+        android:id="@+id/entryDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
-        android:text="@string/textMood"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <EditText
-        android:id="@+id/entry"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/saveEntryBtn"
         android:layout_alignLeft="@+id/title"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="@string/entry_hint"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
+        android:layout_alignParentTop="true"
+        android:textSize="18sp"
+        android:ems="10" />
 
     <EditText
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/entry"
-        android:layout_alignLeft="@+id/textMood"
+        android:layout_alignRight="@+id/spinnerMood"
+        android:layout_below="@+id/entryDateText"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="@string/title_hint"
         android:inputType="text" />
 
-    <Button
-        android:id="@+id/saveEntryBtn"
+    <EditText
+        android:id="@+id/entry"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/entry_hint"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/textMood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/entry"
-        android:layout_centerVertical="true"
-        android:text="@string/btn_saveDiaryEntry" />
+        android:layout_below="@+id/entry"
+        android:layout_marginTop="18dp"
+        android:text="@string/textMood"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/entryDateText"
+    <Spinner
+        android:id="@+id/spinnerMood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/title"
-        android:layout_below="@+id/spinnerMood"
-        android:ems="10"
-        android:inputType="date"
-         />
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textMood" />
 
 </RelativeLayout>

@@ -1,7 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -42,6 +45,16 @@ public class ContactpointMapActivity extends Activity {
                         .show();
             }
         }
+        LatLng sydney = new LatLng(-33.867, 151.206);
+
+        googleMap.setMyLocationEnabled(true);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+
+        googleMap.addMarker(new MarkerOptions()
+                .title("Sydney")
+                .snippet("The most populous city in Australia.")
+                .position(sydney));
+
     }
  
     @Override

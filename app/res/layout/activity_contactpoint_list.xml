@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/grey" >
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -10,99 +11,464 @@
         android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Musteranlaufstelle"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/Aufforderung1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_adress" />
-
-            <LinearLayout
+            <GridLayout
+                android:id="@+id/GridLayout03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
                 android:layout_marginLeft="10dp"
-                android:orientation="vertical" >
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:columnCount="1"
+                android:orientation="vertical"
+                android:padding="10dp" >
 
                 <TextView
-                    android:id="@+id/street"
+                    android:id="@+id/TextView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey"
+                    android:padding="2dp"
+                    android:text="Musteranlaufstelle"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/TextView27"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/label_adress" />
+
+                <TextView
+                    android:id="@+id/TextView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:layout_row="5"
+                    android:text="@string/label_phone" />
+
+                <TextView
+                    android:id="@+id/TextView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/label_mail" />
+
+                <Button
+                    android:id="@+id/Button03"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="callMap"
+                    android:text="@string/btn_show_on_map" />
+
+                <LinearLayout android:layout_gravity="fill_horizontal" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginLeft="10dp"
+                    android:layout_row="7"
+                    android:orientation="vertical" >
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/TextView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="4"
+                    android:text="Deutschland" />
+
+                <TextView
+                    android:id="@+id/TextView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="1"
                     android:text="Musterstr. 5" />
 
                 <TextView
-                    android:id="@+id/city"
+                    android:id="@+id/TextView21"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="5"
+                    android:text="12345/6789" />
+
+                <TextView
+                    android:id="@+id/TextView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="6"
+                    android:text="muster@anlaufstelle.de" />
+
+                <TextView
+                    android:id="@+id/TextView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="3"
                     android:text="12345 Musterstadt" />
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/GridLayout02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:columnCount="1"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/TextView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="@color/grey"
+                    android:padding="2dp"
+                    android:text="Musteranlaufstelle"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/TextView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/label_adress" />
+
+                <TextView
+                    android:id="@+id/TextView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:layout_row="5"
+                    android:text="@string/label_phone" />
+
+                <TextView
+                    android:id="@+id/TextView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/label_mail" />
+
+                <Button
+                    android:id="@+id/Button02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="callMap"
+                    android:text="@string/btn_show_on_map" />
+
+                <LinearLayout android:layout_gravity="fill_horizontal" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginLeft="10dp"
+                    android:layout_row="7"
+                    android:orientation="vertical" >
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/TextView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="4"
+                    android:text="Deutschland" />
+
+                <TextView
+                    android:id="@+id/TextView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="1"
+                    android:text="Musterstr. 5" />
+
+                <TextView
+                    android:id="@+id/TextView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="5"
+                    android:text="12345/6789" />
+
+                <TextView
+                    android:id="@+id/TextView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="6"
+                    android:text="muster@anlaufstelle.de" />
+
+                <TextView
+                    android:id="@+id/TextView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="3"
+                    android:text="12345 Musterstadt" />
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/GridLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:columnCount="1"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="@color/grey"
+                    android:padding="2dp"
+                    android:text="Musteranlaufstelle"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/Aufforderung1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/label_adress" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:layout_row="5"
+                    android:text="@string/label_phone" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/label_mail" />
+
+                <Button
+                    android:id="@+id/best_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="callMap"
+                    android:text="@string/btn_show_on_map" />
+
+                <LinearLayout android:layout_gravity="fill_horizontal" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginLeft="10dp"
+                    android:layout_row="7"
+                    android:orientation="vertical" >
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/country"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="4"
                     android:text="Deutschland" />
-            </LinearLayout>
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <TableRow
-                    android:id="@+id/TableRow1"
+                <TextView
+                    android:id="@+id/street"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="1"
+                    android:text="Musterstr. 5" />
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:text="@string/label_phone" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12345/6789" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/TableRow1"
+                <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="5"
+                    android:text="12345/6789" />
 
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
-                        android:text="@string/label_mail" />
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="6"
+                    android:text="muster@anlaufstelle.de" />
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="muster@anlaufstelle.de" />
-                </TableRow>
-            </TableLayout>
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="3"
+                    android:text="12345 Musterstadt" />
+            </GridLayout>
 
-            <Button
-                android:id="@+id/best_button"
+            <GridLayout
+                android:id="@+id/GridLayout01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_show_on_map"
-                android:onClick="callMap" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:columnCount="1"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="@color/grey"
+                    android:padding="2dp"
+                    android:text="Musteranlaufstelle"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/TextView09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/label_adress" />
+
+                <TextView
+                    android:id="@+id/TextView04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:layout_row="5"
+                    android:text="@string/label_phone" />
+
+                <TextView
+                    android:id="@+id/TextView06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/label_mail" />
+
+                <Button
+                    android:id="@+id/Button01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:onClick="callMap"
+                    android:text="@string/btn_show_on_map" />
+
+                <LinearLayout android:layout_gravity="fill_horizontal" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginLeft="10dp"
+                    android:layout_row="7"
+                    android:orientation="vertical" >
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="4"
+                    android:text="Deutschland" />
+
+                <TextView
+                    android:id="@+id/TextView07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="1"
+                    android:text="Musterstr. 5" />
+
+                <TextView
+                    android:id="@+id/TextView03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="5"
+                    android:text="12345/6789" />
+
+                <TextView
+                    android:id="@+id/TextView05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="6"
+                    android:text="muster@anlaufstelle.de" />
+
+                <TextView
+                    android:id="@+id/TextView08"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_gravity="right|top"
+                    android:layout_row="3"
+                    android:text="12345 Musterstadt" />
+            </GridLayout>
         </LinearLayout>
 
     </ScrollView>

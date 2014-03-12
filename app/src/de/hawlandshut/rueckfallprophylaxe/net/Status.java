@@ -1,4 +1,4 @@
-package de.hawlandshut.rueckfallprophylaxe.data.json;
+package de.hawlandshut.rueckfallprophylaxe.net;
 
 public class Status {
 

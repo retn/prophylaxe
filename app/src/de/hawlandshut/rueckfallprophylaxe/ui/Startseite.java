@@ -2,9 +2,9 @@ package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import java.io.IOException;
 
-import de.hawlandshut.rueckfallprophylaxe.data.json.JsonData;
-import de.hawlandshut.rueckfallprophylaxe.data.json.RequestJson;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
+import de.hawlandshut.rueckfallprophylaxe.net.JsonData;
+import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;

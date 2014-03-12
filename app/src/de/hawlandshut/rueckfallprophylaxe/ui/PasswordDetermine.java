@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//@Stefan Roth
 //Das hier ist die Seite wo der Benutzer aufgefordert wird einen PIN zu erstellen, die
 //nur beim ersten Aufruf der App benutzt wird. Sobald ich weiﬂ wie ich diese Seite hier
 //zur Startseite der App mache und zwar so das sie das nur beim ersten mal macht 
@@ -17,7 +17,7 @@ public class PasswordDetermine extends Activity implements OnClickListener {
 	
 	TextView PIN_entry1, PIN_entry2;
 	Button best_button;
-	int PersonalIdentificationNumber;
+	
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -48,13 +48,9 @@ public class PasswordDetermine extends Activity implements OnClickListener {
 		{
 			Intent intent = new Intent(this, Startseite.class);
 			startActivity(intent);
-			PersonalIdentificationNumber = input1;
+			//Hier wird sobald ich weiﬂ wie ich das in die DB speichere input1 als PIN in der DB
+			//gespeichert.
 		}
 		
-	}
-	
-	int get_PIN()
-	{
-		return PersonalIdentificationNumber;
 	}
 }

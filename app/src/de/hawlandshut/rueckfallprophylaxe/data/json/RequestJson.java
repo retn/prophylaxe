@@ -1,4 +1,4 @@
-package de.hawlandshut.rueckfallprophylaxe.db;
+package de.hawlandshut.rueckfallprophylaxe.data.json;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -6,11 +6,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.google.gson.Gson;
+
+import de.hawlandshut.rueckfallprophylaxe.data.Distraction;
+import de.hawlandshut.rueckfallprophylaxe.data.Maxim;
 import android.util.Log;
 
-public class RequestJSON {
+public class RequestJson {
 	
+	Gson gson;
 	final String URL = "http://spl.bumsi.net/app/get-patient";
 	String email;
 	String token;
@@ -19,12 +26,14 @@ public class RequestJSON {
 	String json;			//contains the servers response
 	boolean valid;			//true if request was valid
 
-	public RequestJSON(String email, String token) throws IOException {
+	public RequestJson(String email, String token) throws IOException {
+		gson = new Gson();
 		this.email = email;
 		this.token = token;
 		valid = false;
 		obj = new URL(URL);
 		con = (HttpURLConnection) obj.openConnection();
+		sendRequest();
 	}
 	
 	public void sendRequest() throws IOException {
@@ -63,14 +72,21 @@ public class RequestJSON {
 		json = response.toString();
 	}
 	
-	public String getJSON() {
+	public String getJsonString() {
 		return json;
 	}
 	
+	public JsonData getData() {
+		JsonData data = gson.fromJson(json, JsonData.class);
+		String statuscode = "Statuscode: " + data.getData().getStatus().getStatuscode();
+		String statusmessage = "Message: " + data.getData().getStatus().getMessage();
+		
+		Log.d("json", statuscode + statusmessage);
+		
+		return data;
+	}
+	
 	public boolean isValid() {
-		if (valid)
-			return true;
-		else 
-			return false;
+		return valid;
 	}
 }

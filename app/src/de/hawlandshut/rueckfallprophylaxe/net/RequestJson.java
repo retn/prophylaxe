@@ -78,10 +78,8 @@ public class RequestJson {
 	
 	public JsonData getData() {
 		JsonData data = gson.fromJson(json, JsonData.class);
-		String statuscode = "Statuscode: " + data.getData().getStatus().getStatuscode();
-		String statusmessage = "Message: " + data.getData().getStatus().getMessage();
-		
-		Log.d("json", statuscode + statusmessage);
+
+		Log.d("json", "json data loaded");
 		
 		return data;
 	}

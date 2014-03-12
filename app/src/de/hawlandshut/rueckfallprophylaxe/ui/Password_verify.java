@@ -14,7 +14,6 @@ public class Password_verify extends Activity implements OnClickListener {
 	
 	TextView PIN_verify;
 	Button best_button2;
-	PasswordDetermine pass;
 
 	
 	protected void onCreate(Bundle savedInstanceState){
@@ -34,8 +33,10 @@ public class Password_verify extends Activity implements OnClickListener {
 		int input3 = Integer.parseInt(PIN_verify.getText().toString());
 		
 		//Funktioniert das hier mit der Abfrage mit get_PIN aus PasswordDetermine
-		
-		 if(input3 == pass.get_PIN())
+		/*
+		 if(input3 == Hier wird dann mit einer DB-Abfrage die PIN geholt und geprüft ob 
+		 			//die Eingabe richtig war. Sobald ich das kapiert habe wie das geht mache
+		 			//ich das.)
 		 {
 		  	Intent intent = new Intent(this, Startseite.class);
 		    startActivity(intent);
@@ -44,6 +45,7 @@ public class Password_verify extends Activity implements OnClickListener {
 		 {
 		 	Toast.makeText(this, "Ihre Eingabe ist falsch", Toast.LENGTH_LONG).show();
 		 }
+		 */
 			
 		 
 	}

@@ -19,33 +19,33 @@
         android:text="@string/btn_tagebuch" />
 
     <Button
-        android:id="@+id/btnAnlaufstellen"
+        android:id="@+id/btnAblenkungen"
         android:layout_width="160dp"
         android:layout_height="50dp"
+        android:layout_alignLeft="@+id/btnAnlaufstellen"
         android:layout_below="@+id/btnTagebuch"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:onClick="callAnlaufstellen"
-        android:text="@string/btn_anlaufstellen" />
+        android:onClick="callEmotion"
+        android:text="@string/btn_ablenkungen" />
 
     <Button
         android:id="@+id/btnNotfallkoffer"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/btnAnlaufstellen"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_alignLeft="@+id/btnTagebuch"
+        android:layout_below="@+id/btnTagebuch"
+        android:layout_marginTop="131dp"
         android:onClick="callNotfallkoffer"
         android:text="@string/btn_notfallkoffer" />
 
     <Button
-        android:id="@+id/btnAblenkungen"
+        android:id="@+id/btnAnlaufstellen"
         android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_alignRight="@+id/btnAnlaufstellen"
+        android:layout_alignLeft="@+id/btnTagebuch"
         android:layout_below="@+id/btnNotfallkoffer"
-        android:layout_marginTop="40dp"
-        android:onClick="callEmotion"
-        android:text="@string/btn_ablenkungen" />
+        android:layout_marginTop="37dp"
+        android:onClick="callAnlaufstellen"
+        android:text="@string/btn_anlaufstellen" />
 
 </RelativeLayout>

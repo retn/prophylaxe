@@ -14,9 +14,9 @@ import android.widget.DatePicker;
 public class DiaryDatePickerFragment 
 	extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 	
-	private NewEntryActivity newEntryActivity;
+	private DiaryNewEntryActivity newEntryActivity;
 
-	public DiaryDatePickerFragment(NewEntryActivity newEntryActivity) {
+	public DiaryDatePickerFragment(DiaryNewEntryActivity newEntryActivity) {
 		this.newEntryActivity = newEntryActivity;
 	}
 

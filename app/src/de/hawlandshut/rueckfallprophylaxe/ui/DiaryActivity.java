@@ -48,7 +48,7 @@ public class DiaryActivity extends Activity {
 	}
 
 	private void openNewEntry() {
-		Intent intent = new Intent(this, NewEntryActivity.class);
+		Intent intent = new Intent(this, DiaryNewEntryActivity.class);
     	startActivity(intent);
 	}
 

@@ -19,7 +19,7 @@ public class Startseite extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startseite);
-        Database database=new Database(this);
+        //Database database=new Database(this);
     }
 
 

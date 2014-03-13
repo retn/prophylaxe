@@ -46,7 +46,7 @@
                 android:value="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" />
         </activity>
         <activity
-            android:name="de.hawlandshut.rueckfallprophylaxe.ui.NewEntryActivity"
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.DiaryNewEntryActivity"
             android:label="@string/title_activity_new_entry"
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.DiaryActivity" >
             <meta-data

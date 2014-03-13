@@ -1,15 +1,23 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
 import android.view.Menu;
@@ -23,9 +31,13 @@ import android.widget.TextView;
 
 
 
-public class NewEntryActivity extends Activity {
+public class DiaryNewEntryActivity extends Activity {
 
+	private DiaryNewEntry_pictureManager pictureManager;
 	private TextView DateEntry;
+	private static int REQUEST_LOAD_IMAGE_FILE = 1;
+	private static int REQUEST_LOAD_IMAGE_CAMERA = 2;
+	
 	
 	
 	@Override
@@ -33,7 +45,7 @@ public class NewEntryActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_entry);
 		
-		// Initialize the spinner
+		// Initialize the mood spinner
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerMood);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 		        R.array.mood_array, android.R.layout.simple_spinner_item);
@@ -50,6 +62,8 @@ public class NewEntryActivity extends Activity {
 		
 		// Let the datePicker appear when user clicks the date text field
 		addListenerOnEntryDateText(); 
+		
+		pictureManager = new DiaryNewEntry_pictureManager();
 	}
 	
 	public void addListenerOnEntryDateText() {
@@ -113,6 +127,10 @@ public class NewEntryActivity extends Activity {
 				return true;
 			case R.id.action_addAttachment:
 				// TODO: add an attachment
+				
+				// Dialog - Take picture from camera or gallery
+				showAttachmentDialog();
+				
 				return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -120,10 +138,13 @@ public class NewEntryActivity extends Activity {
 	
 	private boolean validateInput() {
 		// Validate title & entry
+		
 		return (validateInputTitle() && validateInputEntry());
 	}
 	
-	
+	/*
+	 * Validates the entry title and pops up an error dialog on failure
+	 */
 	private boolean validateInputTitle() {
 		EditText title = (EditText) findViewById(R.id.title);
 		String titleText = title.getText().toString();
@@ -145,6 +166,9 @@ public class NewEntryActivity extends Activity {
 		return true;
 	}
 	
+	/*
+	 * Validates the entry text and pops up an error dialog on failure
+	 */
 	private boolean validateInputEntry() {
 		EditText title = (EditText) findViewById(R.id.entry);
 		String titleText = title.getText().toString();
@@ -166,6 +190,92 @@ public class NewEntryActivity extends Activity {
 		return true;
 	}
 	
+	private void showAttachmentDialog() {
+		if (pictureManager.newPicturesAllowed()) {
+			String[] items = {"Kamera", "Gallerie"};
+			final Activity activity = this;
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			
+		    builder.setTitle("Bildquelle wählen")
+		           .setItems(items, new DialogInterface.OnClickListener() {
+		               public void onClick(DialogInterface dialog, int which) {
+		            	   
+		               if (which == 0) { // Camera
+		            	   
+		            	   Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		            	    // Ensure that there's a camera activity to handle the intent
+		            	    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+		            	        // Create the File where the photo should go
+		            	        File photoFile = null;
+		            	        try {
+		            	            photoFile = pictureManager.createImageFile(activity);
+		            	        } catch (IOException ex) {
+		            	            // Error occurred while creating the File
+		            				showNeutralErrorDialog("Fehler", ex.getMessage());
+		            				
+		            	        }
+		            	        // Continue only if the File was successfully created
+		            	        if (photoFile != null) {
+		            	            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+		            	                    Uri.fromFile(photoFile));
+		            	            startActivityForResult(takePictureIntent, REQUEST_LOAD_IMAGE_CAMERA);
+		            	        }
+		            	    }
+		               }
+		               
+		               if (which == 1) { // Gallery
+		            	   Intent i = new Intent(
+		            			   Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		            			    
+		            			   startActivityForResult(i, REQUEST_LOAD_IMAGE_FILE);
+		               }
+		           }
+		    });
+		    builder.show();
+		} else {
+			// Error msg
+			showNeutralErrorDialog("Zulässige Anzahl von Bildern überschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntry_pictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
+			
+		}
+	}
+	
+
+	@Override
+	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	     super.onActivityResult(requestCode, resultCode, data);
+	     
+	     if (requestCode == REQUEST_LOAD_IMAGE_CAMERA && resultCode == RESULT_OK) {
+	    	 
+	    	 // showNeutralErrorDialog("Debug", mCurrentPhotoPath);
+	    	 pictureManager.addCameraPicture();
+	         
+	         pictureManager.showCurrentPictures(this);
+	     }
+	      
+	     if (requestCode == REQUEST_LOAD_IMAGE_FILE && resultCode == RESULT_OK && null != data) {
+	         Uri selectedImage = data.getData();
+	         String[] filePathColumn = { MediaStore.Images.Media.DATA };
+	 
+	         Cursor cursor = getContentResolver().query(selectedImage,
+	                 filePathColumn, null, null, null);
+	         cursor.moveToFirst();
+	 
+	         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+	         String picturePath = cursor.getString(columnIndex);
+	         cursor.close();
+	         
+	         // showNeutralErrorDialog("Debug", picturePath);
+
+	         pictureManager.addGalleryPicture(picturePath);
+	         
+	         pictureManager.showCurrentPictures(this);
+	     }
+	}
+	
+	
+	
+
 	
 	private void showNeutralErrorDialog(String title, String msg) {
 		new AlertDialog.Builder(this)

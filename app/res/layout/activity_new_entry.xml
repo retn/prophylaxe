@@ -1,3 +1,4 @@
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".NewEntryActivity" >
+    tools:context=".DiaryNewEntryActivity" >
 
     <TextView
         android:id="@+id/entryDateText"
@@ -55,5 +56,53 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/textMood" />
+
+    
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/spinnerMood"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+    
+         <ImageView
+        android:id="@+id/imgView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Bild 1"
+        android:scaleType="fitStart"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1" />
+         
+         <ImageView
+        android:id="@+id/imgView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Bild 2"
+         android:scaleType="fitStart"
+         android:layout_marginRight="10dp"
+        android:layout_weight="1" />
+                  
+         <ImageView
+        android:id="@+id/imgView3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Bild 3"
+         android:scaleType="fitStart"
+         android:layout_marginRight="10dp"
+        android:layout_weight="1" />
+                           
+          <ImageView
+        android:id="@+id/imgView4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Bild 4"
+         android:scaleType="fitStart"
+         android:layout_marginRight="10dp"
+        android:layout_weight="1" />
+	  
+    
+</LinearLayout>
 
 </RelativeLayout>

@@ -8,28 +8,85 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPictureType;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /*
  * Managed das hinzufügen von Bildern eines (neues) Tagebucheintrages
  */
 public class DiaryNewEntry_pictureManager {
-	private ArrayList<String> newGalleryPicturesPathes = new ArrayList<String>();
-	private ArrayList<String> newCameraPicturesPathes = new ArrayList<String>();
+	private Activity myActivity;
+	private ArrayList<DiaryEntryPicture> pictures = new ArrayList<DiaryEntryPicture>();
+	private int lastPictureID = 0;
+
 	String mCurrentPhotoPath; // Current camera photo path
 	private static int MAX_PICTURES_ALLOWED = 4;
 	
+	DiaryNewEntry_pictureManager(Activity myActivity) {
+		this.myActivity = myActivity;
+	}
+	
+	
+	public void addEventListenerOnPicture() {
+		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView1));
+		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView2));
+		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView3));
+		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView4));
+	}
+	
+	private void resetImageView(ImageViewWithContextMenuInfo img) {
+		img.setImageResource(android.R.color.transparent);
+	}
+	
+	public void removePicture(ImageViewWithContextMenuInfo img) throws Exception {
+
+		// Newly added gallery picture:
+		for(DiaryEntryPicture pic: pictures) {
+			if (pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
+
+		        if (img.getTag().toString().equals(pic.getIdString())) {
+		        	Log.d("removePicture", "Equal");
+		        	resetImageView(img); // Hide
+		        	pictures.remove(pic); // Remove from list
+		        }
+		        
+			}
+		}
+		
+		// Newly added camera picture:
+		// TODO: delete instantly from disk
+		// TODO: remove from list
+		
+		// Existing picture:
+		// TODO: add to trash
+		
+		
+		
+	}
 	
 	public void addGalleryPicture(String picturePath) {
-		newGalleryPicturesPathes.add(picturePath); // Add to array
+		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_GALLERY_PICTURE, picturePath, getNewID());
+		pictures.add(newPic);
+		
+		addEventListenerOnPicture();
 	}
 	
 	public void addCameraPicture() {
-		newCameraPicturesPathes.add(mCurrentPhotoPath); // Add to array
+		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_CAMERA_PICTURE, mCurrentPhotoPath, getNewID());
+		pictures.add(newPic);
+	}
+	
+	public int getNewID() {
+		lastPictureID++;
+		return lastPictureID;
 	}
 	
 	public Bitmap getThumbnail(String path){
@@ -59,17 +116,9 @@ public class DiaryNewEntry_pictureManager {
 	public int countPictures() {
 		int i = 0;
 		
-		// Count new Gallery pictures
-		for(@SuppressWarnings("unused") String picturePath: newGalleryPicturesPathes){
+		for(@SuppressWarnings("unused") DiaryEntryPicture item: pictures){
 	        i++;
 		}
-		
-		// Count new camera pictures
-		for(@SuppressWarnings("unused") String picturePath: newCameraPicturesPathes){
-	        i++;
-		}
-		
-		// TODO: Count existing database pictures
 		
 		// TODO: Count & subtract removed database pictures
 		
@@ -101,24 +150,19 @@ public class DiaryNewEntry_pictureManager {
 	public void showCurrentPictures(Activity activity) {
 		int i = 1;
 		
-		// Allow max 4 pictures
-		
-		// Show existing pictures
-		
-		// Show new pictures from camera (newGalleryPicturesPathes)
-		for(String picturePath: newGalleryPicturesPathes){
+		// Show new pictures from gallery & camera
+		for(DiaryEntryPicture pic: pictures){
 	        ImageView imageView = getThumbnailIDAttribute(i, activity);
-	        imageView.setImageBitmap(getThumbnail(picturePath));
+	        imageView.setImageBitmap(getThumbnail(pic.getPath()));
+	        Log.d("showCurrentPictures - Pic id: ", ""+pic.getIdString());
+	        imageView.setTag(pic.getId()); // id
 	        i++;
 		}
 		
-		// Show new pictures from gallery
-		for(String picturePath: newCameraPicturesPathes){
-	        ImageView imageView = getThumbnailIDAttribute(i, activity);
-	        imageView.setImageBitmap(getThumbnail(picturePath));
-	        i++;
-		}
+		// TODO: Show existing pictures from database which were not moved to trash
+		
 	}
+	
 	
 	public boolean newPicturesAllowed() {
 		return (MAX_PICTURES_ALLOWED > countPictures());

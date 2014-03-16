@@ -20,14 +20,19 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 
@@ -37,7 +42,7 @@ public class DiaryNewEntryActivity extends Activity {
 	private TextView DateEntry;
 	private static int REQUEST_LOAD_IMAGE_FILE = 1;
 	private static int REQUEST_LOAD_IMAGE_CAMERA = 2;
-	
+	private static final int removePicture = 0;
 	
 	
 	@Override
@@ -63,8 +68,41 @@ public class DiaryNewEntryActivity extends Activity {
 		// Let the datePicker appear when user clicks the date text field
 		addListenerOnEntryDateText(); 
 		
-		pictureManager = new DiaryNewEntry_pictureManager();
+		pictureManager = new DiaryNewEntry_pictureManager(this);
 	}
+	
+	//Creating Context Menu
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		// TODO Auto-generated method stub
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.setHeaderTitle("Bearbeiten");
+		menu.add(Menu.NONE, removePicture, Menu.NONE, "Bild entfernen");
+	}
+	
+	//this method automatically called when user select menu items
+	public boolean onContextItemSelected(MenuItem item) {
+		ImageViewWithContextMenuInfo.ImageViewContextMenuInfo menuInfo = (ImageViewWithContextMenuInfo.ImageViewContextMenuInfo) item.getMenuInfo();  
+	    ImageViewWithContextMenuInfo img = (ImageViewWithContextMenuInfo) menuInfo.targetView;
+	    
+	    
+		switch (item.getItemId()) {
+		case removePicture:
+			try {
+				pictureManager.removePicture(img);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// Toast.makeText(getApplicationContext(), "Bild wurde entfernt",Toast.LENGTH_LONG).show();
+			
+			break;
+
+		}
+		return super.onContextItemSelected(item);
+	}
+	
+
 	
 	public void addListenerOnEntryDateText() {
 		 

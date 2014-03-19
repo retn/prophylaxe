@@ -1,5 +1,9 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
+/**
+ * TODO: PS: Bitte kommentieren -> JavaDoc
+ *
+ */
 public class JsonData {
 	
 	Data data;

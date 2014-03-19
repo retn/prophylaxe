@@ -1,11 +1,9 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -16,7 +14,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
@@ -24,21 +21,20 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-
+/**
+ * TODO: PS: Bitte kommentieren -> JavaDoc
+ *
+ */
 public class DiaryNewEntryActivity extends Activity {
 
-	private DiaryNewEntry_pictureManager pictureManager;
+	private DiaryNewEntryPictureManager pictureManager;
 	private TextView DateEntry;
 	private static int REQUEST_LOAD_IMAGE_FILE = 1;
 	private static int REQUEST_LOAD_IMAGE_CAMERA = 2;
@@ -68,7 +64,7 @@ public class DiaryNewEntryActivity extends Activity {
 		// Let the datePicker appear when user clicks the date text field
 		addListenerOnEntryDateText(); 
 		
-		pictureManager = new DiaryNewEntry_pictureManager(this);
+		pictureManager = new DiaryNewEntryPictureManager(this);
 	}
 	
 	//Creating Context Menu
@@ -235,7 +231,7 @@ public class DiaryNewEntryActivity extends Activity {
 			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			
-		    builder.setTitle("Bildquelle wŠhlen")
+		    builder.setTitle("Bildquelle wï¿½hlen")
 		           .setItems(items, new DialogInterface.OnClickListener() {
 		               public void onClick(DialogInterface dialog, int which) {
 		            	   
@@ -273,7 +269,7 @@ public class DiaryNewEntryActivity extends Activity {
 		    builder.show();
 		} else {
 			// Error msg
-			showNeutralErrorDialog("ZulŠssige Anzahl von Bildern Ÿberschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntry_pictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
+			showNeutralErrorDialog("Zulï¿½ssige Anzahl von Bildern ï¿½berschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
 			
 		}
 	}

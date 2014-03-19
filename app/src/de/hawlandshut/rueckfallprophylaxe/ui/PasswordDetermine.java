@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 //@Stefan Roth
 //Das hier ist die Seite wo der Benutzer aufgefordert wird einen PIN zu erstellen, die
-//nur beim ersten Aufruf der App benutzt wird. Sobald ich weiß wie ich diese Seite hier
+//nur beim ersten Aufruf der App benutzt wird. Sobald ich weiï¿½ wie ich diese Seite hier
 //zur Startseite der App mache und zwar so das sie das nur beim ersten mal macht 
 //werde ich das machen.
 public class PasswordDetermine extends Activity implements OnClickListener {
@@ -33,12 +33,17 @@ public class PasswordDetermine extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View v) {
+		/*
+		 * TODO: 
+		 *  - Aus PIN_Entry den Text holen, alle Buchstaben lÃ¶schen
+		 *  - Die LÃ¤nge Ã¼berprÃ¼fen des Strings > 4 Stellen -> OK weiter prÃ¼fen
+		 */
 		int input1 = Integer.parseInt(PIN_entry1.getText().toString());
 		int input2 = Integer.parseInt(PIN_entry2.getText().toString());
 		
 		if(input1 != input2)
 		{
-			Toast.makeText(this, "Ihre erste Eingabe stimmt nicht mit der zweiten überrein", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Ihre erste Eingabe stimmt nicht mit der zweiten ï¿½berrein", Toast.LENGTH_LONG).show();
 		}
 		else if(input1 < 1000 || input2 < 1000 || input1 > 9999 || input2 > 9999)
 		{
@@ -46,11 +51,10 @@ public class PasswordDetermine extends Activity implements OnClickListener {
 		}
 		else
 		{
-			Intent intent = new Intent(this, Startseite.class);
+			Intent intent = new Intent(this, HomeActivity.class);
 			startActivity(intent);
-			//Hier wird sobald ich weiß wie ich das in die DB speichere input1 als PIN in der DB
+			//Hier wird sobald ich weiï¿½ wie ich das in die DB speichere input1 als PIN in der DB
 			//gespeichert.
 		}
-		
 	}
 }

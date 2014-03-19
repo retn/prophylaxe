@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * TODO: PS: Bitte kommentieren -> JavaDoc
+ *
+ */
 public class Data {
 	
 	@SerializedName("emergency-case")

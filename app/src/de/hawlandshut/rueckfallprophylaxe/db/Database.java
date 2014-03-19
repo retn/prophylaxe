@@ -3,7 +3,6 @@ import java.io.File;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -32,7 +31,7 @@ public class Database {
         
         SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile, "user", null);
         this.sqldatabase=database;
-        MyTables tables=new MyTables(sqldatabase);
+        //MyTables tables=new MyTables(sqldatabase);
     }
 
 	public void insertExample() {
@@ -48,19 +47,15 @@ public class Database {
         if(c!=null){
         	int i=0;
         	if(c.moveToFirst()){
-        		
         		do{
-        			String text=c.getString(c.getColumnIndex("a"));
+        			//String text=c.getString(c.getColumnIndex("a"));
         			i++;
-        			
         		}
         		while(c.moveToNext());
         	}
         	Log.d("query", ""+i);
         }
-		
 	}
-
 }
 
 /*

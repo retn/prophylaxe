@@ -23,6 +23,10 @@ import net.sqlcipher.database.SQLiteDatabase;
  * `spl_diary_entry_has_mood`
  */
 
+/**
+ * TODO: PS: Bitte kommentieren
+ *
+ */
 public class MyTables {
 	
 	private SQLiteDatabase sqldatabase;
@@ -37,7 +41,7 @@ public class MyTables {
 		//update("table",new HashMap<String,String>(),"index","column");
 	}
 	
-	private boolean update(String table, HashMap<String, String> hashMap,
+	public boolean update(String table, HashMap<String, String> hashMap,
 			String index, String column) {
 		ContentValues values=new ContentValues();
 		for(Map.Entry<String, String> entry: hashMap.entrySet()){
@@ -47,7 +51,7 @@ public class MyTables {
 		return sqldatabase.update(table,values ,column+" = "+index, new String[]{index})>0;
 	}
 
-	private boolean insert(String table, HashMap<String, String> hashMap) {
+	public boolean insert(String table, HashMap<String, String> hashMap) {
 		ContentValues values=new ContentValues();
 		for(Map.Entry<String, String> entry: hashMap.entrySet()){
 			values.put(entry.getKey(),entry.getValue());
@@ -56,11 +60,11 @@ public class MyTables {
 		return sqldatabase.insert(table, null, values)>0;
 	}
 
-	private boolean delete(String table, String id, String column) {
+	public boolean delete(String table, String id, String column) {
 		return sqldatabase.delete(table, column+" = "+id, new String[]{id})>0;
 	}
 
-	private HashMap<Integer, String> query(String table, String value) {
+	public HashMap<Integer, String> query(String table, String value) {
 		HashMap<Integer, String> result= new HashMap<Integer, String>();
 		Cursor c = sqldatabase.rawQuery("SELECT "+value+" FROM "+table, null);
 
@@ -74,8 +78,6 @@ public class MyTables {
 		 
 		return result;
 	}
-	
-	
 
 	private void queryNumberTables() {
 		Cursor c = sqldatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
@@ -91,8 +93,7 @@ public class MyTables {
 		
 	}
 
-	public void createTables(){
-		
+	public void createTables(){	
 		sqldatabase.execSQL("PRAGMA foreign_keys = OFF");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_emergency_case\"( \"ecID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"addict_drughotline\" VARCHAR(45),\"prop_advice_centre\" VARCHAR(45),\"my_therapist\" VARCHAR(45),\"emergency_casecol\" VARCHAR(45),\"risk_danger\" TINYTEXT,\"risk_situation\" TINYTEXT,\"risk_temptation\" TINYTEXT,\"temptation_thought\" TINYTEXT,\"temptation_thought_abstinence\" TINYTEXT,\"temptation_behaviour\" TINYTEXT)");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_ec_risk_situation\"(\"ersID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"text\" TINYTEXT)");
@@ -114,9 +115,7 @@ public class MyTables {
 			
 	}
 	
-
 	private void createExampleTable() {
 		sqldatabase.execSQL("create table if not exists t1(a varchar(255), b varchar(255))");
 	}
-
 }

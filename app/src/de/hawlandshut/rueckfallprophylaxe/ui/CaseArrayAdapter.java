@@ -43,6 +43,5 @@ public class CaseArrayAdapter extends ArrayAdapter<String> {
         }
 
         return convertView;
-
     }
 }

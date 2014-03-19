@@ -33,6 +33,11 @@ public class PasswordDetermine extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View v) {
+		/*
+		 * TODO: 
+		 *  - Aus PIN_Entry den Text holen, alle Buchstaben löschen
+		 *  - Die Länge überprüfen des Strings > 4 Stellen -> OK weiter prüfen
+		 */
 		int input1 = Integer.parseInt(PIN_entry1.getText().toString());
 		int input2 = Integer.parseInt(PIN_entry2.getText().toString());
 		
@@ -51,6 +56,5 @@ public class PasswordDetermine extends Activity implements OnClickListener {
 			//Hier wird sobald ich wei� wie ich das in die DB speichere input1 als PIN in der DB
 			//gespeichert.
 		}
-		
 	}
 }

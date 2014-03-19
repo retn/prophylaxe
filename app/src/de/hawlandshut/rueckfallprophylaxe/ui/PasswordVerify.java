@@ -7,7 +7,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 /**
  * TODO: PS: Bitte kommentieren -> JavaDoc's
  *
@@ -17,12 +16,10 @@ public class PasswordVerify extends Activity implements OnClickListener {
 	
 	TextView PIN_verify;
 	Button best_button2;
-
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.password_verify);
-		
 		
 		PIN_verify = (TextView)findViewById(R.id.PIN_verify);
 		
@@ -47,7 +44,5 @@ public class PasswordVerify extends Activity implements OnClickListener {
 		 	Toast.makeText(this, "Ihre Eingabe ist falsch", Toast.LENGTH_LONG).show();
 		 }
 		 */
-			
-		 
 	}
 }

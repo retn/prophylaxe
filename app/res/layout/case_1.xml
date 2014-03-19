@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white" android:orientation="horizontal">
+
+    <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:text="Man"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/list_view_koffer"
+            android:id="@+id/image_koffer"
+            android:background="@drawable/face_not_final" android:layout_toLeftOf="@+id/list_view_koffer"
+            android:layout_weight="2"/>
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/list_view_koffer" android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" android:layout_weight="1"/>
+
+
+</LinearLayout>

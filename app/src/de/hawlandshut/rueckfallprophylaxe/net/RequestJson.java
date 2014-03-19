@@ -6,13 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.Gson;
 
-import de.hawlandshut.rueckfallprophylaxe.data.Distraction;
-import de.hawlandshut.rueckfallprophylaxe.data.Maxim;
 import android.util.Log;
 
 public class RequestJson {

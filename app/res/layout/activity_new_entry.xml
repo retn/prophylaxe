@@ -1,6 +1,10 @@
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent" android:scrollbars="vertical"  
+android:layout_height="wrap_content" android:scrollbarStyle="insideOverlay">  
+
+<RelativeLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,6 +12,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DiaryNewEntryActivity" >
+    
 
     <TextView
         android:id="@+id/entryDateText"
@@ -40,22 +45,32 @@
         android:hint="@string/entry_hint"
         android:inputType="textMultiLine" />
 
+      
+    <ScrollView
+        android:id="@+id/entryScrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_alignLeft="@+id/entry"
+        android:layout_below="@+id/entry" >
+        
     <TextView
         android:id="@+id/textMood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/entry"
-        android:layout_below="@+id/entry"
+        
         android:layout_marginTop="18dp"
         android:text="@string/textMood"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    
+	</ScrollView>
 
     <Spinner
         android:id="@+id/spinnerMood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textMood" />
+        android:layout_alignTop="@+id/entryScrollView" />
 
     
 <LinearLayout
@@ -107,3 +122,5 @@
 </LinearLayout>
 
 </RelativeLayout>
+
+</ScrollView>

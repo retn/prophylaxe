@@ -47,5 +47,7 @@
     <string name="title_activity_koffer">Notfall Koffer</string>
     <string name="title_activity_koffer2">Notfall Koffer 2</string>
     <string name="btn_saveDiaryEntry">Speichern</string>
+    <string name="title_password_determine">Passwort erstellen</string>
+    <string name="title_password_verify">Passwortabfrage</string>
 
 </resources>

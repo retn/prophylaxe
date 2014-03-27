@@ -1,11 +1,14 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
+import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * TODO: PS: Bitte kommentieren -> JavaDoc's
@@ -16,10 +19,18 @@ public class PasswordVerify extends Activity implements OnClickListener {
 	
 	TextView PIN_verify;
 	Button best_button2;
+	Database data;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.password_verify);
+		data = new Database(this);
+		
+		if(!data.databaseExists())
+		{
+			Intent intent = new Intent(this, PasswordDetermine.class);
+			startActivity(intent);
+		} 
 		
 		PIN_verify = (TextView)findViewById(R.id.PIN_verify);
 		
@@ -28,21 +39,19 @@ public class PasswordVerify extends Activity implements OnClickListener {
 	}
 	
 	public void onClick(View v) {
-		//int input3 = Integer.parseInt(PIN_verify.getText().toString());
+		String input = PIN_verify.getText().toString();
 		
 		//Funktioniert das hier mit der Abfrage mit get_PIN aus PasswordDetermine
-		/*
-		 if(input3 == Hier wird dann mit einer DB-Abfrage die PIN geholt und gepr�ft ob 
-		 			//die Eingabe richtig war. Sobald ich das kapiert habe wie das geht mache
-		 			//ich das.)
-		 {
-		  	Intent intent = new Intent(this, Startseite.class);
-		    startActivity(intent);
-		 }
-		 else
-		 {
-		 	Toast.makeText(this, "Ihre Eingabe ist falsch", Toast.LENGTH_LONG).show();
-		 }
-		 */
+		
+		try {
+			data.InitializeSQLCipher(input);
+			
+			Intent intent = new Intent(this, HomeActivity.class);
+			startActivity(intent);
+		} catch (Exception e){
+			Toast.makeText(this, "Ihre Eingabe ist falsch", Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
+
 	}
 }

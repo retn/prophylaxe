@@ -1,5 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
+import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,23 +39,24 @@ public class PasswordDetermine extends Activity implements OnClickListener {
 		 *  - Aus PIN_Entry den Text holen, alle Buchstaben löschen
 		 *  - Die Länge überprüfen des Strings > 4 Stellen -> OK weiter prüfen
 		 */
-		int input1 = Integer.parseInt(PIN_entry1.getText().toString());
-		int input2 = Integer.parseInt(PIN_entry2.getText().toString());
+		String input1 = PIN_entry1.getText().toString();
+		String input2 = PIN_entry2.getText().toString();
 		
-		if(input1 != input2)
+		if(!input1.equals(input2))
 		{
 			Toast.makeText(this, "Ihre erste Eingabe stimmt nicht mit der zweiten �berrein", Toast.LENGTH_LONG).show();
 		}
-		else if(input1 < 1000 || input2 < 1000 || input1 > 9999 || input2 > 9999)
+		else if(!input1.matches("[0-9][0-9][0-9][0-9]"))
 		{
 			Toast.makeText(this,"Bitte einen vierstelligen PIN eingeben", Toast.LENGTH_LONG).show();
 		}
 		else
 		{
-			Intent intent = new Intent(this, HomeActivity.class);
+			Database db = new Database(this);
+			db.InitializeSQLCipher(input1);
+			db.close();
+			Intent intent = new Intent(this, PasswordVerify.class);
 			startActivity(intent);
-			//Hier wird sobald ich wei� wie ich das in die DB speichere input1 als PIN in der DB
-			//gespeichert.
 		}
 	}
 }

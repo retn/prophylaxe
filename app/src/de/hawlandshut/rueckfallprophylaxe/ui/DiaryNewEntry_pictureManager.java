@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 /*
- * Managed das hinzufŸgen von Bildern eines (neues) Tagebucheintrages
+ * Managed das hinzufï¿½gen von Bildern eines (neues) Tagebucheintrages
  */
 public class DiaryNewEntry_pictureManager {
 	private Activity myActivity;

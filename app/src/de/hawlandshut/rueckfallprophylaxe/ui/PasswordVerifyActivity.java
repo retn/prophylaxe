@@ -11,24 +11,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * TODO: PS: Bitte kommentieren -> JavaDoc's
+ * Asks the user for the PIN to decrypt the database and switches to HomeActivity if the correct
+ * PIN was given
+ * @author Stefan, Patrick
  *
  */
-//Das hier ist die Klasse wo der Benutzer bei jedem nutzen der App die PIN eingeben muss. 
-public class PasswordVerify extends Activity implements OnClickListener {
+public class PasswordVerifyActivity extends Activity implements OnClickListener {
 	
 	TextView PIN_verify;
 	Button best_button2;
 	Database data;
 	
+	/**
+	 * set variables, set an OnClickListener adnd switches to PasswordDetermineActivity 
+	 * if database file doesn't exist 
+	 * 
+	 */
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.password_verify);
+		setContentView(R.layout.activity_password_verify);
 		data = new Database(this);
 		
 		if(!data.databaseExists())
 		{
-			Intent intent = new Intent(this, PasswordDetermine.class);
+			Intent intent = new Intent(this, PasswordDetermineActivity.class);
 			startActivity(intent);
 		} 
 		
@@ -38,10 +44,12 @@ public class PasswordVerify extends Activity implements OnClickListener {
 		best_button2.setOnClickListener(this);
 	}
 	
+	/**
+	 * Checks if database is encrypted with given PIN, decrypts database and switches to 
+	 * HomeActivity
+	 */
 	public void onClick(View v) {
 		String input = PIN_verify.getText().toString();
-		
-		//Funktioniert das hier mit der Abfrage mit get_PIN aus PasswordDetermine
 		
 		try {
 			data.InitializeSQLCipher(input);

@@ -2,24 +2,30 @@ package de.hawlandshut.rueckfallprophylaxe.net;
 
 import java.util.List;
 
+/**
+ * This class is only used for storing data from the JSON-String. It only contains
+ * variables and Getters/Setters.
+ * @author Patrick
+ * @see JsonData
+ */
 public class EmergencyCase {
 
-	int ecID;
-	String patientID_fk;
-	String addict_drughotline;
-	String prop_advice;
-	String my_therapist;
-	String risk_danger;
-	String risk_situation;
-	String risk_temptation;
-	String temptation_thought;
-	String temptation_thought_abstinence;
-	String temptation_behaviour;
-	List<RiskSituation> risk_situations_array;
-	List<LimitRelapse> limit_relapses_array;
-	List<SafetyThought> safety_thoughts_array;
-	List<SafetyAction> safety_actions_array;
-	List<HelpPerson> help_persons_array;
+	private int ecID;
+	private String patientID_fk;
+	private String addict_drughotline;
+	private String prop_advice;
+	private String my_therapist;
+	private String risk_danger;
+	private String risk_situation;
+	private String risk_temptation;
+	private String temptation_thought;
+	private String temptation_thought_abstinence;
+	private String temptation_behaviour;
+	private List<RiskSituation> risk_situations_array;
+	private List<LimitRelapse> limit_relapses_array;
+	private List<SafetyThought> safety_thoughts_array;
+	private List<SafetyAction> safety_actions_array;
+	private List<HelpPerson> help_persons_array;
 	
 	public EmergencyCase() {
 		

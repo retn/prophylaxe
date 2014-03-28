@@ -1,10 +1,16 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
+/**
+ * This class is only used for storing data from the JSON-String. It only contains
+ * variables and Getters/Setters.
+ * @author Patrick
+ * @see JsonData
+ */
 public class LimitRelapse {
 
-	int elrID;
-	String text;
-	String ecId_fk;
+	private int elrID;
+	private String text;
+	private String ecId_fk;
 	
 	public LimitRelapse() {
 		

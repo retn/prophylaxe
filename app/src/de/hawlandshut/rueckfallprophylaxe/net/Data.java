@@ -5,16 +5,18 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * TODO: PS: Bitte kommentieren -> JavaDoc
- *
+ * This class is only used for storing data from the JSON-String. It only contains
+ * variables and Getters/Setters.
+ * @author Patrick
+ * @see JsonData
  */
 public class Data {
 	
 	@SerializedName("emergency-case")
-	EmergencyCase emergencyCase;
-	List<Maxim> maxims;
-	List<Distractions> distractions;
-	Status status;
+	private EmergencyCase emergencyCase;
+	private List<Maxim> maxims;
+	private List<Distractions> distractions;
+	private Status status;
 	
 	public Data() {
 		

@@ -7,24 +7,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Asks the user for the PIN to decrypt the database and switches to HomeActivity if the correct
- * PIN was given
+ * PIN was given. Switches to {@link PasswordDetermineActivity} if no database exists (if the app
+ * is started the first time). 
+ * 
  * @author Stefan, Patrick
  *
  */
 public class PasswordVerifyActivity extends Activity implements OnClickListener {
 	
-	TextView PIN_verify;
-	Button best_button2;
-	Database data;
+	private EditText editTextPin;
+	private Button button;
+	private Database data;
 	
 	/**
-	 * set variables, set an OnClickListener adnd switches to PasswordDetermineActivity 
-	 * if database file doesn't exist 
+	 * Set variables, set an OnClickListener and switches to PasswordDetermineActivity 
+	 * if database file doesn't exist.
 	 * 
 	 */
 	protected void onCreate(Bundle savedInstanceState){
@@ -38,10 +41,10 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 			startActivity(intent);
 		} 
 		
-		PIN_verify = (TextView)findViewById(R.id.PIN_verify);
+		editTextPin = (EditText)findViewById(R.id.PIN_verify);
 		
-		best_button2 = (Button)findViewById(R.id.best_button2);
-		best_button2.setOnClickListener(this);
+		button = (Button)findViewById(R.id.best_button2);
+		button.setOnClickListener(this);
 	}
 	
 	/**
@@ -49,7 +52,7 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 	 * HomeActivity
 	 */
 	public void onClick(View v) {
-		String input = PIN_verify.getText().toString();
+		String input = editTextPin.getText().toString();
 		
 		try {
 			data.InitializeSQLCipher(input);

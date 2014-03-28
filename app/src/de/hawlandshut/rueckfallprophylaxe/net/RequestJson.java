@@ -12,32 +12,49 @@ import com.google.gson.JsonSyntaxException;
 
 import android.util.Log;
 
+/**
+ * This class sends an HTTP-Request to the server and processes received data. 
+ * With the patients email and password {@link #sendRequest()} returns the patients
+ * data in form of a JSON-String. This string will be processed with Google Gson in 
+ * {@link #getData()} which returns an object of the Type {@link JsonData} in which
+ * all the data from the JSON-String is stored.
+ * 
+ * @author Patrick
+ * 
+ */
 public class RequestJson {
 
 	private static final String URL = "http://spl.bumsi.net/app/get-patient";
-	Gson gson;
-	String email;
-	String token;
-	URL obj;
-	HttpURLConnection con;
-	int statuscode;
+	private String email;
+	private String token;
 
 	/**
-	 * This class sends an HTTP-Request to the server and processes received
-	 * data
+	 * RequestJson constructor.
 	 * 
 	 * @param email
-	 *            Authentication email
+	 *            patients email
 	 * @param token
-	 *            Authentication token
+	 *            patients token
 	 * @throws IOException
 	 */
 	public RequestJson(String email, String token) throws IOException {
-		gson = new Gson();
 		this.email = email;
 		this.token = token;
-		obj = new URL(URL);
-		con = (HttpURLConnection) obj.openConnection();
+	}
+
+	/**
+	 * Creates objects filled with data collected from the JSON-String
+	 * 
+	 * @return JSON-Data as an Object
+	 * @throws IOException
+	 * @throws JsonSyntaxException
+	 */
+	public JsonData getData() throws JsonSyntaxException, IOException {
+		Gson gson = new Gson();
+		JsonData data = gson.fromJson(sendRequest(), JsonData.class);
+
+		Log.d("json", "json data loaded");
+		return data;
 	}
 
 	/**
@@ -45,9 +62,11 @@ public class RequestJson {
 	 * 
 	 * @return JSON-String
 	 * @throws IOException
-	 * @throws SendRequestException 
 	 */
 	private String sendRequest() throws IOException {
+		URL obj = new URL(URL);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
 		con.setRequestMethod("POST");
 
 		String urlParameters = "token=" + token + "&email=" + email;
@@ -74,23 +93,4 @@ public class RequestJson {
 
 		return response.toString();
 	}
-
-	/**
-	 * Creates objects filled with data from the JSON-String
-	 * 
-	 * @return JSON-Data as an Object
-	 * @throws IOException
-	 * @throws JsonSyntaxException
-	 * @throws RequestJsonException 
-	 * @throws SendRequestException 
-	 */
-	public JsonData getData() throws JsonSyntaxException, IOException {
-		JsonData data = gson.fromJson(sendRequest(), JsonData.class);
-		
-		Log.d("json", "json data loaded");
-		return data;
-	}
-	
-	
-
 }

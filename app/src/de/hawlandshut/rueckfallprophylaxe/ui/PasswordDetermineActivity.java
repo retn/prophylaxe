@@ -20,7 +20,12 @@ import android.widget.Toast;
 
 /**
  * Activity that asks for the users email, token and let's the user define a PIN
- * that's used to encrypt the database
+ * that's used to encrypt the database. When you {@link #onClick(View) click} on the 
+ * Button your inputs will be checked. If they are valid a {@link RequestJsonAsyncTask} 
+ * starts and gets the {@link de.hawlandshut.rueckfallprophylaxe.net.JsonData} object 
+ * from {@link de.hawlandshut.rueckfallprophylaxe.net.RequestJson#getData()} and calls
+ * {@link #createDatabaseIfEverythingValid(JsonData)} when finished. If the statuscode stored in the 
+ * JSON-Data is '1' the users inputs were right and he can now access the app.
  * 
  * @author Stefan, Patrick
  * 
@@ -71,16 +76,16 @@ public class PasswordDetermineActivity extends Activity implements
 		if (!email.matches(EMAIL_PATTERN)) {
 			Toast.makeText(this, "Email nicht korrekt!", Toast.LENGTH_LONG)
 					.show();
-			// token given?
+		// token given?
 		} else if (token.equals("")) {
 			Toast.makeText(this, "Kein Token angegeben!", Toast.LENGTH_LONG)
 					.show();
+		// inputs equal?
 		} else if (!pin1.equals(pin2)) {
-			// inputs equal?
 			Toast.makeText(this, "PIN's nicht gleich!", Toast.LENGTH_LONG)
 					.show();
+		// input is 4 numbers?
 		} else if (!pin1.matches("[0-9][0-9][0-9][0-9]")) {
-			// input is 4 numbers?
 			Toast.makeText(this, "PIN muss 4-stellig sein!", Toast.LENGTH_LONG)
 					.show();
 		} else {
@@ -95,7 +100,7 @@ public class PasswordDetermineActivity extends Activity implements
 	}
 
 	/**
-	 * starts the RequestJasonAsyncTask 
+	 * Starts the RequestJasonAsyncTask.
 	 * @param email Authentication email
 	 * @param token Authentication token
 	 * @throws IOException
@@ -154,18 +159,21 @@ public class PasswordDetermineActivity extends Activity implements
 			db.InitializeSQLCipher(pin);
 			db.close();
 			
-			switchToVerify();
+			Intent intent = new Intent(this, PasswordVerifyActivity.class);
+			startActivity(intent);
 		}
 	}
 
 	/**
-	 * switch to PasswordVerifyActivity
+	 * Runs an AsyncTask which will send the HTTP-Request to the server. Uses 
+	 * {@link de.hawlandshut.rueckfallprophylaxe.net.RequestJson} to get the {@link de.hawlandshut.rueckfallprophylaxe.net.JsonData}
+	 * object and calls {@link PasswordDetermineActivity#createDatabaseIfEverythingValid(JsonData)} when
+	 * everything worked.
+	 * 
+	 * 
+	 * @author kackspast
+	 *
 	 */
-	private void switchToVerify() {
-		Intent intent = new Intent(this, PasswordVerifyActivity.class);
-		startActivity(intent);
-	}
-
 	private class RequestJsonAsyncTask extends
 			AsyncTask<RequestJson, Integer, JsonData> {
 

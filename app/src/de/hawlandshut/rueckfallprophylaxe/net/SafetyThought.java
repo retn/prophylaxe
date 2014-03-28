@@ -1,9 +1,15 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
+/**
+ * This class is only used for storing data from the JSON-String. It only contains
+ * variables and Getters/Setters.
+ * @author Patrick
+ * @see JsonData
+ */
 public class SafetyThought {
 
-	int estID;
-	String text;
+	private int estID;
+	private String text;
 	
 	public SafetyThought() {
 		

@@ -1,11 +1,17 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
+/**
+ * This class is only used for storing data from the JSON-String. It only contains
+ * variables and Getters/Setters.
+ * @author Patrick
+ * @see JsonData
+ */
 public class Distractions {
 
-	int distractionID;
-	String text;
-	String emotion_text;
-	String emotionID_fk;
+	private int distractionID;
+	private String text;
+	private String emotion_text;
+	private String emotionID_fk;
 	
 	public Distractions() {
 		

@@ -1,9 +1,15 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
+/**
+ * This class is only used for storing data from the JSON-String. It only contains
+ * variables and Getters/Setters.
+ * @author Patrick
+ * @see JsonData
+ */
 public class HelpPerson {
 	
-	String name;
-	String phone_number;
+	private String name;
+	private String phone_number;
 	
 	public HelpPerson() {
 		

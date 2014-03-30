@@ -3,8 +3,9 @@ package de.hawlandshut.rueckfallprophylaxe.net;
 import java.util.List;
 
 /**
- * This class is only used for storing data from the JSON-String. It only contains
- * variables and Getters/Setters.
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
  * @author Patrick
  * @see JsonData
  */
@@ -26,9 +27,9 @@ public class EmergencyCase {
 	private List<SafetyThought> safety_thoughts_array;
 	private List<SafetyAction> safety_actions_array;
 	private List<HelpPerson> help_persons_array;
-	
+
 	public EmergencyCase() {
-		
+
 	}
 
 	public int getEcID() {
@@ -161,6 +162,5 @@ public class EmergencyCase {
 	public void setHelp_persons_array(List<HelpPerson> help_persons_array) {
 		this.help_persons_array = help_persons_array;
 	}
-	
-	
+
 }

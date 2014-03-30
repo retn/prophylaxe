@@ -13,11 +13,11 @@ import com.google.gson.JsonSyntaxException;
 import android.util.Log;
 
 /**
- * This class sends an HTTP-Request to the server and processes received data. 
- * With the patients email and password {@link #sendRequest()} returns the patients
- * data in form of a JSON-String. This string will be processed with Google Gson in 
- * {@link #getData()} which returns an object of the Type {@link JsonData} in which
- * all the data from the JSON-String is stored.
+ * This class sends an HTTP-Request to the server and processes received data.
+ * With the patients email and token {@link #sendRequest()} returns the patients
+ * data in form of a JSON-String. This string will be processed with Google Gson
+ * in {@link #getData()} which returns an object of the Type {@link JsonData} in
+ * which all the data from the JSON-String is stored.
  * 
  * @author Patrick
  * 
@@ -25,6 +25,7 @@ import android.util.Log;
 public class RequestJson {
 
 	private static final String URL = "http://spl.bumsi.net/app/get-patient";
+
 	private String email;
 	private String token;
 

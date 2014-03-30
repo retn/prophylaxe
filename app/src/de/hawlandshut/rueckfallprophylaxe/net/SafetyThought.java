@@ -1,8 +1,9 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
 /**
- * This class is only used for storing data from the JSON-String. It only contains
- * variables and Getters/Setters.
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
  * @author Patrick
  * @see JsonData
  */
@@ -10,9 +11,9 @@ public class SafetyThought {
 
 	private int estID;
 	private String text;
-	
+
 	public SafetyThought() {
-		
+
 	}
 
 	public int getEstID() {
@@ -30,5 +31,5 @@ public class SafetyThought {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 }

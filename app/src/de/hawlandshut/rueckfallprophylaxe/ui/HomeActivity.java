@@ -41,4 +41,10 @@ public class HomeActivity extends Activity {
     	startActivity(intent);
     }
     
+    @Override
+    public void onBackPressed() {
+      moveTaskToBack(true);
+    }
+
+    
 }

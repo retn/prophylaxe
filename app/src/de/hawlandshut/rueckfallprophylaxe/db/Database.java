@@ -16,10 +16,19 @@ public class Database {
 	private Context context;
 	private SQLiteDatabase sqldatabase;
 	private File databaseFile;
+	private MyTables tables;
 	public Database(Context context) {
 		this.context=context;
 		databaseFile = context.getDatabasePath("daten.db");
         }
+	
+	public MyTables getTables() {
+		return tables;
+	}
+
+	public void setTables(MyTables tables) {
+		this.tables = tables;
+	}
 	
     public void InitializeSQLCipher(String pass) {
         SQLiteDatabase.loadLibs(context);
@@ -30,7 +39,7 @@ public class Database {
         
         SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile.getPath(), pass, null);
         this.sqldatabase=database;
-        //MyTables tables=new MyTables(sqldatabase);
+        MyTables tables=new MyTables(sqldatabase);
     }
 
 	public void insertExample() {

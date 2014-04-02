@@ -5,14 +5,14 @@ package de.hawlandshut.rueckfallprophylaxe.net;
  * contains variables and Getters/Setters.
  * 
  * @author Patrick
- * @see JsonData
+ * @see Data
  */
-public class Status {
+public class JsonStatus {
 
 	private int statuscode;
 	private String message;
 
-	public Status() {
+	public JsonStatus() {
 
 	}
 

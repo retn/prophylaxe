@@ -5,16 +5,16 @@ package de.hawlandshut.rueckfallprophylaxe.net;
  * contains variables and Getters/Setters.
  * 
  * @author Patrick
- * @see JsonData
+ * @see Data
  */
-public class Distractions {
+public class JsonDistraction {
 
 	private int distractionID;
 	private String text;
 	private String emotion_text;
 	private String emotionID_fk;
 
-	public Distractions() {
+	public JsonDistraction() {
 
 	}
 

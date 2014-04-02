@@ -1,10 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 import java.io.File;
 
-import android.content.Context;
-import android.util.Log;
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
+import android.content.Context;
+import android.util.Log;
 
 /**
  * Datenbank-Verbindungs Klasse
@@ -25,10 +25,6 @@ public class Database {
 	public MyTables getTables() {
 		return tables;
 	}
-
-	public void setTables(MyTables tables) {
-		this.tables = tables;
-	}
 	
     public void InitializeSQLCipher(String pass) {
         SQLiteDatabase.loadLibs(context);
@@ -39,7 +35,7 @@ public class Database {
         
         SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile.getPath(), pass, null);
         this.sqldatabase=database;
-        MyTables tables=new MyTables(sqldatabase);
+        tables = new MyTables(sqldatabase);
     }
 
 	public void insertExample() {

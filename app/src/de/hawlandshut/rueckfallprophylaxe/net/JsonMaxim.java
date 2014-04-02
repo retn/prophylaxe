@@ -5,23 +5,23 @@ package de.hawlandshut.rueckfallprophylaxe.net;
  * contains variables and Getters/Setters.
  * 
  * @author Patrick
- * @see JsonData
+ * @see Data
  */
-public class RiskSituation {
+public class JsonMaxim {
 
-	private int ersID;
+	private int maximID;
 	private String text;
 
-	public RiskSituation() {
+	public JsonMaxim() {
 
 	}
 
-	public int getErsID() {
-		return ersID;
+	public int getMaximID() {
+		return maximID;
 	}
 
-	public void setErsID(int ersID) {
-		this.ersID = ersID;
+	public void setMaximID(int maximID) {
+		this.maximID = maximID;
 	}
 
 	public String getText() {

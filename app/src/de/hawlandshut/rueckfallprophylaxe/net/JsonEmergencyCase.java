@@ -7,9 +7,9 @@ import java.util.List;
  * contains variables and Getters/Setters.
  * 
  * @author Patrick
- * @see JsonData
+ * @see Data
  */
-public class EmergencyCase {
+public class JsonEmergencyCase {
 
 	private int ecID;
 	private String patientID_fk;
@@ -22,13 +22,13 @@ public class EmergencyCase {
 	private String temptation_thought;
 	private String temptation_thought_abstinence;
 	private String temptation_behaviour;
-	private List<RiskSituation> risk_situations_array;
-	private List<LimitRelapse> limit_relapses_array;
-	private List<SafetyThought> safety_thoughts_array;
-	private List<SafetyAction> safety_actions_array;
-	private List<HelpPerson> help_persons_array;
+	private List<JsonRiskSituation> risk_situations_array;
+	private List<JsonLimitRelapse> limit_relapses_array;
+	private List<JsonSafetyThought> safety_thoughts_array;
+	private List<JsonSafetyAction> safety_actions_array;
+	private List<JsonHelpPerson> help_persons_array;
 
-	public EmergencyCase() {
+	public JsonEmergencyCase() {
 
 	}
 
@@ -121,45 +121,45 @@ public class EmergencyCase {
 		this.temptation_behaviour = temptation_behaviour;
 	}
 
-	public List<RiskSituation> getRisk_situations_array() {
+	public List<JsonRiskSituation> getRisk_situations_array() {
 		return risk_situations_array;
 	}
 
 	public void setRisk_situations_array(
-			List<RiskSituation> risk_situations_array) {
+			List<JsonRiskSituation> risk_situations_array) {
 		this.risk_situations_array = risk_situations_array;
 	}
 
-	public List<LimitRelapse> getLimit_relapses_array() {
+	public List<JsonLimitRelapse> getLimit_relapses_array() {
 		return limit_relapses_array;
 	}
 
-	public void setLimit_relapses_array(List<LimitRelapse> limit_relapses_array) {
+	public void setLimit_relapses_array(List<JsonLimitRelapse> limit_relapses_array) {
 		this.limit_relapses_array = limit_relapses_array;
 	}
 
-	public List<SafetyThought> getSafety_thoughts_array() {
+	public List<JsonSafetyThought> getSafety_thoughts_array() {
 		return safety_thoughts_array;
 	}
 
 	public void setSafety_thoughts_array(
-			List<SafetyThought> safety_thoughts_array) {
+			List<JsonSafetyThought> safety_thoughts_array) {
 		this.safety_thoughts_array = safety_thoughts_array;
 	}
 
-	public List<SafetyAction> getSafety_actions_array() {
+	public List<JsonSafetyAction> getSafety_actions_array() {
 		return safety_actions_array;
 	}
 
-	public void setSafety_actions_array(List<SafetyAction> safety_actions_array) {
+	public void setSafety_actions_array(List<JsonSafetyAction> safety_actions_array) {
 		this.safety_actions_array = safety_actions_array;
 	}
 
-	public List<HelpPerson> getHelp_persons_array() {
+	public List<JsonHelpPerson> getHelp_persons_array() {
 		return help_persons_array;
 	}
 
-	public void setHelp_persons_array(List<HelpPerson> help_persons_array) {
+	public void setHelp_persons_array(List<JsonHelpPerson> help_persons_array) {
 		this.help_persons_array = help_persons_array;
 	}
 

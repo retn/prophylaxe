@@ -27,7 +27,7 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 
 	/**
 	 * Set variables, set an OnClickListener and switches to
-	 * PasswordDetermineActivity if database file doesn't exist.
+	 * {@link PasswordDetermineActivity} if database file doesn't exist.
 	 * 
 	 */
 	protected void onCreate(Bundle savedInstanceState) {

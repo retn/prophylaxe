@@ -5,24 +5,23 @@ package de.hawlandshut.rueckfallprophylaxe.net;
  * contains variables and Getters/Setters.
  * 
  * @author Patrick
- * @see JsonData
+ * @see Data
  */
-public class LimitRelapse {
+public class JsonSafetyThought {
 
-	private int elrID;
+	private int estID;
 	private String text;
-	private String ecId_fk;
 
-	public LimitRelapse() {
+	public JsonSafetyThought() {
 
 	}
 
-	public int getElrID() {
-		return elrID;
+	public int getEstID() {
+		return estID;
 	}
 
-	public void setElrID(int elrID) {
-		this.elrID = elrID;
+	public void setEstID(int estID) {
+		this.estID = estID;
 	}
 
 	public String getText() {
@@ -31,14 +30,6 @@ public class LimitRelapse {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public String getEcId_fk() {
-		return ecId_fk;
-	}
-
-	public void setEcId_fk(String ecId_fk) {
-		this.ecId_fk = ecId_fk;
 	}
 
 }

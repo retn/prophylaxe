@@ -4,8 +4,10 @@ import java.io.IOException;
 
 import com.google.gson.JsonSyntaxException;
 
+import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
+import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
-import de.hawlandshut.rueckfallprophylaxe.net.JsonData;
+import de.hawlandshut.rueckfallprophylaxe.net.Data;
 import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,9 +25,9 @@ import android.widget.Toast;
  * that's used to encrypt the database. When you {@link #onClick(View) click} on
  * the Button your inputs will be checked. If they are valid a
  * {@link RequestJsonAsyncTask} starts and gets the
- * {@link de.hawlandshut.rueckfallprophylaxe.net.JsonData} object from
+ * {@link de.hawlandshut.rueckfallprophylaxe.net.Data} object from
  * {@link de.hawlandshut.rueckfallprophylaxe.net.RequestJson#getData()} and
- * calls {@link #createDatabaseIfEverythingValid(JsonData)} when finished. If
+ * calls {@link #createDatabaseIfEverythingValid(Data)} when finished. If
  * the statuscode stored in the JSON-Data is '1' the users inputs were right and
  * he can now access the app.
  * 
@@ -38,11 +40,14 @@ public class PasswordDetermineActivity extends Activity implements
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	private static final String PIN_PATTERN = "[0-9][0-9][0-9][0-9]";
 
-	EditText editTextToken, editTextEmail, editTextPin1, editTextPin2;
-	Button button;
-	ProgressBar progressBar;
-	String pin;
-	int statuscode;
+	private EditText editTextToken, editTextEmail, editTextPin1, editTextPin2;
+	private Button button;
+	private ProgressBar progressBar;
+	
+	private String email;
+	private String token;
+	private String pin;
+	private int statuscode;
 
 	/**
 	 * set variables and set an OnClickListener
@@ -126,7 +131,9 @@ public class PasswordDetermineActivity extends Activity implements
 	 * @throws IOException
 	 */
 	private void requestJson(String email, String token) throws IOException {
-		RequestJson rj = new RequestJson(email, token);
+		this.email = email;
+		this.token = token;
+		RequestJson rj = new RequestJson();
 		new RequestJsonAsyncTask().execute(rj);
 	}
 
@@ -169,15 +176,16 @@ public class PasswordDetermineActivity extends Activity implements
 	 * from the server. If it is not '1', something went wrong and
 	 * {@link #showMessage()} will be called. If the statuscode is '1'
 	 * everything is right and the database will be generated and the patient
-	 * will be forwarded to HomeActivity.
+	 * will be forwarded to {@link HomeActivity}.
 	 * 
 	 * @param data
 	 *            JsonData object
 	 */
-	private void createDatabaseIfEverythingValid(JsonData data) {
+	private void createDatabaseIfEverythingValid(Data data) {
 		statuscode = data.getData().getStatus().getStatuscode();
 
 		if (statuscode != 1) {
+			progressBar.setVisibility(View.GONE);
 			showMessage();
 		} else {
 			Toast.makeText(
@@ -187,7 +195,10 @@ public class PasswordDetermineActivity extends Activity implements
 					Toast.LENGTH_LONG).show();
 			Database db = new Database(this);
 			db.InitializeSQLCipher(pin);
+			DataInserter di = new DataInserter(db);
+			di.insertData(data);
 			db.close();
+			progressBar.setVisibility(View.GONE);
 
 			Intent intent = new Intent(this, HomeActivity.class);
 			startActivity(intent);
@@ -197,8 +208,8 @@ public class PasswordDetermineActivity extends Activity implements
 	/**
 	 * Runs an AsyncTask which will send the HTTP-Request to the server. Uses
 	 * {@link RequestJson#getData()} to get the
-	 * {@link de.hawlandshut.rueckfallprophylaxe.net.JsonData} object and calls
-	 * {@link PasswordDetermineActivity#createDatabaseIfEverythingValid(JsonData)}
+	 * {@link de.hawlandshut.rueckfallprophylaxe.net.Data} object and calls
+	 * {@link PasswordDetermineActivity#createDatabaseIfEverythingValid(Data)}
 	 * when everything worked.
 	 * 
 	 * 
@@ -206,15 +217,15 @@ public class PasswordDetermineActivity extends Activity implements
 	 * 
 	 */
 	private class RequestJsonAsyncTask extends
-			AsyncTask<RequestJson, Integer, JsonData> {
+			AsyncTask<RequestJson, Integer, Data> {
 
 		@Override
-		protected JsonData doInBackground(RequestJson... params) {
+		protected Data doInBackground(RequestJson... params) {
 			statuscode = 0;
-			JsonData data = null;
+			Data data = null;
 			try {
 				// get the JsonData object from RequestJson.getData()
-				data = params[0].getData();
+				data = params[0].getData(email, token);
 			} catch (JsonSyntaxException e) {
 				showMessage();
 				e.printStackTrace();
@@ -225,8 +236,7 @@ public class PasswordDetermineActivity extends Activity implements
 			return data;
 		}
 
-		protected void onPostExecute(JsonData data) {
-			progressBar.setVisibility(View.GONE);
+		protected void onPostExecute(Data data) {
 			if (data != null) {
 				createDatabaseIfEverythingValid(data);
 			}

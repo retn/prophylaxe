@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.ContentValues;
-import android.util.Log;
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 /* Tables
@@ -24,6 +22,8 @@ import net.sqlcipher.database.SQLiteDatabase;
  * `spl_diary_entry_has_media`
  * `spl_diary_entry_has_mood`
  */
+import android.content.ContentValues;
+import android.util.Log;
 
 /**
  * TODO: PS: Bitte kommentieren

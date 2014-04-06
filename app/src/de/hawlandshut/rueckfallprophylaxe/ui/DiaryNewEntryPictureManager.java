@@ -9,23 +9,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
-import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPictureType;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPictureType;
 
 
 /**
  * TODO: PS: Bitte kommentieren -> JavaDoc
  *
  */
-/*
- * Managed das hinzufï¿½gen von Bildern eines (neues) Tagebucheintrages
+/**
+ * Managed das hinzufŸgen von Bildern eines (neues) Tagebucheintrages
  */
 public class DiaryNewEntryPictureManager {
 	private Activity myActivity;
@@ -39,16 +41,9 @@ public class DiaryNewEntryPictureManager {
 		this.myActivity = myActivity;
 	}
 	
-	
-	public void addEventListenerOnPicture() {
-		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView1));
-		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView2));
-		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView3));
-		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(R.id.imgView4));
-	}
-	
 	private void resetImageView(ImageViewWithContextMenuInfo img) {
 		img.setImageResource(android.R.color.transparent);
+		img.setVisibility(View.GONE);
 	}
 	
 	public void removePicture(ImageViewWithContextMenuInfo img) throws Exception {
@@ -73,20 +68,41 @@ public class DiaryNewEntryPictureManager {
 		// Existing picture:
 		// TODO: add to trash
 		
-		
-		
+		drawCurrentPictures();
 	}
 	
+	
 	public void addGalleryPicture(String picturePath) {
+		
+		// Add to image list
 		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_GALLERY_PICTURE, picturePath, getNewID());
 		pictures.add(newPic);
+		addImageView(newPic);
+
+	}
+	
+	private void addImageView(DiaryEntryPicture pic) {
+		// Create & add imageView dynamically
+		LinearLayout diaryImgsViewGroup = (LinearLayout) myActivity.findViewById(R.id.diaryImgViews); //the layout you set in `setContentView()`
 		
-		addEventListenerOnPicture();
+		ImageViewWithContextMenuInfo image = new ImageViewWithContextMenuInfo(myActivity);
+		image.setImageBitmap(getThumbnail(pic.getPath()));
+		image.setTag(pic.getId());
+		image.setId(pic.getId());
+		image.setScaleType(ImageView.ScaleType.FIT_START);
+		image.setPadding(0, 20, 15, 5);
+		LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT, 1.0f);
+		
+		diaryImgsViewGroup.addView(image, param);
+
 	}
 	
 	public void addCameraPicture() {
 		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_CAMERA_PICTURE, mCurrentPhotoPath, getNewID());
 		pictures.add(newPic);
+		addImageView(newPic);
 	}
 	
 	public int getNewID() {
@@ -99,7 +115,7 @@ public class DiaryNewEntryPictureManager {
 	     try    
 	     {
 
-	         final int THUMBNAIL_SIZE = 300;
+	         final int THUMBNAIL_SIZE = 200;
 
 	         FileInputStream fis = new FileInputStream(path);
 	          imgthumBitmap = BitmapFactory.decodeStream(fis);
@@ -130,38 +146,22 @@ public class DiaryNewEntryPictureManager {
 		return i;
 	}
 	
-	/*
-	 * Found no other way to dynamically create id attributes
-	 */
-	private ImageView getThumbnailIDAttribute(int i, Activity activity) {
-		if (i == 1)
-			return (ImageView) activity.findViewById(R.id.imgView1);
-		
-		if (i == 2)
-			return (ImageView) activity.findViewById(R.id.imgView2);
-		
-		if (i == 3)
-			return (ImageView) activity.findViewById(R.id.imgView3);
-		
-		if (i == 4)
-			return (ImageView) activity.findViewById(R.id.imgView4);
-		
-		return null;
-	}
 	
 	/*
 	 * Shows thumbnails of all current pictures
 	 */
-	public void showCurrentPictures(Activity activity) {
-		int i = 1;
-		
+	public void drawCurrentPictures() {
 		// Show new pictures from gallery & camera
 		for(DiaryEntryPicture pic: pictures){
-	        ImageView imageView = getThumbnailIDAttribute(i, activity);
+	        ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
 	        imageView.setImageBitmap(getThumbnail(pic.getPath()));
+	        
+	        // Register event listener
+	        myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
+	        
+	        
 	        Log.d("showCurrentPictures - Pic id: ", ""+pic.getIdString());
-	        imageView.setTag(pic.getId()); // id
-	        i++;
+	     
 		}
 		
 		// TODO: Show existing pictures from database which were not moved to trash

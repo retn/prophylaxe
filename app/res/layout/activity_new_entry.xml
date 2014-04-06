@@ -74,50 +74,15 @@ android:layout_height="wrap_content" android:scrollbarStyle="insideOverlay">
 
     
 <LinearLayout
+    android:id="@+id/diaryImgViews"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/spinnerMood"
     android:orientation="horizontal"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
-    
-        <de.hawlandshut.rueckfallprophylaxe.ui.ImageViewWithContextMenuInfo
-        android:id="@+id/imgView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Bild 1"
-        android:scaleType="fitStart"
-        android:layout_marginRight="10dp"
-        android:layout_weight="1" />
-  
 
-         <de.hawlandshut.rueckfallprophylaxe.ui.ImageViewWithContextMenuInfo
-        android:id="@+id/imgView2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Bild 2"
-         android:scaleType="fitStart"
-         android:layout_marginRight="10dp"
-        android:layout_weight="1" />
-                  
-         <de.hawlandshut.rueckfallprophylaxe.ui.ImageViewWithContextMenuInfo
-        android:id="@+id/imgView3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Bild 3"
-         android:scaleType="fitStart"
-         android:layout_marginRight="10dp"
-        android:layout_weight="1" />
-                           
-          <de.hawlandshut.rueckfallprophylaxe.ui.ImageViewWithContextMenuInfo
-        android:id="@+id/imgView4"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Bild 4"
-         android:scaleType="fitStart"
-         android:layout_marginRight="10dp"
-        android:layout_weight="1" />
-	  
+	<!-- Diary picture thumbnails are programmatically added here -->	  
     
 </LinearLayout>
 

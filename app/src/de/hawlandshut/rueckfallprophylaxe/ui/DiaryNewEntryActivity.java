@@ -284,7 +284,7 @@ public class DiaryNewEntryActivity extends Activity {
 	    	 // showNeutralErrorDialog("Debug", mCurrentPhotoPath);
 	    	 pictureManager.addCameraPicture();
 	         
-	         pictureManager.showCurrentPictures(this);
+	         pictureManager.drawCurrentPictures();
 	     }
 	      
 	     if (requestCode == REQUEST_LOAD_IMAGE_FILE && resultCode == RESULT_OK && null != data) {
@@ -303,7 +303,7 @@ public class DiaryNewEntryActivity extends Activity {
 
 	         pictureManager.addGalleryPicture(picturePath);
 	         
-	         pictureManager.showCurrentPictures(this);
+	         pictureManager.drawCurrentPictures();
 	     }
 	}
 	

@@ -47,5 +47,18 @@
     <string name="title_activity_koffer">Notfall Koffer</string>
     <string name="title_activity_koffer2">Notfall Koffer 2</string>
     <string name="btn_saveDiaryEntry">Speichern</string>
+    <string name="title_password_determine">Passwort erstellen</string>
+    <string name="title_password_verify">Passwortabfrage</string>
+    <string name="toast_thats_no_email">Das ist keine E-mailadresse</string>
+    <string name="toast_no_token_entered">Bitte Token angeben</string>
+    <string name="toast_pins_not_equal">PIN\'s unterscheiden sich</string>
+    <string name="toast_incorrect_pin">PIN muss aus 4 Ziffern bestehen</string>
+    <string name="toast_something_went_wrong">Etwas lief falsch</string>
+    <string name="toast_email_not_found">Email wurde nicht gefunden</string>
+    <string name="toast_incorrect_token">Der Token ist falsch</string>
+    <string name="toast_token_was_used">Der Token wurde bereits verwendet</string>
+    <string name="toast_data_inclompete">Daten nicht komplett</string>
+    <string name="toast_register_successfull">Das Anmelden war erfolgreich</string>
+    <string name="ready">Fertig</string>
 
 </resources>

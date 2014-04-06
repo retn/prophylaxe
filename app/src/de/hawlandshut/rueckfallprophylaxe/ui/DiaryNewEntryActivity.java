@@ -231,7 +231,7 @@ public class DiaryNewEntryActivity extends Activity {
 			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			
-		    builder.setTitle("Bildquelle wï¿½hlen")
+		    builder.setTitle("Bildquelle wŠhlen")
 		           .setItems(items, new DialogInterface.OnClickListener() {
 		               public void onClick(DialogInterface dialog, int which) {
 		            	   

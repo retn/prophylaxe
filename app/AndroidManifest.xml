@@ -31,6 +31,15 @@
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity"
             android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.PasswordDetermineActivity"
+            android:label="@string/title_password_determine" >
+        </activity>
+        <activity
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.PasswordVerifyActivity"
+            android:label="@string/title_password_verify" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

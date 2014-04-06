@@ -1,12 +1,19 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
-public class SafetyAction {
+/**
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
+ * @author Patrick
+ * @see Data
+ */
+public class JsonSafetyAction {
 
-	int esaID;
-	String text;
-	
-	public SafetyAction() {
-		
+	private int esaID;
+	private String text;
+
+	public JsonSafetyAction() {
+
 	}
 
 	public int getEsaID() {
@@ -24,5 +31,5 @@ public class SafetyAction {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 }

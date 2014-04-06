@@ -1,10 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import android.content.ContentValues;
-import android.util.Log;
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 /* Tables
@@ -22,6 +22,8 @@ import net.sqlcipher.database.SQLiteDatabase;
  * `spl_diary_entry_has_media`
  * `spl_diary_entry_has_mood`
  */
+import android.content.ContentValues;
+import android.util.Log;
 
 /**
  * TODO: PS: Bitte kommentieren
@@ -35,7 +37,7 @@ public class MyTables {
 		this.sqldatabase=sqldatabase;
 		createTables();
 		queryNumberTables();
-		HashMap<Integer,String> results=query("spl_emotion","emotion");
+		List<String> results=query("spl_emotion","emotion");
 		//insert("table", new HashMap<String,String>());
 		//delete("table","index", "column");
 		//update("table",new HashMap<String,String>(),"index","column");
@@ -64,13 +66,14 @@ public class MyTables {
 		return sqldatabase.delete(table, column+" = "+id, new String[]{id})>0;
 	}
 
-	public HashMap<Integer, String> query(String table, String value) {
-		HashMap<Integer, String> result= new HashMap<Integer, String>();
+
+	public List<String> query(String table, String value) {
+		List<String> result= new ArrayList<String>();
 		Cursor c = sqldatabase.rawQuery("SELECT "+value+" FROM "+table, null);
 
 		if (c.moveToFirst()) {int i=0;
 		    while ( !c.isAfterLast() ) {
-		    	result.put(i,c.getString(c.getColumnIndex(value)));
+		    	result.add(c.getString(c.getColumnIndex(value)));
 		        c.moveToNext();
 		        i++;
 		    }

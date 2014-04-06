@@ -96,6 +96,8 @@ public class DiaryNewEntryPictureManager {
                 LayoutParams.WRAP_CONTENT, 1.0f);
 		
 		diaryImgsViewGroup.addView(image, param);
+		
+		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
 
 	}
 	

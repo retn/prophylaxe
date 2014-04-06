@@ -1,10 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 import java.io.File;
 
-import android.content.Context;
-import android.util.Log;
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
+import android.content.Context;
+import android.util.Log;
 
 /**
  * Datenbank-Verbindungs Klasse
@@ -15,30 +15,33 @@ import net.sqlcipher.database.SQLiteDatabase;
 public class Database {
 	private Context context;
 	private SQLiteDatabase sqldatabase;
+	private File databaseFile;
+	private MyTables tables;
 	public Database(Context context) {
 		this.context=context;
-		InitializeSQLCipher();
+		databaseFile = context.getDatabasePath("daten.db");
         }
 	
-    private void InitializeSQLCipher() {
+	public MyTables getTables() {
+		return tables;
+	}
+	
+    public void InitializeSQLCipher(String pass) {
         SQLiteDatabase.loadLibs(context);
-        File databaseFile = context.getDatabasePath("daten.db");
         if(!databaseFile.exists()){
-        	databaseFile.mkdirs();
-        	
+        	databaseFile.getParentFile().mkdirs(); 	
         }
         //databaseFile.delete();
         
-        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile, "user", null);
+        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile.getPath(), pass, null);
         this.sqldatabase=database;
-        //MyTables tables=new MyTables(sqldatabase);
+        tables = new MyTables(sqldatabase);
     }
 
 	public void insertExample() {
 		
         sqldatabase.execSQL("insert into t1(a, b) values(?, ?)", new Object[]{"one for the money",
                                                                         "two for the show"});
-		
 	}
 
 	public void makeExampleQuery() {
@@ -55,6 +58,17 @@ public class Database {
         	}
         	Log.d("query", ""+i);
         }
+	}
+	
+	public boolean databaseExists() {
+		if(databaseFile.exists()){
+        	return true;
+        }
+		return false;
+	}
+	
+	public void close() {
+		sqldatabase.close();
 	}
 }
 

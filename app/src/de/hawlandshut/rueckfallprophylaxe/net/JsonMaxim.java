@@ -1,12 +1,19 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
-public class Maxim {
-	
-	int maximID;
-	String text;
-	
-	public Maxim() {
-		
+/**
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
+ * @author Patrick
+ * @see Data
+ */
+public class JsonMaxim {
+
+	private int maximID;
+	private String text;
+
+	public JsonMaxim() {
+
 	}
 
 	public int getMaximID() {
@@ -24,5 +31,5 @@ public class Maxim {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 }

@@ -11,7 +11,6 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        //Database database=new Database(this);
     }
 
 
@@ -41,5 +40,11 @@ public class HomeActivity extends Activity {
     	Intent intent = new Intent(this, EmotionActivity.class);
     	startActivity(intent);
     }
+    
+    @Override
+    public void onBackPressed() {
+      moveTaskToBack(true);
+    }
+
     
 }

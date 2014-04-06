@@ -1,55 +1,25 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
-import java.util.List;
-
-import com.google.gson.annotations.SerializedName;
-
 /**
- * TODO: PS: Bitte kommentieren -> JavaDoc
- *
+ * This class is used for storing the data collected from the JSON-String. An
+ * object of this class is generated in {@link RequestJson#getData()} and that
+ * object contains all data collected from the JSON-String.
+ * 
  */
 public class Data {
-	
-	@SerializedName("emergency-case")
-	EmergencyCase emergencyCase;
-	List<Maxim> maxims;
-	List<Distractions> distractions;
-	Status status;
-	
+
+	private JsonData data;
+
 	public Data() {
-		
+
 	}
 
-	public EmergencyCase getEmergencyCase() {
-		return emergencyCase;
+	public JsonData getData() {
+		return data;
 	}
 
-	public void setEmergencyCase(EmergencyCase emergencyCase) {
-		this.emergencyCase = emergencyCase;
+	public void setData(JsonData data) {
+		this.data = data;
 	}
 
-	public List<Maxim> getMaxims() {
-		return maxims;
-	}
-
-	public void setMaxims(List<Maxim> maxims) {
-		this.maxims = maxims;
-	}
-
-	public List<Distractions> getDistractions() {
-		return distractions;
-	}
-
-	public void setDistractions(List<Distractions> distractions) {
-		this.distractions = distractions;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	
 }

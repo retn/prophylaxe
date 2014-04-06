@@ -1,12 +1,19 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
-public class Status {
+/**
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
+ * @author Patrick
+ * @see Data
+ */
+public class JsonStatus {
 
-	int statuscode;
-	String message;
-	
-	public Status() {
-		
+	private int statuscode;
+	private String message;
+
+	public JsonStatus() {
+
 	}
 
 	public int getStatuscode() {
@@ -24,5 +31,5 @@ public class Status {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 }

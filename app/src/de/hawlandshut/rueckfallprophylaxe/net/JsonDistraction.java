@@ -1,14 +1,21 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
-public class Distractions {
+/**
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
+ * @author Patrick
+ * @see Data
+ */
+public class JsonDistraction {
 
-	int distractionID;
-	String text;
-	String emotion_text;
-	String emotionID_fk;
-	
-	public Distractions() {
-		
+	private int distractionID;
+	private String text;
+	private String emotion_text;
+	private String emotionID_fk;
+
+	public JsonDistraction() {
+
 	}
 
 	public int getDistractionID() {
@@ -42,5 +49,5 @@ public class Distractions {
 	public void setEmotionID_fk(String emotionID_fk) {
 		this.emotionID_fk = emotionID_fk;
 	}
-	
+
 }

@@ -75,4 +75,14 @@ public class DiaryEntry {
 	public Media[] getMedia() {
 		return media;
 	}
+
+	public void setMedia(Media[] medias) {
+		this.media=medias;
+		
+	}
+
+	public void setEmotionId(int id) {
+		this.id=id;
+		
+	}
 }

@@ -1,12 +1,19 @@
 package de.hawlandshut.rueckfallprophylaxe.net;
 
-public class HelpPerson {
-	
-	String name;
-	String phone_number;
-	
-	public HelpPerson() {
-		
+/**
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
+ * @author Patrick
+ * @see Data
+ */
+public class JsonHelpPerson {
+
+	private String name;
+	private String phone_number;
+
+	public JsonHelpPerson() {
+
 	}
 
 	public String getName() {
@@ -24,5 +31,5 @@ public class HelpPerson {
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
-	
+
 }

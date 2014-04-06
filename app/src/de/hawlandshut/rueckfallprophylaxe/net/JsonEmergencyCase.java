@@ -2,27 +2,34 @@ package de.hawlandshut.rueckfallprophylaxe.net;
 
 import java.util.List;
 
-public class EmergencyCase {
+/**
+ * This class is only used for storing data from the JSON-String. It only
+ * contains variables and Getters/Setters.
+ * 
+ * @author Patrick
+ * @see Data
+ */
+public class JsonEmergencyCase {
 
-	int ecID;
-	String patientID_fk;
-	String addict_drughotline;
-	String prop_advice;
-	String my_therapist;
-	String risk_danger;
-	String risk_situation;
-	String risk_temptation;
-	String temptation_thought;
-	String temptation_thought_abstinence;
-	String temptation_behaviour;
-	List<RiskSituation> risk_situations_array;
-	List<LimitRelapse> limit_relapses_array;
-	List<SafetyThought> safety_thoughts_array;
-	List<SafetyAction> safety_actions_array;
-	List<HelpPerson> help_persons_array;
-	
-	public EmergencyCase() {
-		
+	private int ecID;
+	private String patientID_fk;
+	private String addict_drughotline;
+	private String prop_advice;
+	private String my_therapist;
+	private String risk_danger;
+	private String risk_situation;
+	private String risk_temptation;
+	private String temptation_thought;
+	private String temptation_thought_abstinence;
+	private String temptation_behaviour;
+	private List<JsonRiskSituation> risk_situations_array;
+	private List<JsonLimitRelapse> limit_relapses_array;
+	private List<JsonSafetyThought> safety_thoughts_array;
+	private List<JsonSafetyAction> safety_actions_array;
+	private List<JsonHelpPerson> help_persons_array;
+
+	public JsonEmergencyCase() {
+
 	}
 
 	public int getEcID() {
@@ -114,47 +121,46 @@ public class EmergencyCase {
 		this.temptation_behaviour = temptation_behaviour;
 	}
 
-	public List<RiskSituation> getRisk_situations_array() {
+	public List<JsonRiskSituation> getRisk_situations_array() {
 		return risk_situations_array;
 	}
 
 	public void setRisk_situations_array(
-			List<RiskSituation> risk_situations_array) {
+			List<JsonRiskSituation> risk_situations_array) {
 		this.risk_situations_array = risk_situations_array;
 	}
 
-	public List<LimitRelapse> getLimit_relapses_array() {
+	public List<JsonLimitRelapse> getLimit_relapses_array() {
 		return limit_relapses_array;
 	}
 
-	public void setLimit_relapses_array(List<LimitRelapse> limit_relapses_array) {
+	public void setLimit_relapses_array(List<JsonLimitRelapse> limit_relapses_array) {
 		this.limit_relapses_array = limit_relapses_array;
 	}
 
-	public List<SafetyThought> getSafety_thoughts_array() {
+	public List<JsonSafetyThought> getSafety_thoughts_array() {
 		return safety_thoughts_array;
 	}
 
 	public void setSafety_thoughts_array(
-			List<SafetyThought> safety_thoughts_array) {
+			List<JsonSafetyThought> safety_thoughts_array) {
 		this.safety_thoughts_array = safety_thoughts_array;
 	}
 
-	public List<SafetyAction> getSafety_actions_array() {
+	public List<JsonSafetyAction> getSafety_actions_array() {
 		return safety_actions_array;
 	}
 
-	public void setSafety_actions_array(List<SafetyAction> safety_actions_array) {
+	public void setSafety_actions_array(List<JsonSafetyAction> safety_actions_array) {
 		this.safety_actions_array = safety_actions_array;
 	}
 
-	public List<HelpPerson> getHelp_persons_array() {
+	public List<JsonHelpPerson> getHelp_persons_array() {
 		return help_persons_array;
 	}
 
-	public void setHelp_persons_array(List<HelpPerson> help_persons_array) {
+	public void setHelp_persons_array(List<JsonHelpPerson> help_persons_array) {
 		this.help_persons_array = help_persons_array;
 	}
-	
-	
+
 }

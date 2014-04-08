@@ -1,9 +1,22 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
+import java.util.List;
+
+import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
+import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
+import de.hawlandshut.rueckfallprophylaxe.net.Data;
+import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
+import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +36,7 @@ import android.widget.Toast;
 public class PasswordVerifyActivity extends Activity implements OnClickListener {
 
 	private EditText editTextPin;
-	private Database data;
+	private Database db;
 
 	/**
 	 * Set variables, set an OnClickListener and switches to
@@ -33,9 +46,9 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_password_verify);
-		data = new Database(this);
+		db = new Database(this);
 
-		if (!data.databaseExists()) {
+		if (!db.databaseExists()) {
 			Intent intent = new Intent(this, PasswordDetermineActivity.class);
 			startActivity(intent);
 		}
@@ -57,10 +70,9 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 			String input = editTextPin.getText().toString();
 
 			try {
-				data.InitializeSQLCipher(input);
+				db.InitializeSQLCipher(input);
 
-				Intent intent = new Intent(this, HomeActivity.class);
-				startActivity(intent);
+				launchDialog();
 			} catch (Exception e) {
 				Toast.makeText(this, "Ihre Eingabe ist falsch",
 						Toast.LENGTH_LONG).show();
@@ -68,6 +80,51 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 			}
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void launchDialog() {
+		final SharedPreferences sharedPref = this.getSharedPreferences(
+				"de.hawlandshut.rueckfallprophylaxe", Context.MODE_PRIVATE);
+		final String cpTimestampKey = "de.hawlandshut.rueckfallprophylaxe.cptimestamp";
+
+		final ProgressDialog progressDialog = ProgressDialog.show(
+				PasswordVerifyActivity.this, "Bitte warten...",
+				"Deine Daten werden geladen...");
+		progressDialog.setCancelable(false);
+
+		progressDialog.setOnDismissListener(new OnDismissListener() {
+			@Override
+			public void onDismiss(final DialogInterface arg0) {
+				Intent intent = new Intent(PasswordVerifyActivity.this,
+						HomeActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					DataInserter di = new DataInserter(db);
+					RequestJson rj = new RequestJson();
+
+					if (rj.getContactPointTimestamp() == sharedPref.getString(
+							cpTimestampKey, "")) {
+						List<JsonContactPoint> contactPoints = rj
+								.getContactPoints();
+						di.updateContactPoints(contactPoints);
+						sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp());
+					}
+
+					ControllerData cd = new ControllerData(db);
+
+					db.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				progressDialog.dismiss();
+			}
+		}).start();
 	}
 
 	@Override

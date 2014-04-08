@@ -60,5 +60,6 @@
     <string name="toast_data_inclompete">Daten nicht komplett</string>
     <string name="toast_register_successfull">Das Anmelden war erfolgreich</string>
     <string name="ready">Fertig</string>
+    <string name="data_loading">Deine Daten werden eingerichtet...</string>
 
 </resources>

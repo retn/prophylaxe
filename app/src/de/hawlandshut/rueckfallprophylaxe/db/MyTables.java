@@ -65,6 +65,10 @@ public class MyTables {
 	public boolean delete(String table, String id, String column) {
 		return sqldatabase.delete(table, column+" = "+id, new String[]{id})>0;
 	}
+	
+	public boolean delete(String table) {
+		return sqldatabase.delete(table, null, null)>0;
+	}
 
 
 	public List<String> query(String table, String value) {
@@ -113,7 +117,7 @@ public class MyTables {
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_diary_entry_has_mood\"( \"entryID\" INTEGER NOT NULL, \"emotionID\" INTEGER NOT NULL, CONSTRAINT \"entryID\" FOREIGN KEY(\"entryID\") REFERENCES \"spl_diary_entry\"(\"id\"), CONSTRAINT \"emotionID\" FOREIGN KEY(\"emotionID\") REFERENCES \"spl_emotion\"(\"emotionID\"))");
 		sqldatabase.execSQL("CREATE INDEX IF NOT EXISTS \"spl_diary_entry_has_mood.fk_spl_diary_entry_has_mood_1_idx\" ON \"spl_diary_entry_has_mood\"(\"entryID\")");
 		sqldatabase.execSQL("CREATE INDEX IF NOT EXISTS \"spl_diary_entry_has_mood.emotionID_idx\" ON \"spl_diary_entry_has_mood\"(\"emotionID\")");
-		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_distraction\"( \"distractionID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"emotionID_fk\" INTEGER NOT NULL, CONSTRAINT \"fk_distraction_emotion1\" FOREIGN KEY(\"emotionID_fk\") REFERENCES \"spl_emotion\"(\"emotionID\"))");
+		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_distraction\"( \"distractionID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"emotionID_fk\" INTEGER NOT NULL, \"text\" VARCHAR(45), CONSTRAINT \"fk_distraction_emotion1\" FOREIGN KEY(\"emotionID_fk\") REFERENCES \"spl_emotion\"(\"emotionID\"))");
 		sqldatabase.execSQL("CREATE INDEX IF NOT EXISTS \"spl_distraction.fk_distraction_emotion1_idx\" ON \"spl_distraction\"(\"emotionID_fk\")");
 			
 	}

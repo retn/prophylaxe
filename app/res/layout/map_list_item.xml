@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/GridLayout01"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:columnCount="1"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <TextView
+        android:id="@+id/mapListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:padding="2dp"
+        android:text="Musteranlaufstelle"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/mapListLabelAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="@string/label_adress" />
+
+    <TextView
+        android:id="@+id/mapListLabelPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="15dp"
+        android:layout_row="5"
+        android:text="@string/label_phone" />
+
+    <TextView
+        android:id="@+id/mapListLabelMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="15dp"
+        android:text="@string/label_mail" />
+
+    <LinearLayout android:layout_gravity="fill_horizontal" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginLeft="10dp"
+        android:layout_row="7"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/mapListLand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right|top"
+        android:layout_row="4"
+        android:text="Deutschland" />
+
+    <TextView
+        android:id="@+id/mapListStreet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right|top"
+        android:layout_row="1"
+        android:text="Musterstr. 5" />
+
+    <TextView
+        android:id="@+id/mapListPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right|top"
+        android:layout_row="5"
+        android:text="12345/6789" />
+
+    <TextView
+        android:id="@+id/mapListMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right|top"
+        android:layout_row="6"
+        android:text="muster@anlaufstelle.de" />
+
+    <TextView
+        android:id="@+id/mapListCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right|top"
+        android:layout_row="3"
+        android:text="12345 Musterstadt" />
+
+</GridLayout>

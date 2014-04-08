@@ -7,17 +7,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.data.Media.Type;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
 
 public class ControllerData {
 
-	MyTables tables;
-	List<Maxim> maxims;
-	HashMap<Integer, Emotion> emotions;
-	List<HelpPerson> helpPeople;
-	List<DiaryEntry> diaryEntries;
+	private MyTables tables;
+	private static List<Maxim> maxims;
+	private static HashMap<Integer, Emotion> emotions;
+	private static List<HelpPerson> helpPeople;
+	private static List<DiaryEntry> diaryEntries;
+	private static List<PlaceToGo> placesToGo;
 
 	public ControllerData(Database database) {
 		tables = database.getTables();
@@ -25,6 +27,7 @@ public class ControllerData {
 		emotions = fetchEmotions();
 		helpPeople = fetchHelpPeople();
 		diaryEntries = fetchDiaryEntries();
+		placesToGo = fetchPlacesToGo();
 	}
 
 	private List<Maxim> fetchMaxims() {
@@ -145,25 +148,52 @@ public class ControllerData {
 
 	}
 
-	public List<Maxim> getMaxims() {
+	private List<PlaceToGo> fetchPlacesToGo() {
+		List<PlaceToGo> list = new ArrayList<PlaceToGo>();
+		
+		List<String> ptgids = tables.query("spl_place_to_go", "ptgID");
+		List<String> names = tables.query("spl_place_to_go", "name");
+		List<String> streets = tables.query("spl_place_to_go", "street");
+		List<String> plzs = tables.query("spl_place_to_go", "plz");
+		List<String> towns = tables.query("spl_place_to_go", "town");
+		List<String> phoneNumbers = tables.query("spl_place_to_go", "phone_number");
+		List<String> emails = tables.query("spl_place_to_go", "email");
+		
+		int run = 0;
+		for(int i = 0; i < ptgids.size(); i++) {
+			list.add(new PlaceToGo(
+					Integer.parseInt(ptgids.get(i)), 
+					names.get(i), 
+					streets.get(i), 
+					plzs.get(i), 
+					towns.get(i), 
+					phoneNumbers.get(i), 
+					emails.get(i)));
+			run = i;
+		}
+		Log.d("places", run + " places loaded");
+		
+		return list;
+	}
+
+	public static List<Maxim> getMaxims() {
 		return maxims;
 	}
 
-	public HashMap<Integer, Emotion> getEmotions() {
+	public static HashMap<Integer, Emotion> getEmotions() {
 		return emotions;
 	}
 
-	public List<HelpPerson> getHelpPeople() {
+	public static List<HelpPerson> getHelpPeople() {
 		return helpPeople;
 	}
 
-	public List<DiaryEntry> getDiaryEntries() {
+	public static List<DiaryEntry> getDiaryEntries() {
 		return diaryEntries;
 	}
 	
-	public void updateContactPoints() {
-		//TODO: write the function that updates ContactPoints 
-		//		using: RequestJson.getContactPoints() and RequestJson.getContactPointsTimestamp
+	public static List<PlaceToGo> getPlacesToGo() {
+		return placesToGo;
 	}
 
 }

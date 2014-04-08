@@ -3,7 +3,11 @@ package de.hawlandshut.rueckfallprophylaxe.db;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.net.Data;
+import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonDistraction;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonEmergencyCase;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonHelpPerson;
@@ -16,11 +20,11 @@ import de.hawlandshut.rueckfallprophylaxe.net.JsonSafetyThought;
 public class DataInserter {
 
 	private MyTables tables;
-	
+
 	public DataInserter(Database db) {
 		tables = db.getTables();
 	}
-	
+
 	public void insertData(Data data) {
 		insertMaxims(data.getData().getMaxims());
 		insertEmotions();
@@ -104,7 +108,24 @@ public class DataInserter {
 		for (JsonDistraction distraction : distractions) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("emotionID_fk", distraction.getEmotionID_fk());
+			hashMap.put("text", distraction.getText());
+
+			tables.insert("spl_distraction", hashMap);
 		}
 	}
-	
+
+	public void updateContactPoints(List<JsonContactPoint> contactPoints) {
+		for (JsonContactPoint contactPoint : contactPoints) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("name", contactPoint.getName());
+			hashMap.put("street", contactPoint.getStreet());
+			hashMap.put("town", contactPoint.getTown());
+			hashMap.put("plz", contactPoint.getPlz());
+			hashMap.put("phone_number", contactPoint.getPhone_number());
+			hashMap.put("email", contactPoint.getEmail());
+
+			tables.insert("spl_place_to_go", hashMap);
+		}
+	}
+
 }

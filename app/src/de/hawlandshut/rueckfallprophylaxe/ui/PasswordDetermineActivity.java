@@ -1,6 +1,7 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -8,11 +9,19 @@ import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.net.Data;
+import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
 import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -27,9 +36,9 @@ import android.widget.Toast;
  * {@link RequestJsonAsyncTask} starts and gets the
  * {@link de.hawlandshut.rueckfallprophylaxe.net.Data} object from
  * {@link de.hawlandshut.rueckfallprophylaxe.net.RequestJson#getData()} and
- * calls {@link #createDatabaseIfEverythingValid(Data)} when finished. If
- * the statuscode stored in the JSON-Data is '1' the users inputs were right and
- * he can now access the app.
+ * calls {@link #createDatabaseIfEverythingValid(Data)} when finished. If the
+ * statuscode stored in the JSON-Data is '1' the users inputs were right and he
+ * can now access the app.
  * 
  * @author Stefan, Patrick
  * 
@@ -40,10 +49,13 @@ public class PasswordDetermineActivity extends Activity implements
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	private static final String PIN_PATTERN = "[0-9][0-9][0-9][0-9]";
 
+	ProgressDialog barProgressDialog;
+	Handler updateBarHandler;
+
 	private EditText editTextToken, editTextEmail, editTextPin1, editTextPin2;
 	private Button button;
 	private ProgressBar progressBar;
-	
+
 	private String email;
 	private String token;
 	private String pin;
@@ -55,6 +67,8 @@ public class PasswordDetermineActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_password_determine);
+
+		updateBarHandler = new Handler();
 
 		editTextEmail = (EditText) findViewById(R.id.editTextEmail);
 		editTextToken = (EditText) findViewById(R.id.editTextToken);
@@ -175,13 +189,12 @@ public class PasswordDetermineActivity extends Activity implements
 	 * {@link RequestJson#getData()}. It test the statuscode that was received
 	 * from the server. If it is not '1', something went wrong and
 	 * {@link #showMessage()} will be called. If the statuscode is '1'
-	 * everything is right and the database will be generated and the patient
-	 * will be forwarded to {@link HomeActivity}.
+	 * everything is right {@link #launchDialog(View)} will be called.
 	 * 
 	 * @param data
 	 *            JsonData object
 	 */
-	private void createDatabaseIfEverythingValid(Data data) {
+	private void checkData(Data data) {
 		statuscode = data.getData().getStatus().getStatuscode();
 
 		if (statuscode != 1) {
@@ -193,16 +206,54 @@ public class PasswordDetermineActivity extends Activity implements
 					getResources().getString(
 							R.string.toast_register_successfull),
 					Toast.LENGTH_LONG).show();
-			Database db = new Database(this);
-			db.InitializeSQLCipher(pin);
-			DataInserter di = new DataInserter(db);
-			di.insertData(data);
-			db.close();
 			progressBar.setVisibility(View.GONE);
-
-			Intent intent = new Intent(this, HomeActivity.class);
-			startActivity(intent);
+			launchDialog(data);
 		}
+	}
+
+	private void launchDialog(final Data data) {
+		final SharedPreferences sharedPref = this.getSharedPreferences(
+				"de.hawlandshut.rueckfallprophylaxe", Context.MODE_PRIVATE);
+		final String cpTimestampKey = "de.hawlandshut.rueckfallprophylaxe.cptimestamp";
+		
+		final ProgressDialog progressDialog = ProgressDialog.show(
+				PasswordDetermineActivity.this, "Bitte warten...",
+				"Deine Daten werden eingerichtet...");
+		progressDialog.setCancelable(false);
+		
+		progressDialog.setOnDismissListener(new OnDismissListener() {
+	        @Override
+	        public void onDismiss(final DialogInterface arg0) {
+	            Intent intent = new Intent(PasswordDetermineActivity.this, HomeActivity.class);
+	            startActivity(intent);
+	        }
+	    });
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Database db = new Database(PasswordDetermineActivity.this);
+					db.InitializeSQLCipher(pin);
+					DataInserter di = new DataInserter(db);
+					di.insertData(data);
+					
+					RequestJson rj = new RequestJson();
+					
+					List<JsonContactPoint> contactPoints = rj.getContactPoints();
+					sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp());
+					
+					di.updateContactPoints(contactPoints);
+					
+					ControllerData cd = new ControllerData(db);
+					
+					db.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				progressDialog.dismiss();
+			}
+		}).start();
 	}
 
 	/**
@@ -224,7 +275,6 @@ public class PasswordDetermineActivity extends Activity implements
 			statuscode = 0;
 			Data data = null;
 			try {
-				// get the JsonData object from RequestJson.getData()
 				data = params[0].getData(email, token);
 			} catch (JsonSyntaxException e) {
 				showMessage();
@@ -238,7 +288,7 @@ public class PasswordDetermineActivity extends Activity implements
 
 		protected void onPostExecute(Data data) {
 			if (data != null) {
-				createDatabaseIfEverythingValid(data);
+				checkData(data);
 			}
 		}
 

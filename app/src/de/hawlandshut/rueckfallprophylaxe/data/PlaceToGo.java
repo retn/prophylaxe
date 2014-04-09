@@ -2,16 +2,18 @@ package de.hawlandshut.rueckfallprophylaxe.data;
 
 public class PlaceToGo {
 
-	int id;
-	String name;
-	String street;
-	String plz;
-	String town;
-	String phone_number;
-	String email;
+	private int id;
+	private String name;
+	private String street;
+	private String plz;
+	private String town;
+	private String phone_number;
+	private String email;
+	private double latitude;
+	private double longitude;
 
 	public PlaceToGo(int id, String name, String street, String plz,
-			String town, String phone_number, String email) {
+			String town, String phone_number, String email, double lat, double lng) {
 		this.id = id;
 		this.name = name;
 		this.street = street;
@@ -19,6 +21,8 @@ public class PlaceToGo {
 		this.town = town;
 		this.phone_number = phone_number;
 		this.email = email;
+		this.latitude = lat;
+		this.longitude = lng;
 	}
 
 	public int getId() {
@@ -49,4 +53,11 @@ public class PlaceToGo {
 		return email;
 	}
 
+	public double getLat() {
+		return latitude;
+	}
+	
+	public double getLng() {
+		return longitude;
+	}
 }

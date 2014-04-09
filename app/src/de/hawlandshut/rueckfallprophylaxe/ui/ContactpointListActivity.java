@@ -5,6 +5,7 @@ import de.hawlandshut.rueckfallprophylaxe.data.PlaceToGo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,8 +27,12 @@ public class ContactpointListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = lv.getItemAtPosition(position);
-                PlaceToGo fullObject = (PlaceToGo)o;
-                Toast.makeText(ContactpointListActivity.this, "You have chosen: " + " " + fullObject.getName(), Toast.LENGTH_LONG).show();
+                PlaceToGo ptg = (PlaceToGo) o;
+                
+                Intent intent = new Intent(ContactpointListActivity.this, ContactpointMapActivity.class);
+                intent.putExtra("CP_LAT", ptg.getLat());
+                intent.putExtra("CP_LNG", ptg.getLng());
+                startActivity(intent);
             }
         });
 	}

@@ -1,5 +1,7 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,10 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import com.google.gson.JsonSyntaxException;
+
 import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.data.Media.Type;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
+import de.hawlandshut.rueckfallprophylaxe.net.JsonAddress;
+import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 
 public class ControllerData {
 
@@ -21,7 +27,8 @@ public class ControllerData {
 	private static List<DiaryEntry> diaryEntries;
 	private static List<PlaceToGo> placesToGo;
 
-	public ControllerData(Database database) {
+	public ControllerData(Database database) throws JsonSyntaxException,
+			IOException {
 		tables = database.getTables();
 		maxims = fetchMaxims();
 		emotions = fetchEmotions();
@@ -148,31 +155,37 @@ public class ControllerData {
 
 	}
 
-	private List<PlaceToGo> fetchPlacesToGo() {
+	private List<PlaceToGo> fetchPlacesToGo() throws JsonSyntaxException,
+			IOException {
 		List<PlaceToGo> list = new ArrayList<PlaceToGo>();
-		
+
 		List<String> ptgids = tables.query("spl_place_to_go", "ptgID");
 		List<String> names = tables.query("spl_place_to_go", "name");
 		List<String> streets = tables.query("spl_place_to_go", "street");
 		List<String> plzs = tables.query("spl_place_to_go", "plz");
 		List<String> towns = tables.query("spl_place_to_go", "town");
-		List<String> phoneNumbers = tables.query("spl_place_to_go", "phone_number");
+		List<String> phoneNumbers = tables.query("spl_place_to_go",
+				"phone_number");
 		List<String> emails = tables.query("spl_place_to_go", "email");
-		
-		int run = 0;
-		for(int i = 0; i < ptgids.size(); i++) {
-			list.add(new PlaceToGo(
-					Integer.parseInt(ptgids.get(i)), 
-					names.get(i), 
-					streets.get(i), 
-					plzs.get(i), 
-					towns.get(i), 
-					phoneNumbers.get(i), 
-					emails.get(i)));
-			run = i;
+
+		for (int i = 0; i < ptgids.size(); i++) {
+			RequestJson rj = new RequestJson();
+			String search = URLEncoder
+					.encode(streets.get(i).replace("str.", "straße") + " "
+							+ plzs.get(i) + " " + towns.get(i) + " Deutschland",
+							"UTF-8");
+
+			JsonAddress address = rj.getAddress(search);
+
+			double lat = address.getResults().get(0).getGeometry()
+					.getLocation().getLat();
+			double lng = address.getResults().get(0).getGeometry()
+					.getLocation().getLng();
+
+			list.add(new PlaceToGo(Integer.parseInt(ptgids.get(i)), names
+					.get(i), streets.get(i), plzs.get(i), towns.get(i),
+					phoneNumbers.get(i), emails.get(i), lat, lng));
 		}
-		Log.d("places", run + " places loaded");
-		
 		return list;
 	}
 
@@ -191,7 +204,7 @@ public class ControllerData {
 	public static List<DiaryEntry> getDiaryEntries() {
 		return diaryEntries;
 	}
-	
+
 	public static List<PlaceToGo> getPlacesToGo() {
 		return placesToGo;
 	}

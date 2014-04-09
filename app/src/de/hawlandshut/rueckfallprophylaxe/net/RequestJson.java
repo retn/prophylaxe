@@ -28,15 +28,12 @@ import android.util.Log;
  */
 public class RequestJson {
 
-	private static final String URL = "http://spl.bumsi.net/app/";
+	private static final String URL_APP = "http://spl.bumsi.net/app/";
+	private static final String URL_MAPS = "http://maps.google.com/maps/api/geocode/json";
 
 	/**
 	 * RequestJson constructor.
 	 * 
-	 * @param email
-	 *            patients email
-	 * @param token
-	 *            patients token
 	 * @throws IOException
 	 */
 	public RequestJson() throws IOException {
@@ -79,6 +76,12 @@ public class RequestJson {
 				}.getType());
 		return contactPoints;
 	}
+	
+	public JsonAddress getAddress(String search) throws JsonSyntaxException, IOException {
+		Gson gson = new Gson();
+		JsonAddress address = gson.fromJson(sendRequestMapAddress(search), JsonAddress.class);
+		return address;
+	}
 
 	/**
 	 * Creates objects filled with data collected from the
@@ -108,7 +111,7 @@ public class RequestJson {
 	 */
 	private String sendRequestPatient(String email, String token)
 			throws IOException {
-		URL obj = new URL(URL + "get-patient");
+		URL obj = new URL(URL_APP + "get-patient");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		con.setRequestMethod("POST");
@@ -144,7 +147,7 @@ public class RequestJson {
 	 * @throws IOException
 	 */
 	private String sendRequestContactPoint() throws IOException {
-		URL obj = new URL(URL + "get-contactpoints");
+		URL obj = new URL(URL_APP + "get-contactpoints");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		con.setDoOutput(true);
@@ -175,7 +178,29 @@ public class RequestJson {
 	 * @throws IOException
 	 */
 	private String sendRequestContactPointTimestamp() throws IOException {
-		URL obj = new URL(URL + "get-contactpoint-timestamp");
+		URL obj = new URL(URL_APP + "get-contactpoint-timestamp");
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.flush();
+		wr.close();
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+		return response.toString();
+	}
+	
+	private String sendRequestMapAddress(String search) throws IOException {
+		URL obj = new URL(URL_MAPS + "?address=" + search + "&sensor=false");
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 		con.setDoOutput(true);

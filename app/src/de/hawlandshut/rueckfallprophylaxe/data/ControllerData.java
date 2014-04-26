@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import android.util.Log;
+
 import com.google.gson.JsonSyntaxException;
 
 import android.util.Log;
@@ -98,18 +100,28 @@ public class ControllerData {
 		List<String> titles = tables.query("spl_diary_entry", "title");
 		List<String> contens = tables.query("spl_diary_entry", "content");
 		List<String> createds = tables.query("spl_diary_entry", "created");
+		
+		Log.d("fetchDiaryEntries ", "Lade Einträge");
+		
 		for (int i = 0; i < ids.size(); i++) {
 			DiaryEntry entry;
 			try {
+				//Log.d("fetchDiaryEntries ", "Lade Eintrag mit ID: "+ids.get(i));
+				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Titel: "+titles.get(i));
+				//Log.d("fetchDiaryEntries ", "Lade Eintrag mit Datum: "+createds.get(i));
+				
 				entry = new DiaryEntry(Integer.parseInt(ids.get(i)),
 						titles.get(i), contens.get(i), new SimpleDateFormat(
 								"MMMM d, yyyy", Locale.ENGLISH).parse(createds
 								.get(i)), 0, null);
+				Log.d("fetchDiaryEntries ", "DiaryEntry Objekt erstellt");
 				diaryEntries.add(entry);
 			} catch (NumberFormatException e) {
+				
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ParseException e) {
+				
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -117,6 +129,8 @@ public class ControllerData {
 		}
 		fetchDiaryEntriesPicture(diaryEntries);
 		fetchDiaryEntriesMood(diaryEntries);
+		
+		Log.d("fetchDiaryEntries ", diaryEntries.size()+" Einträge geladen");
 		return diaryEntries;
 	}
 

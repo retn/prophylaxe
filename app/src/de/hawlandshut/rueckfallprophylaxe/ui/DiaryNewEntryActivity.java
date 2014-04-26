@@ -4,7 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.db.Database;
+import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,6 +33,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 /**
  * TODO: PS: Bitte kommentieren -> JavaDoc
@@ -39,6 +47,9 @@ public class DiaryNewEntryActivity extends Activity {
 	private static int REQUEST_LOAD_IMAGE_FILE = 1;
 	private static int REQUEST_LOAD_IMAGE_CAMERA = 2;
 	private static final int removePicture = 0;
+	private Date selectedDate;
+	private Database data;
+	private DiaryDatePickerFragment datePicker;
 	
 	
 	@Override
@@ -65,6 +76,7 @@ public class DiaryNewEntryActivity extends Activity {
 		addListenerOnEntryDateText(); 
 		
 		pictureManager = new DiaryNewEntryPictureManager(this);
+		datePicker = new DiaryDatePickerFragment(this);
 	}
 	
 	//Creating Context Menu
@@ -116,9 +128,10 @@ public class DiaryNewEntryActivity extends Activity {
 	}
 	
 	private void showDatePickerDialog() {
-		DialogFragment newFragment = new DiaryDatePickerFragment(this);
-	    newFragment.show(getFragmentManager(), "datePicker");
+	    datePicker.show(getFragmentManager(), "datePicker");
+	    
 	}
+
 	
 	private void fillInputFields() throws ParseException {
 
@@ -155,13 +168,47 @@ public class DiaryNewEntryActivity extends Activity {
 				NavUtils.navigateUpFromSameTask(this);
 				return true;
 			case R.id.action_createEntry:
-				if (validateInput()) {
-					// TODO: save the entry
+				if (validateInput()) { // Input okay
+					
+					// Collect data
+						// Title text
+						EditText title = (EditText) findViewById(R.id.entry);
+						String titleText = title.getText().toString();
+					
+						// Entry text
+						EditText entryTextView = (EditText) findViewById(R.id.entry);
+						String entryText = entryTextView.getText().toString();
+					
+						// Date
+						selectedDate = datePicker.getSelectedDate();
+					
+					// Create DiaryEntry object
+					DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
+					
+					// Get database object
+					PinShare myApp = PinShare.getInstance();
+					String pin = myApp.getPin();
+					Database db = new Database(this);
+					db.InitializeSQLCipher(pin);
+					MyTables myTables = db.getTables();
+					
+					// Create hash map for main table
+					HashMap<String, String> myHashMap = new HashMap<String, String>();
+					myHashMap.put("title", titleText);
+					myHashMap.put("content", entryText);
+					myHashMap.put("created", selectedDate.toString());
+					
+					myTables.insert("spl_diary_entry", myHashMap);
+					
+					db.close();
+					
+					
+					Toast.makeText(this, "Eintrag gespeichert",
+							Toast.LENGTH_LONG).show();
+					
 				}
 				return true;
 			case R.id.action_addAttachment:
-				// TODO: add an attachment
-				
 				// Dialog - Take picture from camera or gallery
 				showAttachmentDialog();
 				
@@ -170,13 +217,15 @@ public class DiaryNewEntryActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Validates title & entry text
+	 * @return
+	 */
 	private boolean validateInput() {
-		// Validate title & entry
-		
 		return (validateInputTitle() && validateInputEntry());
 	}
 	
-	/*
+	/**
 	 * Validates the entry title and pops up an error dialog on failure
 	 */
 	private boolean validateInputTitle() {
@@ -200,7 +249,7 @@ public class DiaryNewEntryActivity extends Activity {
 		return true;
 	}
 	
-	/*
+	/**
 	 * Validates the entry text and pops up an error dialog on failure
 	 */
 	private boolean validateInputEntry() {
@@ -231,7 +280,7 @@ public class DiaryNewEntryActivity extends Activity {
 			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			
-		    builder.setTitle("Bildquelle wŠhlen")
+		    builder.setTitle("Bildquelle wï¿½hlen")
 		           .setItems(items, new DialogInterface.OnClickListener() {
 		               public void onClick(DialogInterface dialog, int which) {
 		            	   
@@ -269,7 +318,7 @@ public class DiaryNewEntryActivity extends Activity {
 		    builder.show();
 		} else {
 			// Error msg
-			showNeutralErrorDialog("Zulï¿½ssige Anzahl von Bildern ï¿½berschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
+			showNeutralErrorDialog("Zulï¿½ï¿½ï¿½ssige Anzahl von Bildern ï¿½ï¿½ï¿½berschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
 			
 		}
 	}

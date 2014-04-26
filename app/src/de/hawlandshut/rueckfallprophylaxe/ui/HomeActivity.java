@@ -42,7 +42,7 @@ public class HomeActivity extends Activity {
     }
     
     public void callTagebuch(View view) {
-    	Intent intent = new Intent(this, DiaryActivity.class);
+    	Intent intent = new Intent(this, DiaryEntryListActivity.class);
     	startActivity(intent);
     }
     

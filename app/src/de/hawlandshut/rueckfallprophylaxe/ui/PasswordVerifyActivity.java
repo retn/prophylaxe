@@ -51,6 +51,8 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 		if (!db.databaseExists()) {
 			Intent intent = new Intent(this, PasswordDetermineActivity.class);
 			startActivity(intent);
+			
+	
 		}
 
 		editTextPin = (EditText) findViewById(R.id.PIN_verify);
@@ -71,7 +73,10 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 
 			try {
 				db.InitializeSQLCipher(input);
-
+				// Pin global speichern
+				PinShare myApp = PinShare.getInstance();
+				myApp.setPin(input);
+				
 				launchDialog();
 			} catch (Exception e) {
 				Toast.makeText(this, "Ihre Eingabe ist falsch",

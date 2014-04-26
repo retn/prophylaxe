@@ -31,7 +31,7 @@ public class BetwixtActivity extends Activity implements OnClickListener{
 		
 		if(v == betwixt1)
 		{
-			Intent intent = new Intent(this, DiaryActivity.class);
+			Intent intent = new Intent(this, DiaryEntryListActivity.class);
 			startActivity(intent);
 		}
 		if(v == betwixt2)

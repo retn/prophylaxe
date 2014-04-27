@@ -94,12 +94,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.hawlandshut.rueckfallprophylaxe.ui.EmotionActivity" />
         </activity>
-        <activity android:name="NotfallKofferActivity"
+        <activity android:name="EmergencyCaseActivity"
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity"
             android:label="@string/title_activity_koffer">
         </activity>
-        <activity android:name="NotfallKofferZweiActivity"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.EmergencyCaseActivity"
+        <activity android:name="EmergencyCaseTwoActivity"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui."
             android:label="@string/title_activity_koffer2">
         </activity>
         <meta-data

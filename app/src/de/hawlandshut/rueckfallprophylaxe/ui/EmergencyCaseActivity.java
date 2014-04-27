@@ -10,6 +10,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.data.EmergencyCase;
+import de.hawlandshut.rueckfallprophylaxe.db.Database;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,6 +30,19 @@ public class EmergencyCaseActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_1);
+        
+		List<EmergencyCase> Entries= new ArrayList<EmergencyCase>();
+		
+		PinShare myApp = PinShare.getInstance();
+		String pin = myApp.getPin();
+		Database db = new Database(this);
+		db.InitializeSQLCipher(pin);
+		// Load data
+		Entries = ControllerData.getEmergencyCase();
+		
+		db.close();
+		
+        
 
         final ListView listview = (ListView) findViewById(R.id.list_view_koffer);
         String[] values = new String[] { "Ich hatte Streit und bin aggressiv","Ich bin gerade vor einer Bar", "Ich habe alte Freunde wieder getroffen", "Ich habe ein Glas getrunken" };

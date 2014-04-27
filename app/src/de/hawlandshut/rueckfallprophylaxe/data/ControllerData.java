@@ -28,6 +28,11 @@ public class ControllerData {
 	private static List<HelpPerson> helpPeople;
 	private static List<DiaryEntry> diaryEntries;
 	private static List<PlaceToGo> placesToGo;
+	private static List<LimitRelapse> limitRelapse;
+	private static List<RiskSituation> riskSituation;
+	private static List<SafetyAction> safetyAction;
+	private static List<SafetyThought> safetyThought;
+	private static List<EmergencyCase> emergencyCase;
 
 	public ControllerData(Database database) throws JsonSyntaxException,
 			IOException {
@@ -37,6 +42,77 @@ public class ControllerData {
 		helpPeople = fetchHelpPeople();
 		diaryEntries = fetchDiaryEntries();
 		placesToGo = fetchPlacesToGo();
+		limitRelapse=fetchLimitRelapse();
+		riskSituation=fetchRiskSituation();
+		safetyAction=fetchSafetyAction();
+		safetyThought=fetchSafetyThought();
+		emergencyCase=fetchEmergencyCase();
+	}
+
+	private List<LimitRelapse> fetchLimitRelapse() {
+		List<String> ids = tables.query("spl_ec_limit_relapse", "elrID");
+		List<String> texts = tables.query("spl_ec_limit_relapse", "text");
+		List<LimitRelapse> limits = new ArrayList<LimitRelapse>();
+		for (int i = 0; i < ids.size(); i++) {
+			LimitRelapse limit = new LimitRelapse(Integer.parseInt(ids.get(i)), texts.get(i));
+			limits.add(limit);
+		}
+		return limits;
+	}
+
+	private List<RiskSituation> fetchRiskSituation() {
+		List<String> ids = tables.query("spl_ec_risk_situation", "ersID");
+		List<String> texts = tables.query("spl_ec_risk_situation", "text");
+		List<RiskSituation> risks = new ArrayList<RiskSituation>();
+		for (int i = 0; i < ids.size(); i++) {
+			RiskSituation risk = new RiskSituation(Integer.parseInt(ids.get(i)), texts.get(i));
+			risks.add(risk);
+		}
+		return risks;
+	}
+
+	private List<SafetyAction> fetchSafetyAction() {
+		List<String> ids = tables.query("spl_ec_safety_action", "esaID");
+		List<String> texts = tables.query("spl_ec_safety_action", "text");
+		List<SafetyAction> actions = new ArrayList<SafetyAction>();
+		for (int i = 0; i < ids.size(); i++) {
+			SafetyAction action = new SafetyAction(Integer.parseInt(ids.get(i)), texts.get(i));
+			actions.add(action);
+		}
+		return actions;
+	}
+
+	private List<SafetyThought> fetchSafetyThought() {
+		List<String> ids = tables.query("spl_ec_safety_thought", "estID");
+		List<String> texts = tables.query("spl_ec_safety_thought", "text");
+		List<SafetyThought> thoughts = new ArrayList<SafetyThought>();
+		for (int i = 0; i < ids.size(); i++) {
+			SafetyThought thought = new SafetyThought(Integer.parseInt(ids.get(i)), texts.get(i));
+			thoughts.add(thought);
+		}
+		return thoughts;
+	}
+
+	private List<EmergencyCase> fetchEmergencyCase() {
+		List<String> ids = tables.query("spl_emergency_case", "ecID");
+		List<String> addictDrugholtine = tables.query("spl_emergency_case", "addict_drughotline");
+		List<String> propAdvice = tables.query("spl_emergency_case", "prop_advice_centre");
+		List<String> myTherapist = tables.query("spl_emergency_case", "my_therapist");
+		List<String> emergencyCasecol = tables.query("spl_emergency_case", "emergency_casecol");
+		List<String> riskDanger = tables.query("spl_emergency_case", "risk_danger");
+		List<String> riskSituation = tables.query("spl_emergency_case", "risk_situation");
+		List<String> riskTemptation = tables.query("spl_emergency_case", "risk_temptation");
+		List<String> temptationThought = tables.query("spl_emergency_case", "temptation_thought");
+		List<String> temptationThoughtAbstinence = tables.query("spl_emergency_case", "temptation_thought_abstinence");
+		List<String> temptationBehaviour = tables.query("spl_emergency_case", "temptation_behaviour");
+		List<EmergencyCase> cases = new ArrayList<EmergencyCase>();
+		for (int i = 0; i < ids.size(); i++) {
+			EmergencyCase case_ = new EmergencyCase(Integer.parseInt(ids.get(i)), addictDrugholtine.get(i),propAdvice.get(i),
+					myTherapist.get(i),emergencyCasecol.get(i),riskDanger.get(i),riskSituation.get(i),
+					riskTemptation.get(i),temptationThought.get(i),temptationThoughtAbstinence.get(i),temptationBehaviour.get(i));
+			cases.add(case_);
+		}
+		return cases;
 	}
 
 	private List<Maxim> fetchMaxims() {
@@ -221,6 +297,46 @@ public class ControllerData {
 
 	public static List<PlaceToGo> getPlacesToGo() {
 		return placesToGo;
+	}
+
+	public static List<LimitRelapse> getLimitrelapse() {
+		return limitRelapse;
+	}
+
+	public static void setLimitrelapse(List<LimitRelapse> limitrelapse) {
+		ControllerData.limitRelapse = limitrelapse;
+	}
+
+	public static List<RiskSituation> getRiskSituation() {
+		return riskSituation;
+	}
+
+	public static void setRiskSituation(List<RiskSituation> riskSituation) {
+		ControllerData.riskSituation = riskSituation;
+	}
+
+	public static List<SafetyAction> getSafetyAction() {
+		return safetyAction;
+	}
+
+	public static void setSafetyAction(List<SafetyAction> safetyAction) {
+		ControllerData.safetyAction = safetyAction;
+	}
+
+	public static List<SafetyThought> getSafetyThought() {
+		return safetyThought;
+	}
+
+	public static void setSafetyThought(List<SafetyThought> safetyThought) {
+		ControllerData.safetyThought = safetyThought;
+	}
+
+	public static List<EmergencyCase> getEmergencyCase() {
+		return emergencyCase;
+	}
+
+	public static void setEmergencyCase(List<EmergencyCase> emergencyCase) {
+		ControllerData.emergencyCase = emergencyCase;
 	}
 
 }

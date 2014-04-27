@@ -33,7 +33,7 @@ public class TrafficLightActivity extends Activity implements OnClickListener {
 		
 		if(v == redButton)
 		{
-			Intent intent = new Intent(this, NotfallKofferActivity.class );
+			Intent intent = new Intent(this, EmergencyCaseActivity.class );
 			startActivity(intent);
 		}
 		if(v == yellowButton)

@@ -30,8 +30,7 @@ public class ContactpointListActivity extends Activity {
                 PlaceToGo ptg = (PlaceToGo) o;
                 
                 Intent intent = new Intent(ContactpointListActivity.this, ContactpointMapActivity.class);
-                intent.putExtra("CP_LAT", ptg.getLat());
-                intent.putExtra("CP_LNG", ptg.getLng());
+                intent.putExtra("CP_CENTER", ptg.getId());
                 startActivity(intent);
             }
         });

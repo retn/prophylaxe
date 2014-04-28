@@ -21,17 +21,14 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        /*
-        Log.d("Kimm", "1111111111");
-        Spinner spinnemotion = (Spinner) findViewById(R.id.spinnemotion);
+        
+        spinnemotion = (Spinner) findViewById(R.id.spinnemotion);
         
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 				R.array.mood_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnemotion.setAdapter(adapter);
-		Log.d("Kimm", "222222222222222");
-		*/
-		}
+	}
 
 
 
@@ -59,10 +56,9 @@ public class HomeActivity extends Activity {
  
     public void callEmotion(View view) {
     	String selectedEmotion = ((CharSequence) spinnemotion.getSelectedItem()).toString();
-    	//Log.d("Kimm", "Hier sollte es auch noch Funktionieren        "+selectedEmotion);
     	
     	Intent intent = new Intent(this, EmotionActivity.class);
-    	//intent.putExtra("EMOTION", selectedEmotion);
+    	intent.putExtra("EMOTION", selectedEmotion);
     	startActivity(intent);
     }
 

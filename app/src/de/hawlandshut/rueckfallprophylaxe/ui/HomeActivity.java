@@ -29,7 +29,8 @@ public class HomeActivity extends Activity {
 				R.array.mood_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnemotion.setAdapter(adapter);
-		Log.d("Kimm", "222222222222222");*/
+		Log.d("Kimm", "222222222222222");
+		*/
 		}
 
 
@@ -57,17 +58,12 @@ public class HomeActivity extends Activity {
     }
  
     public void callEmotion(View view) {
-    	//String selectedEmotion = ((CharSequence) spinnemotion.getSelectedItem()).toString();
+    	String selectedEmotion = ((CharSequence) spinnemotion.getSelectedItem()).toString();
     	//Log.d("Kimm", "Hier sollte es auch noch Funktionieren        "+selectedEmotion);
     	
     	Intent intent = new Intent(this, EmotionActivity.class);
-//    	intent.putExtra("EMOTION", selectedEmotion);
+    	//intent.putExtra("EMOTION", selectedEmotion);
     	startActivity(intent);
-    }
-    
-    @Override
-    public void onBackPressed() {
-      moveTaskToBack(true);
     }
 
     

@@ -33,7 +33,7 @@ public class TrafficLightActivity extends Activity implements OnClickListener {
 		
 		if(v == redButton)
 		{
-			Intent intent = new Intent(this, EmergencyCaseActivity.class );
+			Intent intent = new Intent(this, ContactpointListActivity.class );
 			startActivity(intent);
 		}
 		if(v == yellowButton)
@@ -48,4 +48,9 @@ public class TrafficLightActivity extends Activity implements OnClickListener {
 		}
 		
 	}
+	
+	@Override
+    public void onBackPressed() {
+      moveTaskToBack(true);
+    }
 }

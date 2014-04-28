@@ -101,7 +101,7 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 			@Override
 			public void onDismiss(final DialogInterface arg0) {
 				Intent intent = new Intent(PasswordVerifyActivity.this,
-						HomeActivity.class);
+						TrafficLightActivity.class);
 				startActivity(intent);
 			}
 		});

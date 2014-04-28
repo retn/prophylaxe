@@ -9,32 +9,12 @@
     tools:context=".HomeActivity" >
 
     <Button
-        android:id="@+id/btnTagebuch"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:onClick="callTagebuch"
-        android:text="@string/btn_tagebuch" />
-
-    <Button
-        android:id="@+id/btnAblenkungen"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_alignLeft="@+id/btnAnlaufstellen"
-        android:layout_below="@+id/btnTagebuch"
-        android:layout_marginTop="40dp"
-        android:onClick="callEmotion"
-        android:text="@string/btn_ablenkungen" />
-
-    <Button
         android:id="@+id/btnNotfallkoffer"
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/btnTagebuch"
-        android:layout_below="@+id/btnTagebuch"
-        android:layout_marginTop="131dp"
+        android:layout_below="@+id/spinnemotion"
+        android:layout_marginTop="20dp"
         android:onClick="callNotfallkoffer"
         android:text="@string/btn_notfallkoffer" />
 
@@ -44,8 +24,36 @@
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/btnTagebuch"
         android:layout_below="@+id/btnNotfallkoffer"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="30dp"
         android:onClick="callAnlaufstellen"
         android:text="@string/btn_anlaufstellen" />
+
+    <Button
+        android:id="@+id/btnAblenkungen"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/btnTagebuch"
+        android:layout_below="@+id/btnTagebuch"
+        android:layout_marginTop="40dp"
+        android:onClick="callEmotion"
+        android:text="@string/btn_ablenkungen" />
+
+    <Button
+        android:id="@+id/btnTagebuch"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:onClick="callTagebuch"
+        android:text="@string/btn_tagebuch" />
+
+    <Spinner
+        android:id="@+id/spinnemotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnAblenkungen"
+        android:layout_marginTop="41dp" />
 
 </RelativeLayout>

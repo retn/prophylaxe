@@ -110,5 +110,7 @@
 		<meta-data
      		android:name="com.google.android.maps.v2.API_KEY"
      		android:value="AIzaSyAZvUzAQR5yiFEQW6Hb7VrmIIYJDxkRG7M" />
+		<activity android:name="TrafficLightActivity"></activity>
+		<activity android:name="BetwixtActivity"></activity>
     </application>
 </manifest>

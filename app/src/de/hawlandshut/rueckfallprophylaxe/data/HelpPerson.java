@@ -24,4 +24,12 @@ public class HelpPerson {
 		return phone_number;
 	}
 
+	@Override
+	public String toString() {
+		return "HelpPerson [id=" + id + ", name=" + name + ", phone_number="
+				+ phone_number + "]";
+	}
+	
+	
+
 }

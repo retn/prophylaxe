@@ -15,6 +15,7 @@ import java.util.List;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
 import de.hawlandshut.rueckfallprophylaxe.data.EmergencyCase;
+import de.hawlandshut.rueckfallprophylaxe.data.RiskSituation;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 
 /**
@@ -31,25 +32,20 @@ public class EmergencyCaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_1);
         
-		List<EmergencyCase> Entries= new ArrayList<EmergencyCase>();
+		List<EmergencyCase> cases=new ArrayList<EmergencyCase>();
+		cases = ControllerData.getEmergencyCase();
 		
-		PinShare myApp = PinShare.getInstance();
-		String pin = myApp.getPin();
-		Database db = new Database(this);
-		db.InitializeSQLCipher(pin);
-		// Load data
-		Entries = ControllerData.getEmergencyCase();
+		EmergencyCase case0=cases.get(0);
+		//Toast.makeText(this, case0.toString(),Toast.LENGTH_LONG).show();    
 		
-		db.close();
+		List<RiskSituation> situations=new ArrayList<RiskSituation>(); 
+		situations = ControllerData.getRiskSituation();
 		
-        
 
         final ListView listview = (ListView) findViewById(R.id.list_view_koffer);
-        String[] values = new String[] { "Ich hatte Streit und bin aggressiv","Ich bin gerade vor einer Bar", "Ich habe alte Freunde wieder getroffen", "Ich habe ein Glas getrunken" };
-
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
+        for (int i = 0; i < situations.size(); ++i) {
+            list.add(situations.get(i).getText());
         }
         final CaseArrayAdapter adapter = new CaseArrayAdapter(this,
                 R.id.message_text, list);

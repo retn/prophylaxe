@@ -26,8 +26,8 @@ public class HelpPerson {
 
 	@Override
 	public String toString() {
-		return "HelpPerson [id=" + id + ", name=" + name + ", phone_number="
-				+ phone_number + "]";
+		return name + "\r\nTelefonnummer "
+				+ phone_number;
 	}
 	
 	

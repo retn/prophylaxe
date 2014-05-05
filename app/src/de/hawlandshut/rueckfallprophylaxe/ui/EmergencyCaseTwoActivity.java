@@ -5,11 +5,18 @@ import java.util.List;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.HelpPerson;
+import de.hawlandshut.rueckfallprophylaxe.data.LimitRelapse;
 import de.hawlandshut.rueckfallprophylaxe.data.RiskSituation;
 import de.hawlandshut.rueckfallprophylaxe.data.SafetyAction;
 import de.hawlandshut.rueckfallprophylaxe.data.SafetyThought;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -36,8 +43,7 @@ public class EmergencyCaseTwoActivity extends Activity {
     }
 
 	private void setHelpPeople() {
-		List<HelpPerson> helpPeople=new ArrayList<HelpPerson>(); 
-		helpPeople = ControllerData.getHelpPeople();
+		final List<HelpPerson> helpPeople=ControllerData.getHelpPeople(); 
 		
         final ListView listview = (ListView) findViewById(R.id.help_people);
         if(listview==null)return;
@@ -48,12 +54,22 @@ public class EmergencyCaseTwoActivity extends Activity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
+        
+        listview.setOnItemClickListener(new ListView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(Intent.ACTION_DIAL);
+				intent.setData(Uri.parse("tel:"+helpPeople.get(arg2).getPhone_number()));
+				startActivity(intent);
+				
+			}
+		});
 		
 	}
 
 	private void setSafetyThoughts() {
-		List<SafetyThought> safetyThoughts=new ArrayList<SafetyThought>(); 
-		safetyThoughts = ControllerData.getSafetyThought();
+		List<SafetyThought> safetyThoughts=ControllerData.getSafetyThought();
 		
         final ListView listview = (ListView) findViewById(R.id.safety_thoughts);
         if(listview==null)return;
@@ -68,8 +84,7 @@ public class EmergencyCaseTwoActivity extends Activity {
 	}
 
 	private void setSafetyActions() {
-		List<SafetyAction> safetyActions=new ArrayList<SafetyAction>(); 
-		safetyActions = ControllerData.getSafetyAction();
+		List<SafetyAction> safetyActions= ControllerData.getSafetyAction();
 		
         final ListView listview = (ListView) findViewById(R.id.safety_actions);
         if(listview==null)return;
@@ -80,7 +95,44 @@ public class EmergencyCaseTwoActivity extends Activity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
+        
+        listview.setOnItemClickListener(new ListView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				showPopUp(arg2);
+				
+			}
+		});
 		
 	}
+	
+	private void showPopUp(int i) {
+		String message="";
+		//not final!!!
+		List<LimitRelapse> limitRelapses= ControllerData.getLimitrelapse();
+		for(LimitRelapse limitRelapse :limitRelapses){
+			if(limitRelapse.getId()==i+1){
+				message=message+limitRelapse.getText()+"\r\n";
+			}
+		}
+
+		 AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
+		 helpBuilder.setMessage(message);
+		 final AlertDialog helpDialog = helpBuilder.create();
+		 helpDialog.show();
+
+		 
+		 helpBuilder.setNeutralButton("Schlieﬂen", new DialogInterface.OnClickListener() {
+		
+		  @Override
+		  public void onClick(DialogInterface dialog, int which) {
+			  helpDialog.dismiss();;
+		  }
+		 });
+
+
+		}
+
 
 }

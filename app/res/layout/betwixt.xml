@@ -15,13 +15,14 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="40dp"
             android:text="@string/btn_tagebuch" />
+        
 
         <Button
             android:id="@+id/betwixt2"
             android:layout_width="160dp"
             android:layout_height="50dp"
+            android:layout_below="@+id/spinnemotion2"
             android:layout_alignLeft="@+id/betwixt3"
-            android:layout_below="@+id/betwixt1"
             android:layout_marginTop="40dp"
             android:text="@string/btn_ablenkungen" />
 
@@ -33,5 +34,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:text="@string/btn_notfallkoffer" />
+        
+        <Spinner 
+	        android:id="@+id/spinnemotion2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/betwixt2"
+	        android:layout_marginTop="41dp"/>
 
 </RelativeLayout>

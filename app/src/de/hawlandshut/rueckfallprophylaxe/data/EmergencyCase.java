@@ -14,6 +14,7 @@ public class EmergencyCase {
 	private String temptationThoughtAbstinence;
 	private String temptationBehaviour;
 
+	
 
 	public EmergencyCase(int id, String addictDrugholtine, String propAdvice,
 			String myTherapist, String emergencyCasecol, String riskDanger,
@@ -76,5 +77,6 @@ public class EmergencyCase {
 	public String getTemptationBehaviour() {
 		return temptationBehaviour;
 	}
+
 
 }

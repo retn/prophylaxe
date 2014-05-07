@@ -5,15 +5,28 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white" android:orientation="horizontal">
 
+    <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+                android:background="@android:color/white" android:orientation="vertical"
+                android:layout_weight="2">
     <ImageView
             android:layout_width="fill_parent"
             android:layout_height="100dp"
-            android:text="Man"
             android:layout_alignParentLeft="true"
             android:layout_alignTop="@+id/list_view_koffer"
             android:id="@+id/image_koffer"
             android:background="@drawable/face_not_final" android:layout_toLeftOf="@+id/list_view_koffer"
             android:layout_weight="2"/>
+    <Button 
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:text="@string/notfall"
+            android:layout_weight="2"
+            android:id="@+id/emergency"
+            >
+    </Button>
+    </LinearLayout>
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

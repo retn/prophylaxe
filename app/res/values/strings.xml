@@ -64,5 +64,7 @@
     <string name="safety_actions">Ich tue etwas was mir hilft</string>
     <string name="safety_thoughts">Ich denke an etwas was mir hilft</string>
     <string name="help_people">Ich brauche Hilfe</string>
+    <string name="notfall">Notfall</string>
+    <string name="title_activity_koffer3">Notfall Koffer 3</string>
 
 </resources>

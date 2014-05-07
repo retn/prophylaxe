@@ -102,6 +102,10 @@
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui."
             android:label="@string/title_activity_koffer2">
         </activity>
+        <activity android:name="EmergencyCaseThreeActivity"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui."
+            android:label="@string/title_activity_koffer3">
+        </activity>
         <meta-data
    			android:name="com.google.android.gms.version"
     		android:value="@integer/google_play_services_version" />

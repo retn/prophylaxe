@@ -1,14 +1,32 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Path;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +46,13 @@ import de.hawlandshut.rueckfallprophylaxe.db.Database;
 public class EmergencyCaseActivity extends Activity {
 
 
-    public void onCreate(Bundle savedInstanceState) {
+	private static final int SELECT_IMAGE = 0;
+	private String mSelectedImagePath;
+
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_1);
         
-		List<EmergencyCase> cases=new ArrayList<EmergencyCase>();
-		cases = ControllerData.getEmergencyCase();
-		
-		EmergencyCase case0=cases.get(0);
-		//Toast.makeText(this, case0.toString(),Toast.LENGTH_LONG).show();    
 		
 		List<RiskSituation> situations=new ArrayList<RiskSituation>(); 
 		situations = ControllerData.getRiskSituation();
@@ -61,14 +77,108 @@ public class EmergencyCaseActivity extends Activity {
 			}
 		});
 
-        ImageView imageView=(ImageView) findViewById(R.id.image_koffer);
+        final ImageView imageView=(ImageView) findViewById(R.id.image_koffer);
+        
+		File sdCard = Environment.getExternalStorageDirectory();
+		
+		File directory = new File (sdCard.getAbsolutePath() + "/Pictures");
+		
+		File file = new File(directory, "profile.jpg"); 
+		
+		FileInputStream streamIn;
+		imageView.setImageBitmap(loadImage(sdCard.getAbsolutePath() + "/Pictures/profile.jpg"));
+                
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast toast=Toast.makeText(EmergencyCaseActivity.this, "W�hle Foto oder mache selbst eines", Toast.LENGTH_LONG);
-                toast.show();		
+                toast.show();
+                imageFromGallery();
+                copyImage();
+                
+                
             }
+
         });
+        
+        Button button=(Button)findViewById(R.id.emergency);
+        button.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+                Intent intent = new Intent(EmergencyCaseActivity.this, EmergencyCaseThreeActivity.class);
+                EmergencyCaseActivity.this.startActivity(intent);
+				
+			}
+		});
 
     }
+    
+    public void imageFromGallery() {
+        Intent getImageFromGalleryIntent = 
+          new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(getImageFromGalleryIntent, SELECT_IMAGE);
+    }
+    
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch(requestCode){ 
+            case SELECT_IMAGE:
+                mSelectedImagePath = getPath(data.getData());
+                break;
+            default:
+            	break;
+            }
+        
+        }
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        startManagingCursor(cursor);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+	private void copyImage() {
+		try {
+            File data = Environment.getDataDirectory();
+            File sd = Environment.getExternalStorageDirectory();
+            if (sd.canWrite()) {
+                File source= new File(data, mSelectedImagePath);
+                
+        		
+        		
+        		File directory = new File (sd.getAbsolutePath() + "/Pictures");
+        		
+        		File file = new File(directory, "profile.jpg"); 
+        		Toast toast1=Toast.makeText(EmergencyCaseActivity.this, mSelectedImagePath+"	"+file.getPath(), Toast.LENGTH_LONG);
+                toast1.show();
+                if (source.exists()) {
+                    FileChannel src = new FileInputStream(source).getChannel();
+                    FileChannel dst = new FileOutputStream(file).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+                }
+            }
+        } catch (Exception e) {}
+		
+	}  
+	
+	private Bitmap loadImage(String imgPath) {
+	    BitmapFactory.Options options;
+	    try {
+	        options = new BitmapFactory.Options();
+	        options.inSampleSize = 2;
+	        Bitmap bitmap = BitmapFactory.decodeFile(imgPath, options);
+	        return bitmap;
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
 }

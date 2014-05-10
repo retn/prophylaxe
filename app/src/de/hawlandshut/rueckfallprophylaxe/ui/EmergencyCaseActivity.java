@@ -26,6 +26,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +50,12 @@ public class EmergencyCaseActivity extends Activity {
 
 	private static final int SELECT_IMAGE = 0;
 	private String mSelectedImagePath;
+	private File imageFile;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_1);
+		imageFile = new File(getExternalFilesDir(null),"profile.jpg");
         
 		
 		List<RiskSituation> situations=new ArrayList<RiskSituation>(); 
@@ -79,19 +83,14 @@ public class EmergencyCaseActivity extends Activity {
 
         final ImageView imageView=(ImageView) findViewById(R.id.image_koffer);
         
-		File sdCard = Environment.getExternalStorageDirectory();
-		
-		File directory = new File (sdCard.getAbsolutePath() + "/Pictures");
-		
-		File file = new File(directory, "profile.jpg"); 
-		
-		FileInputStream streamIn;
-		imageView.setImageBitmap(loadImage(sdCard.getAbsolutePath() + "/Pictures/profile.jpg"));
-                
+        if(imageFile.exists()){
+        	imageView.setBackgroundColor(0x00000000);
+        	imageView.setImageBitmap(loadImage(imageFile.getPath()));
+        }        
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast=Toast.makeText(EmergencyCaseActivity.this, "Wï¿½hle Foto oder mache selbst eines", Toast.LENGTH_LONG);
+                Toast toast=Toast.makeText(EmergencyCaseActivity.this, "Wähle Foto", Toast.LENGTH_LONG);
                 toast.show();
                 imageFromGallery();
                 copyImage();
@@ -143,28 +142,21 @@ public class EmergencyCaseActivity extends Activity {
         return cursor.getString(column_index);
     }
 
+	@SuppressWarnings("resource")
 	private void copyImage() {
 		try {
-            File data = Environment.getDataDirectory();
-            File sd = Environment.getExternalStorageDirectory();
-            if (sd.canWrite()) {
-                File source= new File(data, mSelectedImagePath);
-                
-        		
-        		
-        		File directory = new File (sd.getAbsolutePath() + "/Pictures");
-        		
-        		File file = new File(directory, "profile.jpg"); 
-        		Toast toast1=Toast.makeText(EmergencyCaseActivity.this, mSelectedImagePath+"	"+file.getPath(), Toast.LENGTH_LONG);
+                File source= new File(mSelectedImagePath);
+        		Toast toast1=Toast.makeText(EmergencyCaseActivity.this, "Bild ausgewählt", Toast.LENGTH_LONG);
                 toast1.show();
                 if (source.exists()) {
-                    FileChannel src = new FileInputStream(source).getChannel();
-                    FileChannel dst = new FileOutputStream(file).getChannel();
-                    dst.transferFrom(src, 0, src.size());
-                    src.close();
-                    dst.close();
-                }
-            }
+                	InputStream is=new FileInputStream(source);
+                	OutputStream os=new FileOutputStream(imageFile);
+                	byte[] daten=new byte[is.available()];
+                	is.read(daten);
+                	os.write(daten);
+                	is.close();
+                	os.close();
+           } 
         } catch (Exception e) {}
 		
 	}  

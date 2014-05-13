@@ -4,9 +4,9 @@
  * Folgender Algorithmus rendert das Menue und setzt dabei die Bootstrap Klassen
  */
 $html = array();
-$ulClass = "dropdown";
+$ulClass = "dropdown submenu";
 
-$html[] = '<ul class="navigation">';
+$html[] = '<ul class="nav">';
 
 $iterator = new RecursiveIteratorIterator($this->container, RecursiveIteratorIterator::SELF_FIRST);
 $prevDepth = 0;
@@ -41,7 +41,7 @@ foreach ($iterator as $page) {
         
         if ($page->haspages()) {
             $html [] = '<li class="dropdown ' . $liClass . '">' . "\n";
-            $html [] = '<a  href="#">' . $page->getLabel() . '<span class="caret"></a>' . "\n";
+            $html [] = '<a  href="#">' . $page->getLabel() . '</a>' . "\n";
 //class="dropdown-toggle" data-toggle="dropdown" 
         } else {
             $html [] = '<li class="'. $liClass . '">' . "\n";

@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * Controller zum Verwalten der Anlaufstellen
+ */
 class ContactPointController extends Zend_Controller_Action {
 
     public function init() {
@@ -22,6 +25,9 @@ class ContactPointController extends Zend_Controller_Action {
         $this->view->contactPoints = $contactPoints;
     }
 
+    /*
+     * Erstellen einer Anlaufstelle
+     */
     public function createAction() {
         $form = new Application_Form_ContactPoint();
         $request = $this->getRequest();
@@ -37,7 +43,13 @@ class ContactPointController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    /*
+     * Bearbeiten einer Anlaufstelle
+     */
     public function editAction() {
+        // Gleiches Template verwenden wie bei create
+        $this->_helper->viewRenderer('create');
+        
         $contactpointID = $this->getParam('id');
 
         $form = new Application_Form_ContactPoint();
@@ -65,6 +77,9 @@ class ContactPointController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    /*
+     * Loeschen einer Anlaufstelle
+     */
     public function deleteAction() {
         $post_data = $this->getRequest()->getPost();
 
@@ -74,6 +89,9 @@ class ContactPointController extends Zend_Controller_Action {
         $this->view->success = ($anzDeletedRows > 0);
     }
 
+    /*
+     * Liefert alle Anlaufstellen
+     */
     public function getcontactpointsAction() {
 //        $mapper = new Application_Model_ContactPointMapper();
 //        $contactPoints = $mapper->fetchAll();

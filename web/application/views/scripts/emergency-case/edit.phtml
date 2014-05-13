@@ -1,4 +1,124 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>EmergencyCase</b> and script/action name <b>edit</b></p>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 ">
+            <h1>Notfallkoffer anlegen</h1>
+            <?php
+//    echo $this->form;
+            $form = $this->form;
+// Remove <dt> from label generation
+//            foreach ($form->getElements() as $element) {
+//                $lableDecorater = $element->getDecorator('label');
+//                if (isset($lableDecorater) && $lableDecorater != false) {
+////            $element->getDecorator('label')->setTag(null);
+//                }
+//            }
+            ?>
+            <form id="<?php echo $form->getName() ?>" method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction() ?>">
+                <?php echo $form->ecID->renderViewHelper() ?>
+                <?php echo $form->patientID_fk->renderViewHelper() ?>
+
+                <fieldset>
+                    <legend>Risikosituationen <?php echo $form->getRiskSituationAddButton(); ?>  </legend>
+
+                    <ul id="fieldset-risk_situations_list">
+                        <?php
+                        $elements = $form->getRiskSituations();
+                        foreach ($elements as $name) {
+                            $e = $form->getElement($name);
+                            echo "<li>" . $e . "</li>";
+                        }
+                        ?>
+
+                    </ul>
+                </fieldset>
+
+                <p id="risikosituation_description">
+                    Bitte denken Sie daran, dass Suchtdruck auch pl&ouml;tzlich auftreten kan, ohne erkennbarer Risikosituation!
+                </p>
+                <p id="risikosituation_stop">
+                    Ich sage: "STOP"
+                    <img height="50px" src="/images/emergency-case/verboten_schild.jpg"/>
+                </p>
+                <fieldset id="fieldset-safety_thoughts">
+                    <legend>Pers&ouml;nliche Schutzgedanken<?php echo $form->getSafetyThoughtAddButton(); ?>  </legend>
+                    <p>
+                        Was kann ich tun, das mir hilft?
+                    </p>
+                    <ul id="fieldset-safety_thoughts_list">
+                        <?php
+                        foreach ($form->getSafetyThoughts() as $name) {
+                            $e = $form->getElement($name);
+                            echo "<li>" . $e . "</li>";
+                        }
+                        ?>
+                    </ul>
+                </fieldset>
+
+
+
+                <fieldset id="fieldset-safety_actions">
+                    <legend>Pers&ouml;nliche Schutzhandlungen<?php echo $form->getSafetyActionAddButton(); ?>  </legend>
+                    <p>
+                        Was kann ich denken, das mir hilft?
+                    </p>
+                    <ul id="fieldset-safety_actions_list">
+                        <?php
+                        foreach ($form->getSafetyActions() as $name) {
+                            $e = $form->getElement($name);
+                            echo "<li>" . $e . "</li>";
+                        }
+                        ?>
+                    </ul>
+                </fieldset>
+
+
+                <fieldset>
+                    <legend>Personen die mir helfen <?php echo $form->getHelpPersonAddButton() ?>  </legend>
+                    <ul id='fieldset-help_persons_list'>
+                        <?php
+                        foreach ($form->getHelpPersons() as $name) {
+                            $e = $form->getElement($name);
+                            echo "<li>" . $e . "</li>";
+                        }
+                        ?>
+                    </ul>
+                </fieldset>
+
+                <?php echo $form->addict_drughotline; ?>
+                <?php echo $form->prop_advice_centre; ?>
+                <?php echo $form->my_therapist; ?>
+
+                <fieldset id="fieldset-shortinfo">
+                    <legend>Kurzinfo</legend>
+                    Erfahrungsgem&auml;ß ist es in einem <b>gesch&uuml;tzten</b> Rahmen viel einfacher, sich auf zuk&uuml;nftige Schwierigkeiten vorzubereiten. 
+                    Allerdings ist zu beachten, dass <b>unter Druck</b> (oder "Stress") nicht ausreichend
+                    ge&uuml;btes, also noch wenig vertrautes Verhalten <b>oft nicht verf&uuml;gbar</b> ist. 
+                    Deshalb ist es wichtig, dass Sie sich mit Ihren "Bew&auml;ltigungsfertigkeiten" immer wieder besch&auml;ftigen
+                    (in Gedanken und konkretem Handeln), damit sie <b>zur Gewohnheit werden</b> und im Ernstfall "funktionieren" k&ouml;nnen.
+                </fieldset>
+
+                <?php echo $form->risiko; ?>
+                <?php echo $form->temptation; ?>
+
+                <fieldset>
+                    <legend>Den R&uuml;ckfall begrenzen  <?php echo $form->getLimitRelapseAddButton(); ?></legend>
+                    <ul id='fieldset-limit_relapses_list'>
+                        <?php
+                        foreach ($form->getLimitRelapses() as $name) {
+                            $e = $form->getElement($name);
+                            echo "<li>" . $e . "</li>";
+                        }
+                        ?>
+                    </ul>
+                </fieldset>
+
+
+                <?php echo $this->formSubmit('submit', 'Save') ?>
+
+            </form>
+        </div>
+
+    </div>
 </div>
+

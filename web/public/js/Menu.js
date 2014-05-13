@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 function Menu() {
     var _ul;
-    
+
 //    $(document).mouseup(function(e) {
 //        // If the dropdown is visible
 //        // and the thing we've clicked is not a descendent of the dropdown
@@ -17,20 +17,32 @@ function Menu() {
 //        }
 //    });
 
-    $('.dropdown').bind('click', function() {
-        _ul = $(this).find('ul');
-        toggle();
+    $('.navbar .nav > li').hover(function() {
+        $(this).children('ul.submenu').stop().animate({top: '100%'}, 1000, 'easeOutQuint');
+    }, function() {
+        $(this).children('ul.submenu').stop().animate({top: '70%'}, 1000, 'easeOutQuint');
     });
 
+    $('.navbar .nav ul li').hover(function() {
+        $(this).children('ul.submenu').stop().animate({opacity: 1}, 1000, 'easeOutQuint');
+    }, function() {
+        $(this).children('ul.submenu').stop().animate({opacity: 0}, 1000, 'easeOutQuint');
+    });
 
-
-    var toggle = function($element) {
-        _ul.toggleClass('hover_ul dropdown');
-
-        _ul.find('li').each(function() {
-            $(this).toggleClass('hover_li');
-        });
-    };
+//    $('.dropdown').bind('click', function() {
+//        _ul = $(this).find('ul');
+//        toggle();
+//    });
+//
+//
+//
+//    var toggle = function($element) {
+//        _ul.toggleClass('hover_ul dropdown');
+//
+//        _ul.find('li').each(function() {
+//            $(this).toggleClass('hover_li');
+//        });
+//    };
 
 }
 

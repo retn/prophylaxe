@@ -1,6 +1,115 @@
-Patient anlegen
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Patient anlegen</h1>
 
-<?php
-    $this->form->setAction($this->url());
-    echo $this->form;
-?>
+            <?php
+            $form = $this->form;
+
+            $form->setAction($this->url());
+//    echo $this->form;
+// Remove <dt> from label generation
+            foreach ($form->getElements() as $element) {
+                $lableDecorater = $element->getDecorator('label');
+                if (isset($lableDecorater) && $lableDecorater != false) {
+                    $element->getDecorator('label')->setTag(null);
+                }
+            }
+            ?>
+
+            <form id="<?php echo $form->getName() ?>" method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction() ?>">
+
+                <?php echo $form->id->renderViewHelper(); ?>
+                <?php echo $form->userID_fk->renderViewHelper(); ?>
+                <div class="row">
+
+                    <div class="col-md-2">
+                        
+                        <?php echo $form->firstname->renderLabel(); ?>
+                    </div>
+                    
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->firstname->renderViewHelper();
+                        echo $form->firstname->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                       
+                    </div>
+                </div>
+
+                <div class="row ">
+
+                    <div class="col-md-2">
+                        <?php echo $form->lastname->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->lastname->renderViewHelper();
+                        echo $form->lastname->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <?php echo $form->username->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->username->renderViewHelper();
+                        echo $form->username->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label><?php echo "Geburtstag" ?></label>
+                    </div>
+                    <div class="col-md-7">
+                        <?php echo $form->birthdate; ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <?php echo $form->email->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->email->renderViewHelper();
+                        echo $form->email->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <?php echo $form->submit; ?>
+                    </div>
+                    <div class="col-md-5">
+                        <?php echo $form->reset; ?>
+                    </div>
+                    <div class="col-md-2 placeholder">
+                    </div>
+                </div>
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>

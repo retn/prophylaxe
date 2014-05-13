@@ -87,4 +87,31 @@
             <route>default</route>  
         </Logout>
     </nav>
+    
+    <footer>
+        <Impressum>
+            <label>Impressum</label>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>index</resource>
+            <privilege>index</privilege>
+            <route>default</route>  
+        </Impressum>
+        <Kontakt>
+            <label>Kontakt</label>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>index</resource>
+            <privilege>index</privilege>
+            <route>default</route>  
+        </Kontakt>
+        <Sitemap>
+            <label>Sitemap</label>
+            <controller>index</controller>
+            <action>index</action>
+            <resource>index</resource>
+            <privilege>index</privilege>
+            <route>default</route>  
+        </Sitemap>
+    </footer>
 </config>

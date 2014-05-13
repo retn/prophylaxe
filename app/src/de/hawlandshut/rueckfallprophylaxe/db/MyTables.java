@@ -50,7 +50,7 @@ public class MyTables {
 			values.put(entry.getKey(),entry.getValue());
 		}
 		
-		return sqldatabase.update(table,values ,column+" = "+index, new String[]{index})>0;
+		return sqldatabase.update(table,values ,column+" = "+index, null)>0;
 	}
 
 	public boolean insert(String table, HashMap<String, String> hashMap) {
@@ -82,6 +82,7 @@ public class MyTables {
 		        i++;
 		    }
 		}
+		c.close();
 		 
 		return result;
 	}
@@ -97,6 +98,7 @@ public class MyTables {
 		    }
 		    Log.d("db","number tables: "+i);
 		}
+		c.close();
 		
 	}
 

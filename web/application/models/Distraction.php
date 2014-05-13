@@ -71,7 +71,7 @@ class Application_Model_Distraction {
         return $this->_emotion_text;
     }
 
-     public function setEmotion($id) {
+    public function setEmotion($id) {
         $this->_emotionID_fk = (int) $id;
         return $this;
     }
@@ -79,10 +79,13 @@ class Application_Model_Distraction {
     public function getEmotion() {
         return $this->_emotionID_fk;
     }
-    
+
     public function getArray() {
         return array($this->getId(), $this->getText(), $this->getEmotionText(), $this->getEmotion());
     }
 
-}
+    public function getKeyValueArray() {
+        return array('distractionID' => $this->getId(), 'text' => $this->getText(), 'emotion_text' => $this->getEmotionText(), 'emotionID_fk' => $this->getEmotion());
+    }
 
+}

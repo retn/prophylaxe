@@ -22,8 +22,7 @@ class Application_Model_DistractionHasPatientMapper {
         return $this->_dbTable;
     }
 
-   
-    public function saveAll($patientID, $maximids) {
+    public function saveAll($patientID, $maximids = null) {
 
         // Alle Spreuche des Patienten zuerst loeschen
         $where = $this->getDbTable()->getAdapter()->quoteInto('patient_patientID= ?', $patientID);
@@ -32,12 +31,12 @@ class Application_Model_DistractionHasPatientMapper {
 //        foreach ($maximids as $value) {
 //            $this->getDbTable()->delete(array('patient_patientID' => $patientID));
 //        }
-
         // Alle gewaehlten Sprueche eintragen
-        foreach ($maximids as $value) {
-            $this->getDbTable()->insert(array('patient_patientID' => $patientID, 'distraction_distractionID' => $value));
+        if ($maximids != null) {
+            foreach ($maximids as $value) {
+                $this->getDbTable()->insert(array('patient_patientID' => $patientID, 'distraction_distractionID' => $value));
+            }
         }
     }
-
 
 }

@@ -1,3 +1,8 @@
+/*
+ * Verwaltet die beiden Datatables 
+ * Funktionalität für das Zuordnen von Spruechen zum gewaehlten Patienten
+ * 
+ */
 $(document).ready(function() {
     var pmt = new PatientMaximTable();
 
@@ -8,7 +13,8 @@ function PatientMaximTable() {
     var _row = $('<tr><td id="maxim_id"> </td><td id="maxim_text"> </td><td><button name="btnRemove" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button></td></tr>');
     var _maximsOfPatient = $('#patient_has_maxims');
     var _btnSubmit = $('#btnSubmit');
-
+    var datatable_maxim = $("#patient_maxim_table");
+    var datatable_maxim_has_patient = $("#patient_has_maxims");
 
     var initialize = function() {
 
@@ -16,8 +22,9 @@ function PatientMaximTable() {
         _row.find('button').bind('click', btnRemoveClick);
         _btnSubmit.bind('click', btnSubmitClick);
 
+        datatable_maxim_has_patient.dataTable();
 
-        $("#patient_maxim_table").dataTable({
+        datatable_maxim.dataTable({
             "bProcessing": true,
             'iDisplayLength': 20,
             "aoColumns": [
@@ -31,8 +38,9 @@ function PatientMaximTable() {
                     },
                     "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                         var button = $(nTd).find("button");
-                        button.bind('click', function() {
+                        button.bind('click', function(iRow) {
                             buttonAddClick($(this));
+
                         });
 
 
@@ -45,51 +53,52 @@ function PatientMaximTable() {
     };
 
     var buttonAddClick = function(clickedElement) {
-        var currentRow = clickedElement.parent();
-        while (!currentRow.is('tr')) {
-            currentRow = currentRow.parent();
+        var row = clickedElement.parent();
+        while (!row.is('tr')) {
+            row = row.parent();
         }
 
+        // Ausgewaehlte Daten der Zeile holen
+        var data = datatable_maxim.fnGetData(row.get(0));
 
-        var columns = currentRow.find('td');
-        var id = $(columns[0]).text().trim();
-        var text = $(columns[1]).text().trim();
-
-        if (!isIn(id)) {
-            var row = _row.clone(true);
-
-            row.attr('maximid', id);
-            row.find('#maxim_id').text(id);
-            row.find('#maxim_text').text(text);
-            _maximsOfPatient.append(row);
+        // id auslesen
+        var maximid = data[0];
+        // pruefen ob bereits ein Eintrag mit der ID existiert
+        if (jQuery("[maximid='" + maximid + "']").length > 0) {
+            return;
         }
+
+        // Button in Array hinzufuegen
+        var btn = '<button name="btnRemove" type="button" maximid="' + maximid + '"class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>';
+        data.push(btn);
+
+        // Zeile hinzufuegen
+        datatable_maxim_has_patient.dataTable().fnAddData(data);
+//        $('#' + maximid).bind('click', btnRemoveClick);
+        $("[maximid='"+maximid+"']").bind('click', btnRemoveClick);
+//        index = datatable_maxim_has_patient.dataTable().fnGetPosition()
+//        index++; // Wegen HEader Zeile der Tabelle
+//        console.log("new line at " + index);
+
+
+        // maximid in der neu hinzugefuegten Zeile setzen
+//        var rows = datatable_maxim_has_patient.find('tr');
+//        $(rows[index]).attr('maximid', maximid);
 
     };
 
-    var isIn = function(id) {
-        rows = _maximsOfPatient.find('tr');
-        for (var i = 0; i < rows.length; i++) {
-            if ($(rows[i]).attr('maximid') === id) {
-                return true;
-            }
-        }
-        return false;
-    };
 
     var btnRemoveClick = function() {
-
-        var currentRow = $(this).parent();
-        while (!currentRow.is('tr')) {
-            currentRow = currentRow.parent();
-        }
-        currentRow.remove();
+        var target_row = $(this).closest("tr").get(0); // this line did the trick
+        var aPos = datatable_maxim_has_patient.fnGetPosition(target_row);
+        datatable_maxim_has_patient.fnDeleteRow(aPos);
     };
 
     var btnSubmitClick = function() {
 
         var maxim_ids = new Array();
 
-        _maximsOfPatient.find('tbody tr').each(function(index,value) {
+        _maximsOfPatient.find("tbody [name='btnRemove']").each(function(index, value) {
             maxim_ids.push($(value).attr('maximid'));
         });
 
@@ -100,7 +109,6 @@ function PatientMaximTable() {
             data: {maxim_ids: maxim_ids},
             success: function(data) {
                 window.location.href = data.redirect;
-
             }
         });
 

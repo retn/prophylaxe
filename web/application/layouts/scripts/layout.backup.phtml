@@ -1,0 +1,58 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Suchtprophylaxe</title>
+
+        <?php echo $this->headLink()->appendStylesheet('/css/bootstrap.min.css') ?>
+     
+            <?php echo $this->headLink()->appendStylesheet('/css/spl.css') ?>
+
+            <?php echo $this->jQuery(); ?>
+
+            <?php
+            $this->headScript()->appendFile('/js/bootstrap/bootstrap.min.js');
+            $this->headScript()->appendFile('/js/jquery/js/jquery-ui-1.10.4.custom.min.js');
+            $this->headScript()->appendFile('/js/Menu.js');
+//
+            echo $this->headScript();            
+            ?>
+      
+
+    </head>
+    <body>
+        <div class="container fill">
+
+            <div id="header" class="formRow">
+                <div id="header-logo" class="col-md-12">
+                    <h3 class="head_title">
+                        Suchtprophylaxe
+                    </h3>
+                </div>
+            </div>
+
+            <div id="header-navigation" class="formRow">
+                <div id="header-logo" class="col-md-12">                                       
+                    <?php
+//                    $this->navigation()->menu()->setUlClass($this->navigation()->menu()->getUlClass(). ' nav nav-pills');
+//                    $partial = array('partials/menu.phtml', 'front');
+                    $this->navigation()->menu()->setPartial('menu.phtml');
+//                    echo $this->navigation()->menu()->render();
+
+
+
+                    echo $this->navigation();
+                    ?>
+                </div>
+            </div>
+
+
+            <div class="content formRow">
+                <div class="col-md-12 main_content">   
+                    <?php echo $this->layout()->content ?>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

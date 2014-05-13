@@ -14,7 +14,7 @@ class Application_Model_Maxim {
     public function __set($name, $value) {
         $method = 'set' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Patient Eigenschaft');
+            throw new Exception('Ungültige Maxim Eigenschaft');
         }
         $this->$method($value);
     }
@@ -22,7 +22,7 @@ class Application_Model_Maxim {
     public function __get($name) {
         $method = 'get' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Patient Eigenschaft');
+            throw new Exception('Ungültige Maxim Eigenschaft');
         }
         return $this->$method();
     }
@@ -59,10 +59,13 @@ class Application_Model_Maxim {
     public function getId() {
         return $this->_maximID;
     }
-    
-     public function getArray() {
+
+    public function getArray() {
         return array($this->getId(), $this->getText());
     }
 
-}
+    public function getKeyValueArray() {
+        return array('maximID' => $this->getId(), 'text' => $this->getText());
+    }
 
+}

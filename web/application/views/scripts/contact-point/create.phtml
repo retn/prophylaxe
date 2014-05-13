@@ -1,3 +1,127 @@
-<?php
-echo $this->form;
-?>
+<div class="container" >
+    <div class="row">
+        <div class="col-md-12 ">
+            
+              <h1>Anlaufstelle anlegen</h1>
+            <?php
+            $form = $this->form;
+            ?>
+
+
+            <form id="<?php echo $form->getName() ?>" method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction() ?>">
+
+                <?php echo $form->cpID->renderViewHelper(); ?>
+                <div class="row">
+
+                    <div class="col-md-2">
+
+                        <?php echo $form->name->renderLabel(); ?>
+                    </div>
+
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->name->renderViewHelper();
+                        echo $form->name->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+
+                    </div>
+                </div>
+
+                <div class="row ">
+
+                    <div class="col-md-2">
+                        <?php echo $form->street->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->street->renderViewHelper();
+                        echo $form->street->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <?php echo $form->plz->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->plz->renderViewHelper();
+                        echo $form->plz->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <?php echo $form->town->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->town->renderViewHelper();
+                        echo $form->town->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <?php echo $form->phone_number->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->phone_number->renderViewHelper();
+                        echo $form->phone_number->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <?php echo $form->email->renderLabel(); ?>
+                    </div>
+                    <div class="col-md-7">
+                        <?php
+                        echo $form->email->renderViewHelper();
+                        echo $form->email->renderErrors();
+                        ?>
+                    </div>
+                    <div class="col-md-3 placeholder">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <?php echo $form->submit; ?>
+                    </div>
+                    <div class="col-md-5">
+                        <?php echo $form->reset; ?>
+                    </div>
+                    <div class="col-md-2 placeholder">
+                    </div>
+                </div>
+
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+

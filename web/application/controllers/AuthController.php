@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * Regelt den Login/Logout eines Users
+ */
 class AuthController extends Zend_Controller_Action {
 
     public function init() {
@@ -10,6 +13,9 @@ class AuthController extends Zend_Controller_Action {
         $this->_redirect('auth/login/');
     }
 
+    /*
+     * Wird aufgerufen bei einem Login
+     */
     public function loginAction() {
         // Extra Layout fuer Login setzten
         $this->_helper->layout->setLayout('loginpage');
@@ -47,6 +53,9 @@ class AuthController extends Zend_Controller_Action {
         $this->view->loginForm = $loginForm;
     }
 
+    /*
+     * Wird aufgerufen bei Logout
+     */
     public function logoutAction() {
         Zend_Auth::getInstance()->clearIdentity();
         $this->view->logout = true;

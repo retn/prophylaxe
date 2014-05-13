@@ -11,9 +11,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->doctype('HTML5');
 
         $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
-        $view->jQuery()->addStylesheet('/js/jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css')
-                ->setLocalPath('/js/jquery/js/jquery-1.9.1.js')
-                ->setUiLocalPath('/js/jquery/js/jquery-ui-1.10.3.custom.min.js');
+//        $view->jQuery()->addStylesheet('/js/jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css');
+        $view->jQuery()->addStylesheet('/js/jquery/css/custom-theme/jquery-ui-1.10.4.custom.css');
+        $view->jQuery()->setLocalPath('/js/jquery/js/jquery-1.9.1.js');
+        $view->jQuery()->setUiLocalPath('/js/jquery/js/jquery-ui-1.10.3.custom.min.js');
 
 
 
@@ -45,11 +46,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         $menuContainerConfig = new Zend_Config_Xml(APPLICATION_PATH . '/configs/menu.xml', 'nav');
         $menuContainer = new Zend_Navigation($menuContainerConfig);
-
-
-
         $view->navigation($menuContainer)->setAcl($this->_acl)
                 ->setRole(Zend_Registry::get('user_role'));
+
+
+        $footerConfig = new Zend_Config_Xml(APPLICATION_PATH . '/configs/menu.xml', 'footer');
+        $footer = new Zend_Navigation($footerConfig);
+        $view->footer = $footer;
     }
 
     public function _initRoute() {
@@ -72,20 +75,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // add this route to the front controller 
         $frontController->getRouter()->addRoute('editPatient', $route);
 
-        $editPatientMaxim = new Zend_Controller_Router_Route(
-                'patient/edit-maxim/:id', array(
+        $patientRunThrough = new Zend_Controller_Router_Route(
+                'patient/run-through/:id/', array(
             'controller' => 'patient',
-            'action' => 'edit-maxim',
-            'id' => 'id'));
+            'action' => 'run-through'));
+        $frontController->getRouter()->addRoute('patientRunThrough', $patientRunThrough);
+
+        $editPatientMaxim = new Zend_Controller_Router_Route(
+                'patient/edit-maxim/:id/:runthrough', array(
+            'runthrough' => '0',
+            'controller' => 'patient',
+            'action' => 'edit-maxim'));
 
         // add this route to the front controller 
         $frontController->getRouter()->addRoute('editPatientMaxim', $editPatientMaxim);
 
         $editPatientDistraction = new Zend_Controller_Router_Route(
-                'patient/edit-distraction/:id', array(
+                'patient/edit-distraction/:id/:runthrough', array(
+            'runthrough' => '0',
             'controller' => 'patient',
-            'action' => 'edit-distraction',
-            'id' => 'id'));
+            'action' => 'edit-distraction'));
 
         // add this route to the front controller 
         $frontController->getRouter()->addRoute('editPatientDistraction', $editPatientDistraction);
@@ -97,13 +106,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'id' => 'id'));
 
         // add this route to the front controller 
-        $frontController->getRouter()->addRoute('editContactpint', $editContactPoint);
+        $frontController->getRouter()->addRoute('editContactpoint', $editContactPoint);
 
         $createEmegencyCase = new Zend_Controller_Router_Route(
-                'emergency-case/create/:id', array(
+                'emergency-case/create/:id/:runthrough', array(
+            'runthrough' => '0',
             'controller' => 'emergency-case',
-            'action' => 'create',
-            'id' => 'id'));
+            'action' => 'create'));
 
         // add this route to the front controller 
         $frontController->getRouter()->addRoute('createEmegencyCase', $createEmegencyCase);
@@ -119,4 +128,3 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
 }
-

@@ -35,6 +35,7 @@ class Application_Model_ContactPointMapper {
 
         if (null === ($id = $contactpoint->getCpID())) {
             unset($data['cpID']);
+            $data['timestamp'] =  new Zend_Db_Expr("NOW()");
             $this->getDbTable()->insert($data);
         } else {
             $this->getDbTable()->update($data, array('cpID = ?' => $id));
@@ -56,6 +57,20 @@ class Application_Model_ContactPointMapper {
                 ->setPhone_number($row->phone_number)
                 ->setEmail($row->email);
     }
+    
+    public function fetchLatestTimestamp(){
+        $select = $this->getDbTable()->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+        $max = new Zend_Db_Expr('MAX(timestamp) as latest');
+        $select->columns($max);
+//        $select->having($max);
+        
+        $result = $this->getDbTable()->fetchAll($select);
+        
+        $maxTimestamp = $result->current()->latest;
+        $strTime = strtotime($maxTimestamp);
+        return $strTime;
+        
+    }
 
     public function fetchAll() {
         $entries = array();
@@ -67,7 +82,7 @@ class Application_Model_ContactPointMapper {
                     ->setName($row->name)
                     ->setStreet($row->street)
                     ->setPlz($row->plz)
-                    ->setTown($row->town)
+                    ->setTown(($row->town))
                     ->setPhone_number($row->phone_number)
                     ->setEmail($row->email);
             $entries[] = $entry;

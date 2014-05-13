@@ -22,7 +22,7 @@ class Application_Model_UserMapper {
         return $this->_dbTable;
     }
 
-    public function save(Application_Model_Patient $patient) {
+    public function save(Application_Model_Patient_Patient $patient) {
 //        $data = array(
 //            'first_name' => $patient->getFirstname(),
 //            'last_name' => $patient->getLastname(),

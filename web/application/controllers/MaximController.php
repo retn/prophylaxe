@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Controller fuer Sprueche
+ */
+
 class MaximController extends Zend_Controller_Action {
 
     public function init() {
@@ -31,7 +35,9 @@ class MaximController extends Zend_Controller_Action {
 //        $this->view->maxims = $mapper->fetchAll();
     }
 
-
+    /*
+     * Liefert alle Sprueche fuer jDataTable
+     */
     public function getmaximsAction() {
         $mapper = new Application_Model_MaximMapper();
 
@@ -47,6 +53,9 @@ class MaximController extends Zend_Controller_Action {
         $this->view->aaData = $json;
     }
 
+    /*
+     * Sepeichert einen Spruch
+     */
     public function saveAction() {
         $form = new Application_Form_Maxim();
         //unset($_POST['captcha']);
@@ -73,6 +82,9 @@ class MaximController extends Zend_Controller_Action {
         }
     }
 
+    /*
+     * Loescht einen Spruch
+     */
     public function deleteAction() {
         $post_data = $request = $this->getRequest()->getPost();
 

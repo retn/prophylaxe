@@ -5,6 +5,7 @@ class Application_Form_Maxim extends Zend_Form {
     public function init() {
         $this->setMethod('post');
 
+        $this->setName('maxim_form');
         $this->addElement('hidden', 'id', array(
         ));
 

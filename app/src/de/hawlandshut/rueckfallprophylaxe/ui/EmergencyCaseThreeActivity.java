@@ -40,21 +40,29 @@ public class EmergencyCaseThreeActivity extends Activity{
 	}
 
 	private void setText(EmergencyCase case0) {
-		TextView textView= (TextView) findViewById(R.id.ec_text);
+		TextView textView= (TextView) findViewById(R.id.ec_text_1);
+		textView.setTextSize(20);
 		
-		String text="";
-		text=text+"mein/e Therapeut/in: "+case0.getMyTherapist()+"\n\n";
-		text=text+"Risiko \n";
-		text=text+"Ich bin in Gefahr, wieder zur Flasche zu greifen:\n wenn ich ... "+case0.getRiskDanger()+"\n";
+		String text="mein/e Therapeut/in: "+case0.getMyTherapist()+"\n\n";
+		textView.append(text);
+		
+		textView= (TextView) findViewById(R.id.ec_text_2);
+		text="Risiko \n";
+		textView.append(text);
+		textView.setTextSize(18);
+		text="Ich bin in Gefahr, wieder zur Flasche zu greifen:\n wenn ich ... "+case0.getRiskDanger()+"\n";
 		text=text+"Diese Situation ist schwierig für mich, weil ... : "+case0.getRiskSituation()+"\n";
 		text=text+"\"Versuchung\": Der \"kleine Teufel\" auf meiner Schulter flüstert mir zu:\n \"Trink doch ein Gläschen, dann ... "+case0.getRiskTemptation()+"\n\n";
-		text=text+"Der Versuchung widerstehen \n";
-		text=text+"(Bewältigungsgedanken)  Der \"kleine Engel\" auf meiner Schulter sagt mir: \n \"Nein, wenn du trinkst, dann ... "+case0.getTemptationThought()+"\n";
+		textView.append(text);
+		
+		textView= (TextView) findViewById(R.id.ec_text_3);
+		text="Der Versuchung widerstehen \n";
+		textView.append(text);
+		textView.setTextSize(18);
+		text="(Bewältigungsgedanken)  Der \"kleine Engel\" auf meiner Schulter sagt mir: \n \"Nein, wenn du trinkst, dann ... "+case0.getTemptationThought()+"\n";
 		text=text+"In deiner Abstinenz hast du schon viel erreicht, z.B. ..."+case0.getTemptationThoughtAbstinence()+"\n";
 		text=text+"(Bewältigungsverhalten) \n Was kann ich tun, um meine Abstinenz zu schützen? ...  "+case0.getTemptationBehaviour()+"\n";
-		
-		textView.setTextSize(18);
-		textView.setText(text);
+		textView.append(text);
 	}
 
 	private void setHotlines(final EmergencyCase case0) {

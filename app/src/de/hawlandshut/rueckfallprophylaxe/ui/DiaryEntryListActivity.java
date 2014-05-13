@@ -70,6 +70,7 @@ public class DiaryEntryListActivity extends Activity {
 		case 0:
 			DiaryEntryDatabase diaryEntryDB = new DiaryEntryDatabase(myTag, this);
 			diaryEntryDB.deleteFromDB();
+			tableLayout.setVisibility(View.GONE);
 			Toast.makeText(getApplicationContext(), "Eintrag wurde entfernt",Toast.LENGTH_LONG).show();
 			
 			break;

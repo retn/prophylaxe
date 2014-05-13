@@ -9,6 +9,8 @@ function MaximTable() {
     var _dialog_confirm = $('#maxim_dialog_confirm');
     var _dialog_errors = '#maxim_form_errors';
     var _addButton = $('#maxim_create');
+    var _textEdit = "Spruch ändern";
+    var _textCreate = "Spruch anlegen";
 
 
     var initialize = function() {
@@ -19,6 +21,9 @@ function MaximTable() {
     };
 
     var addButtonClick = function() {
+        _dialog_edit.find('#id').val('');
+        _dialog_edit.find('h3').text(_textCreate);
+        _dialog_edit.find('#text').val('');
         _dialog_edit.dialog("open");
     };
 
@@ -44,7 +49,8 @@ function MaximTable() {
                         var button = $(nTd).find("button");
                         button.bind('click', function() {
                             _dialog_edit.find('#id').val(oData[0]);
-                            _dialog_edit.find('#text').text(oData[1]);
+                            _dialog_edit.find('#text').val(oData[1]);
+                            _dialog_edit.find('h3').text(_textEdit);
                             _dialog_edit.dialog("open");
 //                            alert('show');
                         });

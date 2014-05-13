@@ -1,5 +1,8 @@
 <?php
 
+/*
+ * Controller zum verwalten der Ablenkungen
+ */
 class DistractionController extends Zend_Controller_Action {
 
     public function init() {
@@ -25,6 +28,9 @@ class DistractionController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    /*
+     * Liefert alle Ablenkungen fuer jDataTable
+     */
     public function getDistractionsAction() {
         $mapper = new Application_Model_DistractionMapper();
         $daten = $mapper->fetchAll();
@@ -37,6 +43,9 @@ class DistractionController extends Zend_Controller_Action {
         $this->view->aaData = $json;
     }
 
+    /*
+     * Speichert einer Anlaufstelle
+     */
     public function saveAction() {
         $form = new Application_Form_Distraction();
         //unset($_POST['captcha']);
@@ -63,6 +72,9 @@ class DistractionController extends Zend_Controller_Action {
         }
     }
 
+    /*
+     * Loeschen einer Ablenkung
+     */
     public function deleteAction() {
         $post_data = $request = $this->getRequest()->getPost();
 

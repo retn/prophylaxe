@@ -14,7 +14,7 @@ class Application_Model_MaximHasPatient {
     public function __set($name, $value) {
         $method = 'set' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Patient Eigenschaft');
+            throw new Exception('Ungültige MaximHasPatient Eigenschaft');
         }
         $this->$method($value);
     }
@@ -22,7 +22,7 @@ class Application_Model_MaximHasPatient {
     public function __get($name) {
         $method = 'get' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Ungültige Patient Eigenschaft');
+            throw new Exception('Ungültige MaximHasPatient Eigenschaft');
         }
         return $this->$method();
     }

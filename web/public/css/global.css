@@ -19,7 +19,7 @@ html, body {
 }
 .container{
     /*background-color: lightblue;*/
-    
+
     -moz-box-shadow:    0px 0px 6px 6px #ccc;
     -webkit-box-shadow: 0px 0px 6px 6px #ccc;
     box-shadow:         0px 0px 6px 6px #ccc;
@@ -50,69 +50,6 @@ html, body {
 }
 
 
-
-
-/*
- Navigation Start
-*/
-/*.navigation{
-    background-color: #EEEEEE;
-    border: 1px solid #CCCCCC;
-    border-radius: 5px;    
-    display: table;
-    max-height: 52px;
-    width:100%;
-}
-
-.navigation > li {
-    width:190px;
-    display:table-cell;
-    border-right: #D5D5D5 solid 1px;
-    max-width: 190px;
-    width:1%;
-}
-
-.dropdown-menu {
-    left: auto;
-    margin-top:0px;
-    padding:0px;
-    margin-left:-2px;
-    border-top:none;
-    position: relative;
-}
-
-.dropdown-menu > li{
-    width: 188px;
-    border-bottom: #D5D5D5 solid 1px;
-    position: absolute;
-    width: 100%;
-}
-
-.navigation > li a{
-    background-color: #E5E5E5;
-    background-image: -moz-linear-gradient(center top , #F5F5F5 0%, #E5E5E5 100%);
-    background-repeat: repeat-x;
-    border-bottom: 1px solid #D5D5D5;
-    color: #777777;
-    margin-bottom: 0;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    text-align: center;
-    
-    font-weight: bold;
-    display: block;
-}
-
-.navigation > .active > a{
-    background-color: #DDDDDD;
-    background-image: none;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15) inset;    
-}
-
-.nav-tabs > li{
-    margin-bottom: -1px;
-    float:none;
-}*/
 .hover_ul{
     display: block;       
     width: 100%;
@@ -228,22 +165,73 @@ edit-maxim Start
 edit-maxim Ende
 */
 
+/*
+Patienten auflisten Start
+url: patient/list
+*/
+#patient_edit_table .btnStatus {
+    width:145px;
+    
+}
+
+/*
+Patienten auflisten Ende
+*/
 
 /*
 Patient Anlegen Formular Start
 */
 
 #patient_form dt {
-  float:left;
-  clear:left;
-  width:120px;
+    float:left;
+    clear:left;
+    width:120px;
 }
- 
+
 #patient_form dd {
-  float:left;
-  width:200px;
+    float:left;
+    width:200px;
 }
 
 /*
 Patient Anlegen Formular Ende
 */
+
+/*
+Emergency-Case Start
+*/
+#risikosituation_stop{
+    border: solid black 1px;
+    text-align: center;
+}
+
+#fieldset-safety_thoughts legend, #fieldset-safety_actions legend{
+    margin-bottom: 5px;
+}
+
+#fieldset-safety_thoughts p, #fieldset-safety_actions p{
+    font-size: 12px;
+}
+
+#fieldset-risiko{
+
+}
+/*
+Emergency-Case Ende
+*/
+
+/* Tooltip start */
+
+.tooltip-inner{
+    text-align:left;
+    margin:0px;
+    padding:0px;
+}
+.tooltip-inner li{
+    /*list-style: none;*/
+}
+.tooltip-inner ul{
+    margin:0px;
+    padding:10px 10px 10px 20px;
+}
+/* Tooltip ende */

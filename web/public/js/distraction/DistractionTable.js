@@ -9,6 +9,8 @@ function DistractionTable() {
     var _dialog_confirm = $('#distraction_dialog_confirm');
     var _dialog_errors = '#distraction_form_errors';
     var _addButton = $('#distraction_create');
+    var _textEdit = "Möglichkeit bearbeiten";
+    var _textCreate = "Möglichkeit anlegen";
 
 
     var initialize = function() {
@@ -19,6 +21,9 @@ function DistractionTable() {
     };
 
     var addButtonClick = function() {
+        _dialog_edit.find('#id').val('');
+        _dialog_edit.find('h3').text(_textCreate);
+        _dialog_edit.find('#text').text('');
         _dialog_edit.dialog("open");
     };
 
@@ -35,7 +40,7 @@ function DistractionTable() {
                     "sWidth": "60%"
                 },
                 {
-                    "mData": 2  
+                    "mData": 2
                 },
                 {
                     "mData": null, // Spalte Bearbeiten
@@ -50,6 +55,7 @@ function DistractionTable() {
                             _dialog_edit.find('#id').val(oData[0]);
                             _dialog_edit.find('#text').text(oData[1]);
                             _dialog_edit.find('#emotion').val(oData[3]);
+                              _dialog_edit.find('h3').text(_textEdit);
                             _dialog_edit.dialog("open");
 //                            alert('show');
                         });

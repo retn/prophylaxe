@@ -30,17 +30,19 @@ public class DiaryEntryListActivity extends Activity {
 		setupActionBar();
 		
 		// Get database object
-		PinShare myApp = PinShare.getInstance();
+		/* PinShare myApp = PinShare.getInstance();
 		String pin = myApp.getPin();
 		Database db = new Database(this);
 		db.InitializeSQLCipher(pin);
+		
+		*/
 		
 		List<DiaryEntry> Entries= new ArrayList<DiaryEntry>();
 		
 		// Load data
 		Entries = ControllerData.getDiaryEntries();
 		
-		db.close();
+		//db.close();
 		
 		// Immer 0 .....
 		Toast.makeText(this, "Einträge geladen: "+Entries.size(),

@@ -1,5 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class DiaryEntry {
@@ -20,6 +21,7 @@ public class DiaryEntry {
 		this.emotionId = emotionId;
 		this.media = media;
 	}
+
 
 	public DiaryEntry(int id, String title, String content, Date created,
 			Media[] media) {
@@ -47,6 +49,14 @@ public class DiaryEntry {
 		this.created = created;
 		this.emotionId = 0;
 	}
+	
+	@Override
+	public String toString() {
+		return "DiaryEntry [id=" + id + ", title=" + title + ", content="
+				+ content + ", created=" + created + ", emotionId=" + emotionId
+				+ ", media=" + Arrays.toString(media) + "]";
+	}
+
 
 	public String getContent() {
 		return content;

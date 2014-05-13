@@ -21,6 +21,7 @@
         <item>Langeweile</item>
         <item>Suchtdruck</item>
     </string-array>
+    <string name="how_you_feel">Wie fühlst du dich heute?</string>
     <string name="textMood">Stimmung:</string>
     <string name="label_adress">Adresse:</string>
     <string name="label_phone">Telefonnummer:</string>

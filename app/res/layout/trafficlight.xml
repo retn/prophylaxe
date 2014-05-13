@@ -7,34 +7,46 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <ImageButton
-        android:id="@+id/redButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@null"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/red_light" />
-
             <ImageButton
-                android:id="@+id/yellowButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/greenButton"
-                android:layout_below="@+id/redButton"
+                android:id="@+id/redButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_above="@+id/yellowButton"
+                android:scaleType="fitXY"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
                 android:background="@null"
-                android:layout_marginTop="35dp"
-                android:src="@drawable/yellow_light" />
+                android:src="@drawable/red_light" />
 
             <ImageButton
                 android:id="@+id/greenButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                android:layout_alignLeft="@+id/yellowButton"
+                android:layout_below="@+id/yellowButton"
+                android:layout_marginTop="30dp"
+                android:background="@null"
+                android:src="@drawable/green_light" />
+
+            <ImageButton
+                android:id="@+id/yellowButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/yellow_light" />
+
+            <TextView
+                android:id="@+id/how_you_feel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/redButton"
-                android:layout_below="@+id/yellowButton"
-                android:background="@null"
-                android:layout_marginTop="44dp"
-                android:src="@drawable/green_light" />
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="@string/how_you_feel"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

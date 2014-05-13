@@ -34,6 +34,7 @@ public class ControllerData {
 	private static List<SafetyThought> safetyThought;
 	private static List<EmergencyCase> emergencyCase;
 
+	//constructor calls "fetch"-functions which are loading database stuff into classes
 	public ControllerData(Database database) throws JsonSyntaxException,
 			IOException {
 		tables = database.getTables();

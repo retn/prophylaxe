@@ -30,8 +30,10 @@ public class Database {
         SQLiteDatabase.loadLibs(context);
         if(!databaseFile.exists()){
         	databaseFile.getParentFile().mkdirs(); 	
-        }
-        //databaseFile.delete();
+        } /*else { 
+        	databaseFile.delete();
+        	databaseFile.getParentFile().mkdirs();
+        }*/
         
         SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile.getPath(), pass, null);
         this.sqldatabase=database;

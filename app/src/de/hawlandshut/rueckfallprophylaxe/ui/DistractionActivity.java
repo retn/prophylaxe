@@ -1,14 +1,18 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.Emotion;
 import de.hawlandshut.rueckfallprophylaxe.data.Distraction;
+
 import java.util.HashMap;
 
 public class DistractionActivity extends Activity {
@@ -26,9 +30,17 @@ public class DistractionActivity extends Activity {
 		Bundle bundle = getIntent().getExtras();
 		emotion = (String) bundle.getString("EMOTION");
 				
-		getEmotion();
+		emotion1 = getEmotion();
 	
-		//distractions = emotion1.getDistractions();
+		distractions = emotion1.getDistractions();
+		
+		List<String> dis_texts = new ArrayList<String>();
+		for(Distraction d: distractions) {
+			dis_texts.add(d.getText());
+		}
+		
+		final ListView lv = (ListView) findViewById(R.id.distractionListView);
+        lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dis_texts));
 	}
 
 	@Override
@@ -38,19 +50,13 @@ public class DistractionActivity extends Activity {
 		return true;
 	}
 	
-	public void getEmotion(){
-		String emotionNames = "test";
-		int i = 0;
+	public Emotion getEmotion(){
 		for(Emotion e: emotions.values()){
-			i++;
-			Toast.makeText(this, i + " ", Toast.LENGTH_LONG).show();
-			emotionNames = emotionNames + " " + i + " " + e.getName();
-			if(e.getName().trim().toLowerCase() == emotion.trim().toLowerCase()){
-				emotion1 = e;
-				Toast.makeText(this, emotion1.getName(), Toast.LENGTH_LONG).show();
+			if(e.getName().trim().toLowerCase().equals(emotion.trim().toLowerCase())) {
+				return e;
 			}
 		}
-		//Toast.makeText(this, emotionNames, Toast.LENGTH_LONG).show();		
+		return null;
 	}
 
 }

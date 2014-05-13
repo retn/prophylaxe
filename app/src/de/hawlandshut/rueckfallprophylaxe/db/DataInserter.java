@@ -2,6 +2,7 @@ package de.hawlandshut.rueckfallprophylaxe.db;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,7 +28,6 @@ public class DataInserter {
 
 	public void insertData(Data data) {
 		insertMaxims(data.getData().getMaxims());
-		insertEmotions();
 		insertEmergencyCase(data.getData().getEmergencyCase());
 		insertDistractions(data.getData().getDistractions());
 	}
@@ -39,10 +39,6 @@ public class DataInserter {
 
 			tables.insert("spl_maxim", hashMap);
 		}
-	}
-
-	private void insertEmotions() {
-		// TODO: Emotions kommen nicht vom server? Woher dann?
 	}
 
 	private void insertEmergencyCase(JsonEmergencyCase emergencyCase) {
@@ -115,7 +111,9 @@ public class DataInserter {
 			tables.insert("spl_distraction", hashMap);
 		}
 		
-		for(String emo_id: emos.keySet()) {
+		Set<String> emo_keys = emos.keySet();
+		for(String emo_id: emo_keys) {
+			Log.d("emotions_db", emo_id + " ");
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("emotionID", emo_id);
 			hashMap.put("emotion", emos.get(emo_id));

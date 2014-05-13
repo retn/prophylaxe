@@ -39,14 +39,4 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/yellow_light" />
 
-            <TextView
-                android:id="@+id/how_you_feel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:text="@string/how_you_feel"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
 </RelativeLayout>

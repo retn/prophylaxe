@@ -131,22 +131,21 @@ public class ControllerData {
 		List<String> texts = tables.query("spl_emotion", "emotion");
 		HashMap<Integer, Emotion> emotions = new HashMap<Integer, Emotion>();
 		for (int i = 0; i < ids.size(); i++) {
-			List<Distraction> distractions = fetchDistractions(i);
 			int id = Integer.parseInt(ids.get(i));
+			List<Distraction> distractions = fetchDistractions(id);
 			Emotion emotion = new Emotion(id, texts.get(i), distractions);
 			emotions.put(id, emotion);
 		}
 		return emotions;
 	}
 
-	private List<Distraction> fetchDistractions(int i2) {
+	private List<Distraction> fetchDistractions(int emotion_id) {
 		List<String> ids = tables.query("spl_distraction", "distractionID");
 		List<String> texts=tables.query("spl_distraction", "text");
-		List<String> emotionids = tables.query("spl_distraction",
-				"fk_distraction_emotion1"); // ?
+		List<String> emotionids = tables.query("spl_distraction", "emotionID_fk"); // ?
 		List<Distraction> distractions = new ArrayList<Distraction>();
 		for (int i = 0; i < ids.size(); i++) {
-			if (i == i2) {
+			if (Integer.parseInt(emotionids.get(i)) == emotion_id) {
 				Distraction distraction = new Distraction(Integer.parseInt(ids
 						.get(i)), Integer.parseInt(emotionids.get(i)),texts.get(i));
 				distractions.add(distraction);

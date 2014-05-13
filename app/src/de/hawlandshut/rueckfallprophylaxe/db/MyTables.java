@@ -63,7 +63,7 @@ public class MyTables {
 	}
 
 	public boolean delete(String table, String id, String column) {
-		return sqldatabase.delete(table, column+" = "+id, new String[]{id})>0;
+		return sqldatabase.delete(table, column+" = "+id, null)>0;
 	}
 	
 	public boolean delete(String table) {

@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
+import android.content.Context;
+
+import de.hawlandshut.rueckfallprophylaxe.db.Database;
+import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
+import de.hawlandshut.rueckfallprophylaxe.ui.PinShare;
+
 public class DiaryEntry implements Serializable {
 
 	int id;
@@ -96,4 +102,5 @@ public class DiaryEntry implements Serializable {
 		this.id=id;
 		
 	}
+
 }

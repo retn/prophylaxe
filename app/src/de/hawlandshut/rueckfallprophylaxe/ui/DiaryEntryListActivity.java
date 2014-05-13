@@ -10,8 +10,13 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -19,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
 
 //TODO: Load existing entrys and add to the view
 public class DiaryEntryListActivity extends Activity {
@@ -45,7 +51,32 @@ public class DiaryEntryListActivity extends Activity {
 		loadAndDrawEntries();
 	}
 
+	//Creating Context Menu
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.setHeaderTitle("Eintrag löschen");
+		menu.add(Menu.NONE, 0, Menu.NONE, "Bestätigen");
+	}
+	
+	public boolean onContextItemSelected(MenuItem item) {
+	
+		TableLayoutWithContextMenuInfo.TableLayoutContextMenuInfo menuInfo = (TableLayoutWithContextMenuInfo.TableLayoutContextMenuInfo) item.getMenuInfo();  
+		TableLayoutWithContextMenuInfo tableLayout = (TableLayoutWithContextMenuInfo) menuInfo.targetView;
+		
+	    DiaryEntry myTag = (DiaryEntry) tableLayout.getTag();
+	    
+		switch (item.getItemId()) {
+		case 0:
+			DiaryEntryDatabase diaryEntryDB = new DiaryEntryDatabase(myTag, this);
+			diaryEntryDB.deleteFromDB();
+			Toast.makeText(getApplicationContext(), "Eintrag wurde entfernt",Toast.LENGTH_LONG).show();
+			
+			break;
 
+		}
+		return super.onContextItemSelected(item);
+	}
 
 	/**
 	 * Set up the {@link android.app.ActionBar}.
@@ -99,10 +130,14 @@ public class DiaryEntryListActivity extends Activity {
 			DiaryOnClickListener onClickListener = new DiaryOnClickListener(entry, this);
 
 			// Create TableRow container
-			TableLayout trContainer = new TableLayout(this);
+			TableLayoutWithContextMenuInfo trContainer = new TableLayoutWithContextMenuInfo(this);
 			
+			// Add OnClick Listener
 			trContainer.setOnClickListener(onClickListener);
+			trContainer.setTag(entry);
 			
+			// Add context menu
+			registerForContextMenu(trContainer);
 			
 			// Create TableRow for entry date
 			

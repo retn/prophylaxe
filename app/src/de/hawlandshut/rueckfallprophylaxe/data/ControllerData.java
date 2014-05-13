@@ -141,14 +141,14 @@ public class ControllerData {
 
 	private List<Distraction> fetchDistractions(int i2) {
 		List<String> ids = tables.query("spl_distraction", "distractionID");
-		// List<String> texts=tables.query("spl_distraction", "distraction");
+		List<String> texts=tables.query("spl_distraction", "text");
 		List<String> emotionids = tables.query("spl_distraction",
 				"fk_distraction_emotion1"); // ?
 		List<Distraction> distractions = new ArrayList<Distraction>();
 		for (int i = 0; i < ids.size(); i++) {
 			if (i == i2) {
 				Distraction distraction = new Distraction(Integer.parseInt(ids
-						.get(i)), Integer.parseInt(emotionids.get(i)));
+						.get(i)), Integer.parseInt(emotionids.get(i)),texts.get(i));
 				distractions.add(distraction);
 			}
 		}

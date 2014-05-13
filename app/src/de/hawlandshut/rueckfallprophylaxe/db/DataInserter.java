@@ -105,12 +105,22 @@ public class DataInserter {
 	}
 
 	private void insertDistractions(List<JsonDistraction> distractions) {
+		HashMap<String, String> emos = new HashMap<String, String>();
 		for (JsonDistraction distraction : distractions) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
+			emos.put(distraction.getEmotionID_fk(), distraction.getEmotion_text());
 			hashMap.put("emotionID_fk", distraction.getEmotionID_fk());
 			hashMap.put("text", distraction.getText());
 
 			tables.insert("spl_distraction", hashMap);
+		}
+		
+		for(String emo_id: emos.keySet()) {
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap.put("emotionID", emo_id);
+			hashMap.put("emotion", emos.get(emo_id));
+			
+			tables.insert("spl_emotion", hashMap);
 		}
 	}
 

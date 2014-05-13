@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -181,6 +182,7 @@ public class DiaryNewEntryActivity extends Activity {
 					
 						// Date
 						selectedDate = datePicker.getSelectedDate();
+						Log.d("Datum", selectedDate.toString());
 					
 					// Create DiaryEntry object
 					DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
@@ -192,11 +194,13 @@ public class DiaryNewEntryActivity extends Activity {
 					db.InitializeSQLCipher(pin);
 					MyTables myTables = db.getTables();
 					
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
+					
 					// Create hash map for main table
 					HashMap<String, String> myHashMap = new HashMap<String, String>();
 					myHashMap.put("title", titleText);
 					myHashMap.put("content", entryText);
-					myHashMap.put("created", selectedDate.toString());
+					myHashMap.put("created", dateFormat.format(selectedDate));
 					
 					myTables.insert("spl_diary_entry", myHashMap);
 					

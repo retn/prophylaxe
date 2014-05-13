@@ -42,7 +42,7 @@ import android.widget.Toast;
  *
  */
 public class DiaryNewEntryActivity extends Activity {
-
+	private DiaryEntry existingEntry;
 	private DiaryNewEntryPictureManager pictureManager;
 	private TextView DateEntry;
 	private static int REQUEST_LOAD_IMAGE_FILE = 1;
@@ -64,6 +64,17 @@ public class DiaryNewEntryActivity extends Activity {
 		        R.array.mood_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
+
+		// Let the datePicker appear when user clicks the date text field
+		addListenerOnEntryDateText(); 
+		
+		pictureManager = new DiaryNewEntryPictureManager(this);
+		datePicker = new DiaryDatePickerFragment(this);
+		
+		Intent i = getIntent();
+		
+		// Load selected Entry
+		existingEntry = (DiaryEntry)i.getSerializableExtra("diaryEntry");
 		
 		try {
 			// Fills input fields with default values or existing ones
@@ -73,12 +84,8 @@ public class DiaryNewEntryActivity extends Activity {
 			e.printStackTrace();
 		} 
 		
-		// Let the datePicker appear when user clicks the date text field
-		addListenerOnEntryDateText(); 
-		
-		pictureManager = new DiaryNewEntryPictureManager(this);
-		datePicker = new DiaryDatePickerFragment(this);
 	}
+
 	
 	//Creating Context Menu
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -133,16 +140,35 @@ public class DiaryNewEntryActivity extends Activity {
 	    
 	}
 
-	
+	/**
+	 * Fills input fields with default or existing values
+	 * @throws ParseException
+	 */
 	private void fillInputFields() throws ParseException {
-
-		// Set date into date picker text field
-		// TODO: Get date of existing entry
 		
-		// New entry -> Current date
-		Time currentTime = new Time();
-		currentTime.setToNow();
-		fillInputField_date(currentTime.monthDay, currentTime.month, currentTime.year);
+		if (existingEntry == null) {
+			// New entry -> Current date
+			Time currentTime = new Time();
+			currentTime.setToNow();
+			fillInputField_date(currentTime.monthDay, currentTime.month, currentTime.year);
+		} else {
+			// Date
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
+			String currentDate = dateFormat.format(existingEntry.getCreated());
+			
+			// Set datePicker text field to current date string
+			TextView datePickerText = (TextView) findViewById(R.id.entryDateText);
+			datePickerText.setText(currentDate);
+	
+			// Title
+			TextView title = (TextView) this.findViewById(R.id.title);
+			title.setText(existingEntry.getTitle());
+			
+			// Entry
+			TextView entry = (EditText) this.findViewById(R.id.entry);
+			entry.setText(existingEntry.getContent());
+		}
+
 	}
 	
 	public void fillInputField_date(int day, int month, int year) throws ParseException {
@@ -173,7 +199,7 @@ public class DiaryNewEntryActivity extends Activity {
 					
 					// Collect data
 						// Title text
-						EditText title = (EditText) findViewById(R.id.entry);
+						EditText title = (EditText) findViewById(R.id.title);
 						String titleText = title.getText().toString();
 					
 						// Entry text

@@ -1,32 +1,24 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import com.google.gson.JsonSyntaxException;
-
-import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
-import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
-import de.hawlandshut.rueckfallprophylaxe.db.Database;
-import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.NavUtils;
+import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
 
 //TODO: Load existing entrys and add to the view
 public class DiaryEntryListActivity extends Activity {
@@ -96,13 +88,22 @@ public class DiaryEntryListActivity extends Activity {
 		ScrollView scrollView = new ScrollView(this);
 		
 		// Create TableLayout
-		TableLayout tbl=new TableLayout(this);
+		TableLayout tbl = new TableLayout(this);
 		tbl.setPadding(30, 30, 30, 30);
 		TableRow.LayoutParams fieldparams = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
 		
 		// Loop through all entries
 		for (DiaryEntry entry:Entries) {
+			
+			// Create onclick listener
+			DiaryOnClickListener onClickListener = new DiaryOnClickListener(entry, this);
 
+			// Create TableRow container
+			TableLayout trContainer = new TableLayout(this);
+			
+			trContainer.setOnClickListener(onClickListener);
+			
+			
 			// Create TableRow for entry date
 			
 				TableRow trDate=new TableRow(this);
@@ -117,6 +118,8 @@ public class DiaryEntryListActivity extends Activity {
 				
 				trDate.addView(date);
 				
+				// trDate.setOnClickListener(onclickListener);
+
 			// Create TableRow for entry title
 			TableRow trTitle=new TableRow(this);
 			
@@ -144,9 +147,10 @@ public class DiaryEntryListActivity extends Activity {
 				trContent.addView(content);
 				
 			// Add rows to table view
-			tbl.addView(trDate);
-			tbl.addView(trTitle);
-			tbl.addView(trContent);
+			trContainer.addView(trDate);
+			trContainer.addView(trTitle);
+			trContainer.addView(trContent);
+			tbl.addView(trContainer);
 
 		}
 		

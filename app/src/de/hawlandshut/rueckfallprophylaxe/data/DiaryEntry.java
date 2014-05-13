@@ -1,9 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
-public class DiaryEntry {
+public class DiaryEntry implements Serializable {
 
 	int id;
 	String title;

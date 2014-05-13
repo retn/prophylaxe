@@ -183,6 +183,7 @@ public class ControllerData {
 			try {
 				//Log.d("fetchDiaryEntries ", "Lade Eintrag mit ID: "+ids.get(i));
 				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Titel: "+titles.get(i));
+				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Content: "+contens.get(i));
 				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Datum: "+createds.get(i));
 				
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
@@ -190,10 +191,8 @@ public class ControllerData {
 				
 				entry = new DiaryEntry(Integer.parseInt(ids.get(i)),
 						titles.get(i), contens.get(i),  dateFormat.parse(createds.get(i)), 0, null);
-				
-				
-				
-				Log.d("fetchDiaryEntries ", entry.toString());
+
+				//Log.d("fetchDiaryEntries ", entry.toString());
 				diaryEntries.add(entry);
 			} catch (NumberFormatException e) {
 				

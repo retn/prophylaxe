@@ -211,7 +211,7 @@ public class DiaryNewEntryActivity extends Activity {
 						Log.d("Datum", selectedDate.toString());
 					
 					// Create DiaryEntry object
-					DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
+					// DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
 					
 					// Get database object
 					PinShare myApp = PinShare.getInstance();
@@ -228,11 +228,25 @@ public class DiaryNewEntryActivity extends Activity {
 					myHashMap.put("content", entryText);
 					myHashMap.put("created", dateFormat.format(selectedDate));
 					
-					myTables.insert("spl_diary_entry", myHashMap);
+					// Create new entry
+					if (existingEntry == null) {
+						myTables.insert("spl_diary_entry", myHashMap);
+					} 
+					// Update existing entry
+					else {
+						String existingEntryID = ""+existingEntry.getId(); // Cast id to string
+						myTables.update("spl_diary_entry", myHashMap, existingEntryID, "id");
+						
+						// TODO: Delete pictures that were moved to trash
+					}
+					
+					// TODO: Save emotions
+					
+					// TODO: Save new pictures
 					
 					db.close();
 					
-					// Refresh db
+					// TODO: Refresh db
 					
 					
 					Toast.makeText(this, "Eintrag gespeichert",

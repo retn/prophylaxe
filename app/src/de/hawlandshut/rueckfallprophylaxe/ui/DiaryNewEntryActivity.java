@@ -206,6 +206,8 @@ public class DiaryNewEntryActivity extends Activity {
 					
 					db.close();
 					
+					// Refresh db
+					
 					
 					Toast.makeText(this, "Eintrag gespeichert",
 							Toast.LENGTH_LONG).show();

@@ -6,12 +6,9 @@ import java.util.List;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.HelpPerson;
 import de.hawlandshut.rueckfallprophylaxe.data.LimitRelapse;
-import de.hawlandshut.rueckfallprophylaxe.data.RiskSituation;
 import de.hawlandshut.rueckfallprophylaxe.data.SafetyAction;
 import de.hawlandshut.rueckfallprophylaxe.data.SafetyThought;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +16,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Created with IntelliJ IDEA.

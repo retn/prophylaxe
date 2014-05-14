@@ -1,6 +1,5 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hawlandshut.rueckfallprophylaxe.data.PlaceToGo;

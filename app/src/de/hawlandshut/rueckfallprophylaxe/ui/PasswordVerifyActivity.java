@@ -5,7 +5,6 @@ import java.util.List;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
-import de.hawlandshut.rueckfallprophylaxe.net.Data;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
 import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 import android.app.Activity;
@@ -16,7 +15,6 @@ import android.content.Intent;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -121,7 +119,7 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 						sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp());
 					}
 
-					ControllerData cd = new ControllerData(db);
+					new ControllerData(db);
 
 					db.close();
 				} catch (Exception e) {

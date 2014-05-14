@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.net.Data;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
@@ -105,15 +103,17 @@ public class DataInserter {
 		for (JsonDistraction distraction : distractions) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			emos.put(distraction.getEmotionID_fk(), distraction.getEmotion_text());
+
 			hashMap.put("emotionID_fk", distraction.getEmotionID_fk());
 			hashMap.put("text", distraction.getText());
+			
+			Log.d("emotiondebug", "EIDFK: " + distraction.getEmotionID_fk() + " " + distraction.getText());
 
 			tables.insert("spl_distraction", hashMap);
 		}
 		
 		Set<String> emo_keys = emos.keySet();
 		for(String emo_id: emo_keys) {
-			Log.d("emotions_db", emo_id + " ");
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("emotionID", emo_id);
 			hashMap.put("emotion", emos.get(emo_id));

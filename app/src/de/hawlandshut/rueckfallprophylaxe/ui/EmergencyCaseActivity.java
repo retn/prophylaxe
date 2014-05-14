@@ -1,42 +1,30 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Path;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
-import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
-import de.hawlandshut.rueckfallprophylaxe.data.EmergencyCase;
 import de.hawlandshut.rueckfallprophylaxe.data.RiskSituation;
-import de.hawlandshut.rueckfallprophylaxe.db.Database;
 
 /**
  * Created with IntelliJ IDEA.
@@ -90,7 +78,7 @@ public class EmergencyCaseActivity extends Activity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast=Toast.makeText(EmergencyCaseActivity.this, "Wähle Foto", Toast.LENGTH_LONG);
+                Toast toast=Toast.makeText(EmergencyCaseActivity.this, "Wï¿½hle Foto", Toast.LENGTH_LONG);
                 toast.show();
                 imageFromGallery();
                 copyImage();
@@ -146,7 +134,7 @@ public class EmergencyCaseActivity extends Activity {
 	private void copyImage() {
 		try {
                 File source= new File(mSelectedImagePath);
-        		Toast toast1=Toast.makeText(EmergencyCaseActivity.this, "Bild ausgewählt", Toast.LENGTH_LONG);
+        		Toast toast1=Toast.makeText(EmergencyCaseActivity.this, "Bild ausgewï¿½hlt", Toast.LENGTH_LONG);
                 toast1.show();
                 if (source.exists()) {
                 	InputStream is=new FileInputStream(source);

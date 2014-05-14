@@ -10,7 +10,6 @@ import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.PlaceToGo;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 public class ContactpointMapActivity extends Activity {

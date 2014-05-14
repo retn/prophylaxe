@@ -77,11 +77,25 @@ public class MyTables {
 		List<String> result= new ArrayList<String>();
 		Cursor c = sqldatabase.rawQuery("SELECT "+value+" FROM "+table, null);
 
-		if (c.moveToFirst()) {int i=0;
+		if (c.moveToFirst()) {
 		    while ( !c.isAfterLast() ) {
 		    	result.add(c.getString(c.getColumnIndex(value)));
 		        c.moveToNext();
-		        i++;
+		    }
+		}
+		c.close();
+		 
+		return result;
+	}
+	
+	public List<String> query(String table, String value, String comparison) {
+		List<String> result= new ArrayList<String>();
+		Cursor c = sqldatabase.rawQuery("SELECT "+value+" FROM "+table+" WHERE "+comparison, null);
+
+		if (c.moveToFirst()) {
+		    while ( !c.isAfterLast() ) {
+		    	result.add(c.getString(c.getColumnIndex(value)));
+		        c.moveToNext();
 		    }
 		}
 		c.close();
@@ -116,7 +130,7 @@ public class MyTables {
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_ec_help_person\"(\"ehpID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"name\" VARCHAR(45),\"phone_number\" VARCHAR(45))");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_ec_limit_relapse\"(\"elrID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"text\" TINYTEXT);");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_maxim\"(\"maximID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"text\" INTEGER)");
-		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_emotion\"(\"emotionID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"emotion\" VARCHAR(45))");
+		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_emotion\"(\"emotionID\" INTEGER PRIMARY KEY NOT NULL,\"emotion\" VARCHAR(45))");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_place_to_go\"(\"ptgID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"name\" VARCHAR(45),\"street\" VARCHAR(100),\"plz\" VARCHAR(10),\"town\" VARCHAR(45),\"phone_number\" VARCHAR(45),\"email\" VARCHAR(45))");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_diary_entry\"(\"id\" INTEGER PRIMARY KEY NOT NULL,\"title\" VARCHAR(45),\"content\" TEXT,\"created\" DATETIME)");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_diary_entry_has_picture\"( \"id\" INTEGER PRIMARY KEY NOT NULL, \"entryID\" INTEGER, \"picture\" BLOB, CONSTRAINT \"id\" FOREIGN KEY(\"entryID\") REFERENCES \"spl_diary_entry\"(\"id\"))");
@@ -127,9 +141,5 @@ public class MyTables {
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_distraction\"( \"distractionID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"emotionID_fk\" INTEGER NOT NULL, \"text\" VARCHAR(45), CONSTRAINT \"fk_distraction_emotion1\" FOREIGN KEY(\"emotionID_fk\") REFERENCES \"spl_emotion\"(\"emotionID\"))");
 		sqldatabase.execSQL("CREATE INDEX IF NOT EXISTS \"spl_distraction.fk_distraction_emotion1_idx\" ON \"spl_distraction\"(\"emotionID_fk\")");
 			
-	}
-	
-	private void createExampleTable() {
-		sqldatabase.execSQL("create table if not exists t1(a varchar(255), b varchar(255))");
 	}
 }

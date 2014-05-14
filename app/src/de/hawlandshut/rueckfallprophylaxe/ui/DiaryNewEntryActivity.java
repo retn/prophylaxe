@@ -252,9 +252,12 @@ public class DiaryNewEntryActivity extends Activity {
 					// Create new entry
 					if (existingEntry == null) {
 						
+						
 						// Get ID of new entry
 						int newDiaryEntryID = DiaryEntryDatabase.getLastID()+1;
 						String DiaryEntryIDString = ""+newDiaryEntryID;
+						
+						Log.d("DiaryEntrySave", "Erstelle neuen Eintrag mit ID: "+newDiaryEntryID);
 						
 						// Insert main table data
 						myTables.insert("spl_diary_entry", myHashMap);
@@ -274,7 +277,8 @@ public class DiaryNewEntryActivity extends Activity {
 					else {
 						// ID of existing entry
 						String DiaryEntryIDString = ""+existingEntry.getId();
-	
+						// Log.d("DiaryNewEntrySave","Update Entry "+DiaryEntryIDString);
+						
 						myTables.update("spl_diary_entry", myHashMap, DiaryEntryIDString, "id");
 						
 						// Create hashmap for emotions
@@ -283,7 +287,7 @@ public class DiaryNewEntryActivity extends Activity {
 						myHashMap1.put("emotionID", selectedMoodID);
 						
 						myTables.update("spl_diary_entry_has_mood", myHashMap1, DiaryEntryIDString, "entryID");
-						
+						Log.d("DiaryNewEntrySave","Update Entry "+DiaryEntryIDString+" mit Emotion ID "+selectedMoodID);
 						// TODO: Delete pictures that were moved to trash
 					}
 					

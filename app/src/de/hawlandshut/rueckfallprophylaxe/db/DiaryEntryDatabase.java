@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.gson.JsonSyntaxException;
 
 import android.content.Context;
+import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
 import de.hawlandshut.rueckfallprophylaxe.ui.PinShare;
@@ -31,6 +32,8 @@ public class DiaryEntryDatabase {
 		Entries = ControllerData.getDiaryEntries();
 		
 		DiaryEntry lastDiaryEntry = Entries.get(Entries.size()-1);
+
+		Log.d("DiaryEntryDatabase","Letzter Key lautet "+lastDiaryEntry.getId());
 		
 		return lastDiaryEntry.getId();
 	}
@@ -59,5 +62,6 @@ public class DiaryEntryDatabase {
 		// Fetch diary entries
 		ControllerData cd = new ControllerData(db,true);
 
+		db.close();
 	}
 }

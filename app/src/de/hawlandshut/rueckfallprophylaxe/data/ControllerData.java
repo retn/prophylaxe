@@ -187,7 +187,7 @@ public class ControllerData {
 		for (int i = 0; i < ids.size(); i++) {
 			DiaryEntry entry;
 			try {
-				//Log.d("fetchDiaryEntries ", "Lade Eintrag mit ID: "+ids.get(i));
+				Log.d("fetchDiaryEntries ", "Lade Eintrag mit ID: "+ids.get(i));
 				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Titel: "+titles.get(i));
 				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Content: "+contens.get(i));
 				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Datum: "+createds.get(i));

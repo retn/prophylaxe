@@ -93,7 +93,7 @@ public class DiaryEntry implements Serializable {
 	}
 
 	public void setEmotionId(int id) {
-		this.id=id;
+		this.emotionId=id;
 		
 	}
 

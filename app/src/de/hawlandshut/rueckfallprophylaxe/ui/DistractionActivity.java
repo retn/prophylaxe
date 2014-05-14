@@ -2,13 +2,13 @@ package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.Emotion;
 import de.hawlandshut.rueckfallprophylaxe.data.Distraction;
@@ -51,8 +51,10 @@ public class DistractionActivity extends Activity {
 	}
 	
 	public Emotion getEmotion(){
+		String e1 = emotion.trim().toLowerCase(Locale.getDefault());
 		for(Emotion e: emotions.values()){
-			if(e.getName().trim().toLowerCase().equals(emotion.trim().toLowerCase())) {
+			String e2 = e.getName().trim().toLowerCase(Locale.getDefault());
+			if(e1.equals(e2)) {
 				return e;
 			}
 		}

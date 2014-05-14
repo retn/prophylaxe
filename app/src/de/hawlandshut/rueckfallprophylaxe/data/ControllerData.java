@@ -13,7 +13,6 @@ import android.util.Log;
 
 import com.google.gson.JsonSyntaxException;
 
-import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.data.Media.Type;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
@@ -34,6 +33,7 @@ public class ControllerData {
 	private static List<SafetyThought> safetyThought;
 	private static List<EmergencyCase> emergencyCase;
 
+	//constructor calls "fetch"-functions which are loading database stuff into classes
 	public ControllerData(Database database) throws JsonSyntaxException,
 			IOException {
 		tables = database.getTables();
@@ -137,6 +137,7 @@ public class ControllerData {
 		HashMap<Integer, Emotion> emotions = new HashMap<Integer, Emotion>();
 		for (int i = 0; i < ids.size(); i++) {
 			int id = Integer.parseInt(ids.get(i));
+			Log.d("emotiondebug", "EID: " + id + " | " + texts.get(i));
 			List<Distraction> distractions = fetchDistractions(id);
 			Emotion emotion = new Emotion(id, texts.get(i), distractions);
 			emotions.put(id, emotion);
@@ -145,16 +146,14 @@ public class ControllerData {
 	}
 
 	private List<Distraction> fetchDistractions(int emotion_id) {
-		List<String> ids = tables.query("spl_distraction", "distractionID");
-		List<String> texts=tables.query("spl_distraction", "text");
-		List<String> emotionids = tables.query("spl_distraction", "emotionID_fk"); // ?
+		List<String> ids = tables.query("spl_distraction", "distractionID", "emotionID_fk = "+emotion_id);
+		List<String> texts = tables.query("spl_distraction", "text", "emotionID_fk = "+emotion_id);
 		List<Distraction> distractions = new ArrayList<Distraction>();
 		for (int i = 0; i < ids.size(); i++) {
-			if (Integer.parseInt(emotionids.get(i)) == emotion_id) {
 				Distraction distraction = new Distraction(Integer.parseInt(ids
-						.get(i)), Integer.parseInt(emotionids.get(i)),texts.get(i));
+						.get(i)), emotion_id, texts.get(i));
+				Log.d("emotiondebug", "\tEIDFK: " + emotion_id + " | " + texts.get(i));
 				distractions.add(distraction);
-			}
 		}
 		return distractions;
 	}

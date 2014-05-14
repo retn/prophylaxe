@@ -9,8 +9,6 @@ import android.util.Log;
 /**
  * Datenbank-Verbindungs Klasse
  *
- * TODO
- * * implementieren
  */
 public class Database {
 	private Context context;

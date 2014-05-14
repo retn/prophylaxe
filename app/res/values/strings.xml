@@ -49,7 +49,7 @@
     <string name="title_activity_koffer2">Notfall Koffer 2</string>
     <string name="btn_saveDiaryEntry">Speichern</string>
     <string name="title_password_determine">Passwort erstellen</string>
-    <string name="title_password_verify">Passwortabfrage</string>
+    <string name="title_password_verify">Rückfallprophylaxe</string>
     <string name="toast_thats_no_email">Das ist keine E-mailadresse</string>
     <string name="toast_no_token_entered">Bitte Token angeben</string>
     <string name="toast_pins_not_equal">PIN\'s unterscheiden sich</string>
@@ -67,5 +67,6 @@
     <string name="help_people">Ich brauche Hilfe</string>
     <string name="notfall">Notfall</string>
     <string name="title_activity_koffer3">Notfall Koffer 3</string>
+    <string name="limit_relapse">Meine Notfallschritte um 2. Glas zu verhindern:</string>
 
 </resources>

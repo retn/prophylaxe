@@ -6,12 +6,9 @@ import java.util.List;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.HelpPerson;
 import de.hawlandshut.rueckfallprophylaxe.data.LimitRelapse;
-import de.hawlandshut.rueckfallprophylaxe.data.RiskSituation;
 import de.hawlandshut.rueckfallprophylaxe.data.SafetyAction;
 import de.hawlandshut.rueckfallprophylaxe.data.SafetyThought;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +16,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,10 +33,28 @@ public class EmergencyCaseTwoActivity extends Activity {
         this.setSafetyActions();
         this.setSafetyThoughts();
         this.setHelpPeople();
+        this.setLimitRelapses();
 
 		
 
     }
+
+	private void setLimitRelapses() {
+		List<LimitRelapse> limitRelapses= ControllerData.getLimitrelapse();
+		
+        final ListView listview = (ListView) findViewById(R.id.limit_relapse);
+        if(listview==null)return;
+        final List<String> list = new ArrayList<String>();
+        for (int i = 0; i < limitRelapses.size(); ++i) {
+            list.add(limitRelapses.get(i).getText());
+        }
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, list);
+        listview.setAdapter(adapter);
+        listview.setSelector(android.R.color.transparent); 
+		
+		
+	}
 
 	private void setHelpPeople() {
 		final List<HelpPerson> helpPeople=ControllerData.getHelpPeople(); 
@@ -80,6 +94,7 @@ public class EmergencyCaseTwoActivity extends Activity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
+        listview.setSelector(android.R.color.transparent); 
 		
 	}
 
@@ -95,44 +110,10 @@ public class EmergencyCaseTwoActivity extends Activity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
-        
-        listview.setOnItemClickListener(new ListView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				showPopUp(arg2);
-				
-			}
-		});
-		
+        listview.setSelector(android.R.color.transparent); 
+
 	}
 	
-	private void showPopUp(int i) {
-		String message="";
-		//not final!!!
-		List<LimitRelapse> limitRelapses= ControllerData.getLimitrelapse();
-		for(LimitRelapse limitRelapse :limitRelapses){
-			if(limitRelapse.getId()==i+1){
-				message=message+limitRelapse.getText()+"\r\n";
-			}
-		}
-
-		 AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
-		 helpBuilder.setMessage(message);
-		 final AlertDialog helpDialog = helpBuilder.create();
-		 helpDialog.show();
-
-		 
-		 helpBuilder.setNeutralButton("Schlieﬂen", new DialogInterface.OnClickListener() {
-		
-		  @Override
-		  public void onClick(DialogInterface dialog, int which) {
-			  helpDialog.dismiss();;
-		  }
-		 });
-
-
-		}
 
 
 }

@@ -1,9 +1,12 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import com.google.gson.JsonSyntaxException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,12 +14,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -24,12 +25,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
 
 //TODO: Load existing entrys and add to the view
 public class DiaryEntryListActivity extends Activity {
 	
 	List<DiaryEntry> Entries;
+	ScrollView scrollView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,10 @@ public class DiaryEntryListActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
-		loadAndDrawEntries();
+		Toast.makeText(getApplicationContext(), "Resume..",Toast.LENGTH_LONG).show();
+		
+		Entries = ControllerData.getDiaryEntries();
+		removeAllViewsAndDraw();
 	}
 
 	//Creating Context Menu
@@ -69,14 +75,33 @@ public class DiaryEntryListActivity extends Activity {
 		switch (item.getItemId()) {
 		case 0:
 			DiaryEntryDatabase diaryEntryDB = new DiaryEntryDatabase(myTag, this);
-			diaryEntryDB.deleteFromDB();
-			tableLayout.setVisibility(View.GONE);
+			try {
+				
+				// Delete from db and refresh data
+				diaryEntryDB.deleteFromDB();
+				Entries = ControllerData.getDiaryEntries();
+				
+			} catch (JsonSyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			removeAllViewsAndDraw();
+
 			Toast.makeText(getApplicationContext(), "Eintrag wurde entfernt",Toast.LENGTH_LONG).show();
 			
 			break;
 
 		}
 		return super.onContextItemSelected(item);
+	}
+	
+	private void removeAllViewsAndDraw() {
+		scrollView.removeAllViews();
+		drawEntries();
 	}
 
 	/**
@@ -91,19 +116,17 @@ public class DiaryEntryListActivity extends Activity {
 	private void loadAndDrawEntries() {
 				
 		// Get database object
-		/* PinShare myApp = PinShare.getInstance();
+		PinShare myApp = PinShare.getInstance();
 		String pin = myApp.getPin();
 		Database db = new Database(this);
 		db.InitializeSQLCipher(pin);
-		
-		*/
 	
 		// Load and save entries
 		Entries = new ArrayList<DiaryEntry>();
 		Entries = ControllerData.getDiaryEntries();
 		
 		// Close database
-		// db.close();
+		db.close();
 		
 		// Debug
 		Toast.makeText(this, "Einträge geladen: "+Entries.size(),
@@ -117,7 +140,7 @@ public class DiaryEntryListActivity extends Activity {
 	private void drawEntries() {
 		
 		// Create scroll view
-		ScrollView scrollView = new ScrollView(this);
+		scrollView = new ScrollView(this);
 		
 		// Create TableLayout
 		TableLayout tbl = new TableLayout(this);

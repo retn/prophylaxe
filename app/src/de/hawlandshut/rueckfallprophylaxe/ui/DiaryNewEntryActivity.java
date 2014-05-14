@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
@@ -210,8 +211,7 @@ public class DiaryNewEntryActivity extends Activity {
 						selectedDate = datePicker.getSelectedDate();
 						Log.d("Datum", selectedDate.toString());
 					
-					// Create DiaryEntry object
-					// DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
+
 					
 					// Get database object
 					PinShare myApp = PinShare.getInstance();
@@ -231,6 +231,9 @@ public class DiaryNewEntryActivity extends Activity {
 					// Create new entry
 					if (existingEntry == null) {
 						myTables.insert("spl_diary_entry", myHashMap);
+						
+						// TODO: Create DiaryEntry object and set to existingEntry
+						// DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
 					} 
 					// Update existing entry
 					else {
@@ -244,10 +247,13 @@ public class DiaryNewEntryActivity extends Activity {
 					
 					// TODO: Save new pictures
 					
+					
+					
+					// Refresh db
+					ControllerData cd = new ControllerData(db,true);
+					cd.fetchDiaryEntries();
+					
 					db.close();
-					
-					// TODO: Refresh db
-					
 					
 					Toast.makeText(this, "Eintrag gespeichert",
 							Toast.LENGTH_LONG).show();

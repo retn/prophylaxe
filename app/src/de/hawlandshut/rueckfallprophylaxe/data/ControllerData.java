@@ -49,6 +49,11 @@ public class ControllerData {
 		emergencyCase=fetchEmergencyCase();
 	}
 
+	public ControllerData(Database database, boolean bla) {
+		tables = database.getTables();
+		diaryEntries = fetchDiaryEntries();
+	}
+	
 	private List<LimitRelapse> fetchLimitRelapse() {
 		List<String> ids = tables.query("spl_ec_limit_relapse", "elrID");
 		List<String> texts = tables.query("spl_ec_limit_relapse", "text");
@@ -167,8 +172,9 @@ public class ControllerData {
 		}
 		return helpPersons;
 	}
+	
 
-	private List<DiaryEntry> fetchDiaryEntries() {
+	public List<DiaryEntry> fetchDiaryEntries() {
 		List<DiaryEntry> diaryEntries = new ArrayList<DiaryEntry>();
 
 		List<String> ids = tables.query("spl_diary_entry", "id");

@@ -47,13 +47,12 @@ public class DiaryEntryListActivity extends Activity {
 	}
 	
 
-
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
+
 		super.onResume();
 		
-		Toast.makeText(getApplicationContext(), "Resume..",Toast.LENGTH_LONG).show();
+		// Toast.makeText(getApplicationContext(), "Resume..",Toast.LENGTH_LONG).show();
 		
 		Entries = ControllerData.getDiaryEntries();
 		removeAllViewsAndDraw();

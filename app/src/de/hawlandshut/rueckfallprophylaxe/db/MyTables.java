@@ -36,6 +36,7 @@ public class MyTables {
 	public MyTables(SQLiteDatabase sqldatabase) {
 		this.sqldatabase=sqldatabase;
 		createTables();
+		insertMoodEntries();
 		queryNumberTables();
 //		List<String> results=query("spl_emotion","emotion");
 
@@ -141,5 +142,18 @@ public class MyTables {
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_distraction\"( \"distractionID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"emotionID_fk\" INTEGER NOT NULL, \"text\" VARCHAR(45), CONSTRAINT \"fk_distraction_emotion1\" FOREIGN KEY(\"emotionID_fk\") REFERENCES \"spl_emotion\"(\"emotionID\"))");
 		sqldatabase.execSQL("CREATE INDEX IF NOT EXISTS \"spl_distraction.fk_distraction_emotion1_idx\" ON \"spl_distraction\"(\"emotionID_fk\")");
 			
+	}
+	
+	/**
+	 * Fills the spl_emotion table
+	 */
+	public void insertMoodEntries() {
+		sqldatabase.execSQL("INSERT OR IGNORE INTO \"spl_emotion\" (\"emotionID\", \"emotion\") VALUES (1, \"Angst\")");
+		sqldatabase.execSQL("INSERT OR IGNORE INTO \"spl_emotion\" (\"emotionID\", \"emotion\") VALUES (2, \"Aggression\")");
+		sqldatabase.execSQL("INSERT OR IGNORE INTO \"spl_emotion\" (\"emotionID\", \"emotion\") VALUES (3, \"Einsamkeit\")");
+		sqldatabase.execSQL("INSERT OR IGNORE INTO \"spl_emotion\" (\"emotionID\", \"emotion\") VALUES (4, \"Frust\")");
+		sqldatabase.execSQL("INSERT OR IGNORE INTO \"spl_emotion\" (\"emotionID\", \"emotion\") VALUES (5, \"Gut\")");
+		sqldatabase.execSQL("INSERT OR IGNORE INTO \"spl_emotion\" (\"emotionID\", \"emotion\") VALUES (6, \"Langeweile\")");
+		sqldatabase.execSQL("INSERT OR IGNORE INTO \"spl_emotion\" (\"emotionID\", \"emotion\") VALUES (7, \"Suchtdruck\")");
 	}
 }

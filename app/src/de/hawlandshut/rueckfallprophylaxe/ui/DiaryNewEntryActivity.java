@@ -10,7 +10,9 @@ import java.util.Locale;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.data.Emotions;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
+import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
 
 import android.app.Activity;
@@ -146,12 +148,16 @@ public class DiaryNewEntryActivity extends Activity {
 	 */
 	private void fillInputFields() throws ParseException {
 		
+		// New entry
 		if (existingEntry == null) {
 			// New entry -> Current date
 			Time currentTime = new Time();
 			currentTime.setToNow();
 			fillInputField_date(currentTime.monthDay, currentTime.month, currentTime.year);
-		} else {
+			
+		}
+		// Existing entry
+		else {
 			// Date
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
 			String currentDate = dateFormat.format(existingEntry.getCreated());
@@ -167,6 +173,13 @@ public class DiaryNewEntryActivity extends Activity {
 			// Entry
 			TextView entry = (EditText) this.findViewById(R.id.entry);
 			entry.setText(existingEntry.getContent());
+			
+			// Mood
+			Spinner emotionSpinner = (Spinner) this.findViewById(R.id.spinnerMood);
+			Toast.makeText(this, "Geladene emotion id: "+existingEntry.getEmotionId(),
+					Toast.LENGTH_LONG).show();
+			
+			emotionSpinner.setSelection(existingEntry.getEmotionId());
 		}
 
 	}
@@ -227,22 +240,54 @@ public class DiaryNewEntryActivity extends Activity {
 					myHashMap.put("content", entryText);
 					myHashMap.put("created", dateFormat.format(selectedDate));
 					
+					// Get id of selected emotion
+					Spinner emotionSpinner = (Spinner) findViewById(R.id.spinnerMood);
+					TextView emotionView = (TextView) emotionSpinner.getSelectedView();
+					
+					Emotions emotions = new Emotions();
+					String selectedMoodID = ""+emotions.getIDbyName((String) emotionView.getText());
+					
+					Log.d("DiaryEntrySave", "Ausgewählte Emotion ID: "+selectedMoodID);
+					
 					// Create new entry
 					if (existingEntry == null) {
+						
+						// Get ID of new entry
+						int newDiaryEntryID = DiaryEntryDatabase.getLastID()+1;
+						String DiaryEntryIDString = ""+newDiaryEntryID;
+						
+						// Insert main table data
 						myTables.insert("spl_diary_entry", myHashMap);
+						
+						// Create hashmap for emotions
+						HashMap<String, String> myHashMap1 = new HashMap<String, String>();
+						myHashMap1.put("entryID", DiaryEntryIDString);
+						myHashMap1.put("emotionID", selectedMoodID);
+						
+						myTables.insert("spl_diary_entry_has_mood", myHashMap1);
+						
 						
 						// TODO: Create DiaryEntry object and set to existingEntry
 						// DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
 					} 
 					// Update existing entry
 					else {
-						String existingEntryID = ""+existingEntry.getId(); // Cast id to string
-						myTables.update("spl_diary_entry", myHashMap, existingEntryID, "id");
+						// ID of existing entry
+						String DiaryEntryIDString = ""+existingEntry.getId();
+	
+						myTables.update("spl_diary_entry", myHashMap, DiaryEntryIDString, "id");
+						
+						// Create hashmap for emotions
+						HashMap<String, String> myHashMap1 = new HashMap<String, String>();
+						myHashMap1.put("entryID", DiaryEntryIDString);
+						myHashMap1.put("emotionID", selectedMoodID);
+						
+						myTables.update("spl_diary_entry_has_mood", myHashMap1, DiaryEntryIDString, "entryID");
 						
 						// TODO: Delete pictures that were moved to trash
 					}
 					
-					// TODO: Save emotions
+
 					
 					// TODO: Save new pictures
 					
@@ -369,7 +414,7 @@ public class DiaryNewEntryActivity extends Activity {
 		    builder.show();
 		} else {
 			// Error msg
-			showNeutralErrorDialog("Zul���ssige Anzahl von Bildern ���berschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
+			showNeutralErrorDialog("Zulässige Anzahl von Bildern überschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
 			
 		}
 	}

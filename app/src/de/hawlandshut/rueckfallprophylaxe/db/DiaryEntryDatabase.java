@@ -1,6 +1,8 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -17,6 +19,20 @@ public class DiaryEntryDatabase {
 	public DiaryEntryDatabase(DiaryEntry entry, Context context) {
 		this.entry = entry;
 		this.context = context;
+	}
+	
+	/**
+	 * Returns the id of the latest diary entry
+	 * @return
+	 */
+	public static int getLastID() {
+		List<DiaryEntry> Entries;
+		
+		Entries = ControllerData.getDiaryEntries();
+		
+		DiaryEntry lastDiaryEntry = Entries.get(Entries.size()-1);
+		
+		return lastDiaryEntry.getId();
 	}
 	
 	public void deleteFromDB() throws JsonSyntaxException, IOException  {
@@ -39,15 +55,9 @@ public class DiaryEntryDatabase {
 		
 		// Delete mood table
 		myTables.delete("spl_diary_entry_has_mood", idString, "entryID");
-		
-		//ControllerData cd = new ControllerData(db);
-		//cd.fetchDiaryEntries();
-		
+
 		// Fetch diary entries
 		ControllerData cd = new ControllerData(db,true);
-		
-		//db.close();
-		
 
 	}
 }

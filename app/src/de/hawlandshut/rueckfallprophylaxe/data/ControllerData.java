@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -211,7 +212,8 @@ public class ControllerData {
 
 		}
 		//fetchDiaryEntriesPicture(diaryEntries);
-		//fetchDiaryEntriesMood(diaryEntries);
+		
+		fetchDiaryEntriesMood(diaryEntries);
 		
 		Log.d("fetchDiaryEntries ", diaryEntries.size()+" Einträge geladen");
 		return diaryEntries;
@@ -244,6 +246,8 @@ public class ControllerData {
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entryids.size(); i++) {
 				if (entry.getId() == Integer.parseInt(entryids.get(i))) {
+					
+					Log.d("fetchDiaryEntries", "Emotion gefunden für Entry ID "+entry.getId()+", Emotion ID "+Integer.parseInt(emotionids.get(i)));
 					entry.setEmotionId(Integer.parseInt(emotionids.get(i)));
 				}
 			}

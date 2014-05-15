@@ -91,6 +91,26 @@ public class MyTables {
 		return result;
 	}
 	
+	//returns list of attributs from a table
+	public List<List<String>> queryFullTable(String table) {
+		List<List<String>> result= new ArrayList<List<String>>();
+		Cursor c = sqldatabase.rawQuery("SELECT * FROM "+table, null);
+
+		if (c.moveToFirst()) {
+		    while ( !c.isAfterLast() ) {
+		    	List<String> resultRow=new ArrayList<String>();
+		    	for(int i=0;i<c.getColumnCount();i++){
+		    		resultRow.add(c.getString(i));
+		    	}
+		        c.moveToNext();
+		        result.add(resultRow);
+		    }
+		}
+		c.close();
+		 
+		return result;
+	}	
+	
 	public List<String> query(String table, String value, String comparison) {
 		List<String> result= new ArrayList<String>();
 		Cursor c = sqldatabase.rawQuery("SELECT "+value+" FROM "+table+" WHERE "+comparison, null);

@@ -220,43 +220,34 @@ public class ControllerData {
 	}
 
 	private void fetchDiaryEntriesPicture(List<DiaryEntry> diaryEntries2) {
-		List<String> ids = tables.query("spl_diary_entry_has_picture", "iD");
-		List<String> entryids = tables.query("spl_diary_entry_has_picture",
-				"entryID");
-
+		List<List<String>> entries = tables.queryFullTable("spl_diary_entry_has_picture");
 		for (DiaryEntry entry : diaryEntries2) {
-			for (int i = 0; i < entryids.size(); i++) {
-				if (entry.getId() == Integer.parseInt(entryids.get(i))) {
-					Media media = new Media(Integer.parseInt(ids.get(i)),
+			for (int i = 0; i < entries.size(); i++) {
+				if (entry.getId() == Integer.parseInt(entries.get(i).get(1))) {
+					Media media = new Media(Integer.parseInt(entries.get(i).get(0)),
 							entry.getId(), Type.Image);
 					entry.setMedia(new Media[] { media });
-					;
 				}
 			}
 
 		}
+		
 	}
 
 	private void fetchDiaryEntriesMood(List<DiaryEntry> diaryEntries2) {
-		List<String> entryids = tables.query("spl_diary_entry_has_mood",
-				"entryID");
-		List<String> emotionids = tables.query("spl_diary_entry_has_mood",
-				"emotionID");
-		
-		Log.d("fetchDiaryEntriesMood", entryids.toString());
-		Log.d("fetchDiaryEntriesMood", emotionids.toString());
 
+		List<List<String>> entries = tables.queryFullTable("spl_diary_entry_has_mood");
+		Log.d("fetchDiaryEntriesMood", entries.toString());
 		for (DiaryEntry entry : diaryEntries2) {
-			for (int i = 0; i < entryids.size(); i++) {
-				if (entry.getId() == Integer.parseInt(entryids.get(i))) {
+			for (int i = 0; i < entries.size(); i++) {
+				if (entry.getId() == Integer.parseInt(entries.get(i).get(0))) {
 					
-					Log.d("fetchDiaryEntries", "Emotion gefunden für Entry ID "+entry.getId()+", Emotion ID "+Integer.parseInt(emotionids.get(i)));
-					entry.setEmotionId(Integer.parseInt(emotionids.get(i)));
+					Log.d("fetchDiaryEntries", "Emotion gefunden für Entry ID "+entry.getId()+", Emotion ID "+Integer.parseInt(entries.get(i).get(1)));
+					entry.setEmotionId(Integer.parseInt(entries.get(i).get(1)));
 				}
 			}
 
 		}
-
 	}
 
 	private List<PlaceToGo> fetchPlacesToGo() throws JsonSyntaxException,

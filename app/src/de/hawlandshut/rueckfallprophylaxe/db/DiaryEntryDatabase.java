@@ -31,11 +31,16 @@ public class DiaryEntryDatabase {
 		
 		Entries = ControllerData.getDiaryEntries();
 		
-		DiaryEntry lastDiaryEntry = Entries.get(Entries.size()-1);
-
-		Log.d("DiaryEntryDatabase","Letzter Key lautet "+lastDiaryEntry.getId());
+		if (Entries.size() > 0) {
+			DiaryEntry lastDiaryEntry = Entries.get(Entries.size()-1);
+			
+			Log.d("DiaryEntryDatabase","Letzter Key lautet "+lastDiaryEntry.getId());
+			
+			return lastDiaryEntry.getId();
+		}
 		
-		return lastDiaryEntry.getId();
+		return 0;
+
 	}
 	
 	public void deleteFromDB() throws JsonSyntaxException, IOException  {

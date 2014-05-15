@@ -282,11 +282,11 @@ public class DiaryNewEntryActivity extends Activity {
 						myTables.update("spl_diary_entry", myHashMap, DiaryEntryIDString, "id");
 						
 						// Create hashmap for emotions
-						HashMap<String, String> myHashMap1 = new HashMap<String, String>();
-						myHashMap1.put("entryID", DiaryEntryIDString);
-						myHashMap1.put("emotionID", selectedMoodID);
+						HashMap<String, String> emotionHashmap = new HashMap<String, String>();
+						emotionHashmap.put("entryID", DiaryEntryIDString);
+						emotionHashmap.put("emotionID", selectedMoodID);
 						
-						myTables.update("spl_diary_entry_has_mood", myHashMap1, DiaryEntryIDString, "entryID");
+						myTables.update("spl_diary_entry_has_mood", emotionHashmap, DiaryEntryIDString, "entryID");
 						Log.d("DiaryEntrySave","Update Entry "+DiaryEntryIDString+" mit Emotion ID "+selectedMoodID);
 						// TODO: Delete pictures that were moved to trash
 					}

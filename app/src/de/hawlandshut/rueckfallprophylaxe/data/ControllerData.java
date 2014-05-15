@@ -242,6 +242,9 @@ public class ControllerData {
 				"entryID");
 		List<String> emotionids = tables.query("spl_diary_entry_has_mood",
 				"emotionID");
+		
+		Log.d("fetchDiaryEntriesMood", entryids.toString());
+		Log.d("fetchDiaryEntriesMood", emotionids.toString());
 
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entryids.size(); i++) {

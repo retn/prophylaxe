@@ -45,8 +45,10 @@ public class MyTables {
 	//updates database, needs table hashmap with attributs, index and the column name of id
 	public boolean update(String table, HashMap<String, String> hashMap,
 			String index, String column) {
+		
 		ContentValues values=new ContentValues();
-		for(Map.Entry<String, String> entry: hashMap.entrySet()){
+		for(Map.Entry<String, String> entry: hashMap.entrySet()) {
+			Log.d("dbUpdate", "key: "+entry.getKey()+", val: "+entry.getValue());
 			values.put(entry.getKey(),entry.getValue());
 		}
 		

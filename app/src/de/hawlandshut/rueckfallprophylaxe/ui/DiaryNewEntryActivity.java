@@ -179,7 +179,7 @@ public class DiaryNewEntryActivity extends Activity {
 			Toast.makeText(this, "Geladene emotion id: "+existingEntry.getEmotionId(),
 					Toast.LENGTH_LONG).show();
 			
-			emotionSpinner.setSelection(existingEntry.getEmotionId());
+			emotionSpinner.setSelection(existingEntry.getEmotionId()-1);
 		}
 
 	}

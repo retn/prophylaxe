@@ -6,12 +6,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import de.hawlandshut.rueckfallprophylaxe.data.PlaceToGo;
 import android.util.Log;
 
 /**
@@ -74,6 +76,24 @@ public class RequestJson {
 				sendRequestContactPoint(),
 				new TypeToken<List<JsonContactPoint>>() {
 				}.getType());
+		
+		for (JsonContactPoint cp: contactPoints) {
+			String search = URLEncoder
+					.encode(cp.getStreet().replace("str.", "straße") + " "
+							+ cp.getPlz() + " " + cp.getTown() + " Deutschland",
+							"UTF-8");
+
+			JsonAddress address = getAddress(search);
+
+			double lat = address.getResults().get(0).getGeometry()
+					.getLocation().getLat();
+			double lng = address.getResults().get(0).getGeometry()
+					.getLocation().getLng();
+
+			cp.setLat(lat);
+			cp.setLng(lng);
+		}
+		
 		return contactPoints;
 	}
 	

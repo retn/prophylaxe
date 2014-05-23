@@ -28,14 +28,29 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" android:name="PinShare">
         
+        <activity 
+            android:name="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity">
+        </activity>
+		<activity 
+		    android:name="de.hawlandshut.rueckfallprophylaxe.ui.BetwixtActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity" />
+		</activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity"
-            android:label="@string/app_name" >
-
+            android:label="@string/app_name"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity" />
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.PasswordDetermineActivity"
             android:label="@string/title_password_determine" >
+        
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.PasswordVerifyActivity"
@@ -52,7 +67,7 @@
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity" />
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.DiaryNewEntryActivity"
@@ -68,7 +83,7 @@
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ui.Startseite" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity" />
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointMapActivity"
@@ -114,7 +129,5 @@
 		<meta-data
      		android:name="com.google.android.maps.v2.API_KEY"
      		android:value="AIzaSyAZvUzAQR5yiFEQW6Hb7VrmIIYJDxkRG7M" />
-		<activity android:name="TrafficLightActivity"></activity>
-		<activity android:name="BetwixtActivity"></activity>
     </application>
 </manifest>

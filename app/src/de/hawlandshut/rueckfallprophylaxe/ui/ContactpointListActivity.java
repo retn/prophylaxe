@@ -20,18 +20,6 @@ public class ContactpointListActivity extends Activity {
 		
 		final ListView lv = (ListView) findViewById(R.id.contactpointListView);
         lv.setAdapter(new ContactpointListAdapter(this, ControllerData.getPlacesToGo()));
- 
-        lv.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Object o = lv.getItemAtPosition(position);
-                PlaceToGo ptg = (PlaceToGo) o;
-                
-                Intent intent = new Intent(ContactpointListActivity.this, ContactpointMapActivity.class);
-                intent.putExtra("CP_CENTER", ptg.getId());
-                startActivity(intent);
-            }
-        });
 	}
 
 	@Override

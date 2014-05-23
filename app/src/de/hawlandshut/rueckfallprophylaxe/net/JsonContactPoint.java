@@ -9,6 +9,8 @@ public class JsonContactPoint {
 	private String town;
 	private String phone_number;
 	private String email;
+	private double lat;
+	private double lng;
 
 	public JsonContactPoint() {
 
@@ -32,6 +34,22 @@ public class JsonContactPoint {
 
 	public String getStreet() {
 		return street;
+	}
+	
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public double getLng() {
+		return lng;
+	}
+
+	public void setLng(double lng) {
+		this.lng = lng;
 	}
 
 	public void setStreet(String street) {

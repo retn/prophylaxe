@@ -131,6 +131,8 @@ public class DataInserter {
 			hashMap.put("plz", contactPoint.getPlz());
 			hashMap.put("phone_number", contactPoint.getPhone_number());
 			hashMap.put("email", contactPoint.getEmail());
+			hashMap.put("lat", String.valueOf(contactPoint.getLat()));
+			hashMap.put("lng", String.valueOf(contactPoint.getLng()));
 
 			tables.insert("spl_place_to_go", hashMap);
 		}

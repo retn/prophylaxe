@@ -18,6 +18,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -90,14 +92,25 @@ public class PasswordDetermineActivity extends Activity implements
 	 */
 	public void onClick(View v) {
 		progressBar.setVisibility(View.VISIBLE);
-
+		
 		String email = editTextEmail.getText().toString();
 		String token = editTextToken.getText().toString();
 		String pin1 = editTextPin1.getText().toString();
 		String pin2 = editTextPin2.getText().toString();
+		
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-		// email pattern right?
-		if (!email.matches(EMAIL_PATTERN)) {
+
+			//network available?
+        if(networkInfo == null || !(networkInfo.isConnected()))
+        {
+        	progressBar.setVisibility(View.GONE);
+			Toast.makeText(this,
+					getResources().getString(R.string.network_unavailable),
+					Toast.LENGTH_LONG).show();
+			// email pattern right?
+        } else if (!email.matches(EMAIL_PATTERN)) {
 			progressBar.setVisibility(View.GONE);
 			Toast.makeText(this,
 					getResources().getString(R.string.toast_thats_no_email),
@@ -223,7 +236,7 @@ public class PasswordDetermineActivity extends Activity implements
 		progressDialog.setOnDismissListener(new OnDismissListener() {
 	        @Override
 	        public void onDismiss(final DialogInterface arg0) {
-	            Intent intent = new Intent(PasswordDetermineActivity.this, HomeActivity.class);
+	            Intent intent = new Intent(PasswordDetermineActivity.this, TrafficLightActivity.class);
 	            startActivity(intent);
 	        }
 	    });
@@ -284,7 +297,6 @@ public class PasswordDetermineActivity extends Activity implements
 			}
 			return data;
 		}
-
 		protected void onPostExecute(Data data) {
 			if (data != null) {
 				checkData(data);

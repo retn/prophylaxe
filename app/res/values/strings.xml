@@ -68,5 +68,13 @@
     <string name="notfall">Notfall</string>
     <string name="title_activity_koffer3">Notfall Koffer 3</string>
     <string name="limit_relapse">Meine Notfallschritte um 2. Glas zu verhindern:</string>
+    <string name="pin_reenter">PIN wiederholen:</string>
+    <string name="pin_create">PIN erstellen:</string>
+    <string name="btn_submit">Bestätigen</string>
+    <string name="label_token">Token:</string>
+    <string name="label_pin">PIN</string>
+    <string name="btn_map">Karte</string>
+    <string name="btn_call">Anruf</string>
+    <string name="network_unavailable">Keine Internetverbindung verfügbar</string>
 
 </resources>

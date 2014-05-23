@@ -14,6 +14,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,36 +105,46 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 				startActivity(intent);
 			}
 		});
+		
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					DataInserter di = new DataInserter(db);
-					RequestJson rj = new RequestJson();
-
-					if (rj.getContactPointTimestamp() == sharedPref.getString(
-							cpTimestampKey, "")) {
-						List<JsonContactPoint> contactPoints = rj
-								.getContactPoints();
-						di.updateContactPoints(contactPoints);
-						sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp());
+        //if network available update Contactpoints
+        if(networkInfo != null && (networkInfo.isConnected()))
+        {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						DataInserter di = new DataInserter(db);
+						RequestJson rj = new RequestJson();
+	
+						if (rj.getContactPointTimestamp() == sharedPref.getString(
+								cpTimestampKey, "")) {
+							List<JsonContactPoint> contactPoints = rj
+									.getContactPoints();
+							di.updateContactPoints(contactPoints);
+							sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp());
+						}
+	
+						new ControllerData(db);
+						progressDialog.dismiss();
+						db.close();
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-
-					new ControllerData(db);
-
-					db.close();
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
-				progressDialog.dismiss();
-			}
-		}).start();
+			}).start();
+        } else {
+        	progressDialog.dismiss();
+        	db.close();
+        }
 	}
 
 	@Override
 	public void onBackPressed() {
-		moveTaskToBack(true);
+		finish();
+		System.exit(0);
 	}
 
 	@Override

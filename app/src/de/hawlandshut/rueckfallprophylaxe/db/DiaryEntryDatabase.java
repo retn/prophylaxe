@@ -65,7 +65,7 @@ public class DiaryEntryDatabase {
 		myTables.delete("spl_diary_entry_has_mood", idString, "entryID");
 
 		// Fetch diary entries
-		ControllerData cd = new ControllerData(db,true);
+		new ControllerData(db,true);
 
 		db.close();
 	}

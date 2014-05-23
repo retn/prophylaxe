@@ -34,7 +34,8 @@ public class ControllerData {
 	private static List<SafetyThought> safetyThought;
 	private static List<EmergencyCase> emergencyCase;
 
-	//constructor calls "fetch"-functions which are loading database stuff into classes
+	// constructor calls "fetch"-functions which are loading database stuff into
+	// classes
 	public ControllerData(Database database) throws JsonSyntaxException,
 			IOException {
 		tables = database.getTables();
@@ -43,24 +44,25 @@ public class ControllerData {
 		helpPeople = fetchHelpPeople();
 		diaryEntries = fetchDiaryEntries();
 		placesToGo = fetchPlacesToGo();
-		limitRelapse=fetchLimitRelapse();
-		riskSituation=fetchRiskSituation();
-		safetyAction=fetchSafetyAction();
-		safetyThought=fetchSafetyThought();
-		emergencyCase=fetchEmergencyCase();
+		limitRelapse = fetchLimitRelapse();
+		riskSituation = fetchRiskSituation();
+		safetyAction = fetchSafetyAction();
+		safetyThought = fetchSafetyThought();
+		emergencyCase = fetchEmergencyCase();
 	}
 
 	public ControllerData(Database database, boolean bla) {
 		tables = database.getTables();
 		diaryEntries = fetchDiaryEntries();
 	}
-	
+
 	private List<LimitRelapse> fetchLimitRelapse() {
 		List<String> ids = tables.query("spl_ec_limit_relapse", "elrID");
 		List<String> texts = tables.query("spl_ec_limit_relapse", "text");
 		List<LimitRelapse> limits = new ArrayList<LimitRelapse>();
 		for (int i = 0; i < ids.size(); i++) {
-			LimitRelapse limit = new LimitRelapse(Integer.parseInt(ids.get(i)), texts.get(i));
+			LimitRelapse limit = new LimitRelapse(Integer.parseInt(ids.get(i)),
+					texts.get(i));
 			limits.add(limit);
 		}
 		return limits;
@@ -71,7 +73,8 @@ public class ControllerData {
 		List<String> texts = tables.query("spl_ec_risk_situation", "text");
 		List<RiskSituation> risks = new ArrayList<RiskSituation>();
 		for (int i = 0; i < ids.size(); i++) {
-			RiskSituation risk = new RiskSituation(Integer.parseInt(ids.get(i)), texts.get(i));
+			RiskSituation risk = new RiskSituation(
+					Integer.parseInt(ids.get(i)), texts.get(i));
 			risks.add(risk);
 		}
 		return risks;
@@ -82,7 +85,8 @@ public class ControllerData {
 		List<String> texts = tables.query("spl_ec_safety_action", "text");
 		List<SafetyAction> actions = new ArrayList<SafetyAction>();
 		for (int i = 0; i < ids.size(); i++) {
-			SafetyAction action = new SafetyAction(Integer.parseInt(ids.get(i)), texts.get(i));
+			SafetyAction action = new SafetyAction(
+					Integer.parseInt(ids.get(i)), texts.get(i));
 			actions.add(action);
 		}
 		return actions;
@@ -93,7 +97,8 @@ public class ControllerData {
 		List<String> texts = tables.query("spl_ec_safety_thought", "text");
 		List<SafetyThought> thoughts = new ArrayList<SafetyThought>();
 		for (int i = 0; i < ids.size(); i++) {
-			SafetyThought thought = new SafetyThought(Integer.parseInt(ids.get(i)), texts.get(i));
+			SafetyThought thought = new SafetyThought(Integer.parseInt(ids
+					.get(i)), texts.get(i));
 			thoughts.add(thought);
 		}
 		return thoughts;
@@ -101,21 +106,36 @@ public class ControllerData {
 
 	private List<EmergencyCase> fetchEmergencyCase() {
 		List<String> ids = tables.query("spl_emergency_case", "ecID");
-		List<String> addictDrugholtine = tables.query("spl_emergency_case", "addict_drughotline");
-		List<String> propAdvice = tables.query("spl_emergency_case", "prop_advice_centre");
-		List<String> myTherapist = tables.query("spl_emergency_case", "my_therapist");
-		List<String> emergencyCasecol = tables.query("spl_emergency_case", "emergency_casecol");
-		List<String> riskDanger = tables.query("spl_emergency_case", "risk_danger");
-		List<String> riskSituation = tables.query("spl_emergency_case", "risk_situation");
-		List<String> riskTemptation = tables.query("spl_emergency_case", "risk_temptation");
-		List<String> temptationThought = tables.query("spl_emergency_case", "temptation_thought");
-		List<String> temptationThoughtAbstinence = tables.query("spl_emergency_case", "temptation_thought_abstinence");
-		List<String> temptationBehaviour = tables.query("spl_emergency_case", "temptation_behaviour");
+		List<String> addictDrugholtine = tables.query("spl_emergency_case",
+				"addict_drughotline");
+		List<String> propAdvice = tables.query("spl_emergency_case",
+				"prop_advice_centre");
+		List<String> myTherapist = tables.query("spl_emergency_case",
+				"my_therapist");
+		List<String> emergencyCasecol = tables.query("spl_emergency_case",
+				"emergency_casecol");
+		List<String> riskDanger = tables.query("spl_emergency_case",
+				"risk_danger");
+		List<String> riskSituation = tables.query("spl_emergency_case",
+				"risk_situation");
+		List<String> riskTemptation = tables.query("spl_emergency_case",
+				"risk_temptation");
+		List<String> temptationThought = tables.query("spl_emergency_case",
+				"temptation_thought");
+		List<String> temptationThoughtAbstinence = tables.query(
+				"spl_emergency_case", "temptation_thought_abstinence");
+		List<String> temptationBehaviour = tables.query("spl_emergency_case",
+				"temptation_behaviour");
 		List<EmergencyCase> cases = new ArrayList<EmergencyCase>();
 		for (int i = 0; i < ids.size(); i++) {
-			EmergencyCase case_ = new EmergencyCase(Integer.parseInt(ids.get(i)), addictDrugholtine.get(i),propAdvice.get(i),
-					myTherapist.get(i),emergencyCasecol.get(i),riskDanger.get(i),riskSituation.get(i),
-					riskTemptation.get(i),temptationThought.get(i),temptationThoughtAbstinence.get(i),temptationBehaviour.get(i));
+			EmergencyCase case_ = new EmergencyCase(
+					Integer.parseInt(ids.get(i)), addictDrugholtine.get(i),
+					propAdvice.get(i), myTherapist.get(i),
+					emergencyCasecol.get(i), riskDanger.get(i),
+					riskSituation.get(i), riskTemptation.get(i),
+					temptationThought.get(i),
+					temptationThoughtAbstinence.get(i),
+					temptationBehaviour.get(i));
 			cases.add(case_);
 		}
 		return cases;
@@ -147,14 +167,17 @@ public class ControllerData {
 	}
 
 	private List<Distraction> fetchDistractions(int emotion_id) {
-		List<String> ids = tables.query("spl_distraction", "distractionID", "emotionID_fk = "+emotion_id);
-		List<String> texts = tables.query("spl_distraction", "text", "emotionID_fk = "+emotion_id);
+		List<String> ids = tables.query("spl_distraction", "distractionID",
+				"emotionID_fk = " + emotion_id);
+		List<String> texts = tables.query("spl_distraction", "text",
+				"emotionID_fk = " + emotion_id);
 		List<Distraction> distractions = new ArrayList<Distraction>();
 		for (int i = 0; i < ids.size(); i++) {
-				Distraction distraction = new Distraction(Integer.parseInt(ids
-						.get(i)), emotion_id, texts.get(i));
-				Log.d("emotiondebug", "\tEIDFK: " + emotion_id + " | " + texts.get(i));
-				distractions.add(distraction);
+			Distraction distraction = new Distraction(Integer.parseInt(ids
+					.get(i)), emotion_id, texts.get(i));
+			Log.d("emotiondebug",
+					"\tEIDFK: " + emotion_id + " | " + texts.get(i));
+			distractions.add(distraction);
 		}
 		return distractions;
 	}
@@ -172,7 +195,6 @@ public class ControllerData {
 		}
 		return helpPersons;
 	}
-	
 
 	public List<DiaryEntry> fetchDiaryEntries() {
 		List<DiaryEntry> diaryEntries = new ArrayList<DiaryEntry>();
@@ -181,68 +203,78 @@ public class ControllerData {
 		List<String> titles = tables.query("spl_diary_entry", "title");
 		List<String> contens = tables.query("spl_diary_entry", "content");
 		List<String> createds = tables.query("spl_diary_entry", "created");
-		
+
 		Log.d("fetchDiaryEntries ", "Lade Einträge");
-		
+
 		for (int i = 0; i < ids.size(); i++) {
 			DiaryEntry entry;
 			try {
-				Log.d("fetchDiaryEntries ", "Lade Eintrag mit ID: "+ids.get(i));
-				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Titel: "+titles.get(i));
-				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Content: "+contens.get(i));
-				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Datum: "+createds.get(i));
-				
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
-				
-				
-				entry = new DiaryEntry(Integer.parseInt(ids.get(i)),
-						titles.get(i), contens.get(i),  dateFormat.parse(createds.get(i)), 0, null);
+				Log.d("fetchDiaryEntries ",
+						"Lade Eintrag mit ID: " + ids.get(i));
+				Log.d("fetchDiaryEntries ",
+						"Lade Eintrag mit Titel: " + titles.get(i));
+				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Content: "
+						+ contens.get(i));
+				Log.d("fetchDiaryEntries ", "Lade Eintrag mit Datum: "
+						+ createds.get(i));
 
-				//Log.d("fetchDiaryEntries ", entry.toString());
+				SimpleDateFormat dateFormat = new SimpleDateFormat(
+						"dd.MM.yyyy", Locale.GERMAN);
+
+				entry = new DiaryEntry(Integer.parseInt(ids.get(i)),
+						titles.get(i), contens.get(i),
+						dateFormat.parse(createds.get(i)), 0, null);
+
+				// Log.d("fetchDiaryEntries ", entry.toString());
 				diaryEntries.add(entry);
 			} catch (NumberFormatException e) {
-				
+
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ParseException e) {
-				
+
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
-		//fetchDiaryEntriesPicture(diaryEntries);
-		
+		// fetchDiaryEntriesPicture(diaryEntries);
+
 		fetchDiaryEntriesMood(diaryEntries);
-		
-		Log.d("fetchDiaryEntries ", diaryEntries.size()+" Einträge geladen");
+
+		Log.d("fetchDiaryEntries ", diaryEntries.size() + " Einträge geladen");
 		return diaryEntries;
 	}
 
 	private void fetchDiaryEntriesPicture(List<DiaryEntry> diaryEntries2) {
-		List<List<String>> entries = tables.queryFullTable("spl_diary_entry_has_picture");
+		List<List<String>> entries = tables
+				.queryFullTable("spl_diary_entry_has_picture");
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entries.size(); i++) {
 				if (entry.getId() == Integer.parseInt(entries.get(i).get(1))) {
-					Media media = new Media(Integer.parseInt(entries.get(i).get(0)),
-							entry.getId(), Type.Image);
+					Media media = new Media(Integer.parseInt(entries.get(i)
+							.get(0)), entry.getId(), Type.Image);
 					entry.setMedia(new Media[] { media });
 				}
 			}
 
 		}
-		
+
 	}
 
 	private void fetchDiaryEntriesMood(List<DiaryEntry> diaryEntries2) {
 
-		List<List<String>> entries = tables.queryFullTable("spl_diary_entry_has_mood");
+		List<List<String>> entries = tables
+				.queryFullTable("spl_diary_entry_has_mood");
 		Log.d("fetchDiaryEntriesMood", entries.toString());
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entries.size(); i++) {
 				if (entry.getId() == Integer.parseInt(entries.get(i).get(0))) {
-					
-					Log.d("fetchDiaryEntries", "Emotion gefunden für Entry ID "+entry.getId()+", Emotion ID "+Integer.parseInt(entries.get(i).get(1)));
+
+					Log.d("fetchDiaryEntries",
+							"Emotion gefunden für Entry ID " + entry.getId()
+									+ ", Emotion ID "
+									+ Integer.parseInt(entries.get(i).get(1)));
 					entry.setEmotionId(Integer.parseInt(entries.get(i).get(1)));
 				}
 			}
@@ -262,24 +294,14 @@ public class ControllerData {
 		List<String> phoneNumbers = tables.query("spl_place_to_go",
 				"phone_number");
 		List<String> emails = tables.query("spl_place_to_go", "email");
+		List<String> lats = tables.query("spl_place_to_go", "lat");
+		List<String> lngs = tables.query("spl_place_to_go", "lng");
 
 		for (int i = 0; i < ptgids.size(); i++) {
-			RequestJson rj = new RequestJson();
-			String search = URLEncoder
-					.encode(streets.get(i).replace("str.", "straße") + " "
-							+ plzs.get(i) + " " + towns.get(i) + " Deutschland",
-							"UTF-8");
-
-			JsonAddress address = rj.getAddress(search);
-
-			double lat = address.getResults().get(0).getGeometry()
-					.getLocation().getLat();
-			double lng = address.getResults().get(0).getGeometry()
-					.getLocation().getLng();
-
 			list.add(new PlaceToGo(Integer.parseInt(ptgids.get(i)), names
 					.get(i), streets.get(i), plzs.get(i), towns.get(i),
-					phoneNumbers.get(i), emails.get(i), lat, lng));
+					phoneNumbers.get(i), emails.get(i), Double.parseDouble(lats
+							.get(i)), Double.parseDouble(lngs.get(i))));
 		}
 		return list;
 	}

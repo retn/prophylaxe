@@ -154,7 +154,7 @@ public class MyTables {
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_ec_limit_relapse\"(\"elrID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"text\" TINYTEXT);");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_maxim\"(\"maximID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"text\" INTEGER)");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_emotion\"(\"emotionID\" INTEGER PRIMARY KEY NOT NULL,\"emotion\" VARCHAR(45))");
-		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_place_to_go\"(\"ptgID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"name\" VARCHAR(45),\"street\" VARCHAR(100),\"plz\" VARCHAR(10),\"town\" VARCHAR(45),\"phone_number\" VARCHAR(45),\"email\" VARCHAR(45))");
+		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_place_to_go\"(\"ptgID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\"name\" VARCHAR(45),\"street\" VARCHAR(100),\"plz\" VARCHAR(10),\"town\" VARCHAR(45),\"phone_number\" VARCHAR(45),\"email\" VARCHAR(45), \"lat\" REAL, \"lng\" REAL)");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_diary_entry\"(\"id\" INTEGER PRIMARY KEY NOT NULL,\"title\" VARCHAR(45),\"content\" TEXT,\"created\" DATETIME)");
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_diary_entry_has_picture\"( \"id\" INTEGER PRIMARY KEY NOT NULL, \"entryID\" INTEGER, \"picture\" BLOB, CONSTRAINT \"id\" FOREIGN KEY(\"entryID\") REFERENCES \"spl_diary_entry\"(\"id\"))");
 		sqldatabase.execSQL("CREATE INDEX IF NOT EXISTS \"spl_diary_entry_has_picture.id_idx\" ON \"spl_diary_entry_has_picture\"(\"entryID\")");

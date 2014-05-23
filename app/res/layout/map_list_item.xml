@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:padding="2dp"
-        android:text="Musteranlaufstelle"
+        android:text="@string/btn_anlaufstellen"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -45,6 +45,23 @@
         android:text="@string/label_mail" />
 
     <LinearLayout android:layout_gravity="fill_horizontal" >
+
+        <Button
+            android:id="@+id/mapListBtnMap"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="@string/btn_map" />
+
+        <Button
+            android:id="@+id/mapListBtnCall"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="@string/btn_call" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -58,22 +75,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/mapListLand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="right|top"
-        android:layout_row="4"
-        android:text="Deutschland" />
-
-    <TextView
         android:id="@+id/mapListStreet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_gravity="right|top"
         android:layout_row="1"
-        android:text="Musterstr. 5" />
+        android:text="@string/label_adress" />
 
     <TextView
         android:id="@+id/mapListPhone"
@@ -81,8 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_gravity="right|top"
-        android:layout_row="5"
-        android:text="12345/6789" />
+        android:layout_row="5" />
 
     <TextView
         android:id="@+id/mapListMail"
@@ -90,8 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_column="0"
         android:layout_gravity="right|top"
-        android:layout_row="6"
-        android:text="muster@anlaufstelle.de" />
+        android:layout_row="6" />
 
     <TextView
         android:id="@+id/mapListCity"
@@ -100,6 +106,6 @@
         android:layout_column="0"
         android:layout_gravity="right|top"
         android:layout_row="3"
-        android:text="12345 Musterstadt" />
+        android:text="@string/label_adress" />
 
 </GridLayout>

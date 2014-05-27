@@ -24,12 +24,18 @@ public class DataInserter {
 		tables = db.getTables();
 	}
 
-	public void insertData(Data data) {
+	public void insertData(Data data, List<JsonContactPoint> contactPoints) {
 		insertMaxims(data.getData().getMaxims());
 		insertEmergencyCase(data.getData().getEmergencyCase());
 		insertDistractions(data.getData().getDistractions());
+		insertContactPoints(contactPoints);
 	}
-
+	
+	public void updateContactPoints(List<JsonContactPoint> contactPoints) {
+		tables.delete("spl_place_to_go");
+		insertContactPoints(contactPoints);
+	}
+	
 	private void insertMaxims(List<JsonMaxim> maxims) {
 		for (JsonMaxim maxim : maxims) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
@@ -122,7 +128,7 @@ public class DataInserter {
 		}
 	}
 
-	public void updateContactPoints(List<JsonContactPoint> contactPoints) {
+	private void insertContactPoints(List<JsonContactPoint> contactPoints) {
 		for (JsonContactPoint contactPoint : contactPoints) {
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap.put("name", contactPoint.getName());
@@ -137,5 +143,4 @@ public class DataInserter {
 			tables.insert("spl_place_to_go", hashMap);
 		}
 	}
-
 }

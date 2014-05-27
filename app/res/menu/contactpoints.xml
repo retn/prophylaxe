@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/action_update_contactpoints"
+          android:title="@string/action_update_contactpoints"
+          android:showAsAction="never" />
+
+</menu>

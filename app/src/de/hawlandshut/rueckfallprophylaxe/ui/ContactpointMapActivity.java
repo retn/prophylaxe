@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
-import de.hawlandshut.rueckfallprophylaxe.data.PlaceToGo;
+import de.hawlandshut.rueckfallprophylaxe.data.ContactPoint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -54,7 +54,7 @@ public class ContactpointMapActivity extends Activity {
 
 		googleMap.setMyLocationEnabled(true);
 
-		for (PlaceToGo ptg : ControllerData.getPlacesToGo()) {
+		for (ContactPoint ptg : ControllerData.getPlacesToGo()) {
 			LatLng latlng = new LatLng(ptg.getLat(), ptg.getLng());
 
 			if (ptg.getId() == ptgCenterId) {

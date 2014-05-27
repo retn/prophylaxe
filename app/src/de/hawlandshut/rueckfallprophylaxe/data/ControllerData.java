@@ -27,7 +27,7 @@ public class ControllerData {
 	private static HashMap<Integer, Emotion> emotions;
 	private static List<HelpPerson> helpPeople;
 	private static List<DiaryEntry> diaryEntries;
-	private static List<PlaceToGo> placesToGo;
+	private static List<ContactPoint> placesToGo;
 	private static List<LimitRelapse> limitRelapse;
 	private static List<RiskSituation> riskSituation;
 	private static List<SafetyAction> safetyAction;
@@ -54,6 +54,12 @@ public class ControllerData {
 	public ControllerData(Database database, boolean bla) {
 		tables = database.getTables();
 		diaryEntries = fetchDiaryEntries();
+	}
+	
+	public ControllerData(Database database, int bla) throws JsonSyntaxException, IOException {
+		tables = database.getTables();
+		placesToGo = null;
+		placesToGo = fetchPlacesToGo();
 	}
 
 	private List<LimitRelapse> fetchLimitRelapse() {
@@ -282,9 +288,9 @@ public class ControllerData {
 		}
 	}
 
-	private List<PlaceToGo> fetchPlacesToGo() throws JsonSyntaxException,
+	private List<ContactPoint> fetchPlacesToGo() throws JsonSyntaxException,
 			IOException {
-		List<PlaceToGo> list = new ArrayList<PlaceToGo>();
+		List<ContactPoint> list = new ArrayList<ContactPoint>();
 
 		List<String> ptgids = tables.query("spl_place_to_go", "ptgID");
 		List<String> names = tables.query("spl_place_to_go", "name");
@@ -298,7 +304,7 @@ public class ControllerData {
 		List<String> lngs = tables.query("spl_place_to_go", "lng");
 
 		for (int i = 0; i < ptgids.size(); i++) {
-			list.add(new PlaceToGo(Integer.parseInt(ptgids.get(i)), names
+			list.add(new ContactPoint(Integer.parseInt(ptgids.get(i)), names
 					.get(i), streets.get(i), plzs.get(i), towns.get(i),
 					phoneNumbers.get(i), emails.get(i), Double.parseDouble(lats
 							.get(i)), Double.parseDouble(lngs.get(i))));
@@ -322,7 +328,7 @@ public class ControllerData {
 		return diaryEntries;
 	}
 
-	public static List<PlaceToGo> getPlacesToGo() {
+	public static List<ContactPoint> getPlacesToGo() {
 		return placesToGo;
 	}
 

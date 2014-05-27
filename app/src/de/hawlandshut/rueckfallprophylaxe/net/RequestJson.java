@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import de.hawlandshut.rueckfallprophylaxe.data.PlaceToGo;
+import de.hawlandshut.rueckfallprophylaxe.data.ContactPoint;
 import android.util.Log;
 
 /**
@@ -85,11 +85,17 @@ public class RequestJson {
 
 			JsonAddress address = getAddress(search);
 
-			double lat = address.getResults().get(0).getGeometry()
-					.getLocation().getLat();
-			double lng = address.getResults().get(0).getGeometry()
-					.getLocation().getLng();
-
+			double lat = 0;
+			double lng = 0;
+			if(address.getResults().size() != 0) {
+				lat = address.getResults().get(0).getGeometry()
+						.getLocation().getLat();
+				lng = address.getResults().get(0).getGeometry()
+						.getLocation().getLng();
+			} else {
+				Log.d("LatLngNotFound", search);
+			}
+			
 			cp.setLat(lat);
 			cp.setLng(lng);
 		}

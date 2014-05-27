@@ -51,8 +51,6 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 		if (!db.databaseExists()) {
 			Intent intent = new Intent(this, PasswordDetermineActivity.class);
 			startActivity(intent);
-			
-	
 		}
 
 		editTextPin = (EditText) findViewById(R.id.PIN_verify);
@@ -77,7 +75,37 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 				PinShare myApp = PinShare.getInstance();
 				myApp.setPin(input);
 				
-				launchDialog();
+				final SharedPreferences sharedPref = this.getSharedPreferences(
+	    				"de.hawlandshut.rueckfallprophylaxe", Context.MODE_PRIVATE);
+	    		final String cpTimestampKey = "de.hawlandshut.rueckfallprophylaxe.cptimestamp";
+
+	    		final ProgressDialog progressDialog = ProgressDialog.show(
+	    				PasswordVerifyActivity.this, "Bitte warten...",
+	    				"Deine Daten werden eingerichtet...");
+	    		progressDialog.setCancelable(false);
+	            
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							DataInserter di = new DataInserter(db);
+							RequestJson rj = new RequestJson();
+		
+							new ControllerData(db);
+							
+							progressDialog.dismiss();
+							db.close();
+							
+							Intent intent = new Intent(PasswordVerifyActivity.this, TrafficLightActivity.class);
+	    					startActivity(intent);
+						} catch (Exception e) {
+							e.printStackTrace();
+							Toast.makeText(PasswordVerifyActivity.this, "Sorry! Etwas lief falsch!",
+									Toast.LENGTH_LONG).show();
+							progressDialog.dismiss();
+						}
+					}
+				}).start();
 			} catch (Exception e) {
 				Toast.makeText(this, "Ihre Eingabe ist falsch",
 						Toast.LENGTH_LONG).show();
@@ -85,60 +113,6 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 			}
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void launchDialog() {
-		final SharedPreferences sharedPref = this.getSharedPreferences(
-				"de.hawlandshut.rueckfallprophylaxe", Context.MODE_PRIVATE);
-		final String cpTimestampKey = "de.hawlandshut.rueckfallprophylaxe.cptimestamp";
-
-		final ProgressDialog progressDialog = ProgressDialog.show(
-				PasswordVerifyActivity.this, "Bitte warten...",
-				"Deine Daten werden geladen...");
-		progressDialog.setCancelable(false);
-
-		progressDialog.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(final DialogInterface arg0) {
-				Intent intent = new Intent(PasswordVerifyActivity.this,
-						TrafficLightActivity.class);
-				startActivity(intent);
-			}
-		});
-		
-		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        //if network available update Contactpoints
-        if(networkInfo != null && (networkInfo.isConnected()))
-        {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						DataInserter di = new DataInserter(db);
-						RequestJson rj = new RequestJson();
-	
-						if (rj.getContactPointTimestamp() == sharedPref.getString(
-								cpTimestampKey, "")) {
-							List<JsonContactPoint> contactPoints = rj
-									.getContactPoints();
-							di.updateContactPoints(contactPoints);
-							sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp());
-						}
-	
-						new ControllerData(db);
-						progressDialog.dismiss();
-						db.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}).start();
-        } else {
-        	progressDialog.dismiss();
-        	db.close();
-        }
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
-public class PlaceToGo {
+public class ContactPoint {
 
 	private int id;
 	private String name;
@@ -12,7 +12,7 @@ public class PlaceToGo {
 	private double latitude;
 	private double longitude;
 
-	public PlaceToGo(int id, String name, String street, String plz,
+	public ContactPoint(int id, String name, String street, String plz,
 			String town, String phone_number, String email, double lat, double lng) {
 		this.id = id;
 		this.name = name;

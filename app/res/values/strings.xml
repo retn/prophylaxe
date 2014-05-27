@@ -76,5 +76,6 @@
     <string name="btn_map">Karte</string>
     <string name="btn_call">Anruf</string>
     <string name="network_unavailable">Keine Internetverbindung verfügbar</string>
+    <string name="action_update_contactpoints">Aktualisieren</string>
 
 </resources>

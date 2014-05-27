@@ -102,32 +102,32 @@ public class PasswordDetermineActivity extends Activity implements
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
 
-			//network available?
+		//network available?
         if(networkInfo == null || !(networkInfo.isConnected()))
         {
         	progressBar.setVisibility(View.GONE);
 			Toast.makeText(this,
 					getResources().getString(R.string.network_unavailable),
 					Toast.LENGTH_LONG).show();
-			// email pattern right?
+		// email pattern right?
         } else if (!email.matches(EMAIL_PATTERN)) {
 			progressBar.setVisibility(View.GONE);
 			Toast.makeText(this,
 					getResources().getString(R.string.toast_thats_no_email),
 					Toast.LENGTH_LONG).show();
-			// token given?
+		// token given?
 		} else if (token.equals("")) {
 			progressBar.setVisibility(View.GONE);
 			Toast.makeText(this,
 					getResources().getString(R.string.toast_no_token_entered),
 					Toast.LENGTH_LONG).show();
-			// inputs equal?
+		// inputs equal?
 		} else if (!pin1.equals(pin2)) {
 			progressBar.setVisibility(View.GONE);
 			Toast.makeText(this,
 					getResources().getString(R.string.toast_pins_not_equal),
 					Toast.LENGTH_LONG).show();
-			// input is 4 numbers?
+		// input is 4 numbers?
 		} else if (!pin1.matches(PIN_PATTERN)) {
 			progressBar.setVisibility(View.GONE);
 			Toast.makeText(this,
@@ -236,8 +236,7 @@ public class PasswordDetermineActivity extends Activity implements
 		progressDialog.setOnDismissListener(new OnDismissListener() {
 	        @Override
 	        public void onDismiss(final DialogInterface arg0) {
-	            Intent intent = new Intent(PasswordDetermineActivity.this, TrafficLightActivity.class);
-	            startActivity(intent);
+	            finish();
 	        }
 	    });
 		
@@ -247,18 +246,14 @@ public class PasswordDetermineActivity extends Activity implements
 				try {
 					Database db = new Database(PasswordDetermineActivity.this);
 					db.InitializeSQLCipher(pin);
-					DataInserter di = new DataInserter(db);
-					di.insertData(data);
 					
 					RequestJson rj = new RequestJson();
 					
 					List<JsonContactPoint> contactPoints = rj.getContactPoints();
-					sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp());
+					sharedPref.edit().putString(cpTimestampKey, rj.getContactPointTimestamp()).commit();
 					
-					di.updateContactPoints(contactPoints);
-					
+					new DataInserter(db).insertData(data, contactPoints);
 					new ControllerData(db);
-					
 					db.close();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -304,7 +299,7 @@ public class PasswordDetermineActivity extends Activity implements
 		}
 
 	}
-
+	
 	@Override
 	public void onBackPressed() {
 		moveTaskToBack(true);

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.TextUtils.TruncateAt;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -202,6 +203,9 @@ public class DiaryEntryListActivity extends Activity {
 				// Set text
 				content.setText(entry.getContent());
 				content.setPadding(0, 0, 0, 50);
+				content.setEllipsize(TruncateAt.END);
+				content.setMaxLines(3);
+				content.setLayoutParams(fieldparams);
 				
 				// Add content TesxtView
 				trContent.addView(content);

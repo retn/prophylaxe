@@ -257,9 +257,15 @@ public class ControllerData {
 				.queryFullTable("spl_diary_entry_has_picture");
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entries.size(); i++) {
+				
+				
 				if (entry.getId() == Integer.parseInt(entries.get(i).get(1))) {
+					
+					byte[] imageBlog = null; // <-- Put the blob into this variable
+					
+					
 					Media media = new Media(Integer.parseInt(entries.get(i)
-							.get(0)), entry.getId(), Type.Image);
+							.get(0)), entry.getId(), Type.Image, imageBlog);
 					entry.setMedia(new Media[] { media });
 				}
 			}

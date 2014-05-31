@@ -21,17 +21,13 @@ import android.widget.LinearLayout;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPictureType;
 
-
 /**
- * TODO: PS: Bitte kommentieren -> JavaDoc
- *
- */
-/**
- * Managed das hinzufügen von Bildern eines (neues) Tagebucheintrages
+ * Managed das hinzuf√ºgen von Bildern eines (neues) Tagebucheintrages
  */
 public class DiaryNewEntryPictureManager {
 	private Activity myActivity;
 	private ArrayList<DiaryEntryPicture> pictures = new ArrayList<DiaryEntryPicture>();
+	private ArrayList<DiaryEntryPicture> trash = new ArrayList<DiaryEntryPicture>();
 	private int lastPictureID = 0;
 
 	String mCurrentPhotoPath; // Current camera photo path
@@ -51,7 +47,6 @@ public class DiaryNewEntryPictureManager {
 		// Newly added gallery picture:
 		for(DiaryEntryPicture pic: pictures) {
 			if (pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
-
 		        if (img.getTag().toString().equals(pic.getIdString())) {
 		        	Log.d("removePicture", "Equal");
 		        	resetImageView(img); // Hide
@@ -66,7 +61,17 @@ public class DiaryNewEntryPictureManager {
 		// TODO: remove from list
 		
 		// Existing picture:
-		// TODO: add to trash
+		for(DiaryEntryPicture pic: pictures) {
+			if (pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
+		        if (img.getTag().toString().equals(pic.getIdString())) {
+		        	Log.d("removePicture", "Equal");
+		        	resetImageView(img); // Hide
+		        	pictures.remove(pic); // Remove from list
+		        	trash.add(pic);
+		        }
+		        
+			}
+		}
 		
 		drawCurrentPictures();
 	}
@@ -81,6 +86,12 @@ public class DiaryNewEntryPictureManager {
 
 	}
 	
+	
+	
+	public ArrayList<DiaryEntryPicture> getTrash() {
+		return trash;
+	}
+
 	private void addImageView(DiaryEntryPicture pic) {
 		// Create & add imageView dynamically
 		LinearLayout diaryImgsViewGroup = (LinearLayout) myActivity.findViewById(R.id.diaryImgViews); //the layout you set in `setContentView()`
@@ -197,5 +208,7 @@ public class DiaryNewEntryPictureManager {
 	    mCurrentPhotoPath = image.getAbsolutePath();
 	    return image;
 	}
+	
+
 
 }

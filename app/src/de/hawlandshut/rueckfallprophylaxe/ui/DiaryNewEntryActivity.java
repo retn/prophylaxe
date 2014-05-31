@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
 import de.hawlandshut.rueckfallprophylaxe.data.Emotions;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
@@ -288,7 +289,12 @@ public class DiaryNewEntryActivity extends Activity {
 						
 						myTables.update("spl_diary_entry_has_mood", emotionHashmap, DiaryEntryIDString, "entryID");
 						Log.d("DiaryEntrySave","Update Entry "+DiaryEntryIDString+" mit Emotion ID "+selectedMoodID);
-						// TODO: Delete pictures that were moved to trash
+						
+						// Delete pictures that were moved to trash
+						DiaryEntryDatabase diaryEntryDB = new DiaryEntryDatabase(existingEntry, this);
+						for (DiaryEntryPicture pic:pictureManager.getTrash()) {
+							diaryEntryDB.deletePictureFromDB(pic.getId());
+						}
 					}
 					
 

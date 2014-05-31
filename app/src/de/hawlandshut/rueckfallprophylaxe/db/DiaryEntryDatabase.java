@@ -10,6 +10,7 @@ import android.content.Context;
 import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.data.Media;
 import de.hawlandshut.rueckfallprophylaxe.ui.PinShare;
 
 public class DiaryEntryDatabase {
@@ -41,6 +42,26 @@ public class DiaryEntryDatabase {
 		
 		return 0;
 
+	}
+	
+	public void deletePictureFromDB(int id) {
+		// Initialize database
+		PinShare myApp = PinShare.getInstance();
+		String pin = myApp.getPin();
+		Database db = new Database(context);
+		db.InitializeSQLCipher(pin);
+		
+		MyTables myTables = db.getTables();
+		String idString = ""+entry.getId(); // Cast to string
+		
+		
+		// Delete main table
+		myTables.delete("spl_diary_entry_has_picture", ""+id, "id");
+
+		// Fetch diary entries
+		new ControllerData(db,true);
+
+		db.close();	
 	}
 	
 	public void deleteFromDB() throws JsonSyntaxException, IOException  {

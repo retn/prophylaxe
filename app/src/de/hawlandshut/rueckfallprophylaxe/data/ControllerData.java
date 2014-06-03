@@ -2,6 +2,8 @@ package de.hawlandshut.rueckfallprophylaxe.data;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -253,18 +255,27 @@ public class ControllerData {
 	}
 
 	private void fetchDiaryEntriesPicture(List<DiaryEntry> diaryEntries2) {
-		List<List<String>> entries = tables
-				.queryFullTable("spl_diary_entry_has_picture");
+		List<List<Object>> entries = tables
+				.queryFullTableEntryPicture();
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entries.size(); i++) {
 				
 				
-				if (entry.getId() == Integer.parseInt(entries.get(i).get(1))) {
+				if (entry.getId() == Integer.parseInt((String)entries.get(i).get(1))) {
 					
-					byte[] imageBlog = null; // <-- Put the blob into this variable
+					Blob blob=(Blob) entries.get(i).get(2);
+					int blobLength;
+					byte[] imageBlog = null;
+					try {
+						blobLength = (int) blob.length();
+						imageBlog = blob.getBytes(1, blobLength);
+					} catch (SQLException e) {
+						Log.e(this.toString(),"blob conversion failed");
+						e.printStackTrace();
+					}   
 					
 					
-					Media media = new Media(Integer.parseInt(entries.get(i)
+					Media media = new Media(Integer.parseInt((String)entries.get(i)
 							.get(0)), entry.getId(), Type.Image, imageBlog);
 					entry.setMedia(new Media[] { media });
 				}

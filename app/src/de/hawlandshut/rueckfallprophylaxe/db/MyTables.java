@@ -1,5 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +61,18 @@ public class MyTables {
 		for(Map.Entry<String, String> entry: hashMap.entrySet()){
 			values.put(entry.getKey(),entry.getValue());
 		}
+		
+		return sqldatabase.insert(table, null, values)>0;
+	}
+	
+	//inserts in diary entry has picture table, with ids and blob
+	public boolean insertEntryPicture(int id, int entryid, byte[] imageblob) {
+		String table="spl_diary_entry_has_picture";
+		ContentValues values=new ContentValues();
+		values.put("id",String.valueOf(id));
+		values.put("entryID",String.valueOf(entryid));
+		values.put("picture",imageblob);
+		
 		
 		return sqldatabase.insert(table, null, values)>0;
 	}
@@ -163,5 +176,26 @@ public class MyTables {
 		sqldatabase.execSQL("CREATE TABLE IF NOT EXISTS \"spl_distraction\"( \"distractionID\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \"emotionID_fk\" INTEGER NOT NULL, \"text\" VARCHAR(45), CONSTRAINT \"fk_distraction_emotion1\" FOREIGN KEY(\"emotionID_fk\") REFERENCES \"spl_emotion\"(\"emotionID\"))");
 		sqldatabase.execSQL("CREATE INDEX IF NOT EXISTS \"spl_distraction.fk_distraction_emotion1_idx\" ON \"spl_distraction\"(\"emotionID_fk\")");
 			
+	}
+
+	public List<List<Object>> queryFullTableEntryPicture() {
+		String table="spl_diary_entry_has_picture";
+		List<List<Object>> result= new ArrayList<List<Object>>();
+		Cursor c = sqldatabase.rawQuery("SELECT * FROM "+table, null);
+
+		if (c.moveToFirst()) {
+		    while ( !c.isAfterLast() ) {
+		    	List<Object> resultRow=new ArrayList<Object>();
+		    	for(int i=0;i<c.getColumnCount()-1;i++){
+		    		resultRow.add(c.getString(i));
+		    	}
+		    	resultRow.add(c.getBlob(c.getColumnCount()-1));
+		        c.moveToNext();
+		        result.add(resultRow);
+		    }
+		}
+		c.close();
+		 
+		return result;
 	}
 }

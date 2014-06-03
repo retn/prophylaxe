@@ -3,6 +3,7 @@ package de.hawlandshut.rueckfallprophylaxe.ui;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +38,32 @@ public class DiaryNewEntryPictureManager {
 		this.myActivity = myActivity;
 	}
 	
+	public ArrayList<byte[]> getNewPicturesAsBlob() {
+		ArrayList<byte[]> newPics = new ArrayList<byte[]>();
+		for (DiaryEntryPicture pic:pictures) {
+			if (pic.getType() == DiaryEntryPictureType.NEW_CAMERA_PICTURE || pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
+				// Bitmap laden
+				String path = pic.getPath();
+				
+				try {
+					FileInputStream fis = new FileInputStream(path);
+					Bitmap imgBitmap = BitmapFactory.decodeStream(fis);
+					ByteArrayOutputStream bos = new ByteArrayOutputStream();
+					imgBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+					byte[] bArray = bos.toByteArray();
+					newPics.add(bArray);
+					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    
+				
+			}
+		}
+		return newPics;
+	}
+	
 	private void resetImageView(ImageViewWithContextMenuInfo img) {
 		img.setImageResource(android.R.color.transparent);
 		img.setVisibility(View.GONE);
@@ -57,8 +84,18 @@ public class DiaryNewEntryPictureManager {
 		}
 		
 		// Newly added camera picture:
-		// TODO: delete instantly from disk
-		// TODO: remove from list
+		for(DiaryEntryPicture pic: pictures) {
+			if (pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
+		        if (img.getTag().toString().equals(pic.getIdString())) {
+		        	Log.d("removePicture", "Equal");
+		        	resetImageView(img); // Hide
+		        	pictures.remove(pic); // Remove from list
+		        	
+		        	// TODO: delete instantly from disk
+		        }
+		        
+			}
+		}
 		
 		// Existing picture:
 		for(DiaryEntryPicture pic: pictures) {
@@ -86,6 +123,14 @@ public class DiaryNewEntryPictureManager {
 
 	}
 	
+	public void addExistingPicture(Bitmap picture) {
+		
+		// Add to image list
+		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_GALLERY_PICTURE, picture, getNewID());
+		pictures.add(newPic);
+		addImageView(newPic);
+	}
+	
 	
 	
 	public ArrayList<DiaryEntryPicture> getTrash() {
@@ -97,7 +142,14 @@ public class DiaryNewEntryPictureManager {
 		LinearLayout diaryImgsViewGroup = (LinearLayout) myActivity.findViewById(R.id.diaryImgViews); //the layout you set in `setContentView()`
 		
 		ImageViewWithContextMenuInfo image = new ImageViewWithContextMenuInfo(myActivity);
-		image.setImageBitmap(getThumbnail(pic.getPath()));
+		
+		
+		if (pic.getType() == DiaryEntryPictureType.EXISTING_DATABASE_PICTURE) {
+			image.setImageBitmap(getThumbnailImg(pic.getImg()));
+		} else {
+			image.setImageBitmap(getThumbnail(pic.getPath()));
+		}
+			
 		image.setTag(pic.getId());
 		image.setId(pic.getId());
 		image.setScaleType(ImageView.ScaleType.FIT_START);
@@ -111,6 +163,7 @@ public class DiaryNewEntryPictureManager {
 		myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
 
 	}
+	
 	
 	public void addCameraPicture() {
 		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_CAMERA_PICTURE, mCurrentPhotoPath, getNewID());
@@ -132,6 +185,28 @@ public class DiaryNewEntryPictureManager {
 
 	         FileInputStream fis = new FileInputStream(path);
 	          imgthumBitmap = BitmapFactory.decodeStream(fis);
+
+	         imgthumBitmap = Bitmap.createScaledBitmap(imgthumBitmap,
+	                THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);
+
+	        ByteArrayOutputStream bytearroutstream = new ByteArrayOutputStream(); 
+	        imgthumBitmap.compress(Bitmap.CompressFormat.JPEG, 100,bytearroutstream);
+
+
+	     }
+	     catch(Exception ex) {
+
+	     }
+	     return imgthumBitmap;
+	}
+	
+	public Bitmap getThumbnailImg(Bitmap img){
+	    Bitmap imgthumBitmap=null;
+	     try    
+	     {
+
+	         final int THUMBNAIL_SIZE = 200;
+	          imgthumBitmap = img;
 
 	         imgthumBitmap = Bitmap.createScaledBitmap(imgthumBitmap,
 	                THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);

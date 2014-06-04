@@ -65,15 +65,12 @@ public class MyTables {
 		return sqldatabase.insert(table, null, values)>0;
 	}
 	
-	//inserts in diary entry has picture table, with ids and blob
-	public boolean insertEntryPicture(int id, int entryid, byte[] imageblob) {
+	//inserts in diary entry has picture table, with entryid and blob
+	public boolean insertEntryPicture(int entryid, byte[] imageblob) {
 		String table="spl_diary_entry_has_picture";
 		ContentValues values=new ContentValues();
-		values.put("id",String.valueOf(id));
 		values.put("entryID",String.valueOf(entryid));
-		values.put("picture",imageblob);
-		
-		
+		values.put("picture",imageblob);		
 		return sqldatabase.insert(table, null, values)>0;
 	}
 

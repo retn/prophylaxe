@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/FrameLayout1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey" >
+    android:background="@color/grey"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/editTextCPSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Suche"
+        android:inputType="text"
+        android:visibility="gone" >
+
+        <requestFocus />
+    </EditText>
 
     <ListView
         android:id="@+id/contactpointListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="false" >
-
     </ListView>
 
-</FrameLayout>
+</LinearLayout>

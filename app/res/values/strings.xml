@@ -77,5 +77,6 @@
     <string name="btn_call">Anruf</string>
     <string name="network_unavailable">Keine Internetverbindung verfügbar</string>
     <string name="action_update_contactpoints">Aktualisieren</string>
+    <string name="action_search">Suche</string>
 
 </resources>

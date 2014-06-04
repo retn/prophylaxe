@@ -1,21 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
-import java.util.List;
-
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
-import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
-import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
-import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -75,10 +64,6 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 				PinShare myApp = PinShare.getInstance();
 				myApp.setPin(input);
 				
-				final SharedPreferences sharedPref = this.getSharedPreferences(
-	    				"de.hawlandshut.rueckfallprophylaxe", Context.MODE_PRIVATE);
-	    		final String cpTimestampKey = "de.hawlandshut.rueckfallprophylaxe.cptimestamp";
-
 	    		final ProgressDialog progressDialog = ProgressDialog.show(
 	    				PasswordVerifyActivity.this, "Bitte warten...",
 	    				"Deine Daten werden eingerichtet...");
@@ -88,9 +73,6 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 					@Override
 					public void run() {
 						try {
-							DataInserter di = new DataInserter(db);
-							RequestJson rj = new RequestJson();
-		
 							new ControllerData(db);
 							
 							progressDialog.dismiss();

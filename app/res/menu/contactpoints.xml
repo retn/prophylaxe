@@ -3,5 +3,8 @@
     <item android:id="@+id/action_update_contactpoints"
           android:title="@string/action_update_contactpoints"
           android:showAsAction="never" />
+    <item android:id="@+id/action_search_contactpoints"
+          android:title="@string/action_search"
+          android:showAsAction="always" android:icon="@drawable/ic_action_search"/>
 
 </menu>

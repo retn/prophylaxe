@@ -3,7 +3,6 @@ package de.hawlandshut.rueckfallprophylaxe.ui;
 import java.util.List;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
-import de.hawlandshut.rueckfallprophylaxe.data.ContactPoint;
 import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
@@ -18,24 +17,27 @@ import android.content.DialogInterface.OnDismissListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class ContactpointListActivity extends Activity {
+	
+	ListView lv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contactpoint_list);
 		
-		final ListView lv = (ListView) findViewById(R.id.contactpointListView);
+		lv = (ListView) findViewById(R.id.contactpointListView);
         lv.setAdapter(new ContactpointListAdapter(this, ControllerData.getPlacesToGo()));
 	}
 
@@ -123,6 +125,28 @@ public class ContactpointListActivity extends Activity {
 	        } else {
 	        	Toast.makeText(ContactpointListActivity.this, "Keine Internetverbindung möglich!", Toast.LENGTH_LONG).show();
 	        }
+		} else if(item.getItemId() == R.id.action_search_contactpoints) {
+			EditText searchBar = (EditText) findViewById(R.id.editTextCPSearch);
+			searchBar.setVisibility(View.VISIBLE);
+			
+			searchBar.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+				}
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					lv.setAdapter(new ContactpointListAdapter(ContactpointListActivity.this, ControllerData.searchContactPoints(s.toString())));					
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+				}
+				
+			});
 		}
 		return super.onOptionsItemSelected(item);
 	}

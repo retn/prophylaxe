@@ -8,7 +8,9 @@ import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
 import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,26 +27,57 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
 import android.widget.ListView;
 
-public class ContactpointListActivity extends Activity {
-	
-	ListView lv;
+public class ContactpointListActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contactpoint_list);
-		
-		lv = (ListView) findViewById(R.id.contactpointListView);
-        lv.setAdapter(new ContactpointListAdapter(this, ControllerData.getPlacesToGo()));
+        setListAdapter(new ContactpointListAdapter(this, ControllerData.getPlacesToGo()));
+        
+        handleIntent(getIntent());
 	}
+	
+	public void onNewIntent(Intent intent) {
+		setIntent(intent);
+		handleIntent(intent);
+	} 
 
+	private void handleIntent(Intent intent) {
+		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+			String query = intent.getStringExtra(SearchManager.QUERY);
+		}
+    } 
+	
 	public boolean onCreateOptionsMenu(Menu menu) {
         
 	    MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.contactpoints, menu);
+	    
+	    SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+	    SearchView searchView = (SearchView) menu.findItem(R.id.action_search_contactpoints).getActionView();
+	    searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+	    searchView.setOnQueryTextListener(new OnQueryTextListener() {
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				setListAdapter(new ContactpointListAdapter(ContactpointListActivity.this, ControllerData.searchContactPoints(query)));
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				setListAdapter(new ContactpointListAdapter(ContactpointListActivity.this, ControllerData.searchContactPoints(newText)));
+				return false;
+			}
+	    	
+	    });
+	    
 	    return true;
 	}
 	
@@ -73,8 +106,7 @@ public class ContactpointListActivity extends Activity {
 	    		progressDialog.setOnDismissListener(new OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
-						final ListView lv = (ListView) findViewById(R.id.contactpointListView);
-				        lv.setAdapter(new ContactpointListAdapter(ContactpointListActivity.this, ControllerData.getPlacesToGo()));
+				        setListAdapter(new ContactpointListAdapter(ContactpointListActivity.this, ControllerData.getPlacesToGo()));
 					}
 	    		});
 	    		
@@ -125,28 +157,6 @@ public class ContactpointListActivity extends Activity {
 	        } else {
 	        	Toast.makeText(ContactpointListActivity.this, "Keine Internetverbindung möglich!", Toast.LENGTH_LONG).show();
 	        }
-		} else if(item.getItemId() == R.id.action_search_contactpoints) {
-			EditText searchBar = (EditText) findViewById(R.id.editTextCPSearch);
-			searchBar.setVisibility(View.VISIBLE);
-			
-			searchBar.addTextChangedListener(new TextWatcher() {
-
-				@Override
-				public void beforeTextChanged(CharSequence s, int start,
-						int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start,
-						int before, int count) {
-					lv.setAdapter(new ContactpointListAdapter(ContactpointListActivity.this, ControllerData.searchContactPoints(s.toString())));					
-				}
-
-				@Override
-				public void afterTextChanged(Editable s) {
-				}
-				
-			});
 		}
 		return super.onOptionsItemSelected(item);
 	}

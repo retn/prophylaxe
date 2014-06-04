@@ -6,20 +6,8 @@
     android:background="@color/grey"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editTextCPSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Suche"
-        android:inputType="text"
-        android:visibility="gone" >
-
-        <requestFocus />
-    </EditText>
-
     <ListView
-        android:id="@+id/contactpointListView"
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="false" >

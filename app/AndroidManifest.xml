@@ -79,11 +79,21 @@
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity"
+            android:launchMode="singleTop"
             android:label="@string/title_activity_contactpoint_list"
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity" />
+            <intent-filter >
+	         <action android:name="android.intent.action.SEARCH" />
+	      </intent-filter>
+          <intent-filter >
+	         <action android:name="android.intent.action.VIEW" />
+	      </intent-filter>
+  	      <meta-data
+             android:name="android.app.searchable"
+             android:resource="@xml/searchable" />
+       	  <meta-data
+			android:name="android.support.PARENT_ACTIVITY"
+            android:value="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity" />
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointMapActivity"

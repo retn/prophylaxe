@@ -306,7 +306,7 @@ public class DiaryNewEntryActivity extends Activity {
 					// Save new pictures
 					ArrayList<byte[]> newPics = pictureManager.getNewPicturesAsBlob();
 					for (byte[] newPic:newPics) {
-						myTables.insertEntryPicture(entryID, newPic);
+						//myTables.insertEntryPicture(entryID, newPic);
 					}
 					
 					// Refresh db

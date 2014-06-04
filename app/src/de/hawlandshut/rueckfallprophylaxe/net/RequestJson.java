@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import de.hawlandshut.rueckfallprophylaxe.data.ContactPoint;
 import android.util.Log;
 
 /**

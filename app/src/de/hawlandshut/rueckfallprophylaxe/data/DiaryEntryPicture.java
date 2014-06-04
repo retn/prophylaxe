@@ -1,12 +1,14 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
+import android.graphics.Bitmap;
+
 public class DiaryEntryPicture {
 	
 	DiaryEntryPictureType type;
 	String path;
 	int id;
+	Bitmap img;
 
-	
 	public DiaryEntryPicture(DiaryEntryPictureType type, String path, int id) {
 		super();
 		this.type = type;
@@ -14,9 +16,19 @@ public class DiaryEntryPicture {
 		this.id = id;
 	}
 	
+	public DiaryEntryPicture(DiaryEntryPictureType type, Bitmap img, int id) {
+		super();
+		this.type = type;
+		this.img = img;
+		this.id = id;
+	}
 	
-	public void delete() {
-		
+	public Bitmap getImg() {
+		return img;
+	}
+
+	public void setImg(Bitmap img) {
+		this.img = img;
 	}
 
 	public DiaryEntryPictureType getType() {
@@ -43,6 +55,5 @@ public class DiaryEntryPicture {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 		
 }

@@ -1,6 +1,9 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,11 +12,15 @@ import java.util.List;
 import java.util.Locale;
 
 import android.util.Log;
+import android.widget.Toast;
+
 import com.google.gson.JsonSyntaxException;
 
 import de.hawlandshut.rueckfallprophylaxe.data.Media.Type;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
+import de.hawlandshut.rueckfallprophylaxe.net.JsonAddress;
+import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 
 public class ControllerData {
 
@@ -50,8 +57,9 @@ public class ControllerData {
 		tables = database.getTables();
 		diaryEntries = fetchDiaryEntries();
 	}
-	
-	public ControllerData(Database database, int bla) throws JsonSyntaxException, IOException {
+
+	public ControllerData(Database database, int bla)
+			throws JsonSyntaxException, IOException {
 		tables = database.getTables();
 		placesToGo = null;
 		placesToGo = fetchPlacesToGo();
@@ -248,13 +256,27 @@ public class ControllerData {
 	}
 
 	private void fetchDiaryEntriesPicture(List<DiaryEntry> diaryEntries2) {
-		List<List<String>> entries = tables
-				.queryFullTable("spl_diary_entry_has_picture");
+		List<List<Object>> entries = tables.queryFullTableEntryPicture();
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entries.size(); i++) {
-				if (entry.getId() == Integer.parseInt(entries.get(i).get(1))) {
-					Media media = new Media(Integer.parseInt(entries.get(i)
-							.get(0)), entry.getId(), Type.Image);
+
+				if (entry.getId() == Integer.parseInt((String) entries.get(i)
+						.get(1))) {
+
+					Blob blob = (Blob) entries.get(i).get(2);
+					int blobLength;
+					byte[] imageBlog = null;
+					try {
+						blobLength = (int) blob.length();
+						imageBlog = blob.getBytes(1, blobLength);
+					} catch (SQLException e) {
+						Log.e(this.toString(), "blob conversion failed");
+						e.printStackTrace();
+					}
+
+					Media media = new Media(Integer.parseInt((String) entries
+							.get(i).get(0)), entry.getId(), Type.Image,
+							imageBlog);
 					entry.setMedia(new Media[] { media });
 				}
 			}
@@ -366,23 +388,23 @@ public class ControllerData {
 	public static void setEmergencyCase(List<EmergencyCase> emergencyCase) {
 		ControllerData.emergencyCase = emergencyCase;
 	}
-	
+
 	public static List<ContactPoint> searchContactPoints(String search) {
 		ArrayList<ContactPoint> searchedCPs = new ArrayList<ContactPoint>();
-		for(ContactPoint cp: ControllerData.getPlacesToGo()) {
+		for (ContactPoint cp : ControllerData.getPlacesToGo()) {
 			String name = cp.getName().toLowerCase(Locale.GERMANY);
 			String street = cp.getStreet().toLowerCase(Locale.GERMANY);
 			String town = cp.getTown().toLowerCase(Locale.GERMANY);
 			String plz = cp.getPlz().toLowerCase(Locale.GERMANY);
 			String s = search.toLowerCase(Locale.GERMANY);
-			
-			if(name.contains(s)) {
+
+			if (name.contains(s)) {
 				searchedCPs.add(cp);
-			} else if(street.contains(s)) {
+			} else if (street.contains(s)) {
 				searchedCPs.add(cp);
-			} else if(town.contains(s)) {
+			} else if (town.contains(s)) {
 				searchedCPs.add(cp);
-			} else if(plz.contains(s)) {
+			} else if (plz.contains(s)) {
 				searchedCPs.add(cp);
 			}
 		}

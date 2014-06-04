@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import com.google.android.gms.internal.cd;
+
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
+import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
 import de.hawlandshut.rueckfallprophylaxe.data.Emotions;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
@@ -180,6 +184,9 @@ public class DiaryNewEntryActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 			
 			emotionSpinner.setSelection(existingEntry.getEmotionId()-1);
+			
+			// Add existing pictures to pictureManager
+			
 		}
 
 	}
@@ -288,14 +295,19 @@ public class DiaryNewEntryActivity extends Activity {
 						
 						myTables.update("spl_diary_entry_has_mood", emotionHashmap, DiaryEntryIDString, "entryID");
 						Log.d("DiaryEntrySave","Update Entry "+DiaryEntryIDString+" mit Emotion ID "+selectedMoodID);
-						// TODO: Delete pictures that were moved to trash
+						
+						// Delete pictures that were moved to trash
+						DiaryEntryDatabase diaryEntryDB = new DiaryEntryDatabase(existingEntry, this);
+						for (DiaryEntryPicture pic:pictureManager.getTrash()) {
+							diaryEntryDB.deletePictureFromDB(pic.getId());
+						}
 					}
 					
-
-					
-					// TODO: Save new pictures
-					
-					
+					// Save new pictures
+					ArrayList<byte[]> newPics = pictureManager.getNewPicturesAsBlob();
+					for (byte[] newPic:newPics) {
+						myTables.insertEntryPicture(entryID, newPic);
+					}
 					
 					// Refresh db
 					ControllerData cd = new ControllerData(db,true);

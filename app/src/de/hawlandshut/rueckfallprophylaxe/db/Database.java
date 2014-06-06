@@ -15,6 +15,8 @@ public class Database {
 	private SQLiteDatabase sqldatabase;
 	private File databaseFile;
 	private MyTables tables;
+	
+	//get database with path
 	public Database(Context context) {
 		this.context=context;
 		databaseFile = context.getDatabasePath("daten.db");
@@ -24,41 +26,18 @@ public class Database {
 		return tables;
 	}
 	
+	//initialize, creates file if not exists
     public void InitializeSQLCipher(String pass) {
         SQLiteDatabase.loadLibs(context);
         if(!databaseFile.exists()){
         	databaseFile.getParentFile().mkdirs(); 	
-        } /* else {
-        	databaseFile.delete();
-        	databaseFile.mkdirs();
-        } */ 
+        }
         
         SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile.getPath(), pass, null);
         this.sqldatabase=database;
         tables = new MyTables(sqldatabase);
     }
 
-	public void insertExample() {
-		
-        sqldatabase.execSQL("insert into t1(a, b) values(?, ?)", new Object[]{"one for the money",
-                                                                        "two for the show"});
-	}
-
-	public void makeExampleQuery() {
-		String query="select * from t1";
-        Cursor c=sqldatabase.rawQuery(query, null);
-        if(c!=null){
-        	int i=0;
-        	if(c.moveToFirst()){
-        		do{
-        			//String text=c.getString(c.getColumnIndex("a"));
-        			i++;
-        		}
-        		while(c.moveToNext());
-        	}
-        	Log.d("query", ""+i);
-        }
-	}
 	
 	public boolean databaseExists() {
 		if(databaseFile.exists()){
@@ -72,20 +51,3 @@ public class Database {
 	}
 }
 
-/*
- * example table+query
-        database.execSQL("create table t1(a , b)");
-        database.execSQL("insert into t1(a, b) values(?, ?)", new Object[]{"one for the money",
-                                                                        "two for the show"});
-        String query="select * from t1";
-        Cursor c=database.rawQuery(query, null);
-        if(c!=null){
-        	if(c.moveToFirst()){
-        		do{
-        			String text=c.getString(c.getColumnIndex("a"));
-        			Toast.makeText(context, text, Toast.LENGTH_LONG).show();;
-        		}
-        		while(c.moveToNext());
-        	}
-        }
-*/

@@ -34,17 +34,17 @@ public class MyTables {
 	
 	private SQLiteDatabase sqldatabase;
 
+	//constructor with the database as parameter
 	public MyTables(SQLiteDatabase sqldatabase) {
 		this.sqldatabase=sqldatabase;
 		createTables();
-		queryNumberTables();
-//		List<String> results=query("spl_emotion","emotion");
+		Log.d(this.toString(),queryNumberTables()+" tables counted.");
 
 	}
 	
 	//updates database, needs table hashmap with attributs, index and the column name of id
 	public boolean update(String table, HashMap<String, String> hashMap,
-			String index, String column) {
+			String index, String columnName) {
 		
 		ContentValues values=new ContentValues();
 		for(Map.Entry<String, String> entry: hashMap.entrySet()) {
@@ -52,8 +52,9 @@ public class MyTables {
 			values.put(entry.getKey(),entry.getValue());
 		}
 		
-		return sqldatabase.update(table,values ,column+" = "+index, null)>0;
+		return sqldatabase.update(table,values ,columnName+" = "+index, null)>0;
 	}
+	
 	
 	//inserts in database, needs a hashmap with attributs
 	public boolean insert(String table, HashMap<String, String> hashMap) {
@@ -65,7 +66,7 @@ public class MyTables {
 		return sqldatabase.insert(table, null, values)>0;
 	}
 	
-	//inserts in diary entry has picture table, with entryid and blob
+	//special insert: inserts in diary entry has picture table, with entryid and blob
 	public boolean insertEntryPicture(int entryid, byte[] imageblob) {
 		String table="spl_diary_entry_has_picture";
 		ContentValues values=new ContentValues();
@@ -75,8 +76,8 @@ public class MyTables {
 	}
 
 	//deletes entry in database, needs id of entry and the column name of id
-	public boolean delete(String table, String id, String column) {
-		return sqldatabase.delete(table, column+" = "+id, null)>0;
+	public boolean delete(String table, String id, String columnName) {
+		return sqldatabase.delete(table, columnName+" = "+id, null)>0;
 	}
 	
 	//deletes table
@@ -100,7 +101,7 @@ public class MyTables {
 		return result;
 	}
 	
-	//returns list of attributs from a table
+	//returns list of all entries with all attributs from a table
 	public List<List<String>> queryFullTable(String table) {
 		List<List<String>> result= new ArrayList<List<String>>();
 		Cursor c = sqldatabase.rawQuery("SELECT * FROM "+table, null);
@@ -120,6 +121,7 @@ public class MyTables {
 		return result;
 	}	
 	
+	//query with where condition
 	public List<String> query(String table, String value, String comparison) {
 		List<String> result= new ArrayList<String>();
 		Cursor c = sqldatabase.rawQuery("SELECT "+value+" FROM "+table+" WHERE "+comparison, null);
@@ -151,6 +153,28 @@ public class MyTables {
 		return i;
 		
 	}
+	
+	//special query: query with blob for entrypicture
+	public List<List<Object>> queryFullTableEntryPicture() {
+		String table="spl_diary_entry_has_picture";
+		List<List<Object>> result= new ArrayList<List<Object>>();
+		Cursor c = sqldatabase.rawQuery("SELECT * FROM "+table, null);
+
+		if (c.moveToFirst()) {
+		    while ( !c.isAfterLast() ) {
+		    	List<Object> resultRow=new ArrayList<Object>();
+		    	for(int i=0;i<c.getColumnCount()-1;i++){
+		    		resultRow.add(c.getString(i));
+		    	}
+		    	resultRow.add(c.getBlob(c.getColumnCount()-1));
+		        c.moveToNext();
+		        result.add(resultRow);
+		    }
+		}
+		c.close();
+		 
+		return result;
+	}
 
 	//creates all tables
 	public void createTables(){	
@@ -175,24 +199,4 @@ public class MyTables {
 			
 	}
 
-	public List<List<Object>> queryFullTableEntryPicture() {
-		String table="spl_diary_entry_has_picture";
-		List<List<Object>> result= new ArrayList<List<Object>>();
-		Cursor c = sqldatabase.rawQuery("SELECT * FROM "+table, null);
-
-		if (c.moveToFirst()) {
-		    while ( !c.isAfterLast() ) {
-		    	List<Object> resultRow=new ArrayList<Object>();
-		    	for(int i=0;i<c.getColumnCount()-1;i++){
-		    		resultRow.add(c.getString(i));
-		    	}
-		    	resultRow.add(c.getBlob(c.getColumnCount()-1));
-		        c.moveToNext();
-		        result.add(resultRow);
-		    }
-		}
-		c.close();
-		 
-		return result;
-	}
 }

@@ -69,6 +69,7 @@ public class EmergencyCaseTwoActivity extends Activity {
                 android.R.layout.simple_list_item_1, list);
         listview.setAdapter(adapter);
         
+    	//opens tel number and let you call help people
         listview.setOnItemClickListener(new ListView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,

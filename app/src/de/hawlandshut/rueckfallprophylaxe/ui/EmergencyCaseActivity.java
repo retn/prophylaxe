@@ -59,6 +59,7 @@ public class EmergencyCaseActivity extends Activity {
                 R.id.message_text, list);
         listview.setAdapter(adapter);
         
+        //starts second ec activity when clicking on a list item
         listview.setOnItemClickListener(new ListView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -70,11 +71,12 @@ public class EmergencyCaseActivity extends Activity {
 		});
 
         final ImageView imageView=(ImageView) findViewById(R.id.image_koffer);
-        
+        //loads profile picture if one is chosen
         if(imageFile.exists()){
         	imageView.setBackgroundColor(0x00000000);
         	imageView.setImageBitmap(loadImage(imageFile.getPath()));
         }        
+        //opens gallery
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +91,7 @@ public class EmergencyCaseActivity extends Activity {
         });
         
         Button button=(Button)findViewById(R.id.emergency);
+        //starts third emergency case activity when clicking on emergency button
         button.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -101,12 +104,15 @@ public class EmergencyCaseActivity extends Activity {
 
     }
     
+	
+	//Opens gallery and let choose a image and save it as profile picture
     public void imageFromGallery() {
         Intent getImageFromGalleryIntent = 
           new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(getImageFromGalleryIntent, SELECT_IMAGE);
     }
     
+    //result of gallery choose
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {

@@ -18,6 +18,8 @@ import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
 
 public class ControllerData {
+	
+	//this class is a singelton!
 
 	private MyTables tables;
 	private static List<Maxim> maxims;
@@ -47,6 +49,8 @@ public class ControllerData {
 		safetyThought = fetchSafetyThought();
 		emergencyCase = fetchEmergencyCase();
 	}
+	
+	//fetch-functions query tables and create a objects and put them in a list
 
 	public ControllerData(Database database, boolean bla) {
 		tables = database.getTables();

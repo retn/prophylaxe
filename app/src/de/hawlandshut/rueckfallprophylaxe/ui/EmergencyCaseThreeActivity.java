@@ -64,6 +64,7 @@ public class EmergencyCaseThreeActivity extends Activity{
 		textView.append(text);
 	}
 
+	//opens tel number and let you call it
 	private void setHotlines(final EmergencyCase case0) {
 		
         Button hotlineButton=(Button)findViewById(R.id.hotline_button);

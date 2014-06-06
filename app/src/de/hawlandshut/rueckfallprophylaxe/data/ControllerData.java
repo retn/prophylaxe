@@ -1,7 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -12,15 +11,11 @@ import java.util.List;
 import java.util.Locale;
 
 import android.util.Log;
-import android.widget.Toast;
-
 import com.google.gson.JsonSyntaxException;
 
 import de.hawlandshut.rueckfallprophylaxe.data.Media.Type;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
-import de.hawlandshut.rueckfallprophylaxe.net.JsonAddress;
-import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
 
 public class ControllerData {
 
@@ -396,17 +391,26 @@ public class ControllerData {
 			String street = cp.getStreet().toLowerCase(Locale.GERMANY);
 			String town = cp.getTown().toLowerCase(Locale.GERMANY);
 			String plz = cp.getPlz().toLowerCase(Locale.GERMANY);
-			String s = search.toLowerCase(Locale.GERMANY);
+			
+			String[] split = search.split(" ");
 
-			if (name.contains(s)) {
-				searchedCPs.add(cp);
-			} else if (street.contains(s)) {
-				searchedCPs.add(cp);
-			} else if (town.contains(s)) {
-				searchedCPs.add(cp);
-			} else if (plz.contains(s)) {
+			int contains = 0;
+			for(String s: split) {
+				if (name.contains(s.toLowerCase(Locale.GERMANY))) {
+					contains++;
+				} else if (street.contains(s.toLowerCase(Locale.GERMANY))) {
+					contains++;
+				} else if (town.contains(s.toLowerCase(Locale.GERMANY))) {
+					contains++;
+				} else if (plz.contains(s.toLowerCase(Locale.GERMANY))) {
+					contains++;
+				}
+			}
+			
+			if(contains == split.length) {
 				searchedCPs.add(cp);
 			}
+			
 		}
 		return searchedCPs;
 	}

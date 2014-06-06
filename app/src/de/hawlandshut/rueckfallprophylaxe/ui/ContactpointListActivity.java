@@ -7,7 +7,6 @@ import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.net.JsonContactPoint;
 import de.hawlandshut.rueckfallprophylaxe.net.RequestJson;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
@@ -19,18 +18,14 @@ import android.content.DialogInterface.OnDismissListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
-import android.widget.ListView;
 
 public class ContactpointListActivity extends ListActivity {
 
@@ -39,20 +34,7 @@ public class ContactpointListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contactpoint_list);
         setListAdapter(new ContactpointListAdapter(this, ControllerData.getPlacesToGo()));
-        
-        handleIntent(getIntent());
 	}
-	
-	public void onNewIntent(Intent intent) {
-		setIntent(intent);
-		handleIntent(intent);
-	} 
-
-	private void handleIntent(Intent intent) {
-		if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-			String query = intent.getStringExtra(SearchManager.QUERY);
-		}
-    } 
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
         

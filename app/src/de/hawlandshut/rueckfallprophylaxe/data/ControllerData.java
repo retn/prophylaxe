@@ -22,6 +22,7 @@ public class ControllerData {
 	//this class is a singelton!
 
 	private MyTables tables;
+	private static boolean initialized = false;
 	private static List<Maxim> maxims;
 	private static HashMap<Integer, Emotion> emotions;
 	private static List<HelpPerson> helpPeople;
@@ -48,6 +49,7 @@ public class ControllerData {
 		safetyAction = fetchSafetyAction();
 		safetyThought = fetchSafetyThought();
 		emergencyCase = fetchEmergencyCase();
+		initialized = true;
 	}
 	
 	//fetch-functions query tables and create a objects and put them in a list
@@ -62,6 +64,10 @@ public class ControllerData {
 		tables = database.getTables();
 		placesToGo = null;
 		placesToGo = fetchPlacesToGo();
+	}
+	
+	public static boolean isInitialized() {
+		return initialized;
 	}
 
 	private List<LimitRelapse> fetchLimitRelapse() {

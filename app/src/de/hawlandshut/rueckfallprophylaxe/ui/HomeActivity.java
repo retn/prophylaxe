@@ -1,5 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
+import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +30,13 @@ public class HomeActivity extends Activity {
     @Override
     protected void onResume() {
     	super.onResume();
+    	
+    	if(!ControllerData.isInitialized()) {
+    		Intent i = new Intent(this, PasswordDetermineActivity.class);
+    		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+    		startActivity(i);
+    	}
+    	
     	 if(isBetwixt) {
          	Button btnContactpoints = (Button) findViewById(R.id.btnAnlaufstellen);
          	btnContactpoints.setVisibility(View.GONE);
@@ -40,8 +48,6 @@ public class HomeActivity extends Activity {
          	startActivity(intent);
          }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

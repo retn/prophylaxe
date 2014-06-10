@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -79,6 +80,11 @@ public class EmotionActivity extends Activity {
 			}
 			
 		});
+	}
+	
+	public void startPlaylist(View view){ 
+		Intent intent = new Intent("android.intent.action.MUSIC_PLAYER"); 
+		startActivity(intent); 
 	}
 
 	@Override

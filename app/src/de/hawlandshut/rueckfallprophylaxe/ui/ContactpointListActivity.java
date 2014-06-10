@@ -38,6 +38,16 @@ public class ContactpointListActivity extends ListActivity {
         setListAdapter(new ContactpointListAdapter(this, ControllerData.getPlacesToGo()));
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(!ControllerData.isInitialized()) {
+    		Intent i = new Intent(this, PasswordDetermineActivity.class);
+    		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+    		startActivity(i);
+    	}
+	}
+	
 	public boolean onCreateOptionsMenu(Menu menu) {
         
 	    MenuInflater inflater = getMenuInflater();

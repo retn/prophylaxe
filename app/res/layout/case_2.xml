@@ -9,7 +9,7 @@
 
         
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/help_people"
-              android:id="@+id/textView2" android:layout_weight="1"
+              android:id="@+id/street" android:layout_weight="1"
               android:textColor="@android:color/black"/>
     <ListView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:id="@+id/help_people" android:layout_weight="3" android:layout_marginLeft="50dp"

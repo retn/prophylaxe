@@ -131,6 +131,10 @@
             android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui."
             android:label="@string/title_activity_koffer3">
         </activity>
+        <activity android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointViewActivity"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointList"
+            android:label="@string/title_contactpoint_view" >
+        </activity>
         <meta-data
    			android:name="com.google.android.gms.version"
     		android:value="@integer/google_play_services_version" />

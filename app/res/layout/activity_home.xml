@@ -13,7 +13,7 @@
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/btnTagebuch"
-        android:layout_below="@+id/spinnemotion"
+        android:layout_below="@+id/btnAblenkungen"
         android:layout_marginTop="20dp"
         android:onClick="callNotfallkoffer"
         android:text="@string/btn_notfallkoffer" />
@@ -34,6 +34,7 @@
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/btnTagebuch"
         android:layout_below="@+id/btnTagebuch"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="40dp"
         android:onClick="callEmotion"
         android:text="@string/btn_ablenkungen" />
@@ -47,12 +48,5 @@
         android:layout_marginTop="40dp"
         android:onClick="callTagebuch"
         android:text="@string/btn_tagebuch" />
-
-    <Spinner
-        android:id="@+id/spinnemotion"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnAblenkungen"
-        android:layout_below="@+id/btnAblenkungen" />
 
 </RelativeLayout>

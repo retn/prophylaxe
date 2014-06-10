@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 //The Spinner which will be used to select a Emotion before Clicking at the EmotionActivity
 //isnt working yet so i commented it out for now. I will try to fix it the next days.
 public class HomeActivity extends Activity {
 	
+	static boolean isBetwixt;
 	Spinner spinnemotion;
 	
     @Override
@@ -19,12 +21,11 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         
-        spinnemotion = (Spinner) findViewById(R.id.spinnemotion);
-        
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-				R.array.mood_array, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnemotion.setAdapter(adapter);
+        String site = getIntent().getStringExtra("SITE");
+        if(isBetwixt) {
+        	Button btnContactpoints = (Button) findViewById(R.id.btnAnlaufstellen);
+        	btnContactpoints.setVisibility(View.GONE);
+        }
 	}
 
 
@@ -52,10 +53,7 @@ public class HomeActivity extends Activity {
     }
  
     public void callEmotion(View view) {
-    	String selectedEmotion = ((CharSequence) spinnemotion.getSelectedItem()).toString();
-    	
     	Intent intent = new Intent(this, EmotionActivity.class);
-    	intent.putExtra("EMOTION", selectedEmotion);
     	startActivity(intent);
     }
 

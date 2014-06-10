@@ -2,31 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EmotionActivity" >
-
-   <TextView
-       
-        android:id="@+id/ermutigungs_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-         />
 
     <ListView
         android:id="@+id/distractionListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/MP3_button"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/spinnemotion"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_alignLeft="@+id/ermutigungs_text"
-        android:layout_below="@+id/ermutigungs_text" >
-
-    </ListView>
+        android:clickable="false"
+        android:gravity="center_horizontal" />
 
     <Button
         android:id="@+id/MP3_button"
@@ -36,6 +24,41 @@
         android:layout_centerHorizontal="true"
         android:text="@string/MP3_button" />
 
+    <TextView
+        android:id="@+id/ermutigungs_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/lightGreen"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="@string/hello_world"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textViewEmotionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinnemotion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/spinnemotion"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp"
+        android:text="@string/how_you_feel" />
+
+    <Spinner
+        android:id="@+id/spinnemotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ermutigungs_text"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/textViewEmotionLabel"
+        android:gravity="right" />
+
 </RelativeLayout>
-
-

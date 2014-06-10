@@ -88,4 +88,6 @@
 	<string name="diary_errorTitle">Fehler</string>
 	<string name="diary_addPictureTooMany">Zulässige Anzahl von Bildern überschritten</string>
 	<string name="diary_addPictureTooManyExpl">Das ist ein Bild zuviel. Es sind maximal %d Bilder erlaubt.</string>
+	<string name="lbl_distractions">Hier ein paar Ablenkungsmöglichkeiten:</string>
+	<string name="title_contactpoint_view">Anlaufstellen</string>
 </resources>

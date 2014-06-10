@@ -2,6 +2,7 @@ package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import java.util.List;
 
+import de.hawlandshut.rueckfallprophylaxe.data.ContactPoint;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.db.DataInserter;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
@@ -23,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
@@ -63,11 +65,14 @@ public class ContactpointListActivity extends ListActivity {
 	    return true;
 	}
 	
-	public void callMap(View view) {
-		Intent intent = new Intent(this, ContactpointMapActivity.class);
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		ContactPoint cp = (ContactPoint) l.getItemAtPosition(position);
+		ContactpointViewActivity.cp = cp;
+		Intent intent = new Intent(this, ContactpointViewActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_update_contactpoints) {
 

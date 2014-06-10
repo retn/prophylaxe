@@ -182,8 +182,7 @@ public class DiaryNewEntryActivity extends Activity {
 			
 			// Mood
 			Spinner emotionSpinner = (Spinner) this.findViewById(R.id.spinnerMood);
-			Toast.makeText(this, "Geladene emotion id: "+existingEntry.getEmotionId(),
-					Toast.LENGTH_LONG).show();
+			// Toast.makeText(this, "Geladene emotion id: "+existingEntry.getEmotionId(), Toast.LENGTH_LONG).show();
 			
 			emotionSpinner.setSelection(existingEntry.getEmotionId()-1);
 			
@@ -193,8 +192,7 @@ public class DiaryNewEntryActivity extends Activity {
 				for (Media myMedia:media) {
 					Log.d("showCurrentPictures","existing pic found");
 					try {
-						Bitmap myImage = myMedia.getImage();
-						pictureManager.addExistingPicture(myImage);
+						pictureManager.addExistingPicture(myMedia);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -336,7 +334,11 @@ public class DiaryNewEntryActivity extends Activity {
 					
 					db.close();
 					
-					Toast.makeText(this, "Eintrag gespeichert",
+					// Go back to entry list
+					Intent intent = new Intent(this, DiaryEntryListActivity.class);
+			    	startActivity(intent);
+					
+					Toast.makeText(this, "Eintrag wurde gespeichert",
 							Toast.LENGTH_LONG).show();
 					
 				}

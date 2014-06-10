@@ -63,8 +63,8 @@ public class DiaryEntryListActivity extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.setHeaderTitle("Eintrag löschen");
-		menu.add(Menu.NONE, 0, Menu.NONE, "Bestätigen");
+		menu.setHeaderTitle("Eintrag l��schen");
+		menu.add(Menu.NONE, 0, Menu.NONE, "Best��tigen");
 	}
 	
 	public boolean onContextItemSelected(MenuItem item) {
@@ -129,10 +129,6 @@ public class DiaryEntryListActivity extends Activity {
 		
 		// Close database
 		db.close();
-		
-		// Debug
-		Toast.makeText(this, "Einträge geladen: "+Entries.size(),
-				Toast.LENGTH_LONG).show();
 		
 		// Draw entries into activity
 		drawEntries();

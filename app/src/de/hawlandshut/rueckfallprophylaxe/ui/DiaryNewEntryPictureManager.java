@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPictureType;
+import de.hawlandshut.rueckfallprophylaxe.data.Media;
 
 /**
  * Managed das hinzuf��gen von Bildern eines (neues) Tagebucheintrages
@@ -128,10 +129,12 @@ public class DiaryNewEntryPictureManager {
 
 	}
 	
-	public void addExistingPicture(Bitmap picture) {
+	public void addExistingPicture(Media media) throws Exception {
+		
+		Bitmap myImage = media.getImage();
 		
 		// Add to image list
-		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_GALLERY_PICTURE, picture, getNewID());
+		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.EXISTING_DATABASE_PICTURE, myImage, media.getId());
 		pictures.add(newPic);
 		addImageView(newPic);
 	}

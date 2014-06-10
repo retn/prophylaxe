@@ -212,7 +212,7 @@ public class ControllerData {
 		List<String> contens = tables.query("spl_diary_entry", "content");
 		List<String> createds = tables.query("spl_diary_entry", "created");
 
-		Log.d("fetchDiaryEntries ", "Lade Einträge");
+		Log.d("fetchDiaryEntries ", "Lade Eintraege");
 
 		for (int i = 0; i < ids.size(); i++) {
 			DiaryEntry entry;
@@ -246,11 +246,13 @@ public class ControllerData {
 			}
 
 		}
-		// fetchDiaryEntriesPicture(diaryEntries);
+		
+		Log.d("fetchDiaryEntries ", "Trying to fetch pictures");
+		fetchDiaryEntriesPicture(diaryEntries);
 
 		fetchDiaryEntriesMood(diaryEntries);
 
-		Log.d("fetchDiaryEntries ", diaryEntries.size() + " Einträge geladen");
+		Log.d("fetchDiaryEntries ", diaryEntries.size() + " Eintraege geladen");
 		return diaryEntries;
 	}
 
@@ -294,7 +296,7 @@ public class ControllerData {
 				if (entry.getId() == Integer.parseInt(entries.get(i).get(0))) {
 
 					Log.d("fetchDiaryEntries",
-							"Emotion gefunden für Entry ID " + entry.getId()
+							"Emotion gefunden f��r Entry ID " + entry.getId()
 									+ ", Emotion ID "
 									+ Integer.parseInt(entries.get(i).get(1)));
 					entry.setEmotionId(Integer.parseInt(entries.get(i).get(1)));

@@ -15,6 +15,7 @@ import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
 import de.hawlandshut.rueckfallprophylaxe.data.Emotions;
+import de.hawlandshut.rueckfallprophylaxe.data.Media;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
@@ -24,6 +25,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -158,8 +160,8 @@ public class DiaryNewEntryActivity extends Activity {
 			Time currentTime = new Time();
 			currentTime.setToNow();
 			fillInputField_date(currentTime.monthDay, currentTime.month, currentTime.year);
-			
 		}
+		
 		// Existing entry
 		else {
 			// Date
@@ -186,7 +188,21 @@ public class DiaryNewEntryActivity extends Activity {
 			emotionSpinner.setSelection(existingEntry.getEmotionId()-1);
 			
 			// Add existing pictures to pictureManager
-			
+			Media[] media = existingEntry.getMedia();
+			if (media != null) {
+				for (Media myMedia:media) {
+					Log.d("showCurrentPictures","existing pic found");
+					try {
+						Bitmap myImage = myMedia.getImage();
+						pictureManager.addExistingPicture(myImage);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}	
+			} else {
+				Log.d("showCurrentPictures","Diary entry has no pics");
+			}
 		}
 
 	}
@@ -256,12 +272,15 @@ public class DiaryNewEntryActivity extends Activity {
 					
 					Log.d("DiaryEntrySave", "Ausgewählte Emotion ID: "+selectedMoodID);
 					
+					int DiaryEntryID;
+					
 					// Create new entry
 					if (existingEntry == null) {
 						
 						
 						// Get ID of new entry
 						int newDiaryEntryID = DiaryEntryDatabase.getLastID()+1;
+						DiaryEntryID = newDiaryEntryID;
 						String DiaryEntryIDString = ""+newDiaryEntryID;
 						
 						Log.d("DiaryNewEntrySave", "Erstelle neuen Eintrag mit ID: "+newDiaryEntryID + " und mood id "+selectedMoodID);
@@ -283,6 +302,7 @@ public class DiaryNewEntryActivity extends Activity {
 					// Update existing entry
 					else {
 						// ID of existing entry
+						DiaryEntryID = existingEntry.getId();
 						String DiaryEntryIDString = ""+existingEntry.getId();
 						// Log.d("DiaryNewEntrySave","Update Entry "+DiaryEntryIDString);
 						
@@ -306,7 +326,8 @@ public class DiaryNewEntryActivity extends Activity {
 					// Save new pictures
 					ArrayList<byte[]> newPics = pictureManager.getNewPicturesAsBlob();
 					for (byte[] newPic:newPics) {
-						//myTables.insertEntryPicture(entryID, newPic);
+						Log.d("DiaryEntrySave", "saving picture for diaryEntryID "+DiaryEntryID);
+						myTables.insertEntryPicture(DiaryEntryID, newPic);
 					}
 					
 					// Refresh db
@@ -392,7 +413,7 @@ public class DiaryNewEntryActivity extends Activity {
 			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			
-		    builder.setTitle("Bildquelle w�hlen")
+		    builder.setTitle("Bildquelle w���hlen")
 		           .setItems(items, new DialogInterface.OnClickListener() {
 		               public void onClick(DialogInterface dialog, int which) {
 		            	   
@@ -430,7 +451,7 @@ public class DiaryNewEntryActivity extends Activity {
 		    builder.show();
 		} else {
 			// Error msg
-			showNeutralErrorDialog("Zulässige Anzahl von Bildern überschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
+			showNeutralErrorDialog("Zul��ssige Anzahl von Bildern ��berschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
 			
 		}
 	}

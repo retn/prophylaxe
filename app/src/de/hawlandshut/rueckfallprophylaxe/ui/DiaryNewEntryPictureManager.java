@@ -23,7 +23,7 @@ import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPicture;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPictureType;
 
 /**
- * Managed das hinzufügen von Bildern eines (neues) Tagebucheintrages
+ * Managed das hinzuf��gen von Bildern eines (neues) Tagebucheintrages
  */
 public class DiaryNewEntryPictureManager {
 	private Activity myActivity;
@@ -38,8 +38,13 @@ public class DiaryNewEntryPictureManager {
 		this.myActivity = myActivity;
 	}
 	
+	/**
+	 * Returns an ArrayList<byte[]> of all newly added pictures
+	 * @return
+	 */
 	public ArrayList<byte[]> getNewPicturesAsBlob() {
 		ArrayList<byte[]> newPics = new ArrayList<byte[]>();
+		
 		for (DiaryEntryPicture pic:pictures) {
 			if (pic.getType() == DiaryEntryPictureType.NEW_CAMERA_PICTURE || pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
 				// Bitmap laden
@@ -239,21 +244,29 @@ public class DiaryNewEntryPictureManager {
 	 * Shows thumbnails of all current pictures
 	 */
 	public void drawCurrentPictures() {
-		// Show new pictures from gallery & camera
-		for(DiaryEntryPicture pic: pictures){
-	        ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
-	        imageView.setImageBitmap(getThumbnail(pic.getPath()));
-	        
-	        // Register event listener
-	        myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
-	        
-	        
-	        Log.d("showCurrentPictures - Pic id: ", ""+pic.getIdString());
-	     
-		}
 		
-		// TODO: Show existing pictures from database which were not moved to trash
-		
+		for(DiaryEntryPicture pic: pictures) {
+			// Show new pictures from gallery & camera
+			if (pic.getType() == DiaryEntryPictureType.NEW_CAMERA_PICTURE || pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
+		        ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
+		        imageView.setImageBitmap(getThumbnail(pic.getPath()));
+		        
+		        // Register event listener
+		        myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
+		        
+		        
+		        Log.d("showCurrentPictures from gallery & camera- Pic id: ", ""+pic.getIdString());
+			} else {
+				// Show existing pictures from database which were not moved to trash
+			    ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
+			    imageView.setImageBitmap(getThumbnail(pic.getPath()));
+			        
+			    // Register event listener
+			    myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
+			        
+			    Log.d("showCurrentPictures from database - Pic id: ", ""+pic.getIdString());
+			}
+		}	
 	}
 	
 	

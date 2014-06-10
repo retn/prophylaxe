@@ -100,8 +100,8 @@ public class DiaryNewEntryActivity extends Activity {
 			ContextMenuInfo menuInfo) {
 		// TODO Auto-generated method stub
 		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.setHeaderTitle("Bearbeiten");
-		menu.add(Menu.NONE, removePicture, Menu.NONE, "Bild entfernen");
+		menu.setHeaderTitle(R.string.diary_editPictureTitle);
+		menu.add(Menu.NONE, removePicture, Menu.NONE, R.string.diary_editPictureRemove);
 	}
 	
 	//this method automatically called when user select menu items
@@ -338,7 +338,7 @@ public class DiaryNewEntryActivity extends Activity {
 					Intent intent = new Intent(this, DiaryEntryListActivity.class);
 			    	startActivity(intent);
 					
-					Toast.makeText(this, "Eintrag wurde gespeichert",
+					Toast.makeText(this, R.string.diary_saveSuccess,
 							Toast.LENGTH_LONG).show();
 					
 				}
@@ -415,7 +415,7 @@ public class DiaryNewEntryActivity extends Activity {
 			
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			
-		    builder.setTitle("Bildquelle w���hlen")
+		    builder.setTitle(R.string.diary_addPictureChooseSource)
 		           .setItems(items, new DialogInterface.OnClickListener() {
 		               public void onClick(DialogInterface dialog, int which) {
 		            	   
@@ -453,8 +453,7 @@ public class DiaryNewEntryActivity extends Activity {
 		    builder.show();
 		} else {
 			// Error msg
-			showNeutralErrorDialog("Zul��ssige Anzahl von Bildern ��berschritten", "Das ist ein Bild zuviel. Es sind maximal "+DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()+" Bilder erlaubt.");
-			
+			showNeutralErrorDialog(getResources().getString(R.string.diary_addPictureTooMany), getResources().getString(R.string.diary_addPictureTooManyExpl, DiaryNewEntryPictureManager.getMAX_PICTURES_ALLOWED()));	
 		}
 	}
 	
@@ -491,10 +490,7 @@ public class DiaryNewEntryActivity extends Activity {
 	     }
 	}
 	
-	
-	
 
-	
 	private void showNeutralErrorDialog(String title, String msg) {
 		new AlertDialog.Builder(this)
 	    .setTitle(title)

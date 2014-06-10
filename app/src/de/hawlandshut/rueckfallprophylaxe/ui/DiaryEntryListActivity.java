@@ -63,8 +63,8 @@ public class DiaryEntryListActivity extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.setHeaderTitle("Eintrag l��schen");
-		menu.add(Menu.NONE, 0, Menu.NONE, "Best��tigen");
+		menu.setHeaderTitle(R.string.diary_deleteEntry);
+		menu.add(Menu.NONE, 0, Menu.NONE, R.string.diary_deleteEntryConfirm);
 	}
 	
 	public boolean onContextItemSelected(MenuItem item) {
@@ -93,7 +93,7 @@ public class DiaryEntryListActivity extends Activity {
 			
 			removeAllViewsAndDraw();
 
-			Toast.makeText(getApplicationContext(), "Eintrag wurde entfernt",Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), R.string.diary_deleteEntrySuccess,Toast.LENGTH_LONG).show();
 			
 			break;
 

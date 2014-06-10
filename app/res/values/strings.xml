@@ -78,5 +78,14 @@
     <string name="network_unavailable">Keine Internetverbindung verfügbar</string>
     <string name="action_update_contactpoints">Aktualisieren</string>
     <string name="action_search">Suche</string>
-
+    <string name="diary_deleteEntry">Eintrag löschen</string>
+    <string name="diary_deleteEntryConfirm">Bestätigen</string>
+	<string name="diary_deleteEntrySuccess">Eintrag wurde gelöscht</string>
+	<string name="diary_editPictureTitle">Bearbeiten</string>
+	<string name="diary_editPictureRemove">Bild entfernen</string>
+	<string name="diary_saveSuccess">Eintrag wurde gespeichert</string>
+	<string name="diary_addPictureChooseSource">Bildquelle wählen</string>
+	<string name="diary_errorTitle">Fehler</string>
+	<string name="diary_addPictureTooMany">Zulässige Anzahl von Bildern überschritten</string>
+	<string name="diary_addPictureTooManyExpl">Das ist ein Bild zuviel. Es sind maximal %d Bilder erlaubt.</string>
 </resources>

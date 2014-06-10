@@ -55,8 +55,20 @@ public class DiaryNewEntryPictureManager {
 					FileInputStream fis = new FileInputStream(path);
 					Bitmap imgBitmap = BitmapFactory.decodeStream(fis);
 					ByteArrayOutputStream bos = new ByteArrayOutputStream();
-					imgBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+					
+					// Resize to max 800px
+					int bwidth=imgBitmap.getWidth();
+					int bheight=imgBitmap.getHeight();
+					int swidth=800;
+					int new_width=swidth;
+					int new_height = (int) Math.floor((double) bheight *( (double) new_width / (double) bwidth));
+					Log.d("PictureConvert", "width: "+new_width+", height: "+new_height);
+					Bitmap newbitMap = Bitmap.createScaledBitmap(imgBitmap,new_width,new_height, true);
+					
+					
+					newbitMap.compress(Bitmap.CompressFormat.PNG, 50, bos);
 					byte[] bArray = bos.toByteArray();
+					Log.d("PictureConvert", "length: "+bArray.length);
 					newPics.add(bArray);
 					
 				} catch (FileNotFoundException e) {
@@ -70,56 +82,83 @@ public class DiaryNewEntryPictureManager {
 		return newPics;
 	}
 	
+	/**
+	 * Resets an imageView
+	 * @param img
+	 */
 	private void resetImageView(ImageViewWithContextMenuInfo img) {
 		img.setImageResource(android.R.color.transparent);
 		img.setVisibility(View.GONE);
 	}
 	
+	/**
+	 * Deletes a picture from sd card
+	 * @param pic
+	 * @return
+	 */
+	public boolean deletePicFromDisk(DiaryEntryPicture pic) {
+    	File file = new File(pic.getPath());
+    	return file.delete();	
+	}
+	
+	/**
+	 * Removes the picture from the newDiaryEntryActivity
+	 * - new camera pictures are deleted from disk
+	 * - new gallery pictures are only removed from the picture list
+	 * - existing database pictures are only moved to the trash list. it should be deleted after user saved the diary entry
+	 * @param img
+	 * @throws Exception
+	 */
 	public void removePicture(ImageViewWithContextMenuInfo img) throws Exception {
 
-		// Newly added gallery picture:
+		
 		for(DiaryEntryPicture pic: pictures) {
+			
+			// Newly added gallery picture:
 			if (pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
 		        if (img.getTag().toString().equals(pic.getIdString())) {
-		        	Log.d("removePicture", "Equal");
+		        	Log.d("removePicture", "new gallery picture");
 		        	resetImageView(img); // Hide
 		        	pictures.remove(pic); // Remove from list
-		        }
-		        
+		        }	        
 			}
-		}
-		
-		// Newly added camera picture:
-		for(DiaryEntryPicture pic: pictures) {
-			if (pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
+			
+			// Newly added camera picture:
+			if (pic.getType() == DiaryEntryPictureType.NEW_CAMERA_PICTURE) {
 		        if (img.getTag().toString().equals(pic.getIdString())) {
-		        	Log.d("removePicture", "Equal");
+		        	Log.d("removePicture", "new camera picture");
 		        	resetImageView(img); // Hide
 		        	pictures.remove(pic); // Remove from list
 		        	
-		        	// TODO: delete instantly from disk
+		        	// Delete instantly from disk
+		        	if (deletePicFromDisk(pic) == true) {
+		        		Log.d("RemovePicture","Deleted from disk");
+		        	} else {
+		        		Log.d("RemovePicture", "Not deleted from disk");
+		        	}
 		        }
-		        
 			}
-		}
-		
-		// Existing picture:
-		for(DiaryEntryPicture pic: pictures) {
-			if (pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
+			
+			// Existing picture
+			if (pic.getType() == DiaryEntryPictureType.EXISTING_DATABASE_PICTURE) {
 		        if (img.getTag().toString().equals(pic.getIdString())) {
 		        	Log.d("removePicture", "Equal");
 		        	resetImageView(img); // Hide
 		        	pictures.remove(pic); // Remove from list
-		        	trash.add(pic);
+		        	trash.add(pic); // Add to trash
 		        }
-		        
 			}
+			
 		}
+		
 		
 		drawCurrentPictures();
 	}
 	
-	
+	/**
+	 * Adds picture from the Android gallery
+	 * @param picturePath
+	 */
 	public void addGalleryPicture(String picturePath) {
 		
 		// Add to image list
@@ -129,6 +168,11 @@ public class DiaryNewEntryPictureManager {
 
 	}
 	
+	/**
+	 * Adds existing picture from the database
+	 * @param media
+	 * @throws Exception
+	 */
 	public void addExistingPicture(Media media) throws Exception {
 		
 		Bitmap myImage = media.getImage();
@@ -140,11 +184,15 @@ public class DiaryNewEntryPictureManager {
 	}
 	
 	
-	
+	/**
+	 * Returns the trash with all recently removed database pictures
+	 * @return
+	 */
 	public ArrayList<DiaryEntryPicture> getTrash() {
 		return trash;
 	}
 
+	
 	private void addImageView(DiaryEntryPicture pic) {
 		// Create & add imageView dynamically
 		LinearLayout diaryImgsViewGroup = (LinearLayout) myActivity.findViewById(R.id.diaryImgViews); //the layout you set in `setContentView()`
@@ -243,7 +291,7 @@ public class DiaryNewEntryPictureManager {
 	}
 	
 	
-	/*
+	/**
 	 * Shows thumbnails of all current pictures
 	 */
 	public void drawCurrentPictures() {
@@ -273,10 +321,18 @@ public class DiaryNewEntryPictureManager {
 	}
 	
 	
+	/**
+	 * Tells you if you can add another picture
+	 * @return
+	 */
 	public boolean newPicturesAllowed() {
 		return (MAX_PICTURES_ALLOWED > countPictures());
 	}
 
+	/** 
+	 * Tells you how many pictures are allowed
+	 * @return
+	 */
 	public static int getMAX_PICTURES_ALLOWED() {
 		return MAX_PICTURES_ALLOWED;
 	}

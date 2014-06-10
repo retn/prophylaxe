@@ -258,6 +258,8 @@ public class ControllerData {
 
 	private void fetchDiaryEntriesPicture(List<DiaryEntry> diaryEntries2) {
 		List<List<Object>> entries = tables.queryFullTableEntryPicture();
+		
+		
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entries.size(); i++) {
 
@@ -283,6 +285,7 @@ public class ControllerData {
 			}
 
 		}
+		
 
 	}
 

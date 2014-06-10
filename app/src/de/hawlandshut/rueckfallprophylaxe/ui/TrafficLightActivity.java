@@ -33,19 +33,26 @@ public class TrafficLightActivity extends Activity implements OnClickListener {
 		
 		if(v == redButton)
 		{
-			Intent intent = new Intent(this, ContactpointListActivity.class );
+			Intent intent = new Intent(this, HomeActivity.class );
+			HomeActivity.isContactPoint = true;
+			HomeActivity.isBetwixt = false;
+			HomeActivity.comeFromContactPoint = false;
 			startActivity(intent);
 		}
 		if(v == yellowButton)
 		{
 			Intent intent = new Intent(this, HomeActivity.class );
+			HomeActivity.isContactPoint = false;
 			HomeActivity.isBetwixt = true;
+			HomeActivity.comeFromContactPoint = false;
 			startActivity(intent);
 		}
 		if(v == greenButton)
 		{
 			Intent intent = new Intent(this, HomeActivity.class );
+			HomeActivity.isContactPoint = false;
 			HomeActivity.isBetwixt = false;
+			HomeActivity.comeFromContactPoint = false;
 			startActivity(intent);
 		}
 		

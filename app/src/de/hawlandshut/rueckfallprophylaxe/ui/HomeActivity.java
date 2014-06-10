@@ -14,6 +14,8 @@ import android.widget.Spinner;
 public class HomeActivity extends Activity {
 	
 	static boolean isBetwixt;
+	static boolean isContactPoint;
+	static boolean comeFromContactPoint;
 	Spinner spinnemotion;
 	
     @Override
@@ -22,11 +24,22 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         
         String site = getIntent().getStringExtra("SITE");
-        if(isBetwixt) {
-        	Button btnContactpoints = (Button) findViewById(R.id.btnAnlaufstellen);
-        	btnContactpoints.setVisibility(View.GONE);
-        }
 	}
+    
+    @Override
+    protected void onResume() {
+    	super.onResume();
+    	 if(isBetwixt) {
+         	Button btnContactpoints = (Button) findViewById(R.id.btnAnlaufstellen);
+         	btnContactpoints.setVisibility(View.GONE);
+         } else if(isContactPoint && comeFromContactPoint) {
+         	onBackPressed();
+         } else if(!comeFromContactPoint && isContactPoint) {
+         	comeFromContactPoint = true;
+         	Intent intent = new Intent(this, ContactpointListActivity.class);
+         	startActivity(intent);
+         }
+    }
 
 
 

@@ -30,14 +30,6 @@
         
         <activity 
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity">
-        </activity>
-		<activity 
-		    android:name="de.hawlandshut.rueckfallprophylaxe.ui.BetwixtActivity"
-            android:label="@string/app_name"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ui.TrafficLightActivity" />
 		</activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.HomeActivity"
@@ -50,14 +42,12 @@
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.PasswordDetermineActivity"
             android:label="@string/title_password_determine" >
-        
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.PasswordVerifyActivity"
             android:label="@string/title_password_verify" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -98,10 +88,10 @@
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointMapActivity"
             android:label="@string/title_activity_contactpoint_map"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity" >
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointViewActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity" />
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointViewActivity" />
         </activity>
         <activity
             android:name="de.hawlandshut.rueckfallprophylaxe.ui.EmotionActivity"
@@ -132,8 +122,11 @@
             android:label="@string/title_activity_koffer3">
         </activity>
         <activity android:name="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointViewActivity"
-            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointList"
+            android:parentActivityName="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity"
             android:label="@string/title_contactpoint_view" >
+        	<meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.hawlandshut.rueckfallprophylaxe.ui.ContactpointListActivity" />
         </activity>
         <meta-data
    			android:name="com.google.android.gms.version"

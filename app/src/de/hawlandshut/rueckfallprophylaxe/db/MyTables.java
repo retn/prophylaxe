@@ -156,9 +156,9 @@ public class MyTables {
 	
 	//special query: query with blob for entrypicture
 	public List<List<Object>> queryFullTableEntryPicture() {
-		String table="spl_diary_entry_has_picture";
+/*		String table="spl_diary_entry_has_picture";
 		List<List<Object>> result= new ArrayList<List<Object>>();
-		Cursor c = sqldatabase.rawQuery("SELECT * FROM "+table, null);
+		Cursor c = sqldatabase.rawQuery("SELECT * FROM "+table , null);
 
 		if (c.moveToFirst()) {
 		    while ( !c.isAfterLast() ) {
@@ -172,6 +172,32 @@ public class MyTables {
 		    }
 		}
 		c.close();
+		 
+		return result;*/
+		String table="spl_diary_entry_has_picture";
+		List<List<Object>> result= new ArrayList<List<Object>>();
+		Cursor c = sqldatabase.rawQuery("SELECT id FROM "+table , null);
+		List<Integer> ids=new ArrayList<Integer>();
+		if (c.moveToFirst()) {
+		    while ( !c.isAfterLast() ) {
+		    	ids.add(Integer.parseInt(c.getString(0)));
+		        c.moveToNext();
+		    }
+		}
+		c.close();
+		
+		for(int id :ids){
+			Cursor cId = sqldatabase.rawQuery("SELECT * FROM "+table + "WHERE id ="+id, null);
+			if (cId.moveToFirst()) {
+		    	List<Object> resultRow=new ArrayList<Object>();
+		    	for(int i=0;i<cId.getColumnCount()-1;i++){
+		    		resultRow.add(cId.getString(i));
+		    	}
+		    	resultRow.add(cId.getBlob(cId.getColumnCount()-1));
+		        result.add(resultRow);
+			}
+			cId.close();
+		}
 		 
 		return result;
 	}

@@ -31,7 +31,6 @@ import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
 
-//TODO: Load existing entrys and add to the view
 public class DiaryEntryListActivity extends Activity {
 	
 	List<DiaryEntry> Entries;
@@ -40,7 +39,7 @@ public class DiaryEntryListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_diary);
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
@@ -53,7 +52,7 @@ public class DiaryEntryListActivity extends Activity {
 
 		super.onResume();
 		
-		// Toast.makeText(getApplicationContext(), "Resume..",Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Resume..",Toast.LENGTH_LONG).show();
 		
 		Entries = ControllerData.getDiaryEntries();
 		removeAllViewsAndDraw();

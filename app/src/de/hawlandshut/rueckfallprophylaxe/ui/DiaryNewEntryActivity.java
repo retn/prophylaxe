@@ -201,6 +201,9 @@ public class DiaryNewEntryActivity extends Activity {
 			} else {
 				Log.d("showCurrentPictures","Diary entry has no pics");
 			}
+			
+			// Draw
+			pictureManager.drawCurrentPictures();
 		}
 
 	}

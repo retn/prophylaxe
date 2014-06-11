@@ -17,6 +17,13 @@ public class DiaryEntryPicture {
 		this.id = id;
 	}
 	
+	/**
+	 * Constructor for database images
+	 * @param type
+	 * @param img
+	 * @param id
+	 * @param databaseID
+	 */
 	public DiaryEntryPicture(DiaryEntryPictureType type, Bitmap img, int id, int databaseID) {
 		super();
 		this.type = type;

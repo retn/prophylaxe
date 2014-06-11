@@ -20,11 +20,10 @@ public class DiaryOnClickListener implements OnClickListener
   @Override
   public void onClick(View v)
   {
-	  	Log.d("DiaryOnClickListener", "onClick method called");
+	  	Log.d("DiaryOnClickListenerContext", "onClick method called");
   		Intent intent = new Intent(activity, DiaryNewEntryActivity.class);
   		intent.putExtra("diaryEntry", entry);
   		activity.startActivity(intent); 
-
   }
   
 

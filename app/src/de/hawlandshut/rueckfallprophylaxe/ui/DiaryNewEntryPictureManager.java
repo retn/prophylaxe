@@ -11,13 +11,12 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -185,7 +184,9 @@ public class DiaryNewEntryPictureManager {
 		Bitmap myImage = media.getImage();
 		
 		// Add to image list
-		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.EXISTING_DATABASE_PICTURE, myImage, getNewID(), media.getId());
+		int newID = getNewID();
+		Log.d("showCurrentPictures", "Add new database pic "+newID);
+		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.EXISTING_DATABASE_PICTURE, myImage, newID, media.getId());
 		pictures.add(newPic);
 		addImageView(newPic);
 	}
@@ -302,6 +303,7 @@ public class DiaryNewEntryPictureManager {
         myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
         
         // Add onClick listener
+        Log.d("DiaryOnClickListenerNormal", "precall");
         DiaryImageViewOnClickListener l = new DiaryImageViewOnClickListener(pic, myActivity);
         myActivity.findViewById(pic.getId()).setOnClickListener(l);
 	}
@@ -317,7 +319,6 @@ public class DiaryNewEntryPictureManager {
 			if (pic.getType() == DiaryEntryPictureType.NEW_CAMERA_PICTURE || pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
 		        ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
 		        imageView.setImageBitmap(getThumbnail(pic.getPath()));
-		        
 		        addEventListeners(pic);
  
 		        Log.d("showCurrentPictures from gallery & camera- Pic id: ", ""+pic.getIdString());
@@ -325,7 +326,6 @@ public class DiaryNewEntryPictureManager {
 				// Show existing pictures from database which were not moved to trash
 			    ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
 			    imageView.setImageBitmap(pic.getImg());
-			        
 			    addEventListeners(pic);
 			        
 			    Log.d("showCurrentPictures from database - Pic id: ", ""+pic.getIdString());
@@ -369,6 +369,16 @@ public class DiaryNewEntryPictureManager {
 	    return image;
 	}
 	
+	 public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
 
+		 final float densityMultiplier = context.getResources().getDisplayMetrics().density;        
+
+		 int h= (int) (newHeight*densityMultiplier);
+		 int w= (int) (h * photo.getWidth()/((double) photo.getHeight()));
+
+		 photo=Bitmap.createScaledBitmap(photo, w, h, true);
+
+		 return photo;
+		 }
 
 }

@@ -187,7 +187,7 @@ public class MyTables {
 		c.close();
 		
 		for(int id :ids){
-			Cursor cId = sqldatabase.rawQuery("SELECT * FROM "+table + "WHERE id ="+id, null);
+			Cursor cId = sqldatabase.rawQuery("SELECT * FROM "+table + " WHERE id ="+id, null);
 			if (cId.moveToFirst()) {
 		    	List<Object> resultRow=new ArrayList<Object>();
 		    	for(int i=0;i<cId.getColumnCount()-1;i++){

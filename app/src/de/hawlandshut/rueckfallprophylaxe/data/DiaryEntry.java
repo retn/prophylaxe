@@ -1,8 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class DiaryEntry implements Serializable {
 
@@ -15,10 +17,10 @@ public class DiaryEntry implements Serializable {
 	String content;
 	Date created;
 	int emotionId; // 0 if no Emotion was given
-	Media[] media;
+	List<Media> media=new ArrayList<Media>();
 
 	public DiaryEntry(int id, String title, String content, Date created,
-			int emotionId, Media[] media) {
+			int emotionId, List<Media> media) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -29,7 +31,7 @@ public class DiaryEntry implements Serializable {
 
 
 	public DiaryEntry(int id, String title, String content, Date created,
-			Media[] media) {
+			List<Media> media) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -59,7 +61,7 @@ public class DiaryEntry implements Serializable {
 	public String toString() {
 		return "DiaryEntry [id=" + id + ", title=" + title + ", content="
 				+ content + ", created=" + created + ", emotionId=" + emotionId
-				+ ", media=" + Arrays.toString(media) + "]";
+				+ ", media=" + media + "]";
 	}
 
 
@@ -87,14 +89,11 @@ public class DiaryEntry implements Serializable {
 		return emotionId;
 	}
 
-	public Media[] getMedia() {
+	public List<Media> getMedia() {
 		return media;
 	}
 
-	public void setMedia(Media[] medias) {
-		this.media=medias;
-		
-	}
+
 
 	public void setEmotionId(int id) {
 		this.emotionId=id;

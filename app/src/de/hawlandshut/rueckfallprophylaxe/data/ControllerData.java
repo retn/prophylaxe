@@ -287,7 +287,7 @@ public class ControllerData {
 					Media media = new Media(Integer.parseInt((String) entries
 							.get(i).get(0)), entry.getId(), Type.Image,
 							imageBlob);
-					if(imageBlob!=null)entry.setMedia(new Media[] { media });
+					if(imageBlob!=null)entry.getMedia().add(media);
 				}
 			}
 

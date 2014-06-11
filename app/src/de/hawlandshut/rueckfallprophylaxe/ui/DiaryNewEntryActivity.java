@@ -187,7 +187,7 @@ public class DiaryNewEntryActivity extends Activity {
 			emotionSpinner.setSelection(existingEntry.getEmotionId()-1);
 			
 			// Add existing pictures to pictureManager
-			List<Media> media = existingEntry.getMedia();
+			Media[] media = existingEntry.getMedia();
 			if (media != null) {
 				for (Media myMedia:media) {
 					Log.d("showCurrentPictures","existing pic found");

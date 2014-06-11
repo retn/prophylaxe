@@ -264,7 +264,7 @@ public class ControllerData {
 
 	private void fetchDiaryEntriesPicture(List<DiaryEntry> diaryEntries2) {
 		List<List<Object>> entries = tables.queryFullTableEntryPicture();
-		
+		ArrayList<Media> medias=new ArrayList<Media>();
 		
 		for (DiaryEntry entry : diaryEntries2) {
 			for (int i = 0; i < entries.size(); i++) {
@@ -272,25 +272,15 @@ public class ControllerData {
 				if (entry.getId() == Integer.parseInt((String) entries.get(i)
 						.get(1))) {
 
-					/*Blob blob = (Blob) entries.get(i).get(2);
-					int blobLength;
-					byte[] imageBlob = null;
-					try {
-						blobLength = (int) blob.length();
-						imageBlob = blob.getBytes(1, blobLength);
-					} catch (SQLException e) {
-						Log.e(this.toString(), "blob conversion failed");
-						e.printStackTrace();
-					}
-					*/
 					byte[] imageBlob = (byte[]) entries.get(i).get(2);
 					Media media = new Media(Integer.parseInt((String) entries
 							.get(i).get(0)), entry.getId(), Type.Image,
 							imageBlob);
-					if(imageBlob!=null)entry.getMedia().add(media);
+					if(imageBlob!=null)medias.add(media);
 				}
 			}
-
+			Media[] mediaArray = null;
+			entry.setMedia(medias.toArray(mediaArray));
 		}
 		
 

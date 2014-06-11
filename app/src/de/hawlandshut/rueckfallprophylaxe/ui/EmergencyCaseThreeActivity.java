@@ -2,7 +2,6 @@ package de.hawlandshut.rueckfallprophylaxe.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.EmergencyCase;
 import android.app.Activity;
@@ -42,25 +41,25 @@ public class EmergencyCaseThreeActivity extends Activity{
 		TextView textView= (TextView) findViewById(R.id.ec_text_1);
 		textView.setTextSize(20);
 		
-		String text="mein/e Therapeut/in: "+case0.getMyTherapist()+"\n\n";
+		String text=getString(R.string.mein_e_therapeut_in_)+case0.getMyTherapist()+"\n\n";
 		textView.append(text);
 		
 		textView= (TextView) findViewById(R.id.ec_text_2);
-		text="Risiko \n";
+		text=getString(R.string.risiko_);
 		textView.append(text);
 		textView.setTextSize(18);
-		text="Ich bin in Gefahr, wieder zur Flasche zu greifen:\n wenn ich ... "+case0.getRiskDanger()+"\n";
-		text=text+"Diese Situation ist schwierig f�r mich, weil ... : "+case0.getRiskSituation()+"\n";
-		text=text+"\"Versuchung\": Der \"kleine Teufel\" auf meiner Schulter fl�stert mir zu:\n \"Trink doch ein Gl�schen, dann ... "+case0.getRiskTemptation()+"\n\n";
+		text=getString(R.string.ich_bin_in_gefahr_wieder_zur_flasche_zu_greifen_wenn_ich_)+case0.getRiskDanger()+"\n";
+		text=text+getString(R.string.diese_situation_ist_schwierig_f_r_mich_weil_)+case0.getRiskSituation()+"\n";
+		text=text+getString(R.string._versuchung_der_kleine_teufel_auf_meiner_schulter_fl_stert_mir_zu_trink_doch_ein_gl_schen_dann_)+case0.getRiskTemptation()+"\n\n";
 		textView.append(text);
 		
 		textView= (TextView) findViewById(R.id.ec_text_3);
-		text="Der Versuchung widerstehen \n";
+		text=getString(R.string.der_versuchung_widerstehen_);
 		textView.append(text);
 		textView.setTextSize(18);
-		text="(Bew�ltigungsgedanken)  Der \"kleine Engel\" auf meiner Schulter sagt mir: \n \"Nein, wenn du trinkst, dann ... "+case0.getTemptationThought()+"\n";
-		text=text+"In deiner Abstinenz hast du schon viel erreicht, z.B. ..."+case0.getTemptationThoughtAbstinence()+"\n";
-		text=text+"(Bew�ltigungsverhalten) \n Was kann ich tun, um meine Abstinenz zu sch�tzen? ...  "+case0.getTemptationBehaviour()+"\n";
+		text=getString(R.string._bew_ltigungsgedanken_der_kleine_engel_auf_meiner_schulter_sagt_mir_nein_wenn_du_trinkst_dann_)+case0.getTemptationThought()+"\n";
+		text=text+getString(R.string.in_deiner_abstinenz_hast_du_schon_viel_erreicht_z_b_)+case0.getTemptationThoughtAbstinence()+"\n";
+		text=text+getString(R.string._bew_ltigungsverhalten_was_kann_ich_tun_um_meine_abstinenz_zu_sch_tzen_)+case0.getTemptationBehaviour()+"\n";
 		textView.append(text);
 	}
 
@@ -68,25 +67,25 @@ public class EmergencyCaseThreeActivity extends Activity{
 	private void setHotlines(final EmergencyCase case0) {
 		
         Button hotlineButton=(Button)findViewById(R.id.hotline_button);
-        hotlineButton.setText("Sucht-+Drogenhotline anrufen\n"+case0.getAddictDrugholtine());
+        hotlineButton.setText(R.string.sucht_drogenhotline_anrufen_+case0.getAddictDrugholtine());
         hotlineButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_DIAL);
-				intent.setData(Uri.parse("tel:"+case0.getAddictDrugholtine()));
+				intent.setData(Uri.parse(getString(R.string.tel_)+case0.getAddictDrugholtine()));
 				startActivity(intent);
 			}
 		});
         
         Button adviceButton=(Button)findViewById(R.id.advice_button);
-        adviceButton.setText("Prop Beratungstelle anrufen\n"+case0.getPropAdvice());
+        adviceButton.setText(R.string.prop_beratungstelle_anrufen_+case0.getPropAdvice());
         adviceButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_DIAL);
-				intent.setData(Uri.parse("tel:"+case0.getPropAdvice()));
+				intent.setData(Uri.parse(getString(R.string.tel_)+case0.getPropAdvice()));
 				startActivity(intent);
 				
 			}

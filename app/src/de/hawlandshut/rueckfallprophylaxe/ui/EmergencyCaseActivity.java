@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,7 +21,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.RiskSituation;
 
@@ -140,7 +138,7 @@ public class EmergencyCaseActivity extends Activity {
 	private void copyImage() {
 		try {
                 File source= new File(mSelectedImagePath);
-        		Toast toast1=Toast.makeText(EmergencyCaseActivity.this, "Bild ausgew�hlt", Toast.LENGTH_LONG);
+        		Toast toast1=Toast.makeText(EmergencyCaseActivity.this, R.string.bild_ausgewaehlt, Toast.LENGTH_LONG);
                 toast1.show();
                 if (source.exists()) {
                 	InputStream is=new FileInputStream(source);

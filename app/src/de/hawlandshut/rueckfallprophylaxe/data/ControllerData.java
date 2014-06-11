@@ -274,20 +274,20 @@ public class ControllerData {
 
 					/*Blob blob = (Blob) entries.get(i).get(2);
 					int blobLength;
-					byte[] imageBlog = null;
+					byte[] imageBlob = null;
 					try {
 						blobLength = (int) blob.length();
-						imageBlog = blob.getBytes(1, blobLength);
+						imageBlob = blob.getBytes(1, blobLength);
 					} catch (SQLException e) {
 						Log.e(this.toString(), "blob conversion failed");
 						e.printStackTrace();
 					}
 					*/
-					byte[] imageBlog = (byte[]) entries.get(i).get(2);
+					byte[] imageBlob = (byte[]) entries.get(i).get(2);
 					Media media = new Media(Integer.parseInt((String) entries
 							.get(i).get(0)), entry.getId(), Type.Image,
-							imageBlog);
-					entry.setMedia(new Media[] { media });
+							imageBlob);
+					if(imageBlob!=null)entry.setMedia(new Media[] { media });
 				}
 			}
 

@@ -272,7 +272,7 @@ public class ControllerData {
 				if (entry.getId() == Integer.parseInt((String) entries.get(i)
 						.get(1))) {
 
-					Blob blob = (Blob) entries.get(i).get(2);
+					/*Blob blob = (Blob) entries.get(i).get(2);
 					int blobLength;
 					byte[] imageBlog = null;
 					try {
@@ -282,7 +282,8 @@ public class ControllerData {
 						Log.e(this.toString(), "blob conversion failed");
 						e.printStackTrace();
 					}
-
+					*/
+					byte[] imageBlog = (byte[]) entries.get(i).get(2);
 					Media media = new Media(Integer.parseInt((String) entries
 							.get(i).get(0)), entry.getId(), Type.Image,
 							imageBlog);

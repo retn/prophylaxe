@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import com.google.android.gms.internal.cd;
@@ -19,7 +20,6 @@ import de.hawlandshut.rueckfallprophylaxe.data.Media;
 import de.hawlandshut.rueckfallprophylaxe.db.Database;
 import de.hawlandshut.rueckfallprophylaxe.db.DiaryEntryDatabase;
 import de.hawlandshut.rueckfallprophylaxe.db.MyTables;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -187,7 +187,7 @@ public class DiaryNewEntryActivity extends Activity {
 			emotionSpinner.setSelection(existingEntry.getEmotionId()-1);
 			
 			// Add existing pictures to pictureManager
-			Media[] media = existingEntry.getMedia();
+			List<Media> media = existingEntry.getMedia();
 			if (media != null) {
 				for (Media myMedia:media) {
 					Log.d("showCurrentPictures","existing pic found");

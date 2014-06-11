@@ -6,6 +6,10 @@ import java.util.Date;
 
 public class DiaryEntry implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int id;
 	String title;
 	String content;

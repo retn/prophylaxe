@@ -45,6 +45,8 @@ public class DiaryEntryDatabase {
 	}
 	
 	public void deletePictureFromDB(int id) {
+		Log.d("DiaryEntryDatabase", "Trying to delete pic with id: "+id);
+		
 		// Initialize database
 		PinShare myApp = PinShare.getInstance();
 		String pin = myApp.getPin();

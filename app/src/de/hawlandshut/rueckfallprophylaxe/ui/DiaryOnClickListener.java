@@ -10,8 +10,8 @@ import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
 public class DiaryOnClickListener implements OnClickListener
 {
 
-  DiaryEntry entry;
-  Activity activity;
+  private DiaryEntry entry;
+  private Activity activity;
   public DiaryOnClickListener(DiaryEntry entry, Activity activity) {
        this.entry = entry;
        this.activity = activity;

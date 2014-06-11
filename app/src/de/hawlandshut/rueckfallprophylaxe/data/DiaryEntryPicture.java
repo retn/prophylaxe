@@ -7,6 +7,7 @@ public class DiaryEntryPicture {
 	DiaryEntryPictureType type;
 	String path;
 	int id;
+	int databaseID;
 	Bitmap img;
 
 	public DiaryEntryPicture(DiaryEntryPictureType type, String path, int id) {
@@ -16,11 +17,16 @@ public class DiaryEntryPicture {
 		this.id = id;
 	}
 	
-	public DiaryEntryPicture(DiaryEntryPictureType type, Bitmap img, int id) {
+	public DiaryEntryPicture(DiaryEntryPictureType type, Bitmap img, int id, int databaseID) {
 		super();
 		this.type = type;
 		this.img = img;
 		this.id = id;
+		this.databaseID = databaseID;
+	}
+	
+	public int getDatabaseID() {
+		return databaseID;
 	}
 	
 	public Bitmap getImg() {

@@ -268,7 +268,7 @@ public class DiaryNewEntryActivity extends Activity {
 					Emotions emotions = new Emotions();
 					String selectedMoodID = ""+emotions.getIDbyName((String) emotionView.getText());
 					
-					Log.d("DiaryEntrySave", "Ausgewählte Emotion ID: "+selectedMoodID);
+					Log.d("DiaryEntrySave", "Ausgewaehlte Emotion ID: "+selectedMoodID);
 					
 					int DiaryEntryID;
 					
@@ -317,7 +317,8 @@ public class DiaryNewEntryActivity extends Activity {
 						// Delete pictures that were moved to trash
 						DiaryEntryDatabase diaryEntryDB = new DiaryEntryDatabase(existingEntry, this);
 						for (DiaryEntryPicture pic:pictureManager.getTrash()) {
-							diaryEntryDB.deletePictureFromDB(pic.getId());
+							
+							diaryEntryDB.deletePictureFromDB(pic.getDatabaseID());
 						}
 					}
 					

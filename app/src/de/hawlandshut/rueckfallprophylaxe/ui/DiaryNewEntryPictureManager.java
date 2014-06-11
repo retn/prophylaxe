@@ -11,11 +11,13 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +26,7 @@ import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntryPictureType;
 import de.hawlandshut.rueckfallprophylaxe.data.Media;
 
 /**
- * Managed das hinzuf��gen von Bildern eines (neues) Tagebucheintrages
+ * Managed das hinzufügen von Bildern eines (neues) Tagebucheintrages
  */
 public class DiaryNewEntryPictureManager {
 	private Activity myActivity;
@@ -59,7 +61,12 @@ public class DiaryNewEntryPictureManager {
 					// Resize to max 800px
 					int bwidth=imgBitmap.getWidth();
 					int bheight=imgBitmap.getHeight();
-					int swidth=800;
+					int swidth;
+					if (bwidth >= 800) {
+						swidth=800;
+					} else {
+						swidth=bwidth;
+					}
 					int new_width=swidth;
 					int new_height = (int) Math.floor((double) bheight *( (double) new_width / (double) bwidth));
 					Log.d("PictureConvert", "width: "+new_width+", height: "+new_height);
@@ -165,7 +172,7 @@ public class DiaryNewEntryPictureManager {
 		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.NEW_GALLERY_PICTURE, picturePath, getNewID());
 		pictures.add(newPic);
 		addImageView(newPic);
-
+		drawCurrentPictures();
 	}
 	
 	/**
@@ -178,7 +185,7 @@ public class DiaryNewEntryPictureManager {
 		Bitmap myImage = media.getImage();
 		
 		// Add to image list
-		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.EXISTING_DATABASE_PICTURE, myImage, media.getId());
+		DiaryEntryPicture newPic = new DiaryEntryPicture(DiaryEntryPictureType.EXISTING_DATABASE_PICTURE, myImage, getNewID(), media.getId());
 		pictures.add(newPic);
 		addImageView(newPic);
 	}
@@ -290,30 +297,36 @@ public class DiaryNewEntryPictureManager {
 		return i;
 	}
 	
+	private void addEventListeners(DiaryEntryPicture pic) {
+		 // Register event listener for context menu
+        myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
+        
+        // Add onClick listener
+        DiaryImageViewOnClickListener l = new DiaryImageViewOnClickListener(pic, myActivity);
+        myActivity.findViewById(pic.getId()).setOnClickListener(l);
+	}
 	
 	/**
 	 * Shows thumbnails of all current pictures
 	 */
 	public void drawCurrentPictures() {
 		
-		for(DiaryEntryPicture pic: pictures) {
+		for(final DiaryEntryPicture pic: pictures) {
+			
 			// Show new pictures from gallery & camera
 			if (pic.getType() == DiaryEntryPictureType.NEW_CAMERA_PICTURE || pic.getType() == DiaryEntryPictureType.NEW_GALLERY_PICTURE) {
 		        ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
 		        imageView.setImageBitmap(getThumbnail(pic.getPath()));
 		        
-		        // Register event listener
-		        myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
-		        
-		        
+		        addEventListeners(pic);
+ 
 		        Log.d("showCurrentPictures from gallery & camera- Pic id: ", ""+pic.getIdString());
 			} else {
 				// Show existing pictures from database which were not moved to trash
 			    ImageView imageView = (ImageView) myActivity.findViewById(pic.getId());
-			    imageView.setImageBitmap(getThumbnail(pic.getPath()));
+			    imageView.setImageBitmap(pic.getImg());
 			        
-			    // Register event listener
-			    myActivity.registerForContextMenu((ImageView) myActivity.findViewById(pic.getId()));
+			    addEventListeners(pic);
 			        
 			    Log.d("showCurrentPictures from database - Pic id: ", ""+pic.getIdString());
 			}

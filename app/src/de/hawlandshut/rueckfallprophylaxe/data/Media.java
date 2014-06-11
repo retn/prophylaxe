@@ -1,11 +1,12 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
 import java.io.ByteArrayInputStream;
+import java.io.Serializable;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-public class Media {
+public class Media implements Serializable {
 
 	enum Type {Sound, Image, Video};
 	

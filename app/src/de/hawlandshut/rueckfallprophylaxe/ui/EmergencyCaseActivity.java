@@ -32,8 +32,7 @@ import de.hawlandshut.rueckfallprophylaxe.data.RiskSituation;
  * To change this template use File | Settings | File Templates.
  */
 public class EmergencyCaseActivity extends Activity {
-
-
+	
 	private static final int SELECT_IMAGE = 0;
 	private String mSelectedImagePath;
 	private File imageFile;
@@ -42,11 +41,9 @@ public class EmergencyCaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_1);
 		imageFile = new File(getExternalFilesDir(null),"profile.jpg");
-        
 		
 		List<RiskSituation> situations=new ArrayList<RiskSituation>(); 
 		situations = ControllerData.getRiskSituation();
-		
 
         final ListView listview = (ListView) findViewById(R.id.list_view_koffer);
         final ArrayList<String> list = new ArrayList<String>();
@@ -63,8 +60,7 @@ public class EmergencyCaseActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
                 Intent intent = new Intent(EmergencyCaseActivity.this, EmergencyCaseTwoActivity.class);
-                EmergencyCaseActivity.this.startActivity(intent);
-				
+                EmergencyCaseActivity.this.startActivity(intent);	
 			}
 		});
 
@@ -82,10 +78,7 @@ public class EmergencyCaseActivity extends Activity {
                 toast.show();
                 imageFromGallery();
                 copyImage();
-                
-                
             }
-
         });
         
         Button button=(Button)findViewById(R.id.emergency);
@@ -95,11 +88,9 @@ public class EmergencyCaseActivity extends Activity {
 			@Override
 			public void onClick(View v) {
                 Intent intent = new Intent(EmergencyCaseActivity.this, EmergencyCaseThreeActivity.class);
-                EmergencyCaseActivity.this.startActivity(intent);
-				
+                EmergencyCaseActivity.this.startActivity(intent);	
 			}
 		});
-
     }
     
 	
@@ -150,7 +141,6 @@ public class EmergencyCaseActivity extends Activity {
                 	os.close();
            } 
         } catch (Exception e) {}
-		
 	}  
 	
 	private Bitmap loadImage(String imgPath) {

@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -22,9 +21,7 @@ public class HomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        
-        String site = getIntent().getStringExtra("SITE");
+        setContentView(R.layout.activity_home);        
 	}
     
     @Override
@@ -75,6 +72,4 @@ public class HomeActivity extends Activity {
     	Intent intent = new Intent(this, EmotionActivity.class);
     	startActivity(intent);
     }
-
-    
 }

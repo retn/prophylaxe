@@ -1,6 +1,5 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

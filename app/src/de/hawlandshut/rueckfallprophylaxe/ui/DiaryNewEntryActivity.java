@@ -7,10 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-
-import com.google.android.gms.internal.cd;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
@@ -25,7 +22,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -45,10 +41,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-/**
- * TODO: PS: Bitte kommentieren -> JavaDoc
- *
- */
 public class DiaryNewEntryActivity extends Activity {
 	private DiaryEntry existingEntry;
 	private DiaryNewEntryPictureManager pictureManager;
@@ -57,7 +49,6 @@ public class DiaryNewEntryActivity extends Activity {
 	private static int REQUEST_LOAD_IMAGE_CAMERA = 2;
 	private static final int removePicture = 0;
 	private Date selectedDate;
-	private Database data;
 	private DiaryDatePickerFragment datePicker;
 	
 	
@@ -88,7 +79,6 @@ public class DiaryNewEntryActivity extends Activity {
 			// Fills input fields with default values or existing ones
 			fillInputFields();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -98,7 +88,6 @@ public class DiaryNewEntryActivity extends Activity {
 	//Creating Context Menu
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		// TODO Auto-generated method stub
 		super.onCreateContextMenu(menu, v, menuInfo);
 		menu.setHeaderTitle(R.string.diary_editPictureTitle);
 		menu.add(Menu.NONE, removePicture, Menu.NONE, R.string.diary_editPictureRemove);
@@ -115,7 +104,6 @@ public class DiaryNewEntryActivity extends Activity {
 			try {
 				pictureManager.removePicture(img);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// Toast.makeText(getApplicationContext(), "Bild wurde entfernt",Toast.LENGTH_LONG).show();
@@ -194,7 +182,6 @@ public class DiaryNewEntryActivity extends Activity {
 					try {
 						pictureManager.addExistingPicture(myMedia);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}	
@@ -295,10 +282,6 @@ public class DiaryNewEntryActivity extends Activity {
 						myHashMap1.put("emotionID", selectedMoodID);
 						
 						myTables.insert("spl_diary_entry_has_mood", myHashMap1);
-						
-						
-						// TODO: Create DiaryEntry object and set to existingEntry
-						// DiaryEntry newEntry = new DiaryEntry(0, titleText, entryText, selectedDate);
 					} 
 					// Update existing entry
 					else {

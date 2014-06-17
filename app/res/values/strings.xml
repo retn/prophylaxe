@@ -32,7 +32,7 @@
     <string name="title_activity_contactpoint_list">Anlaufstellen Liste</string>
     <string name="btn_notfallkoffer">Notfallkoffer</string>
     <string name="btn_ablenkungen">Ablenkungen</string>
-    <string name="title_activity_emotion">EmotionActivity</string>
+    <string name="title_activity_emotion">Ablenkungen</string>
     <string name="title_activity_distraction">DistractionActivity</string>
      <string name="ermutigungs_text">Hier könnte der Text, der zur Ermutigung
          beitragen soll stehen oder so.</string>
@@ -61,7 +61,7 @@
     <string name="toast_data_inclompete">Daten nicht komplett</string>
     <string name="toast_register_successfull">Das Anmelden war erfolgreich</string>
     <string name="ready">Fertig</string>
-    <string name="data_loading">Deine Daten werden eingerichtet...</string>
+    <string name="data_loading">Deine Daten werden eingerichtet..</string>
     <string name="safety_actions">Ich tue etwas was mir hilft</string>
     <string name="safety_thoughts">Ich denke an etwas was mir hilft</string>
     <string name="help_people">Ich brauche Hilfe</string>
@@ -94,13 +94,13 @@
 	<string name="bild_ausgewaehlt">Bild ausgewählt</string>
 	<string name="mein_e_therapeut_in_">"mein/e Therapeut/in: "</string>
 	<string name="risiko_">Risiko \n</string>
-	<string name="ich_bin_in_gefahr_wieder_zur_flasche_zu_greifen_wenn_ich_">"Ich bin in Gefahr, wieder zur Flasche zu greifen:\n wenn ich ... "</string>
-	<string name="diese_situation_ist_schwierig_f_r_mich_weil_">"Diese Situation ist schwierig für mich, weil ... : "</string>
-	<string name="_versuchung_der_kleine_teufel_auf_meiner_schulter_fl_stert_mir_zu_trink_doch_ein_gl_schen_dann_">"\"Versuchung\": Der \"kleine Teufel\" auf meiner Schulter flüstert mir zu:\n \"Trink doch ein Gläschen, dann ... "</string>
+	<string name="ich_bin_in_gefahr_wieder_zur_flasche_zu_greifen_wenn_ich_">"Ich bin in Gefahr, wieder zur Flasche zu greifen:\n wenn ich .. "</string>
+	<string name="diese_situation_ist_schwierig_f_r_mich_weil_">"Diese Situation ist schwierig für mich, weil .. : "</string>
+	<string name="_versuchung_der_kleine_teufel_auf_meiner_schulter_fl_stert_mir_zu_trink_doch_ein_gl_schen_dann_">"\"Versuchung\": Der \"kleine Teufel\" auf meiner Schulter flüstert mir zu:\n \"Trink doch ein Gläschen, dann .. "</string>
 	<string name="der_versuchung_widerstehen_">Der Versuchung widerstehen \n</string>
-	<string name="_bew_ltigungsgedanken_der_kleine_engel_auf_meiner_schulter_sagt_mir_nein_wenn_du_trinkst_dann_">"(Bewältigungsgedanken)  Der \"kleine Engel\" auf meiner Schulter sagt mir: \n \"Nein, wenn du trinkst, dann ... "</string>
-	<string name="in_deiner_abstinenz_hast_du_schon_viel_erreicht_z_b_">In deiner Abstinenz hast du schon viel erreicht, z.B. ...</string>
-	<string name="_bew_ltigungsverhalten_was_kann_ich_tun_um_meine_abstinenz_zu_sch_tzen_">"(Bewältigungsverhalten) \n Was kann ich tun, um meine Abstinenz zu schützen? ...  "</string>
+	<string name="_bew_ltigungsgedanken_der_kleine_engel_auf_meiner_schulter_sagt_mir_nein_wenn_du_trinkst_dann_">"(Bewältigungsgedanken)  Der \"kleine Engel\" auf meiner Schulter sagt mir: \n \"Nein, wenn du trinkst, dann .. "</string>
+	<string name="in_deiner_abstinenz_hast_du_schon_viel_erreicht_z_b_">In deiner Abstinenz hast du schon viel erreicht, z.B. ..</string>
+	<string name="_bew_ltigungsverhalten_was_kann_ich_tun_um_meine_abstinenz_zu_sch_tzen_">"(Bewältigungsverhalten) \n Was kann ich tun, um meine Abstinenz zu schützen? ..  "</string>
 	<string name="sucht_drogenhotline_anrufen_">Sucht-+Drogenhotline anrufen\n</string>
 	<string name="tel_">tel:</string>
 	<string name="prop_beratungstelle_anrufen_">Prop Beratungstelle anrufen\n</string>

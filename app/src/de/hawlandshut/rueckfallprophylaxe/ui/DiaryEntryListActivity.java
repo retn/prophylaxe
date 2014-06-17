@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -49,10 +48,7 @@ public class DiaryEntryListActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-
 		super.onResume();
-		
-		Toast.makeText(getApplicationContext(), "Resume..",Toast.LENGTH_LONG).show();
 		
 		Entries = ControllerData.getDiaryEntries();
 		removeAllViewsAndDraw();
@@ -83,10 +79,8 @@ public class DiaryEntryListActivity extends Activity {
 				Entries = ControllerData.getDiaryEntries();
 				
 			} catch (JsonSyntaxException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

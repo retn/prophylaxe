@@ -4,25 +4,19 @@ import java.util.List;
 
 import de.hawlandshut.rueckfallprophylaxe.data.ContactPoint;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class ContactpointListAdapter extends BaseAdapter {
     private static List<ContactPoint> contactPoints;
-    private Context context;
  
     private LayoutInflater mInflater;
  
     public ContactpointListAdapter(Context context, List<ContactPoint> placesToGo) {
         contactPoints = placesToGo;
-        this.context = context;
         mInflater = LayoutInflater.from(context);
     }
  

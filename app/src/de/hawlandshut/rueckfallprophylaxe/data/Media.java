@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 
 public class Media implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	enum Type {Sound, Image, Video};
 	
 	int id;

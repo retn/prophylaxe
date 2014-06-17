@@ -1,12 +1,10 @@
 package de.hawlandshut.rueckfallprophylaxe.ui;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -37,7 +35,6 @@ public class ContactpointMapActivity extends Activity {
 		try {
 			// Loading map
 			initilizeMap();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,7 +42,7 @@ public class ContactpointMapActivity extends Activity {
 	}
 
 	/**
-	 * function to load map. If map is not created it will create it for you
+	 * Function to load map. If map is not created it will create it for you
 	 * */
 	private void initilizeMap() {
 		if (googleMap == null) {

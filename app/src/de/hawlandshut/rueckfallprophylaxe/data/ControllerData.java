@@ -1,8 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.data;
 
 import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -242,15 +240,10 @@ public class ControllerData {
 				// Log.d("fetchDiaryEntries ", entry.toString());
 				diaryEntries.add(entry);
 			} catch (NumberFormatException e) {
-
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ParseException e) {
-
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
 		
 		Log.d("fetchDiaryEntries ", "Trying to fetch pictures");

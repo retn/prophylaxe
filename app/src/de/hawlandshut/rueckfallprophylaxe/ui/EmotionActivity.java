@@ -35,7 +35,6 @@ public class EmotionActivity extends Activity {
 		setContentView(R.layout.activity_emotion);
 		
 		maxims = ControllerData.getMaxims();
-		Bundle bundle = getIntent().getExtras();
 		emotions = ControllerData.getEmotions();
 		
 		int randomnumber = (int)(Math.random()*maxims.size());
@@ -75,10 +74,8 @@ public class EmotionActivity extends Activity {
 			}
 
 			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				
+			public void onNothingSelected(AdapterView<?> parent) {	
 			}
-			
 		});
 	}
 	
@@ -93,5 +90,4 @@ public class EmotionActivity extends Activity {
 		getMenuInflater().inflate(R.menu.emotion, menu);
 		return true;
 	}   
-
 }

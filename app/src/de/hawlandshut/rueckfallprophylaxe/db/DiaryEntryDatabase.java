@@ -1,7 +1,6 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
@@ -10,7 +9,6 @@ import android.content.Context;
 import android.util.Log;
 import de.hawlandshut.rueckfallprophylaxe.data.ControllerData;
 import de.hawlandshut.rueckfallprophylaxe.data.DiaryEntry;
-import de.hawlandshut.rueckfallprophylaxe.data.Media;
 import de.hawlandshut.rueckfallprophylaxe.ui.PinShare;
 
 public class DiaryEntryDatabase {
@@ -53,9 +51,7 @@ public class DiaryEntryDatabase {
 		Database db = new Database(context);
 		db.InitializeSQLCipher(pin);
 		
-		MyTables myTables = db.getTables();
-		String idString = ""+entry.getId(); // Cast to string
-		
+		MyTables myTables = db.getTables();		
 		
 		// Delete main table
 		myTables.delete("spl_diary_entry_has_picture", ""+id, "id");

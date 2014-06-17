@@ -1,10 +1,8 @@
 package de.hawlandshut.rueckfallprophylaxe.db;
 import java.io.File;
 
-import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 import android.content.Context;
-import android.util.Log;
 
 /**
  * Datenbank-Verbindungs Klasse

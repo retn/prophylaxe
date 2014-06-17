@@ -82,8 +82,8 @@ public class PasswordVerifyActivity extends Activity implements OnClickListener 
 	    					startActivity(intent);
 						} catch (Exception e) {
 							e.printStackTrace();
-							Toast.makeText(PasswordVerifyActivity.this, "Sorry! Etwas lief falsch!",
-									Toast.LENGTH_LONG).show();
+							//Toast.makeText(PasswordVerifyActivity.this, "Sorry! Etwas lief falsch!",
+							//		Toast.LENGTH_LONG).show();
 							progressDialog.dismiss();
 						}
 					}

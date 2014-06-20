@@ -272,8 +272,9 @@ public class ControllerData {
 					if(imageBlob!=null)medias.add(media);
 				}
 			}
-			Media[] mediaArray = null;
-			entry.setMedia(medias.toArray(mediaArray));
+			Media[] mediaArray = new Media[medias.size()];
+			medias.toArray(mediaArray);
+			entry.setMedia(mediaArray);
 		}
 		
 

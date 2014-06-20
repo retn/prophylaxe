@@ -257,9 +257,10 @@ public class ControllerData {
 
 	private void fetchDiaryEntriesPicture(List<DiaryEntry> diaryEntries2) {
 		List<List<Object>> entries = tables.queryFullTableEntryPicture();
-		ArrayList<Media> medias=new ArrayList<Media>();
+		
 		
 		for (DiaryEntry entry : diaryEntries2) {
+			ArrayList<Media> medias=new ArrayList<Media>();
 			for (int i = 0; i < entries.size(); i++) {
 
 				if (entry.getId() == Integer.parseInt((String) entries.get(i)
@@ -274,6 +275,7 @@ public class ControllerData {
 			}
 			Media[] mediaArray = new Media[medias.size()];
 			medias.toArray(mediaArray);
+			Log.d("fetchDiaryEntries ", "Media for Entry ID: "+entry.getId() +", length mediaArray: "+mediaArray.length);
 			entry.setMedia(mediaArray);
 		}
 		
